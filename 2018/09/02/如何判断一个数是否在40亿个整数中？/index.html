@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="40亿中的数," />
 
 
 
@@ -81,13 +81,42 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="MY STUDY BLOG">
-<meta property="og:url" content="http://yoursite.com/tags/最短路/index.html">
+<meta name="description" content="这好像是我在微信上看见的文章，挺有意思的，记录一下。 小史是一个应届生，虽然学的是电子专业，但是自己业余时间看了很多互联网与编程方面的书，一心想进BAT。 今天他就去BAT中的一家面试了。 简单的自我介绍后，面试官给了小史一个问题。 【面试现场】题目：我有40亿个整数，再给一个新的整数，我需要判断新的整数是否在40亿个整数中，你会怎么做？">
+<meta name="keywords" content="40亿中的数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何判断一个数是否在40亿个整数中？">
+<meta property="og:url" content="http://yoursite.com/2018/09/02/如何判断一个数是否在40亿个整数中？/index.html">
 <meta property="og:site_name" content="MY STUDY BLOG">
+<meta property="og:description" content="这好像是我在微信上看见的文章，挺有意思的，记录一下。 小史是一个应届生，虽然学的是电子专业，但是自己业余时间看了很多互联网与编程方面的书，一心想进BAT。 今天他就去BAT中的一家面试了。 简单的自我介绍后，面试官给了小史一个问题。 【面试现场】题目：我有40亿个整数，再给一个新的整数，我需要判断新的整数是否在40亿个整数中，你会怎么做？">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJW8qiblPsXtog0hqTBl8T97wuxibyHkIqpJJbicTC81vMbj3PUQWAHmqZg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJErlQZY7jjZicxNnXahQoQjIwibQicbgKmCG5nQIwADgOFD1OgyDmic6Kkw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJiaISIFnAAW5eSnkPTibsAicgl0GBFCkickIibuS1n2QoZ2nTLCSxvuw8mrw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJiaISIFnAAW5eSnkPTibsAicgl0GBFCkickIibuS1n2QoZ2nTLCSxvuw8mrw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJlPRibrCmOPj5cuuS7CPsMKz4GK514naeItHgKugYX7gFLmws7AicZfAw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJSvZERibpwCxNj1tVg9JMBhQFgmxu9wECO4tanrhUm1rGh3QHLn2cibww/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJrtH58me3fB5GN5cBjaY8jGDWnUE8SvQibEQ3l5e5aGruB0fwBMJicCag/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJrtH58me3fB5GN5cBjaY8jGDWnUE8SvQibEQ3l5e5aGruB0fwBMJicCag/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJRtPJqX2U6vke021wSTtVofKjhr1jTqzAN4tB1v50LXzHtAd5AALLgA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJiaEo620icTZGh1sVU1BWgB4ic4ZtQQbibGudl18iamrFhHUKP9oK6j5ad5g/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJIibqZTLdJkxP7ibpyalWcJMR5oiabtd3gj72aFmm9cym1pncrRWRpMOTA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJVoia4ic3nARH2OqeBBoNicP9YkP5cjBHPPYuHnAQnrTlH14BJMjvkCZeA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJ0B2wUL1CrhnCmdIMjz7XYuTTVl4galltQIJaBV0jXlhkuIY08uPpkQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJenhicdMRrr2icoTiahTsfY8KHPiaULQm8ibA7glUVDtd6Oo86icAYyDAYbzw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJ6vIKxJeibQlRQto0N0gmWLfFq9ruNYQHOXECutEDGS2Xibicspj1z73nw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJ6vIKxJeibQlRQto0N0gmWLfFq9ruNYQHOXECutEDGS2Xibicspj1z73nw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJkUOwd3ME81oA9kYSkD0R9gJncV9ndtibTs7HXUPYKqmf7PK7gp8nWfA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJPoq7Z0WFrIdV98G3cfmiagiaC89Q0iaZtTcbICiaTvicLib1mYzj6hjy3zRg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJIYXg1aviclPE1Fg2PwGsficmgF7Kibowg09Da4TAoLpwYtJ6lv6icECvWw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJkibHc3JzumRcno07CYn7wblfAIUsI9s5wRWb1ymL45nPkEiceqJf4Cow/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJ9U9969s5c8Av7XHRrvict99msfkN8xDn8tVHDb4oNbr9a2TqVVvrmSA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJjyv26KLpFIJeagKUoiblg2DI0E9VmhF7ZZp0Ee6PLwWStFyhqlAibfcg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJ1uOGrxCG9uzARQKQnz1MvlJec4hkUoFf9udVMeYiayOaOlAutNyibDwA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:updated_time" content="2018-09-02T02:54:27.087Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MY STUDY BLOG">
+<meta name="twitter:title" content="如何判断一个数是否在40亿个整数中？">
+<meta name="twitter:description" content="这好像是我在微信上看见的文章，挺有意思的，记录一下。 小史是一个应届生，虽然学的是电子专业，但是自己业余时间看了很多互联网与编程方面的书，一心想进BAT。 今天他就去BAT中的一家面试了。 简单的自我介绍后，面试官给了小史一个问题。 【面试现场】题目：我有40亿个整数，再给一个新的整数，我需要判断新的整数是否在40亿个整数中，你会怎么做？">
+<meta name="twitter:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJW8qiblPsXtog0hqTBl8T97wuxibyHkIqpJJbicTC81vMbj3PUQWAHmqZg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 
 
 
@@ -117,13 +146,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/最短路/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/02/如何判断一个数是否在40亿个整数中？/"/>
 
 
 
 
 
-  <title>标签: 最短路 | MY STUDY BLOG</title>
+  <title>如何判断一个数是否在40亿个整数中？ | MY STUDY BLOG</title>
   
 
 
@@ -142,7 +171,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 	<a href="https://your-url" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -290,54 +319,272 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>最短路<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/02/如何判断一个数是否在40亿个整数中？/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Smile">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MY STUDY BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/08/29/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/" itemprop="url">
-              
-                <span itemprop="name">链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">如何判断一个数是否在40亿个整数中？</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-29T13:44:19+08:00"
-              content="2018-08-29" >
-          08-29
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-02T10:22:53+08:00">
+                2018-09-02
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/休闲/" itemprop="url" rel="index">
+                    <span itemprop="name">休闲</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,343
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>这好像是我在微信上看见的文章，挺有意思的，记录一下。</strong></p>
+<p>小史是一个应届生，虽然学的是电子专业，但是自己业余时间看了很多互联网与编程方面的书，一心想进BAT。</p>
+<p>今天他就去BAT中的一家面试了。</p>
+<p>简单的自我介绍后，面试官给了小史一个问题。</p>
+<h1 id="【面试现场】"><a href="#【面试现场】" class="headerlink" title="【面试现场】"></a>【面试现场】</h1><h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>我有40亿个整数，再给一个新的整数，我需要判断新的整数是否在40亿个整数中，你会怎么做？<br><a id="more"></a></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJW8qiblPsXtog0hqTBl8T97wuxibyHkIqpJJbicTC81vMbj3PUQWAHmqZg/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJErlQZY7jjZicxNnXahQoQjIwibQicbgKmCG5nQIwADgOFD1OgyDmic6Kkw/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJiaISIFnAAW5eSnkPTibsAicgl0GBFCkickIibuS1n2QoZ2nTLCSxvuw8mrw/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJiaISIFnAAW5eSnkPTibsAicgl0GBFCkickIibuS1n2QoZ2nTLCSxvuw8mrw/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJlPRibrCmOPj5cuuS7CPsMKz4GK514naeItHgKugYX7gFLmws7AicZfAw/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJSvZERibpwCxNj1tVg9JMBhQFgmxu9wECO4tanrhUm1rGh3QHLn2cibww/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJrtH58me3fB5GN5cBjaY8jGDWnUE8SvQibEQ3l5e5aGruB0fwBMJicCag/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJrtH58me3fB5GN5cBjaY8jGDWnUE8SvQibEQ3l5e5aGruB0fwBMJicCag/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJRtPJqX2U6vke021wSTtVofKjhr1jTqzAN4tB1v50LXzHtAd5AALLgA/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJiaEo620icTZGh1sVU1BWgB4ic4ZtQQbibGudl18iamrFhHUKP9oK6j5ad5g/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJIibqZTLdJkxP7ibpyalWcJMR5oiabtd3gj72aFmm9cym1pncrRWRpMOTA/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJVoia4ic3nARH2OqeBBoNicP9YkP5cjBHPPYuHnAQnrTlH14BJMjvkCZeA/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<h1 id="【请教大神】"><a href="#【请教大神】" class="headerlink" title="【请教大神】"></a>【请教大神】</h1><p>小史回到学校，把面试的情况和计算机学院的吕老师说了一下。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJ0B2wUL1CrhnCmdIMjz7XYuTTVl4galltQIJaBV0jXlhkuIY08uPpkQ/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p>小史忙拉着吕老师问，为什么我说分8次加载数据，面试官会说太慢了呢？</p>
+<p>吕老师：哈哈，从磁盘加载数据是磁盘io操作，是非常慢的，你每次都要加载这么大的数据，还要8次，我估计你找一个数的时间可以达到分钟甚至小时级了。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJenhicdMRrr2icoTiahTsfY8KHPiaULQm8ibA7glUVDtd6Oo86icAYyDAYbzw/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p>小史：那如果是你，你会怎么办呢？</p>
+<p>吕老师：其实面试官已经提示得比较明显了，他说给你一批机器，就是暗示你可以用分布式算法。你把数据分散在8台机器上，然后来一个新的数据，8台机器一起找，最后再汇总结果就行了。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJ6vIKxJeibQlRQto0N0gmWLfFq9ruNYQHOXECutEDGS2Xibicspj1z73nw/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJ6vIKxJeibQlRQto0N0gmWLfFq9ruNYQHOXECutEDGS2Xibicspj1z73nw/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p>小史：这样的话能快多少？</p>
+<p>吕老师：这样应该能达到秒级。小史，你可以自己分析分析。</p>
+<p>小史：我想想……哦，这样做的话，因为每台机器都可以一次性把数据读入内存，在比较的时候不用来回加载数据了，所以可以节省加载数据的开销！这真是个好办法。</p>
+<h1 id="【更好方案】"><a href="#【更好方案】" class="headerlink" title="【更好方案】"></a>【更好方案】</h1><p>吕老师：其实这并不是最好方法，我这还有一种毫秒级的方法，想不想知道啊？</p>
+<p>小史：当然想啊，快教教我。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJkUOwd3ME81oA9kYSkD0R9gJncV9ndtibTs7HXUPYKqmf7PK7gp8nWfA/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p>小史：哦，对哦，这样我就申请40亿个位就好了，新的数转换成一个位，然后判断一下这个位是0还是1就行了。</p>
+<p>吕老师：小史啊，考虑问题要考虑清楚啊，如果是40亿个位，那么这40亿个位哪些是0，哪些是1呢？来了一个新的数，怎么判断是否在40亿个位之中？</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJPoq7Z0WFrIdV98G3cfmiagiaC89Q0iaZtTcbICiaTvicLib1mYzj6hjy3zRg/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p>小史：我想想，对啊，40亿个位，40亿个数，那么每个位都是1，这。。。</p>
+<p>吕老师：其实你可以想想，32位int的范围，总共就是2的32次方，大概42亿多点。所以你可以申请2的32次方个位。</p>
+<p>小史：意思是我把整个整数范围都覆盖了，哦，对哦。这样一来，就可以做了，1代表第一个位，2代表第二个位，2的32次方代表最后一个位。40亿个数中，存在的数就在相应的位置1，其他位就是0。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJIYXg1aviclPE1Fg2PwGsficmgF7Kibowg09Da4TAoLpwYtJ6lv6icECvWw/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p>吕老师：没错，那来了一个新的数呢？</p>
+<p>小史：新的数就去找相应的位，比如来了一个1234，就找一下第1234位，如果是1就存在，是0就不存在啦。</p>
+<p>吕老师：没错，那么这样的话，需要多大内存呢？</p>
+<p>小史：我想想啊，2的32次方个位，相当于2的29次方个字节，哇，才500MB，真是节省了不少内存呢。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJkibHc3JzumRcno07CYn7wblfAIUsI9s5wRWb1ymL45nPkEiceqJf4Cow/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p>小史：这么厉害的算法，你是怎么想到的？</p>
+<p>吕老师：其实这是一种非常有名的大数据算法，叫位图法，英文名叫bitmap。顾名思义，就是用位来表示状态，从而节省空间。明天正好我有一节课，就讲位图法，你可以来听一听。</p>
+<h1 id="【吕老师的课】"><a href="#【吕老师的课】" class="headerlink" title="【吕老师的课】"></a>【吕老师的课】</h1><p>第二天，吕老师开始上课，他一开始就抛出了小史遇到的面试题。</p>
+<p>吕老师：同学们，这道题是BAT公司的一道面试题，大家有什么思路吗？</p>
+<p>话音刚落，蛋哥就站起来回答。蛋哥是吕老师最得意的门生，以思维活跃著称。</p>
+<p>蛋哥：我觉得可以这样。首先，32位int的范围是42亿，40亿整数中肯定有一些是连续的，我们可以先对数据进行一个外部排序，然后用一个初始的数和一个长度构成一个数据结构，来表示一段连续的数，举个例子。</p>
+<p>如果数据是1 2 3 4 6 7……这种的，那么可以用(1,4)和(6,2)来表示，这样一来，连续的数都变成了2个数表示。</p>
+<p>来了一个新数之后，就用二分法进行查找了。</p>
+<p>这样一来，最差情况就是2亿多的断点，也就是2亿多的结构体，每个结构体8个字节，大概16亿字节，1.6GB，在内存中可以放下。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJ9U9969s5c8Av7XHRrvict99msfkN8xDn8tVHDb4oNbr9a2TqVVvrmSA/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p>吕老师：嗯，非常好，不仅给出了方案，还能主动分析空间和可行性。</p>
+<p>小史听完后深感佩服，问题的解决方法绝对不止一种，只要肯动脑筋，即使没有学过bitmap算法，也能有别的方法来解决问题。</p>
+<h1 id="【课后】"><a href="#【课后】" class="headerlink" title="【课后】"></a>【课后】</h1><p>下课后，小史又找到吕老师。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJjyv26KLpFIJeagKUoiblg2DI0E9VmhF7ZZp0Ee6PLwWStFyhqlAibfcg/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/1hReHaqafafoECOhLn7Aek9lmuTfPzZJ1uOGrxCG9uzARQKQnz1MvlJec4hkUoFf9udVMeYiayOaOlAutNyibDwA/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p>吕老师：但是你的理解能力还是很强的，很多东西一听就懂，这可不是谁都能做到的。</p>
+<ul>
+<li>The End -</li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+	<div>
+  	
+    	<div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读!-------------</div>
+
+</div>
+  	
+	</div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/40亿中的数/" rel="tag"><i class="fa fa-tag"></i> 40亿中的数</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/29/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/" rel="next" title="链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）">
+                <i class="fa fa-chevron-left"></i> 链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -345,6 +592,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -365,8 +616,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -437,6 +697,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#【面试现场】"><span class="nav-number">1.</span> <span class="nav-text">【面试现场】</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目："><span class="nav-number">1.1.</span> <span class="nav-text">题目：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#【请教大神】"><span class="nav-number">2.</span> <span class="nav-text">【请教大神】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#【更好方案】"><span class="nav-number">3.</span> <span class="nav-text">【更好方案】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#【吕老师的课】"><span class="nav-number">4.</span> <span class="nav-text">【吕老师的课】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#【课后】"><span class="nav-number">5.</span> <span class="nav-text">【课后】</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -587,6 +863,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
