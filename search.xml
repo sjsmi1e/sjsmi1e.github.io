@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>2018暑期ccpc网络赛总结</title>
+    <url>/2018/08/25/2018%E6%9A%91%E6%9C%9Fccpc%E7%BD%91%E7%BB%9C%E8%B5%9B%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>从12：00到17:00，是这次网络赛的时间。我与小伙伴们约好在食堂来一场惊心动魄的脑脑裂比赛。从11:00开始准备，吃饭，预热，开始答题。</p>
+<p>由于以前了解过ACM，也参加过4C，所以也有一些经验吧。只是第一次，本以为是ccpc，中国的，可以有点中文题目，没想到全是英文题，让我这样的英文渣额。。。不过还好，能读懂一些的！</p>
+<p>煎熬中度过，漫度中煎熬。一些题似懂非懂，有思路，但数据范围的卡壳，导致更换思路。。。最后，受大佬启发，完成了一道</p>
+<p>a^n+b^n=c^n的题目：<br><a id="more"></a></p>
+<p><strong>1004 Find Integer<br>Problem<br>people in USSS love math very much, and there is a famous math problem .<br>give you two integers , ,you are required to find integers , such that + .<br>Input<br>one line contains one integer ;<br>next lines contains two integers , ; , ,<br>Output<br>print two integers , if , exits; , , ;<br>else print two integers -1 -1 instead.<br>Sample Input<br>1 2 3<br>Sample Output<br>4 5</strong></p>
+<p>思路：显而易见，对于a^n+b^n=c^n，当N&gt;2时，是没有整数解的（费马大定理），所以问题主要就来到求a^2+b^2=c^2；第一次，我们用O(N)的暴力去解，发现超时，所以第一时间就想到剪枝，寻找其中规律，发现，a*b%6==0；于是，就6个6个找，再用本源勾股在进一步剪枝，a的倍数计算；但发现还是TL了。。。我的天！！！绝望。。。最后呢，有一位大佬说其实有一个公式的，所以，我去研究了一番，发现：</p>
+<p><strong>题意：<br>给出直角三角形的一条边，求另外两条边。无解输出-1.<br>思路：<br>1、2无解。<br>n为偶数，(n <em> n / 4 - 1) ^ 2 + n </em> n = (n <em> n / 4 + 1) ^2<br>n为奇数，((n </em> n - 1) / 2) ^ 2 + n <em> n = ((n </em> n + 1) / 2) ^ 2</strong></p>
+<p>天哪，所以，，，就所以了。最后题目还卡了一下cin与cout的输出时间限制，改成printf与scanf就ok了。</p>
+<p>以下是AC代码：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">typedef long long ll;</span><br><span class="line"></span><br><span class="line">int  main()</span><br><span class="line">&#123;</span><br><span class="line">    int t;</span><br><span class="line">    int n,a;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;t);</span><br><span class="line">    while(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf(&quot;%d %d&quot;,&amp;n,&amp;a);</span><br><span class="line">        if(n&gt;2)</span><br><span class="line">        &#123;</span><br><span class="line">          printf(&quot;-1 -1\n&quot;);</span><br><span class="line">          //  cout&lt;&lt;&quot;-1 -1&quot;&lt;&lt;endl;</span><br><span class="line">        &#125;</span><br><span class="line">        else if(n==2)</span><br><span class="line">        &#123;</span><br><span class="line">            if(a%2==0)</span><br><span class="line">            &#123;</span><br><span class="line">                printf(&quot;%d %d\n&quot;,a*a/4-1,a*a/4+1);</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">                printf(&quot;%d %d\n&quot;,(a*a-1)/2,(a*a+1)/2);</span><br><span class="line">        &#125;</span><br><span class="line">        else if(n==1)</span><br><span class="line">        &#123;</span><br><span class="line">          printf(&quot;%d %d\n&quot;,a+1,a+2);</span><br><span class="line">            //cout&lt;&lt;a+1&lt;&lt;&quot; &quot;&lt;&lt;a+2&lt;&lt;endl;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">          printf(&quot;-1 -1\n&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>后面有这样一道题：</p>
+<p>**1010 YJJ’s Salesman<br>Problem<br>YJJ is a salesman who has traveled through western country. YJJ is always on journey. Either is he at the destination, or on the way to destination. One day, he is going to travel from city A to southeastern city B. Let us assume that A is on the rectangle map and B . YJJ is so busy so he never turn back or go twice the same way, he will only move to east, south or southeast, which means, if YJJ is at now , he will only forward to , or . On the rectangle map from to , there are several villages scattering on the map. Villagers will do business deals with salesmen from northwestern, but not northern or western. In mathematical language, this means when there is a village on , only the one who was from to will be able to earn dollars.(YJJ may get different number of dollars from different village.) YJJ has no time to plan the path, can you help him to find maximum of dollars YJJ can get.<br>Input<br>The first line of the input contains an integer ,which is the number of test cases.<br>In each case, the first line of the input contains an integer .The following lines, the -th line contains 3 integers, , which indicate that there is a village on and he can get dollars in that village. The positions of each village is distinct.<br>Output<br>The maximum of dollars YJJ can get.<br>(0,0) ( , ) 109 109<br>(x,y) (0 ≤ x ≤ ,0 ≤ y ≤ ) 109 109 (x +1,y) (x,y +1) (x +1,y +1) (0,0) ( , ) 109 109<br>k ( , ) xk yk (1 ≤ ≤ ,1 ≤ ≤ ) xk 109 yk 109 ( −1, −1) xk yk ( , ) xk yk vk<br>T (1 ≤ T ≤ 10)<br>N (1 ≤ N ≤ ) 105 N k , , xk yk vk (0 ≤ ≤ ) vk 103 ( , ) xk yk vk<br>Sample Input<br>1 </p>
+<p>3</p>
+<p>1 1 1</p>
+<p>1 2 2</p>
+<p>3 3 1<br>Sample Output<br>3<br>**</p>
+<p>一看这题目就是搜索+dp，思路简单；但看数字，1e9，开个二维数组，绝对爆内存，所以，我想到把二维压成一维去做，不知道有没有错误，代码码到一半，后面再慢慢研究一下，发AC代码。</p>
+<p>总的来说，英语还有待加强，做题不够多，自然就GOOD GAME了。。。 </p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KMP</title>
+    <url>/2018/08/18/KMP/</url>
+    <content><![CDATA[<p><strong>kmp即字符串匹配，时间复杂度O(M+N)。</strong></p>
+<p>核心为求匹配的字符串的next[]数组（以当前位置结束的最长前缀的位置），代码如下：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void getnext()</span><br><span class="line">&#123;</span><br><span class="line">	int i=0,j=-1,len=strlen(str2);</span><br><span class="line">		a[0]=-1;</span><br><span class="line">		while(i&lt;len)</span><br><span class="line">		&#123;</span><br><span class="line">			if(j==-1||str2[i]==str2[j])</span><br><span class="line">				a[++i]=++j;</span><br><span class="line">			else</span><br><span class="line">				j=a[j];</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p><strong>裸题：hdu1686</strong><br>查一串字符串中某个单词的出现次数。 </p>
+<p>输入<br>第一行输入一个 T ，代表数据数目。</p>
+<p>每组数据第一行输入需要查找的单词。</p>
+<p>第二行输入这个较长的字符串（长度小于1000010）。</p>
+<p>输出<br>每组数据输出一个 n ，代表要这个单词出现的次数。</p>
+<p>样例输入<br>3<br>ABCD<br>ABCD<br>AZA<br>AZAZAZA<br>HIDSJ<br>FJOSJWHABNMDS<br>样例输出<br>1<br>3<br>0</p>
+<p>代码：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxn=1000010;</span><br><span class="line">char str1[maxn],str2[maxn];</span><br><span class="line">int a[maxn];</span><br><span class="line"></span><br><span class="line">void getnext()</span><br><span class="line">&#123;</span><br><span class="line">	int i=0,j=-1,len=strlen(str2);</span><br><span class="line">		a[0]=-1;</span><br><span class="line">		while(i&lt;len)</span><br><span class="line">		&#123;</span><br><span class="line">			if(j==-1||str2[i]==str2[j])</span><br><span class="line">				a[++i]=++j;</span><br><span class="line">			else</span><br><span class="line">				j=a[j];</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int kmp()</span><br><span class="line">&#123;</span><br><span class="line">	int ans=0,i=0,j=0,l1=strlen(str1),l2=strlen(str2);</span><br><span class="line">	while(i&lt;l1)</span><br><span class="line">	&#123;</span><br><span class="line">		if(j==-1||str1[i]==str2[j])</span><br><span class="line">			i++,j++;</span><br><span class="line">		else</span><br><span class="line">			j=a[j];</span><br><span class="line">		if(j==l2)ans++;</span><br><span class="line">	&#125;</span><br><span class="line">	return ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int t;</span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	while(t--)</span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;str2&gt;&gt;str1;</span><br><span class="line">		getnext();</span><br><span class="line">		cout&lt;&lt;kmp()&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>hdu2594 </strong></p>
+<p>题意：<br>给两个字符串s1,s2，求最长的s1前缀匹配s2后缀的字符串，以及长度</p>
+<p>输入<br>输入有多组数据。</p>
+<p>每组数据有两行，分别为两个人的名字（名字全由英文组成，名字长度不超过50000）。</p>
+<p>输出<br>求出前一个人的名字的前缀，与后一个人的名字的前缀，最大的相同数目。</p>
+<p>若不为0，还需输出其相同的几位字母，并且字母在数字前面，中间由空格隔开。</p>
+<p>样例输入<br>mike<br>aniom<br>kiava<br>dvakia<br>dasds<br>fdsgh<br>样例输出<br>m 1<br>kia 3<br>0<br><strong>思路：先把两串合并在一起，然后求next[]数组，然后判断next[]最后一位，如果长度&gt;最短串的长度，就缩进到前面（即切断过长的部分）</strong></p>
+<p>代码：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxn=200010;</span><br><span class="line">string str1,str2,str3;</span><br><span class="line">int a[maxn];</span><br><span class="line"></span><br><span class="line">void getnext()</span><br><span class="line">&#123;</span><br><span class="line">	int i=0,j=-1,len=str3.size();</span><br><span class="line">		a[0]=-1;</span><br><span class="line">		while(i&lt;len)</span><br><span class="line">		&#123;</span><br><span class="line">			if(j==-1||str3[i]==str3[j])</span><br><span class="line">				a[++i]=++j;</span><br><span class="line">			else</span><br><span class="line">				j=a[j];</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	while(cin&gt;&gt;str1&gt;&gt;str2)</span><br><span class="line">	&#123;</span><br><span class="line"></span><br><span class="line">		str3=str1+str2;</span><br><span class="line">		int lena=str1.size();</span><br><span class="line">		int lenb=str2.size();</span><br><span class="line">		int lenc=str3.size();</span><br><span class="line">		int ab=min(lena,lenb);</span><br><span class="line">		getnext();</span><br><span class="line">		while(a[lenc]&gt;ab)</span><br><span class="line">			lenc=a[lenc];</span><br><span class="line">		if(a[lenc])</span><br><span class="line">			&#123;</span><br><span class="line">				for(int i=0;i&lt;a[lenc];i++)</span><br><span class="line">							cout&lt;&lt;str1[i];</span><br><span class="line">					cout&lt;&lt;&quot; &quot;&lt;&lt;a[lenc]&lt;&lt;endl;</span><br><span class="line">			&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			cout&lt;&lt;a[lenc]&lt;&lt;endl;</span><br><span class="line">		&#125;</span><br><span class="line">		str1.clear();</span><br><span class="line">		str2.clear();</span><br><span class="line">		str3.clear();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong> hdu4763</strong><br>题意描述：给定一个字符串，找出长度最大的子串，使开始、中间、结尾至少都包含它？</p>
+<p>思路：</p>
+<p>从大到小枚举子串长度，先判断结尾和开始是否一样，如果一样，则使用kmp判断中间是否含有子串，如果有就是答案</p>
+<p>代码：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">char s[1000005];</span><br><span class="line">int nxt[1000005];</span><br><span class="line">int len;</span><br><span class="line">set&lt;int&gt; st;</span><br><span class="line">void getnxt()</span><br><span class="line">&#123;</span><br><span class="line">    memset(nxt,-1,sizeof(nxt));</span><br><span class="line">    nxt[0] = -1; int j = -1;</span><br><span class="line">    for(int i = 0; i &lt; len;)&#123;</span><br><span class="line">        if(j == -1||s[i] == s[j])nxt[++i] = ++j;</span><br><span class="line">        else j = nxt[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void getback()</span><br><span class="line">&#123;</span><br><span class="line">    int p = nxt[len-1];</span><br><span class="line">    while(p&gt;=0)&#123;</span><br><span class="line">        if(s[len-1] == s[p])&#123;</span><br><span class="line">            st.insert(p+1);</span><br><span class="line">        &#125;</span><br><span class="line">        p = nxt[p];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void solve()</span><br><span class="line">&#123;</span><br><span class="line">    int ans = 0;</span><br><span class="line">    for(int i = len-2;i&gt;=0;--i)&#123;</span><br><span class="line">        int p = nxt[i];</span><br><span class="line">        while(p&gt;=0)&#123;</span><br><span class="line">            if(s[i] == s[p] &amp;&amp; st.find(p+1)!=st.end())&#123;</span><br><span class="line">                if(len - 1 -p &gt; i &amp;&amp; p &lt; i-p)&#123;</span><br><span class="line">                    ans = max(ans,p+1);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            p = nxt[p];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%d\n&quot;,ans);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    while(T--)&#123;</span><br><span class="line">        cin&gt;&gt;s;</span><br><span class="line">        st.clear();</span><br><span class="line">        len = strlen(s);</span><br><span class="line">        getnxt();</span><br><span class="line">        getback();</span><br><span class="line">        solve();</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上为kmp总结例题。 </p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>字符串匹配</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>dfs&amp;dfs</title>
+    <url>/2018/08/06/dfs&amp;bfs/</url>
+    <content><![CDATA[<p>dfs（深度优先搜索）</p>
+<p>bfs（广度优先搜索）</p>
+<p><strong>前言</strong><br>作为初学者，可能会想，搜索吗，就是作用在图上啊，树上什么的算法。其实，搜索（这里主要说dfs和bfs），就是以一种特定方式，在大多数场景寻找真正想要结果的方式。而dfs就是以一种现已一种单一方式走到黑，然后通过回溯等得到答案的过程。而bfs则是先看有多少种方式可以走，然后先记录每一种方式，在一一按这种方式一层一层遍历，直到得到最后结果。这两种搜索大体上没什么差别，都是搜索出所有可能满足自己的答案而已。有的人可能会说，bfs适合求最短路径，dfs适合求所有答案，其实，两个都可以相互转化（这里不多说，其实我也不怎么懂，哈哈~），只不过方便与否的问题罢了。</p>
+<p>下面就对这两种经典搜索进行简单探讨。<br><a id="more"></a><br>dfs（深度优先搜索）<br>模板：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void bfs()&#123;</span><br><span class="line">		if:(...)&#123;//需要的结果</span><br><span class="line">			...</span><br><span class="line">		//做出操作</span><br><span class="line">		return;//结束 </span><br><span class="line">		&#125; </span><br><span class="line">		...</span><br><span class="line">		dfs();</span><br><span class="line">		...//具体要怎么搜索 </span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这就是走到黑方式，就像对123进行全排列，123,132,213,231,312,321；</p>
+<p>按照顺序排列就是方式，然后逐个改变。</p>
+<p>多说这种无益，来一道最简单的bfs的题目吧：</p>
+<p>**有一款游戏叫做《绝地求生：大逃杀》。<br>绝地求生，是一款开放世界策略射击游戏，采用虚幻4引擎制作。 是一款大逃杀类型的游戏，每一局游戏将有100名玩家参与，他们将被投放在绝地岛(battlegrounds)的上空，游戏开始跳伞时所有人都一无所有。 游戏展开的方式是：玩家赤手空拳地分布在岛屿的各个角落，利用岛上多样的武器与道具。 随着时间的流逝，岛上的安全地带越来越少，特定地区也会发生轰炸的情况，最终只有一人存活获得胜利。游戏的每一局比赛都会随机转换安全区，这样玩家的很新鲜与紧张感会更加强烈。</p>
+<p>小东同学玩游戏也坚决不忘算法的学习，有一天，他面临了这样的情况，小东要前往安全区，他决定冒险通过一片大平原，虽然跑向两边的山上更安全，但是时间来不及了。在小东同学奔跑的过程中，浑然不知两边的山上各有一个人趴在那里埋伏猎物，他们同时发现小东，同时开枪！小东意识到危险了！伴随了若干声枪声，砰砰砰！小东已经倒地了…</p>
+<p>小东挂掉之前一秒，意识到了一件事，两边的人同时开枪，那么我又多少种中弹顺序呢？比如我有100血，而一个人用冲锋枪每发子弹能伤害我30血，另一个人用步枪每发子弹能伤害我45血，那导致我死亡的中弹顺序可能是，30 30 30 45，也可能是 45 45 30，也有可能是45 30 45，等等。当然，血量小于或等于0都算被击倒。</p>
+<p>同时要注意，如果两人每次对自己造成的伤害是相同的，但仍被看作不同的死亡顺序，比如玩家有100血量，左右两边的人每次能造成50血量的伤害，那么答案为4，情况分别为：</p>
+<p>50 50（左边敌人打中了两枪）。</p>
+<p>50 50（右边敌人打中了两枪）</p>
+<p>50 50（左边敌人开了第一枪）</p>
+<p>50 50（右边敌人开了第一枪）</p>
+<p>输入<br>本题有多组测试数据。每组占一行，由三个正整数m n hp组成（10=&lt;m&lt;hp&lt;90,10&lt;=n&lt;hp&lt;90）。m代表左边的敌人每次对玩家造成的伤害，n代表右边的敌人每次对玩家造成的伤害，hp代表玩家的血量。</p>
+<p>输出<br>对于每组输入数据，输出一行，结果为玩家有多少种死亡顺序，即中弹顺序。</p>
+<p>样例输入<br>45 30 100<br>50 50 100<br>12 23 80<br>样例输出<br>9<br>4<br>34**<br>思路：看题意是求出所有方式，所以用dfs比较方便，然后，走到黑，先以第一种方式减血（第一个例子，-45，-45，-45。。。），然后就回溯，继续操作，看代码：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int ans=0,l,r,hp;</span><br><span class="line">void dfs(int hp,int l,int r)&#123;</span><br><span class="line">	if(hp&lt;=0)&#123;</span><br><span class="line">		ans++;</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(hp-l,l,r);</span><br><span class="line">	dfs(hp-r,l,r);</span><br><span class="line">&#125; </span><br><span class="line">int main()&#123;</span><br><span class="line">	while(cin&gt;&gt;l&gt;&gt;r&gt;&gt;hp)&#123;</span><br><span class="line">		dfs(hp,l,r);</span><br><span class="line">		cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">		ans=0;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>下面就来看bfs：</p>
+<p>bfs（广度优先搜索）<br>模板：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void bfs()&#123;</span><br><span class="line">	if()&#123;</span><br><span class="line">		return;//首先判断当前位置是否为结果 </span><br><span class="line">	&#125;</span><br><span class="line">	while()&#123;</span><br><span class="line">		...//循环每一种方试直到最后的结果 </span><br><span class="line">	&#125; </span><br><span class="line">	</span><br><span class="line">	return ; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对于bfs，用得最多的试队列，来插入（记录方法）与弹出（此方法遍历完毕）来进行搜索， 最经典的迷宫问题（求最短路径）：</p>
+<p>**平面迷宫<br>时间限制: 1 Sec  内存限制: 128 MB</p>
+<p>题目描述<br>老王同学深陷一个迷宫，他现在想要逃出去。迷宫 是这样的，在m行n列的矩阵当中，“.”表示可以通过的道路，“#”表示墙，是障碍物所以不能通过。迷宫中S代表起始点，E代表出口。老王每次只向上、向下、向左、向右移动一个单位距离，每次移动一个距离话费的时间是1分钟。请问老王最少花多少时间可以离开迷宫，或者根本就不能离开迷宫？</p>
+<p>输入<br>本题有多组测试数据，对于每组测试数据：</p>
+<p>两个整数mn表示m行n列的迷宫，0&lt;mn&lt;=100</p>
+<p>接下来是m行n列的迷宫，其中S表示入口，E表示出口，#表示墙，.表示通路。</p>
+<p>输出<br>如果老王逃出去话费X分钟，则输出：</p>
+<p>Escaped in x minute(s).</p>
+<p>如果老王不能逃出去，则输出：</p>
+<p>Trapped!</p>
+<p>样例输入<br>3 3<br>S..<br>.#.<br>..E</p>
+<p>3 3<br>S#.<br>.#.<br>.#E<br>样例输出<br>Escaped in 4 minute(s).<br>Trapped!<br> **</p>
+<p>思路也不必多说，搜索所有路径，找到最短的，代码如下：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;string.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">char map[101][101];</span><br><span class="line">int n,m;</span><br><span class="line">int dir[4][2]=&#123;1,0,-1,0,0,1,0,-1&#125;;</span><br><span class="line">int v[101][101],d[101][101];</span><br><span class="line">queue &lt;char&gt; q;</span><br><span class="line">void bfs(int x,int y)&#123;</span><br><span class="line">	while(q.size())&#123;</span><br><span class="line">	char tq=q.front();</span><br><span class="line">	q.pop();</span><br><span class="line">	if(tq==&apos;E&apos;)	</span><br><span class="line">		break;</span><br><span class="line">	for(int i=0;i&lt;4;i++)&#123;</span><br><span class="line">		int tx=x+dir[i][0];</span><br><span class="line">		int ty=y+dir[i][1];</span><br><span class="line">		if(map[tx][ty]==&apos;.&apos;&amp;&amp;v[tx][ty]==0&amp;&amp;tx&gt;=0&amp;&amp;tx&lt;n&amp;&amp;ty&gt;=0&amp;&amp;ty&lt;m)&#123;</span><br><span class="line">			q.push(map[tx][ty]);</span><br><span class="line">			d[tx][ty]=d[x][y]+1;</span><br><span class="line">			v[tx][ty]=1;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line">int main()&#123;</span><br><span class="line">	while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m)!=EOF)&#123;</span><br><span class="line">		memset(v,0,sizeof(v));</span><br><span class="line">		memset(d,0,sizeof(d));</span><br><span class="line">		int ex,ey,sx,sy;</span><br><span class="line">		for(int i=0;i&lt;n;i++)</span><br><span class="line">			for(int j=0;j&lt;m;j++)&#123;</span><br><span class="line">				cin&gt;&gt;map[i][j];</span><br><span class="line">				if(map[i][j]==&apos;S&apos;)&#123;</span><br><span class="line">					sx=i;</span><br><span class="line">					sy=j;</span><br><span class="line">					q.push(map[i][j]);</span><br><span class="line">					v[i][j]=1;</span><br><span class="line">				&#125;</span><br><span class="line">				if(map[i][j]==&apos;E&apos;)&#123;</span><br><span class="line">					ex=i;</span><br><span class="line">					ey=j;</span><br><span class="line">				&#125;</span><br><span class="line">				</span><br><span class="line">			&#125;</span><br><span class="line">		bfs(sx,sy);</span><br><span class="line">		if(d[ex][ey]==0)</span><br><span class="line">		cout&lt;&lt;&quot;Trapped!&quot;&lt;&lt;endl;</span><br><span class="line">		else</span><br><span class="line">		cout&lt;&lt;&quot;Escaped in &quot;&lt;&lt;d[ex][ey]&lt;&lt;&quot; minute(s).&quot;&lt;&lt;endl;</span><br><span class="line">				</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可能会有错哦，好久以前写的，不知道是对的还是错的，但知道方式与思路就行！</p>
+<p>其实dfs与bfs都大相径庭，所以，当你用熟练了，几乎都能互用，只是代码多少的问题而已！</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>搜索</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>分治与归并</title>
+    <url>/2018/08/09/%E5%88%86%E6%B2%BB%E4%B8%8E%E5%BD%92%E5%B9%B6/</url>
+    <content><![CDATA[<p>分治算法的基本思想是将一个规模为N的问题分解为K个规模较小的子问题，这些子问题相互独立且与原问题性质相同。</p>
+<p>求出子问题的解，就可得到原问题的解。就像前面的我说过的二分查找，也有类似的思想。</p>
+<p>其实，学习中也有许多类似的问题可以用到分治与归并，快排与归并排序就是这样。<br><a id="more"></a><br>下里面容我记录一下我昨天下午敲的快排与归并的代码：</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//快排 </span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxn=1000;</span><br><span class="line">int arr[maxn];</span><br><span class="line">void quickshort(int arr[],int l,int r)&#123; </span><br><span class="line">	int st=l,ed=r;</span><br><span class="line">	if(st&gt;=ed)</span><br><span class="line">		return ;</span><br><span class="line">	int temp=arr[l];</span><br><span class="line">	while(st&lt;ed)&#123;</span><br><span class="line">		while(st&lt;ed&amp;&amp;arr[ed]&gt;=temp)&#123;</span><br><span class="line">			ed--;</span><br><span class="line">		&#125;</span><br><span class="line">		arr[st]=arr[ed];</span><br><span class="line">		while(st&lt;ed&amp;&amp;arr[st]&lt;=temp)&#123;</span><br><span class="line">			st++;</span><br><span class="line">		&#125;</span><br><span class="line">		arr[ed]=arr[st];</span><br><span class="line">	&#125;</span><br><span class="line">	arr[st]=temp;</span><br><span class="line">	quickshort(arr,l,st-1);</span><br><span class="line">	quickshort(arr,st+1,r);</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cout&lt;&lt;&quot;请输入要排序数的个数：(不大于1000)&quot;&lt;&lt;endl;</span><br><span class="line">	int n;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	cout&lt;&lt;&quot;请输入要排序的数：&quot;&lt;&lt;endl; </span><br><span class="line">	for(int i=0;i&lt;n;i++)</span><br><span class="line">		cin&gt;&gt;arr[i];</span><br><span class="line">	quickshort(arr,0,n-1);</span><br><span class="line">	cout&lt;&lt;&quot;排序后的数：&quot;; </span><br><span class="line">	for(int i=0;i&lt;9;i++)</span><br><span class="line">		cout&lt;&lt;arr[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string.h&gt; </span><br><span class="line">using namespace std;</span><br><span class="line">const int maxn=1000;</span><br><span class="line">int arr[maxn];</span><br><span class="line">//归并 </span><br><span class="line">void merge(int beg,int mid,int end)&#123;</span><br><span class="line">	if(end&lt;=beg)</span><br><span class="line">		return ;</span><br><span class="line">	int beg1=beg,beg2=mid,a[end-beg];</span><br><span class="line">	int i=0;</span><br><span class="line">	while(beg1&lt;mid&amp;&amp;beg2&lt;end)&#123;</span><br><span class="line">		if(arr[beg1]&lt;=arr[beg2])</span><br><span class="line">			a[i++]=arr[beg1++];</span><br><span class="line">		if(arr[beg1]&gt;arr[beg2])</span><br><span class="line">			a[i++]=arr[beg2++];</span><br><span class="line">	&#125;</span><br><span class="line">	while(beg1&lt;mid)&#123;</span><br><span class="line">		a[i++]=arr[beg1++];</span><br><span class="line">	&#125;</span><br><span class="line">	while(beg2&lt;end)&#123;</span><br><span class="line">		a[i++]=arr[beg2++];</span><br><span class="line">	&#125;</span><br><span class="line">	memcpy(arr+beg,a,sizeof(a));</span><br><span class="line">&#125; </span><br><span class="line">//排序 </span><br><span class="line">void order(int n) &#123;</span><br><span class="line">	for(int length=1;length&lt;=n;length*=2)&#123;</span><br><span class="line">		int beg=0,mid=beg+length,end=mid+length;</span><br><span class="line">		for(;beg&lt;n;beg+=end,mid=beg+length,end=mid+length)&#123;</span><br><span class="line">			if(mid&gt;n)</span><br><span class="line">				mid=n;</span><br><span class="line">			if(end&gt;n)</span><br><span class="line">				end=n;</span><br><span class="line">			merge(beg,mid,end);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cout&lt;&lt;&quot;请输入要排序数的个数：(不大于1000)&quot;&lt;&lt;endl;</span><br><span class="line">	int n;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	cout&lt;&lt;&quot;请输入要排序的数：&quot;&lt;&lt;endl; </span><br><span class="line">	for(int i=0;i&lt;n;i++)</span><br><span class="line">		cin&gt;&gt;arr[i];</span><br><span class="line">	order(n);</span><br><span class="line">	cout&lt;&lt;&quot;排序后的数：&quot;; </span><br><span class="line">	for(int i=0;i&lt;n;i++)</span><br><span class="line">		cout&lt;&lt;arr[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">	return 0;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><p>接下里接入正题，分治与归并能解决的问题。</p>
+<p>**逆序对<br>定义：</p>
+<p>设 A 为一个有 n 个数字的有序集 (n&gt;1)，其中所有数字各不相同。</p>
+<p>如果存在正整数 i, j 使得 1 ≤ i &lt; j ≤ n 而且 A[i] &gt; A[j]，则 &lt;A[i], A[j]&gt; 这个有序对称为 A 的一个逆序对，也称作逆序数。**</p>
+<p>求的时候呢，具体思路是</p>
+<p>在归并的过程中计算每个小区间的逆序对数，进而计算出大区间的逆序对数</p>
+<p>代码入下：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int a[10000],l[10000],r[10000];</span><br><span class="line">long long t;</span><br><span class="line">void cmp(int ll,int mid,int rr)</span><br><span class="line">&#123;</span><br><span class="line">    int m=0,n=0,i,j,k;</span><br><span class="line">    for(i=ll;i&lt;=mid;i++)</span><br><span class="line">        l[m++]=a[i];</span><br><span class="line">    for(i=mid+1;i&lt;=rr;i++)</span><br><span class="line">        r[n++]=a[i];</span><br><span class="line">    i=j=0;</span><br><span class="line">    k=ll;</span><br><span class="line">    while(i&lt;m&amp;&amp;j&lt;n)&#123;</span><br><span class="line">        if(l[i]&lt;=r[j])</span><br><span class="line">            a[k++]=l[i++];</span><br><span class="line">        else&#123;</span><br><span class="line">            a[k++]=r[j++];</span><br><span class="line">            t+=m-i;//小区间逆序个数 </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    while(i&lt;m)</span><br><span class="line">        a[k++]=l[i++];</span><br><span class="line">    while(j&lt;n)</span><br><span class="line">        a[k++]=r[j++];</span><br><span class="line">&#125;</span><br><span class="line">void mergesort(int l,int r)</span><br><span class="line">&#123;</span><br><span class="line">    int mid;</span><br><span class="line">    if(l&lt;r)&#123;</span><br><span class="line">        mid=(l+r)/2;</span><br><span class="line">        mergesort(l,mid);</span><br><span class="line">        mergesort(mid+1,r);</span><br><span class="line">        cmp(l,mid,r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,i;</span><br><span class="line">    while(cin&gt;&gt;n)&#123;</span><br><span class="line">        for(i=0;i&lt;n;i++)</span><br><span class="line">            cin&gt;&gt;a[i];</span><br><span class="line">        t=0;</span><br><span class="line">        mergesort(0,n-1);</span><br><span class="line">        cout&lt;&lt;t&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong> HUD1394</strong><br>Minimum Inversion Number<br>Time Limit: 2000/1000 MS (Java/Others)    Memory Limit: 65536/32768 K (Java/Others)<br>Total Submission(s): 6743    Accepted Submission(s): 4112</p>
+<p>Problem Description</p>
+<p>The inversion number of a given number sequence a1, a2, …, an is the number of pairs (ai, aj) that satisfy i &lt; j and ai &gt; aj.</p>
+<p>For a given sequence of numbers a1, a2, …, an, if we move the first m &gt;= 0 numbers to the end of the seqence, we will obtain another sequence. There are totally n such sequences as the following:</p>
+<p>a1, a2, …, an-1, an (where m = 0 - the initial seqence)<br>a2, a3, …, an, a1 (where m = 1)<br>a3, a4, …, an, a1, a2 (where m = 2)<br>…<br>an, a1, a2, …, an-1 (where m = n-1)</p>
+<p>You are asked to write a program to find the minimum inversion number out of the above sequences.</p>
+<p>Input</p>
+<p>The input consists of a number of test cases. Each case consists of two lines: the first line contains a positive integer n (n &lt;= 5000); the next line contains a permutation of the n integers from 0 to n-1.</p>
+<p>Output</p>
+<p>For each case, output the minimum inversion number on a single line.</p>
+<p>Sample Input</p>
+<p>10 1 3 6 9 0 8 5 7 4 2</p>
+<p>Sample Output</p>
+<p>16</p>
+<p>题意：</p>
+<p>一个由0..n-1组成的序列，每次可以把队首的元素移到队尾，<br>          求形成的n个序列中最小逆序对数目</p>
+<p>超时思路：刚开始我以为会挺简单，就直接枚举每一次移动新序列的逆序对数取最小就行，可是这样做肯定会超时，我提交的时候就想到了（哈哈哈，勇于尝试）。</p>
+<p>AC思路：如果求出第一种情况的逆序列，其他的可以通过递推来搞出来，一开始是t[1],t[2],t[3]….t[N]</p>
+<p>它的逆序列个数是N个，如果把t[1]放到t[N]后面，逆序列个数会减少t[1]个，相应会增加N-(t[1]+1)个  </p>
+<p>例如：0123 逆序对数：0</p>
+<pre><code>1230 逆序对数：0-0+4-（0+1）=3
+
+2301逆序对数：3-1+4-（1+1）=4
+
+......
+</code></pre><p>注意，这道题是从0~n的序列才有这种推论。</p>
+<p>AC代码：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxn=5000;</span><br><span class="line">int cnt=0;</span><br><span class="line">int a[maxn],b[maxn],temp[maxn];</span><br><span class="line">void merge(int beg,int mid,int end)&#123;</span><br><span class="line">	if(end&lt;=beg)</span><br><span class="line">		return ;</span><br><span class="line">	int beg1=beg,beg2=mid,i=0;</span><br><span class="line">	while(beg1&lt;mid&amp;&amp;beg2&lt;end)&#123;</span><br><span class="line">		if(b[beg1]&lt;=b[beg2])&#123;</span><br><span class="line">			temp[i++]=b[beg1++];</span><br><span class="line">		&#125;</span><br><span class="line">		else&#123;</span><br><span class="line">			temp[i++]=b[beg2++];</span><br><span class="line">			cnt+=mid-beg1;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">		while(beg1&lt;mid)</span><br><span class="line">			temp[i++]=b[beg1++];</span><br><span class="line">		while(beg2&lt;end)</span><br><span class="line">			temp[i++]=b[beg2++];</span><br><span class="line">	memcpy(b+beg,temp,sizeof(int) * (end-beg));</span><br><span class="line">&#125;</span><br><span class="line">void order(int n)&#123;</span><br><span class="line">	for(int length=1;length&lt;=n;length*=2)&#123;</span><br><span class="line">		for(int beg=0,mid=beg+length,end=mid+length;beg&lt;n;beg=end,mid=beg+length,end=mid+length)&#123;</span><br><span class="line">			if(mid&gt;n)</span><br><span class="line">				mid=n;</span><br><span class="line">			if(end&gt;n)</span><br><span class="line">				end=n;</span><br><span class="line">			merge(beg,mid,end);	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	int n;</span><br><span class="line">	while(cin&gt;&gt;n)&#123;</span><br><span class="line">	for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">		cin&gt;&gt;a[i];</span><br><span class="line">		b[i]=a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	cnt=0; </span><br><span class="line">	int tcnt=999999999;//这个9必须多，第一次我提交9写少了，WA了。所以，以后用0x3f3f3f吧 </span><br><span class="line">	order(n);</span><br><span class="line">	tcnt=min(tcnt,cnt);	</span><br><span class="line">	for(int i=0;i&lt;n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt = cnt - a[i] + n - 1 - a[i];</span><br><span class="line">            tcnt=min(tcnt,cnt);</span><br><span class="line">        &#125;</span><br><span class="line">		cout&lt;&lt;tcnt&lt;&lt;endl;	</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>最大和连续子序列问题：</strong><br>给定K个整数的序列{ N1, N2, …, NK }，其任意连续子序列可表示为{ Ni, Ni+1, …, Nj }，其中 1 &lt;= i &lt;= j &lt;= K。最大连续子序列是所有连续子序列中元素和最大的一个， </p>
+<p>例如给定序列{ -2, 11, -4, 13, -5, -2 }，其最大连续子序列为{ 11, -4, 13 }，最大和 为20。<br>要求编写程序得到最大和。</p>
+<p>这种题解法很多，这里主要说一下分治解法：</p>
+<p>直接看代码：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">struct MaximumSubarray&#123;</span><br><span class="line">    int low;</span><br><span class="line">    int high;</span><br><span class="line">    int sum;</span><br><span class="line">&#125;;</span><br><span class="line">MaximumSubarray findMaxCrossingSubarr(int A[],int low,int mid,int high)&#123;</span><br><span class="line">    int left_sum=0x80000000;//最小负数</span><br><span class="line">    int right_sum=0x80000000;//最小负数</span><br><span class="line">    int max_left=0;</span><br><span class="line">    int max_right=0;</span><br><span class="line">    int sum=0;</span><br><span class="line">    MaximumSubarray maxSubarr=&#123;0&#125;;</span><br><span class="line"> </span><br><span class="line">    for(int i=mid;i&gt;=low;--i)&#123;</span><br><span class="line">        sum+=A[i];</span><br><span class="line">        if(sum&gt;left_sum)&#123;</span><br><span class="line">            left_sum=sum;</span><br><span class="line">            max_left=i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sum=0;</span><br><span class="line">    for(int i=mid+1;i&lt;=high;++i)&#123;</span><br><span class="line">        sum+=A[i];</span><br><span class="line">        if(sum&gt;right_sum)&#123;</span><br><span class="line">            right_sum=sum;</span><br><span class="line">            max_right=i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    maxSubarr.low=max_left;</span><br><span class="line">    maxSubarr.high=max_right;</span><br><span class="line">    maxSubarr.sum=left_sum+right_sum;</span><br><span class="line">    return maxSubarr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/***********************************</span><br><span class="line">func:求给定数组的最大子数组</span><br><span class="line">para:A:数组;low:左下标;high:右下标</span><br><span class="line">***********************************/</span><br><span class="line">MaximumSubarray findMaxSubarr(int A[],int low,int high)&#123;</span><br><span class="line">    MaximumSubarray maxSubarrLeft=&#123;0&#125;;</span><br><span class="line">    MaximumSubarray maxSubarrRight=&#123;0&#125;;</span><br><span class="line">    MaximumSubarray maxSubarrCross=&#123;0&#125;;</span><br><span class="line">    if(high==low)&#123;          //特殊情况：只有一个元素</span><br><span class="line">        maxSubarrLeft.low=low;</span><br><span class="line">        maxSubarrLeft.high=high;</span><br><span class="line">        maxSubarrLeft.sum=A[low];</span><br><span class="line">        return maxSubarrLeft;  </span><br><span class="line">    &#125;</span><br><span class="line">    int mid=(low+high)/2;</span><br><span class="line">    maxSubarrLeft=findMaxSubarr(A,low,mid);</span><br><span class="line">    maxSubarrRight=findMaxSubarr(A,mid+1,high);</span><br><span class="line">    maxSubarrCross=findMaxCrossingSubarr(A,low,mid,high);</span><br><span class="line">    if(maxSubarrLeft.sum&gt;maxSubarrRight.sum&amp;&amp;maxSubarrLeft.sum&gt;maxSubarrCross.sum)</span><br><span class="line">        return maxSubarrLeft;</span><br><span class="line">    else if(maxSubarrRight.sum&gt;maxSubarrLeft.sum&amp;&amp; maxSubarrRight.sum&gt;maxSubarrCross.sum)</span><br><span class="line">        return maxSubarrRight;</span><br><span class="line">    else return maxSubarrCross;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">int main(int argc,char* argv[])&#123;</span><br><span class="line">    int n,arr[100000];</span><br><span class="line">	while(cin&gt;&gt;n)&#123;</span><br><span class="line">	for(int i=0,j=-1;i&lt;n;j++,i++)&#123;</span><br><span class="line">		cin&gt;&gt;arr[i];</span><br><span class="line">		if(i!=0)&#123;</span><br><span class="line">			arr[j]=arr[i]-arr[i-1];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">//	for(int i=0;i&lt;n;i++)</span><br><span class="line">//		cout&lt;&lt;arr[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">	MaximumSubarray resMaxSubarr=findMaxSubarr(arr,0,n-2);</span><br><span class="line"> //   cout&lt;&lt;&quot;maximum subarray is:&quot;&lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt;resMaxSubarr.low&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;resMaxSubarr.high&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;resMaxSubarr.sum&lt;&lt;endl;	</span><br><span class="line">&#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p> 以上是我关于分治与归并的总结！！！</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>分治</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>周末之ACM之旅：焦作网络赛与青岛网络赛</title>
+    <url>/2018/09/16/%E5%91%A8%E6%9C%AB%E4%B9%8BACM%E4%B9%8B%E6%97%85%EF%BC%9A%E7%84%A6%E4%BD%9C%E7%BD%91%E7%BB%9C%E8%B5%9B%E4%B8%8E%E9%9D%92%E5%B2%9B%E7%BD%91%E7%BB%9C%E8%B5%9B/</url>
+    <content><![CDATA[<h1 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h1><p>  这两天呢，几乎赖床般的，十点半左右起床，然后做好准备，拿好电脑，走向创客，和伙伴讨论，解题。也不知是没睡好还是怎么的，五点做完题后是特别的困，打英雄联盟都能连跪的（也不排除楼下的奥斯卡影帝的给与吧），脑力消耗，几万亿个脑细胞就这样莫得了。。。天是阴沉，也是凉爽，“空山新雨后，天气晚来秋！”啊。<br><a id="more"></a></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="ACM-ICPC-2018-焦作赛区网络预赛"><a href="#ACM-ICPC-2018-焦作赛区网络预赛" class="headerlink" title="ACM-ICPC 2018 焦作赛区网络预赛"></a>ACM-ICPC 2018 焦作赛区网络预赛</h2><h3 id="Mathematical-Curse"><a href="#Mathematical-Curse" class="headerlink" title="Mathematical Curse"></a>Mathematical Curse</h3><p>B. Mathematical Curse<br>A prince of the Science Continent was imprisoned in a castle because of his contempt for mathematics when he was young, and was entangled in some mathematical curses. He studied hard until he reached adulthood and decided to use his knowledge to escape the castle.</p>
+<p>There are NN rooms from the place where he was imprisoned to the exit of the castle. In the i^{th}ith room, there is a wizard who has a resentment value of a[i]a[i]. The prince has MM curses, the j^{th}jth curse is f[j]f[j], and f[j]f[j] represents one of the four arithmetic operations, namely addition(‘+’), subtraction(‘-‘), multiplication(‘*’), and integer division(‘/‘). The prince’s initial resentment value is KK. Entering a room and fighting with the wizard will eliminate a curse, but the prince’s resentment value will become the result of the arithmetic operation f[j]f[j] with the wizard’s resentment value. That is, if the prince eliminates the j^{th}jth curse in the i^{th}ith room, then his resentment value will change from xx to (x\ f[j]\ a[i]x f[j] a[i]), for example, when x=1, a[i]=2, f[j]=x=1,a[i]=2,f[j]=’+’, then xx will become 1+2=31+2=3.</p>
+<p>Before the prince escapes from the castle, he must eliminate all the curses. He must go from a[1]a[1] to a[N]a[N] in order and cannot turn back. He must also eliminate the f[1]f[1] to f[M]f[M] curses in order(It is guaranteed that N\ge MN≥M). What is the maximum resentment value that the prince may have when he leaves the castle?</p>
+<p>Input<br>The first line contains an integer T(1 \le T \le 1000)T(1≤T≤1000), which is the number of test cases.</p>
+<p>For each test case, the first line contains three non-zero integers: N(1 \le N \le 1000), M(1 \le M \le 5)N(1≤N≤1000),M(1≤M≤5) and K(-1000 \le K \le 1000K(−1000≤K≤1000), the second line contains NN non-zero integers: a[1], a[2], …, a<a href="-1000 \le a[i] \le 1000">N</a>a[1],a[2],…,a<a href="−1000≤a[i]≤1000">N</a>, and the third line contains MM characters: f[1], f[2], …, f[M](f[j] =f[1],f[2],…,f[M](f[j]=’+’,’-‘,’*’,’/‘, with no spaces in between.</p>
+<p>Output<br>For each test case, output one line containing a single integer.</p>
+<p>样例输入复制</p>
+<p>3<br>2 1 5<br>2 3<br>/<br>3 2 1<br>1 2 3<br>++<br>4 4 5<br>1 2 3 4<br>+-*/<br>样例输出复制</p>
+<p>2<br>6<br>3</p>
+<h4 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h4><p>在给定的N个数中依次使用M个运算符，初始值为K，求最大值。</p>
+<h4 id="题解（学习一位大神的题解）："><a href="#题解（学习一位大神的题解）：" class="headerlink" title="题解（学习一位大神的题解）："></a>题解（学习一位大神的题解）：</h4><p>动态规划，设状态dp[i][j]表示取前i个数，j个字符时能获得的最值（最大和最小值都要维护）</p>
+<p>设mul(dp,i,j)表示之前的结果为dp，第i个数字第j个运算符运算后的结果</p>
+<p>有转移方程：</p>
+<p>dpmax[i][j]=max(dpmax[i-1][j]，mul(dpmax[i-1][j-1],i,j)，mul(dpmin[i-1][j-1],i,j))</p>
+<p>//别忘了负数乘以负数可能会转移到最大值。最小值同理。</p>
+<p>dpmin同上（详见代码）</p>
+<p>边界自然是</p>
+<p>dpmax=-inf</p>
+<p>dpmin=inf</p>
+<p>dp[i][0]=k</p>
+<h4 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">ll dpmin[1005][10];</span><br><span class="line">ll dpmax[1005][10];</span><br><span class="line">ll const inf=0x3f3f3f3f3f3f;</span><br><span class="line"> </span><br><span class="line">int numb[1005];</span><br><span class="line">char s[10];</span><br><span class="line">inline ll mul(ll v,int i,int j)&#123;</span><br><span class="line">    switch(s[j])&#123;</span><br><span class="line">        case &apos;+&apos;:return v+numb[i];</span><br><span class="line">        case &apos;-&apos;:return v-numb[i];</span><br><span class="line">        case &apos;*&apos;:return v*numb[i];</span><br><span class="line">        case &apos;/&apos;:return v/numb[i];</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">    int T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    int n,m,k;</span><br><span class="line">    while(T--)&#123;</span><br><span class="line">        scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;k);</span><br><span class="line">        for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">            scanf(&quot;%d&quot;,numb+i);</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;=n;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;=m;j++)&#123;</span><br><span class="line">                dpmax[i][j]=-inf;</span><br><span class="line">                dpmin[i][j]=inf;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        dpmin[0][0]=dpmax[0][0]=k;</span><br><span class="line">        getchar();</span><br><span class="line">        gets(s+1);</span><br><span class="line">        for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">            dpmin[i][0]=k;</span><br><span class="line">            dpmax[i][0]=k;</span><br><span class="line">            for(int j=1;j&lt;=m;j++)&#123;</span><br><span class="line">                dpmin[i][j]=dpmin[i-1][j]; </span><br><span class="line">                dpmax[i][j]=dpmax[i-1][j]; </span><br><span class="line">                if(dpmax[i-1][j-1]!=-inf)</span><br><span class="line">                    dpmax[i][j]=max(dpmax[i][j],mul(dpmax[i-1][j-1],i,j));</span><br><span class="line">                if(dpmin[i-1][j-1]!=inf)</span><br><span class="line">                    dpmax[i][j]=max(dpmax[i][j],mul(dpmin[i-1][j-1],i,j));</span><br><span class="line">            </span><br><span class="line">                if(dpmin[i-1][j-1]!=inf)</span><br><span class="line">                    dpmin[i][j]=min(dpmin[i][j],mul(dpmin[i-1][j-1],i,j));    </span><br><span class="line">                if(dpmax[i-1][j-1]!=-inf)</span><br><span class="line">                    dpmin[i][j]=min(dpmin[i][j],mul(dpmax[i-1][j-1],i,j));</span><br><span class="line">            </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;dpmax[n][m]&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="Give-Candies"><a href="#Give-Candies" class="headerlink" title="Give Candies"></a>Give Candies</h3><p>There are N children in kindergarten. Miss Li bought them N candies. To make the process more interesting, Miss Li comes up with the rule: All the children line up according to their student number (1…N), and each time a child is invited, Miss Li randomly gives him some candies (at least one). The process goes on until there is no candy. Miss Li wants to know how many possible different distribution results are there.</p>
+<p>Input<br>The first line contains an integer T, the number of test case.</p>
+<p>The next TT lines, each contains an integer N.</p>
+<p>1≤T≤100</p>
+<p>1≤N≤10^100000</p>
+<p>Output<br>For each test case output the number of possible results (mod 1000000007).</p>
+<p>样例输入复制</p>
+<p>1<br>4<br>样例输出复制</p>
+<p>8</p>
+<h4 id="题目大意-："><a href="#题目大意-：" class="headerlink" title="题目大意 ："></a>题目大意 ：</h4><p>一个老师买了N个苹果分给N位同学（这N个同学编了不同的号码），问一共有多少种分发？</p>
+<h4 id="题解-："><a href="#题解-：" class="headerlink" title="题解 ："></a>题解 ：</h4><p>很容易发现答案就是2^n-1，但是，N有10^100000，会发现快速幂也会超时。所以，就有费马小定理，如下：</p>
+<p>ans=2^(n-1)%mod=2^((n-1)%(mod-1)+(n-1)/(mod-1)<em>(mod-1))%mod=2^((n-1)%(mod-1))%mod</em>2^((n-1)/(mod-1)*(mod-1))%mod=2^((n-1)%(mod-1))%mod</p>
+<h4 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxn = 2e5;</span><br><span class="line">const int mod = 1e9 + 7;</span><br><span class="line">string s;</span><br><span class="line">int n;</span><br><span class="line">long long ipow(long long a, long long x) &#123;</span><br><span class="line">    long long ans = 1;</span><br><span class="line">    while (x) &#123;</span><br><span class="line">        if (x &amp; 1) ans = ans * a % mod;</span><br><span class="line">        a = a * a % mod;</span><br><span class="line">        x &gt;&gt;= 1;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line">int main() &#123;</span><br><span class="line">    int t;</span><br><span class="line">    cin&gt;&gt;t;</span><br><span class="line">    while (t--) &#123;</span><br><span class="line">        cin &gt;&gt; s;</span><br><span class="line">        long long num = 0;</span><br><span class="line">        for (int i = 0; i &lt; s.size(); i++) num = (num*10+(s[i]-&apos;0&apos;))%(mod-1);</span><br><span class="line">        num = (num-1+mod-1) % (mod-1);</span><br><span class="line">        cout &lt;&lt; ipow(2, num) &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="Save-the-Room"><a href="#Save-the-Room" class="headerlink" title="Save the Room"></a>Save the Room</h3><p>Bob is a sorcerer. He lives in a cuboid room which has a length of A, a width of B and a height of C, so we represent it as A <em> B </em> C. One day, he finds that his room is filled with unknown dark energy. Bob wants to neutralize all the dark energy in his room with his light magic. He can summon a 1 <em> 1 </em> 2 cuboid at a time to neutralize dark energy. But the cuboid must be totally in dark energy to take effect. Can you foresee whether Bob can save his room or not?</p>
+<p>Input<br>Input has T test cases. T≤100</p>
+<p>For each line, there are three integers A, B, C</p>
+<p>1≤A,B,C≤100</p>
+<p>Output<br>For each test case, if Bob can save his room, print”Yes”, otherwise print”No”.</p>
+<p>样例输入复制</p>
+<p>1 1 2<br>1 1 4<br>1 1 1<br>样例输出复制</p>
+<p>Yes<br>Yes<br>No</p>
+<h4 id="题目大意-：-1"><a href="#题目大意-：-1" class="headerlink" title="题目大意 ："></a>题目大意 ：</h4><p>给一个方体的长宽高，填入1<em>1</em>2的小方体，问能否填满</p>
+<h4 id="题解-：-1"><a href="#题解-：-1" class="headerlink" title="题解 ："></a>题解 ：</h4><p>感觉有点水，也不水（哈哈~），应该一会就能发现答案就是 a<em>b</em>c%2=0就YES</p>
+<h4 id="AC代码：-1"><a href="#AC代码：-1" class="headerlink" title="AC代码："></a>AC代码：</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    //freopen(&quot;test.in&quot;,&quot;r&quot;,stdin);</span><br><span class="line">    //freopen(&quot;test.in&quot;,&quot;w+&quot;,stdout);</span><br><span class="line">    int A, B, C;</span><br><span class="line">    while(cin&gt;&gt;A&gt;&gt;B&gt;&gt;C)</span><br><span class="line">    &#123;</span><br><span class="line"> </span><br><span class="line">        int flag = 0;</span><br><span class="line">        if(A%2==0||B%2==0||C%2==0)  flag = 1;</span><br><span class="line">        if(flag)    cout&lt;&lt;&quot;Yes&quot;&lt;&lt;endl;</span><br><span class="line">        else    cout&lt;&lt;&quot;No&quot;&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><h2 id="The-2018-ACM-ICPC-Asia-Qingdao-Regional-Contest-Online"><a href="#The-2018-ACM-ICPC-Asia-Qingdao-Regional-Contest-Online" class="headerlink" title="The 2018 ACM-ICPC Asia Qingdao Regional Contest, Online"></a>The 2018 ACM-ICPC Asia Qingdao Regional Contest, Online</h2><h3 id="XOR-Clique"><a href="#XOR-Clique" class="headerlink" title="XOR Clique"></a>XOR Clique</h3><p>BaoBao has a sequence a​1​​,a​2​​,…,a​n​​. He would like to find a subset S of {1,2,…,n} such that ∀i,j∈S, a​i​​⊕a​j​​&lt;min(a​i​​,a​j​​) and ∣S∣ is maximum, where ⊕ means bitwise exclusive or.</p>
+<p>Input</p>
+<p>There are multiple test cases. The first line of input contains an integer T, indicating the number of test cases. For each test case:</p>
+<p>The first line contains an integer n (1≤n≤10​5​​), indicating the length of the sequence.</p>
+<p>The second line contains n integers: a​1​​,a​2​​,…,a​n​​ (1≤a​i​​≤10​9​​), indicating the sequence.</p>
+<p>It is guaranteed that the sum of n in all cases does not exceed 10​5​​.</p>
+<p>Output</p>
+<p>For each test case, output an integer denoting the maximum size of S.</p>
+<p>Sample Input</p>
+<p>3<br>3<br>1 2 3<br>3<br>1 1 1<br>5<br>1 2323 534 534 5<br>Sample Output</p>
+<p>2<br>3<br>2</p>
+<h4 id="题意："><a href="#题意：" class="headerlink" title="题意："></a>题意：</h4><p>给N个数，从中选取一些书作为集合S，并且 ∀i,j∈S, a​i​​⊕a​j​​&lt;min(a​i​​,a​j​​)，求max（|S|）。</p>
+<h4 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h4><p>思路应该比较简单，就是求这N个数里面2进制最高位位数有数时对应范围的数的个数谁最多，例如最高第三位有数，则100~111，最高第二位有数时，10~11；</p>
+<h4 id="AC代码：-2"><a href="#AC代码：-2" class="headerlink" title="AC代码："></a>AC代码：</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxn=1e5+5;</span><br><span class="line">int a[maxn];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int m,n,t;</span><br><span class="line">    cin&gt;&gt;t;</span><br><span class="line">    while(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        for(int i=1;i&lt;=n;i++)</span><br><span class="line">            cin&gt;&gt;a[i];</span><br><span class="line">        sort(a+1,a+n+1);</span><br><span class="line">        int flag=0;</span><br><span class="line">        int tj=0;</span><br><span class="line">        int tflag=0;</span><br><span class="line">        for(int i=1;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            /*</span><br><span class="line">            if(a[i]==1&amp;&amp;i==1)</span><br><span class="line">                continue;</span><br><span class="line">            if(a[i]==1&amp;&amp;a[i-1]==1)&#123;</span><br><span class="line">                tflag++;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            if(a[i]==1&amp;&amp;a[i+1]!=1)</span><br><span class="line">            &#123;</span><br><span class="line">                flag=max(flag,tflag);</span><br><span class="line">                tflag=0;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;*/</span><br><span class="line">            if(pow(2,tj)&lt;=a[i])</span><br><span class="line">           &#123;        </span><br><span class="line">                        </span><br><span class="line">                        while(1)</span><br><span class="line">                       &#123;</span><br><span class="line">                            tj++;</span><br><span class="line">                           if(pow(2,tj)&gt;a[i])</span><br><span class="line">                           &#123;</span><br><span class="line">                               flag=max(flag,tflag);</span><br><span class="line">                               tflag=0;</span><br><span class="line">                               break;</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125;</span><br><span class="line">           &#125;</span><br><span class="line"> </span><br><span class="line">            if(a[i]&lt;pow(2,tj))&#123;</span><br><span class="line">                tflag++;</span><br><span class="line">               //cout&lt;&lt;tflag&lt;&lt;endl;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        flag=max(tflag,flag);</span><br><span class="line">        cout&lt;&lt;flag&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="Halting-Problem"><a href="#Halting-Problem" class="headerlink" title="Halting Problem"></a>Halting Problem</h3><p>In computability theory, the halting problem is the problem of determining, from a description of an arbitrary computer program, whether the program will finish running (i.e., halt) or continue to run forever.</p>
+<p>Alan Turing proved in 1936 that a general algorithm to solve the halting problem cannot exist, but DreamGrid, our beloved algorithm scientist, declares that he has just found a solution to the halting problem in a specific programming language – the Dream Language!</p>
+<p>Dream Language is a programming language consists of only 5 types of instructions. All these instructions will read from or write to a 8-bit register r, whose value is initially set to 0. We now present the 5 types of instructions in the following table. Note that we denote the current instruction as the i-th instruction.</p>
+<p>Instruction    Description<br>add v    Add v to the register r. As r is a 8-bit register, this instruction actually calculates (r+v)mod256 and stores the result into r, i.e. r←(r+v)mod256. After that, go on to the (i+1)-th instruction.<br>beq v k    If the value of r is equal to v, jump to the k-th instruction, otherwise go on to the (i+1)-th instruction.<br>bne v k    If the value of r isn’t equal to v, jump to the k-th instruction, otherwise go on to the (i+1)-th instruction.<br>blt v k    If the value of r is strictly smaller than v, jump to the k-th instruction, otherwise go on to the (i+1)-th instruction.<br>bgt v k    If the value of r is strictly larger than v, jump to the k-th instruction, otherwise go on to the (i+1)-th instruction.<br>A Dream Language program consisting of n instructions will always start executing from the 1st instruction, and will only halt (that is to say, stop executing) when the program tries to go on to the (n+1)-th instruction.</p>
+<p>As DreamGrid’s assistant, in order to help him win the Turing Award, you are asked to write a program to determine whether a given Dream Language program will eventually halt or not.</p>
+<p>Input</p>
+<p>There are multiple test cases. The first line of the input is an integer T, indicating the number of test cases. For each test case:</p>
+<p>The first line contains an integer n (1≤n≤10​4​​), indicating the number of instructions in the following Dream Language program.</p>
+<p>For the following n lines, the i-th line first contains a string s (s∈{“add”,“beq”,“bne”,“blt”,“bgt”}), indicating the type of the i-th instruction of the program.</p>
+<p>If s equals to “add”, an integer v follows (0≤v≤255), indicating the value added to the register;<br>Otherwise, two integers v and k follow (0≤v≤255, 1≤k≤n), indicating the condition value and the destination of the jump.<br>It’s guaranteed that the sum of n of all test cases will not exceed 10​5​​.</p>
+<p>Output</p>
+<p>For each test case output one line. If the program will eventually halt, output “Yes” (without quotes); If the program will continue to run forever, output “No” (without quotes).</p>
+<p>Sample Input</p>
+<p>4<br>2<br>add 1<br>blt 5 1<br>3<br>add 252<br>add 1<br>bgt 252 2<br>2<br>add 2<br>bne 7 1<br>3<br>add 1<br>bne 252 1<br>beq 252 1<br>Sample Output</p>
+<p>Yes<br>Yes<br>No<br>No<br>Hint</p>
+<p>For the second sample test case, note that r is a 8-bit register, so after four “add 1” instructions the value of r will change from 252 to 0, and the program will halt.</p>
+<p>For the third sample test case, it’s easy to discover that the value of r will always be even, so it’s impossible for the value of r to be equal to 7, and the program will run forever.</p>
+<h4 id="题意：-1"><a href="#题意：-1" class="headerlink" title="题意："></a>题意：</h4><p>就是一般的模拟，然后判断是否为无限循环或者不是无限循环</p>
+<h4 id="题解：-1"><a href="#题解：-1" class="headerlink" title="题解："></a>题解：</h4><p>就是用一个二维数组记录下是否经过这一步，经过则为无限循环。</p>
+<h4 id="AC代码：-3"><a href="#AC代码：-3" class="headerlink" title="AC代码："></a>AC代码：</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//C</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;math.h&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"> </span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long llong;</span><br><span class="line">const int MAXN = 10000 + 10;</span><br><span class="line"> </span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	int p, v, k;</span><br><span class="line">&#125; node;</span><br><span class="line"> </span><br><span class="line">bool book[MAXN][260];</span><br><span class="line"> </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int t, n, i, r, sgn;</span><br><span class="line">	char str[7];</span><br><span class="line">	int p, v, k;</span><br><span class="line">	node a[MAXN];</span><br><span class="line">	</span><br><span class="line">	scanf(&quot;%d&quot;, &amp;t);</span><br><span class="line">	getchar();</span><br><span class="line">	while(t--)</span><br><span class="line">	&#123;</span><br><span class="line">		scanf(&quot;%d&quot;, &amp;n);</span><br><span class="line">		getchar();</span><br><span class="line">		for(i = 1; i &lt;= n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			scanf(&quot;%s&quot;, str);</span><br><span class="line">			getchar();</span><br><span class="line">			if(str[1] == &apos;d&apos;)</span><br><span class="line">			&#123;</span><br><span class="line">				scanf(&quot;%d&quot;, &amp;k);</span><br><span class="line">				getchar();</span><br><span class="line">				p = 1;</span><br><span class="line">				a[i] = (node)&#123;p, v, k&#125;;</span><br><span class="line">				continue;</span><br><span class="line">			&#125;</span><br><span class="line">			scanf(&quot;%d%d&quot;, &amp;v, &amp;k);</span><br><span class="line">			getchar();</span><br><span class="line">			if(str[1] == &apos;e&apos;)</span><br><span class="line">			&#123;</span><br><span class="line">				p = 2;</span><br><span class="line">			&#125;</span><br><span class="line">			else if(str[1] == &apos;n&apos;)</span><br><span class="line">			&#123;</span><br><span class="line">				p = 3;</span><br><span class="line">			&#125;</span><br><span class="line">			else if(str[1] == &apos;l&apos;)</span><br><span class="line">			&#123;</span><br><span class="line">				p = 4;</span><br><span class="line">			&#125;</span><br><span class="line">			else if(str[1] == &apos;g&apos;)</span><br><span class="line">			&#123;</span><br><span class="line">				p = 5;</span><br><span class="line">			&#125;</span><br><span class="line">			a[i] = (node)&#123;p, v, k&#125;;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		memset(book, false, sizeof(book));</span><br><span class="line">		i = 1; r = 0;</span><br><span class="line">		book[i][r] = true;</span><br><span class="line">		sgn = 1;</span><br><span class="line">		while(i &lt;= n)</span><br><span class="line">		&#123;</span><br><span class="line">			p = a[i].p;</span><br><span class="line">			v = a[i].v;</span><br><span class="line">			k = a[i].k;</span><br><span class="line">			if(p == 1)</span><br><span class="line">			&#123;</span><br><span class="line">				r += k;</span><br><span class="line">				r %= 256;</span><br><span class="line">				i++;</span><br><span class="line">			&#125;</span><br><span class="line">			else if(p == 2)</span><br><span class="line">			&#123;</span><br><span class="line">				i = (r == v) ? k : i + 1;</span><br><span class="line">			&#125;</span><br><span class="line">			else if(p == 3)</span><br><span class="line">			&#123;</span><br><span class="line">				i = (r != v) ? k : i + 1;</span><br><span class="line">			&#125;</span><br><span class="line">			else if(p == 4)</span><br><span class="line">			&#123;</span><br><span class="line">				i = (r &lt; v) ? k : i + 1;</span><br><span class="line">			&#125;</span><br><span class="line">			else if(p == 5)</span><br><span class="line">			&#123;</span><br><span class="line">				i = (r &gt; v) ? k : i + 1;</span><br><span class="line">			&#125;</span><br><span class="line">			if(book[i][r] == true)</span><br><span class="line">			&#123;</span><br><span class="line">				sgn = 0;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">			book[i][r] = true;</span><br><span class="line">		&#125;</span><br><span class="line">		if(sgn == 1)</span><br><span class="line">		&#123;</span><br><span class="line">			printf(&quot;Yes\n&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			printf(&quot;No\n&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="Live-Love"><a href="#Live-Love" class="headerlink" title="Live Love"></a>Live Love</h3><p>DreamGrid is playing the music game Live Love. He has just finished a song consisting of nnotes and got a result sequence A​1​​,A​2​​,…,A​n​​ (A​i​​∈ {PERFECT, NON-PERFECT}). The score of the song is equal to the max-combo of the result sequence, which is defined as the maximum number of continuous PERFECTs in the sequence.</p>
+<p>Formally speaking, max-combo(A)=max { k | k is an integer and there exists an integer i (1≤i≤n−k+1) such that A​i​​=A​i+1​​=A​i+2​​=…=A​i+k−1​​= PERFECT }. For completeness, we define max(∅)=0.</p>
+<p>As DreamGrid is forgetful, he forgets the result sequence immediately after finishing the song. All he knows is the sequence length n and the total number of PERFECTs in the sequence, indicated by m. Any possible score s he may get must satisfy that there exists a sequence A​′​​ of length n containing exactly m PERFECTs and (n−m) NON-PERFECTs and max-combo(A​′​​)=s. Now he needs your help to find the maximum and minimum samong all possible scores.</p>
+<p>Input</p>
+<p>There are multiple test cases. The first line of the input contains an integer T (1≤T≤100), indicating the number of test cases. For each test case:</p>
+<p>The only line contains two integers n and m (1≤n≤10​3​​, 0≤m≤10​3​​, m≤n), indicating the sequence length and the number of PERFECTs DreamGrid gets.</p>
+<p>Output</p>
+<p>For each test case output one line containing two integers s​max​​ and s​min​​, indicating the maximum and minimum possible score.</p>
+<p>Sample Input</p>
+<p>5<br>5 4<br>100 50<br>252 52<br>3 0<br>10 10<br>Sample Output</p>
+<p>4 2<br>50 1<br>52 1<br>0 0<br>10 10<br>Hint</p>
+<p>Let’s indicate a PERFECT as P and a NON-PERFECT as N.</p>
+<p>For the first sample test case, the sequence (P,P,P,P,N) leads to the maximum score and the sequence (P,P,N,P,P) leads to the minimum score.</p>
+<h4 id="题解：-2"><a href="#题解：-2" class="headerlink" title="题解："></a>题解：</h4><p>这题是我队友做的，感觉也比较简单，直接上代码了。</p>
+<h4 id="AC代码：-4"><a href="#AC代码：-4" class="headerlink" title="AC代码："></a>AC代码：</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int n,m;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int T;</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;T);</span><br><span class="line">	while(T--)&#123;</span><br><span class="line">		scanf(&quot;%d%d&quot;,&amp;n,&amp;m);</span><br><span class="line">		int nc = n - m + 1;</span><br><span class="line">		printf(&quot;%d %d\n&quot;,m,n/nc);</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>真的有时候发现就是孰能生巧，当题目出来，有点思路的时候刷新看下解题情况（也就2-3分吧），哇，就有AC了，天哪！所以说，做得多就是一种好处，像小儿科一样。还有就是啊，明明“Halting Problem”就是无解，还出这个，弄得我晕头转向额，壳卡在输出这的代码BUG，调了快半把个小时，心累！不过，也是一种有趣的体验，图灵啊图灵，图灵机。。。。。。为我以后助我一臂之力吧！！！<br>学无止境，继续前行。</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>判断素数与欧拉筛</title>
+    <url>/2018/08/18/%E5%88%A4%E6%96%AD%E7%B4%A0%E6%95%B0%E4%B8%8E%E6%AC%A7%E6%8B%89%E7%AD%9B/</url>
+    <content><![CDATA[<p>对于一个数，判断是否为素数，按照性质暴力枚举每一个，时间复杂度就是O（n），今天，不讨论这个，讨论一下更高效的方法。</p>
+<p><strong>## 一、 ##</strong><br>这是我在一篇博客看到的方法，时间复杂度为O（sqr（n）/3）：</p>
+<p><a href="https://blog.csdn.net/huang_miao_xin/article/details/51331710（方法3）" target="_blank" rel="noopener">https://blog.csdn.net/huang_miao_xin/article/details/51331710（方法3）</a></p>
+<p>首先看一个关于质数分布的规律：大于等于5的质数一定和6的倍数相邻。例如5和7，11和13,17和19等等；</p>
+<p>证明：令x≥1，将大于等于5的自然数表示如下：</p>
+<p>······ 6x-1，6x，6x+1，6x+2，6x+3，6x+4，6x+5，6(x+1），6(x+1)+1 ······<br><a id="more"></a></p>
+<p>可以看到，不在6的倍数两侧，即6x两侧的数为6x+2，6x+3，6x+4，由于2(3x+1)，3(2x+1)，2(3x+2)，所以它们一定不是素数，再除去6x本身，显然，素数要出现只可能出现在6x的相邻两侧。这里有个题外话，关于孪生素数，有兴趣的道友可以再另行了解一下，由于与我们主题无关，暂且跳过。这里要注意的一点是，在6的倍数相邻两侧并不是一定就是质数。</p>
+<p>此时判断质数可以6个为单元快进，即将方法（2）循环中i++步长加大为6，加快判断速度，原因是，假如要判定的数为n，则n必定是6x-1或6x+1的形式，对于循环中6i-1，6i，6i+1,6i+2，6i+3，6i+4，其中如果n能被6i，6i+2，6i+4整除，则n至少得是一个偶数，但是6x-1或6x+1的形式明显是一个奇数，故不成立；另外，如果n能被6i+3整除，则n至少能被3整除，但是6x能被3整除，故6x-1或6x+1（即n）不可能被3整除，故不成立。综上，循环中只需要考虑6i-1和6i+1的情况，即循环的步长可以定为6，每次判断循环变量k和k+2的情况即可，理论上讲整体速度应该会是方法（2）的3倍。代码如下：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bool isPrime_3( int num )</span><br><span class="line">&#123;</span><br><span class="line">                 //两个较小数另外处理</span><br><span class="line">                 if(num ==2|| num==3 )</span><br><span class="line">                                 return 1 ;</span><br><span class="line">                 //不在6的倍数两侧的一定不是质数</span><br><span class="line">                 if(num %6!= 1&amp;&amp;num %6!= 5)</span><br><span class="line">                                 return 0 ;</span><br><span class="line">                 int tmp =sqrt( num);</span><br><span class="line">                 //在6的倍数两侧的也可能不是质数</span><br><span class="line">                 for(int i= 5;i &lt;=tmp; i+=6 )</span><br><span class="line">                                 if(num %i== 0||num %(i+ 2)==0 )</span><br><span class="line">                                                 return 0 ;</span><br><span class="line">                 //排除所有，剩余的是质数</span><br><span class="line">                 return 1 ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="二、米勒拉宾素数测试"><a href="#二、米勒拉宾素数测试" class="headerlink" title="二、米勒拉宾素数测试"></a>二、米勒拉宾素数测试</h2><p>米勒拉宾素数测试可以快速测出单个数是否为素数。</p>
+<p>**步骤：</p>
+<p>首先判断这个数n的奇偶性</p>
+<p>若为偶数仅有2是质数</p>
+<p>奇数则进入测试</p>
+<p>测试方法：</p>
+<p>首先确定几个基底a,范围在[2,n-1]</p>
+<p>因为n是奇数,所以n-1必定为偶数</p>
+<p>则n-1可以表示为(2^s)*d</p>
+<p>s、d分别求出来</p>
+<p>设t为a^d模n的数,有如下几个约定：</p>
+<p>1.若t=-1或1时则该数n可能为质数</p>
+<p>2.若此时t=n-1,则该数可能为质数</p>
+<p>3.d*2&gt;n-1时n必为合数</p>
+<p>4.若上述皆不满足则让d*2,返回2**</p>
+<p>多组测试之后就能判断是否为质数,而且错误率相当低！！</p>
+<p>　　还有一篇博客：<a href="https://www.cnblogs.com/cons/p/5188910.html，说的很清楚。" target="_blank" rel="noopener">https://www.cnblogs.com/cons/p/5188910.html，说的很清楚。</a><br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">int t,n,ans;</span><br><span class="line">long long qpow(int x,int y,int mod)//快速幂</span><br><span class="line">&#123;</span><br><span class="line">    long long ans=1,a=x;</span><br><span class="line">    while(y)</span><br><span class="line">    &#123;</span><br><span class="line">        if(y&amp;1) ans=ans*a%mod;</span><br><span class="line">        a=a*a%mod;</span><br><span class="line">        y&gt;&gt;=1;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line">bool MR_prime(int a,int n)//米勒拉宾</span><br><span class="line">&#123;</span><br><span class="line">    int r=0,d=n-1;</span><br><span class="line">    if(!(n%a)) return false;//倍数必为合数</span><br><span class="line">    while(!(d&amp;1))//找到奇数</span><br><span class="line">    &#123;</span><br><span class="line">        d&gt;&gt;=1;</span><br><span class="line">        r++;</span><br><span class="line">    &#125;</span><br><span class="line">    long long k=qpow(a,d,n);</span><br><span class="line">    if(k==1) return true;//同余1</span><br><span class="line">    for(int i=0;i&lt;r;i++,k=k*k%n) if(k==n-1) return true;//同余-1</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line">bool check_prime(int n)</span><br><span class="line">&#123;</span><br><span class="line">    if(n==2||n==3||n==7||n==61) return true;</span><br><span class="line">    if(!(n&amp;1)||n%3==0||n==1) return false;//删掉大量已知情况</span><br><span class="line">    if(MR_prime(2,n)&amp;&amp;MR_prime(7,n)&amp;&amp;MR_prime(61,n)) return true;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    while(scanf(&quot;%d&quot;,&amp;t)!=EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        ans=0;</span><br><span class="line">        while(t--)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">            if(check_prime(n)) ++ans;</span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;%d\n&quot;,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="三、欧拉筛（朴素筛和埃拉托斯特尼筛的优化）"><a href="#三、欧拉筛（朴素筛和埃拉托斯特尼筛的优化）" class="headerlink" title="三、欧拉筛（朴素筛和埃拉托斯特尼筛的优化）"></a>三、欧拉筛（朴素筛和埃拉托斯特尼筛的优化）</h2><p>•从2开始枚举i，若没有被删除，则加入素数表</p>
+<p>•枚举素数表的所有素数j，筛去i*j，直到枚举到某个j能整除i</p>
+<p>时间复杂度为线性O（n）。</p>
+<p>一般用于求一个区间的素数。</p>
+<p>代码：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">long long pri[maxn];</span><br><span class="line">bool ispri[maxn];</span><br><span class="line">void init()&#123;</span><br><span class="line">	for(int i=2;i&lt;maxn;i++)</span><br><span class="line">		ispri[i]=true;</span><br><span class="line">	for(int i=0;i&lt;maxn;i++)</span><br><span class="line">		pri[i]=0;</span><br><span class="line">&#125;</span><br><span class="line">void findpri()</span><br><span class="line">&#123;	</span><br><span class="line">	init();</span><br><span class="line">	int j=0;</span><br><span class="line">	for(int i=2;i&lt;maxn;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if(ispri[i])</span><br><span class="line">		&#123;</span><br><span class="line">			pri[j++]=i;	</span><br><span class="line">		&#125;</span><br><span class="line">		for(int k=0;k&lt;j;k++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(i*pri[k]&gt;=maxn)</span><br><span class="line">				break;</span><br><span class="line">			ispri[i*pri[k]]=false;</span><br><span class="line">			if(i%pri[k]==0)</span><br><span class="line">			&#123;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>判断素数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何判断一个数是否在40亿个整数中？</title>
+    <url>/2018/09/02/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E6%95%B0%E6%98%AF%E5%90%A6%E5%9C%A840%E4%BA%BF%E4%B8%AA%E6%95%B4%E6%95%B0%E4%B8%AD%EF%BC%9F/</url>
+    <content><![CDATA[<p><strong>这好像是我在微信上看见的文章，挺有意思的，记录一下。</strong></p>
+<p>小史是一个应届生，虽然学的是电子专业，但是自己业余时间看了很多互联网与编程方面的书，一心想进BAT。</p>
+<p>今天他就去BAT中的一家面试了。</p>
+<p>简单的自我介绍后，面试官给了小史一个问题。</p>
+<h1 id="【面试现场】"><a href="#【面试现场】" class="headerlink" title="【面试现场】"></a>【面试现场】</h1><h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>我有40亿个整数，再给一个新的整数，我需要判断新的整数是否在40亿个整数中，你会怎么做？<br><a id="more"></a></p>
+<p><img src="https://i.imgur.com/SKeVRnM.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/TDCuI0L.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/9toxZUG.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/CnrEvV6.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/uNmDbjP.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/ydqmtjq.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/6a2boG2.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/uHFiM5b.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/eaia3t6.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/aUq6dHf.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/Ii6AXrJ.jpg" alt=""></p>
+<h1 id="【请教大神】"><a href="#【请教大神】" class="headerlink" title="【请教大神】"></a>【请教大神】</h1><p>小史回到学校，把面试的情况和计算机学院的吕老师说了一下。<br><img src="https://i.imgur.com/zTThXGV.jpg" alt=""><br><img src="https://i.imgur.com/0ckzUNw.jpg" alt=""><br>小史忙拉着吕老师问，为什么我说分8次加载数据，面试官会说太慢了呢？</p>
+<p>吕老师：哈哈，从磁盘加载数据是磁盘io操作，是非常慢的，你每次都要加载这么大的数据，还要8次，我估计你找一个数的时间可以达到分钟甚至小时级了。<br><img src="https://i.imgur.com/Eey9ZIh.jpg" alt=""></p>
+<p>小史：那如果是你，你会怎么办呢？</p>
+<p>吕老师：其实面试官已经提示得比较明显了，他说给你一批机器，就是暗示你可以用分布式算法。你把数据分散在8台机器上，然后来一个新的数据，8台机器一起找，最后再汇总结果就行了。<br><img src="https://i.imgur.com/87BMWhT.jpg" alt=""></p>
+<p>小史：这样的话能快多少？</p>
+<p>吕老师：这样应该能达到秒级。小史，你可以自己分析分析。</p>
+<p>小史：我想想……哦，这样做的话，因为每台机器都可以一次性把数据读入内存，在比较的时候不用来回加载数据了，所以可以节省加载数据的开销！这真是个好办法。</p>
+<h1 id="【更好方案】"><a href="#【更好方案】" class="headerlink" title="【更好方案】"></a>【更好方案】</h1><p>吕老师：其实这并不是最好方法，我这还有一种毫秒级的方法，想不想知道啊？</p>
+<p>小史：当然想啊，快教教我。</p>
+<p><img src="https://i.imgur.com/dNsAYbq.jpg" alt=""></p>
+<p>小史：哦，对哦，这样我就申请40亿个位就好了，新的数转换成一个位，然后判断一下这个位是0还是1就行了。</p>
+<p>吕老师：小史啊，考虑问题要考虑清楚啊，如果是40亿个位，那么这40亿个位哪些是0，哪些是1呢？来了一个新的数，怎么判断是否在40亿个位之中？<br><img src="https://i.imgur.com/RVQK1oA.jpg" alt=""></p>
+<p>小史：我想想，对啊，40亿个位，40亿个数，那么每个位都是1，这。。。</p>
+<p>吕老师：其实你可以想想，32位int的范围，总共就是2的32次方，大概42亿多点。所以你可以申请2的32次方个位。</p>
+<p>小史：意思是我把整个整数范围都覆盖了，哦，对哦。这样一来，就可以做了，1代表第一个位，2代表第二个位，2的32次方代表最后一个位。40亿个数中，存在的数就在相应的位置1，其他位就是0。</p>
+<p><img src="https://i.imgur.com/HRf4o96.jpg" alt=""></p>
+<p>吕老师：没错，那来了一个新的数呢？</p>
+<p>小史：新的数就去找相应的位，比如来了一个1234，就找一下第1234位，如果是1就存在，是0就不存在啦。</p>
+<p>吕老师：没错，那么这样的话，需要多大内存呢？</p>
+<p>小史：我想想啊，2的32次方个位，相当于2的29次方个字节，哇，才500MB，真是节省了不少内存呢。</p>
+<p><img src="https://i.imgur.com/wlg8zSa.jpg" alt=""></p>
+<p>小史：这么厉害的算法，你是怎么想到的？</p>
+<p><img src="https://i.imgur.com/pvMbBzF.jpg" alt=""></p>
+<p>吕老师：其实这是一种非常有名的大数据算法，叫位图法，英文名叫bitmap。顾名思义，就是用位来表示状态，从而节省空间。明天正好我有一节课，就讲位图法，你可以来听一听。</p>
+<h1 id="【吕老师的课】"><a href="#【吕老师的课】" class="headerlink" title="【吕老师的课】"></a>【吕老师的课】</h1><p>第二天，吕老师开始上课，他一开始就抛出了小史遇到的面试题。</p>
+<p>吕老师：同学们，这道题是BAT公司的一道面试题，大家有什么思路吗？</p>
+<p>话音刚落，蛋哥就站起来回答。蛋哥是吕老师最得意的门生，以思维活跃著称。</p>
+<p>蛋哥：我觉得可以这样。首先，32位int的范围是42亿，40亿整数中肯定有一些是连续的，我们可以先对数据进行一个外部排序，然后用一个初始的数和一个长度构成一个数据结构，来表示一段连续的数，举个例子。</p>
+<p>如果数据是1 2 3 4 6 7……这种的，那么可以用(1,4)和(6,2)来表示，这样一来，连续的数都变成了2个数表示。</p>
+<p>来了一个新数之后，就用二分法进行查找了。</p>
+<p>这样一来，最差情况就是2亿多的断点，也就是2亿多的结构体，每个结构体8个字节，大概16亿字节，1.6GB，在内存中可以放下。</p>
+<p><img src="https://i.imgur.com/1tJWVk9.jpg" alt=""></p>
+<p>吕老师：嗯，非常好，不仅给出了方案，还能主动分析空间和可行性。</p>
+<p>小史听完后深感佩服，问题的解决方法绝对不止一种，只要肯动脑筋，即使没有学过bitmap算法，也能有别的方法来解决问题。</p>
+<h1 id="【课后】"><a href="#【课后】" class="headerlink" title="【课后】"></a>【课后】</h1><p>下课后，小史又找到吕老师。<br><img src="https://i.imgur.com/TKYX8AD.jpg" alt=""><br><img src="https://i.imgur.com/CvY2UhS.jpg" alt=""></p>
+<p>吕老师：但是你的理解能力还是很强的，很多东西一听就懂，这可不是谁都能做到的。</p>
+<ul>
+<li>The End -</li>
+</ul>
+]]></content>
+      <categories>
+        <category>休闲</category>
+      </categories>
+      <tags>
+        <tag>40亿中的数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何实现可以获取最小值的栈？</title>
+    <url>/2018/09/11/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E4%BB%A5%E8%8E%B7%E5%8F%96%E6%9C%80%E5%B0%8F%E5%80%BC%E7%9A%84%E6%A0%88%EF%BC%9F/</url>
+    <content><![CDATA[<p>又是一个微信的休闲小算法与技巧篇，记录一下。</p>
+<h1 id="【问题】"><a href="#【问题】" class="headerlink" title="【问题】"></a>【问题】</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>有这样一个问题，有一个栈，这个栈除了原本拥有的操作外，还存在这样一个功能函数（方法）：getmin();这个方法返回栈中的最小值</p>
+<p>下面就来看看这有趣小故事吧<br><a id="more"></a></p>
+<p><img src="https://i.imgur.com/KLDLmTo.jpg" alt=""><br><img src="https://i.imgur.com/2bmT0JP.jpg" alt=""><br><img src="https://i.imgur.com/DfMGles.jpg" alt=""><br><img src="https://i.imgur.com/MmkDHaa.jpg" alt=""><br><img src="https://i.imgur.com/LvMTcn7.jpg" alt=""><br><img src="https://i.imgur.com/FygkxWv.jpg" alt=""><br><img src="https://i.imgur.com/Yc5Hpuy.jpg" alt=""><br><img src="https://i.imgur.com/bODQ7Qg.jpg" alt=""><br><img src="https://i.imgur.com/QcIzNPN.jpg" alt=""><br><img src="https://i.imgur.com/kskAp6V.jpg" alt=""><br><img src="https://i.imgur.com/MhpsJTR.jpg" alt=""><br><img src="https://i.imgur.com/dnV5GyT.jpg" alt=""><br><img src="https://i.imgur.com/ExCX9kG.jpg" alt=""><br><img src="https://i.imgur.com/OMNt8Zo.jpg" alt=""><br><img src="https://i.imgur.com/WHVwKsH.jpg" alt=""><br><img src="https://i.imgur.com/izrEj0U.jpg" alt=""><br><img src="https://i.imgur.com/ac4hBiy.jpg" alt=""><br><img src="https://i.imgur.com/vOh4079.jpg" alt=""><br><img src="https://i.imgur.com/E4HHw6A.jpg" alt=""><br><img src="https://i.imgur.com/Dfp6o0K.jpg" alt=""><br><img src="https://i.imgur.com/Ebd8GX2.jpg" alt=""><br><img src="https://i.imgur.com/qNmpk9R.jpg" alt=""></p>
+<p>代码如下：</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author xiaoshi on 2018/9/1.</span><br><span class="line"> */</span><br><span class="line">public class MinStack &#123;</span><br><span class="line"></span><br><span class="line">    private List&lt;Integer&gt; data = new ArrayList&lt;Integer&gt;();</span><br><span class="line">    private List&lt;Integer&gt; mins = new ArrayList&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line">    public void push(int num) &#123;</span><br><span class="line">        data.add(num);</span><br><span class="line">        if(mins.size() == 0) &#123;</span><br><span class="line">            // 初始化mins</span><br><span class="line">            mins.add(num);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            // 辅助栈mins每次push当时最小值</span><br><span class="line">            int min = getMin();</span><br><span class="line">            if (num &gt;= min) &#123;</span><br><span class="line">                mins.add(min);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                mins.add(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int pop() &#123;</span><br><span class="line">        // 栈空，异常，返回-1</span><br><span class="line">        if(data.size() == 0) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        // pop时两栈同步pop</span><br><span class="line">        mins.remove(mins.size() - 1);</span><br><span class="line">        return data.remove(data.size() - 1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getMin() &#123;</span><br><span class="line">        // 栈空，异常，返回-1</span><br><span class="line">        if(mins.size() == 0) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        // 返回mins栈顶元素</span><br><span class="line">        return mins.get(mins.size() - 1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><p><img src="https://i.imgur.com/hSFQWEj.jpg" alt=""><br><img src="https://i.imgur.com/AhQbzeQ.jpg" alt=""><br><img src="https://i.imgur.com/85HdSJj.jpg" alt=""></p>
+<h1 id="【大神解法】"><a href="#【大神解法】" class="headerlink" title="【大神解法】"></a>【大神解法】</h1><p>小史回到学校，把面试的情况和计算机学院的吕老师说了一下。</p>
+<p><img src="https://i.imgur.com/jjkgCJM.jpg" alt=""><br><img src="https://i.imgur.com/aKlGGW9.jpg" alt=""><br><img src="https://i.imgur.com/B5FHbPd.jpg" alt=""><br><img src="https://i.imgur.com/6nAwWyS.jpg" alt=""><br><img src="https://i.imgur.com/H1k3CQG.jpg" alt=""></p>
+<h2 id="【异常情况处理】"><a href="#【异常情况处理】" class="headerlink" title="【异常情况处理】"></a>【异常情况处理】</h2><p>吕老师：面试官已经提出了你的异常处理有点问题，当栈内为空的时候，你返回-1，但是如果用户push过-1，那么你返回-1的时候，是用户push进来的值，还是栈为空，就不得而知了。</p>
+<p><img src="https://i.imgur.com/ldc2t0l.jpg" alt=""><br><img src="https://i.imgur.com/h1zqJ0q.jpg" alt=""><br><img src="https://i.imgur.com/OLx9OTe.jpg" alt=""></p>
+<p>小史咬咬牙：那就再定义一个类，里面包括一个int的data和一个boolean的isSuccess，正常情况下isSuccess是true，栈为空的话，isSuccess是false。这样就能区分开了吧？</p>
+<p><img src="https://i.imgur.com/h67gZfE.jpg" alt=""><br><img src="https://i.imgur.com/mTUUqEi.jpg" alt=""></p>
+<p>小史突然一拍大腿：对哦，我可以用一个包装类Integer来定义返回值，如果是空，就代表栈为空就行了。它和int的区别就是它多了一个null，正好用来返回异常情况。</p>
+<p><img src="https://i.imgur.com/VSUMsOJ.jpg" alt=""></p>
+<p>吕老师：嗯，越来越好，但是还是有点问题。你并没有站在使用者的角度考虑问题。使用你这个栈的人，在pop的时候，他并不知道可能返回null，如果他不做判断，后面的代码就可能抛出空指针了。</p>
+<p><img src="https://i.imgur.com/Q13jmah.jpg" alt=""><br><img src="https://i.imgur.com/cRJMgFc.jpg" alt=""><br><img src="https://i.imgur.com/TS7OGBE.jpg" alt=""><br><img src="https://i.imgur.com/G9N6KPe.jpg" alt=""></p>
+<p>吕老师发来一个表情。</p>
+<p><img src="https://i.imgur.com/CdoBwA4.jpg" alt=""><br><img src="https://i.imgur.com/yVGFoft.jpg" alt=""><br><img src="https://i.imgur.com/8LSq2N9.jpg" alt=""><br><img src="https://i.imgur.com/dNbbffV.jpg" alt=""></p>
+<p>吕老师：没错，最关键的是，你显式抛出异常，如果使用者不捕获，那么编译就会报错，这样就把错误暴露在编译阶段，并且不需要和任何人商量所谓的特殊返回值了。</p>
+<p><img src="https://i.imgur.com/bmy08Ot.jpg" alt=""><br><img src="https://i.imgur.com/f9kgtE6.jpg" alt=""></p>
+<h2 id="【算法优化】"><a href="#【算法优化】" class="headerlink" title="【算法优化】"></a>【算法优化】</h2><p><img src="https://i.imgur.com/7fvUJjZ.jpg" alt=""><br><img src="https://i.imgur.com/Veb5YM2.jpg" alt=""><br><img src="https://i.imgur.com/qUHIgRf.jpg" alt=""><br><img src="https://i.imgur.com/QV0rwYw.jpg" alt=""><br><img src="https://i.imgur.com/Rs1zcOY.jpg" alt=""><br><img src="https://i.imgur.com/cXfcVDI.jpg" alt=""><br><img src="https://i.imgur.com/g1kpj3H.jpg" alt=""></p>
+<p>小史想了想：明白了，我可以在push的时候判断一下，如果比最小值还大，就不加入辅助栈。pop的时候，如果不是最小值，辅助栈就不出栈。这样一来，辅助栈就不会有大量重复元素了。</p>
+<p><img src="https://i.imgur.com/sqGFarg.jpg" alt=""></p>
+<p>小史：push的时候进行判断，如果数值比当前最小值大，就不动mins栈了，这样mins栈中不会保存大量冗余的最小值。pop的时候同样进行判断，只有pop出的数就是当前最小值的时候，才让mins出栈。</p>
+<p><img src="https://i.imgur.com/m0wjvdD.jpg" alt=""><br><img src="https://i.imgur.com/tMNWrvH.jpg" alt=""><br><img src="https://i.imgur.com/odcIht4.jpg" alt=""></p>
+<p>小史：如果push一个和最小值相等的元素，还是要入mins栈。不然当这个最小值pop出去的时候。data中还会有一个最小值元素，而mins中却已经没有最小值元素了。</p>
+<p><img src="https://i.imgur.com/UROzkvt.jpg" alt=""><br><img src="https://i.imgur.com/hoNy7xr.jpg" alt=""><br><img src="https://i.imgur.com/hFLVuT4.jpg" alt=""><br><img src="https://i.imgur.com/bWxNZz3.jpg" alt=""><br><img src="https://i.imgur.com/o5iZ4eZ.jpg" alt=""></p>
+<p>小史：mins栈中改存最小值在data数组中的索引。这样一来，当push了与最小值相同元素的时候，就不需要动mins栈了。而pop的时候，pop出的元素的索引如果不是mins栈顶元素，mins也不出栈。同时，获取最小值的时候，需要拿到mins栈顶元素作为索引，再去data数组中找到相应的数作为最小值。</p>
+<p><img src="https://i.imgur.com/aCpAJkh.jpg" alt=""><br><img src="https://i.imgur.com/4QFxDVA.jpg" alt=""></p>
+<p>理解了算法之后，小史的代码写起来也是非常快，不一会儿就写好了：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author xiaoshi on 2018/9/1.</span><br><span class="line"> */</span><br><span class="line">public class MinStack &#123;</span><br><span class="line"></span><br><span class="line">    private List&lt;Integer&gt; data = new ArrayList&lt;Integer&gt;();</span><br><span class="line">    private List&lt;Integer&gt; mins = new ArrayList&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line">    public void push(int num) throws Exception &#123;</span><br><span class="line">        data.add(num);</span><br><span class="line">        if(mins.size() == 0) &#123;</span><br><span class="line">            // 初始化mins</span><br><span class="line">            mins.add(0);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            // 辅助栈mins push最小值的索引</span><br><span class="line">            int min = getMin();</span><br><span class="line">            if (num &lt; min) &#123;</span><br><span class="line">                mins.add(data.size() - 1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int pop() throws Exception &#123;</span><br><span class="line">        // 栈空，抛出异常</span><br><span class="line">        if(data.size() == 0) &#123;</span><br><span class="line">            throw new Exception(&quot;栈为空&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        // pop时先获取索引</span><br><span class="line">        int popIndex = data.size() - 1;</span><br><span class="line">        // 获取mins栈顶元素，它是最小值索引</span><br><span class="line">        int minIndex = mins.get(mins.size() - 1);</span><br><span class="line">        // 如果pop出去的索引就是最小值索引，mins才出栈</span><br><span class="line">        if(popIndex == minIndex) &#123;</span><br><span class="line">            mins.remove(mins.size() - 1);</span><br><span class="line">        &#125;</span><br><span class="line">        return data.remove(data.size() - 1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getMin() throws Exception &#123;</span><br><span class="line">        // 栈空，抛出异常</span><br><span class="line">        if(data.size() == 0) &#123;</span><br><span class="line">            throw new Exception(&quot;栈为空&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        // 获取mins栈顶元素，它是最小值索引</span><br><span class="line">        int minIndex = mins.get(mins.size() - 1);</span><br><span class="line">        return data.get(minIndex);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="【小史的疑惑】"><a href="#【小史的疑惑】" class="headerlink" title="【小史的疑惑】"></a>【小史的疑惑】</h2><p>小史又问吕老师：</p>
+<p><img src="https://i.imgur.com/aX0JRCv.jpg" alt=""><br><img src="https://i.imgur.com/JacosHA.jpg" alt=""></p>
+<p>吕老师：数据结构和算法的设计是一个程序员的内功，工作时虽然用不到这么细，但是你在学习其他知识的底层原理的时候，到处都是数据结构和算法。</p>
+<p><img src="https://i.imgur.com/8Es66TN.jpg" alt=""></p>
+]]></content>
+      <categories>
+        <category>休闲</category>
+      </categories>
+      <tags>
+        <tag>最小值的栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>字符串中的最长回文子串</title>
+    <url>/2018/10/02/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</url>
+    <content><![CDATA[<h1 id="回文"><a href="#回文" class="headerlink" title="回文"></a>回文</h1><p>对于回文的问题，从学c开始就一直在接触，包括算法什么的，几乎都能见到身影，回文定义：从头到尾或者从尾到头看都是同一个字符串。例如：abcba！</p>
+<p>今天就有这样一个问题：</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p><strong>字符串中的最长回文子串</strong></p>
+<a id="more"></a>
+<h1 id="面试现场"><a href="#面试现场" class="headerlink" title="面试现场"></a>面试现场</h1><p><img src="https://i.imgur.com/75kyFKU.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/iANQAQq.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/zQQkyUw.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/T78IbqR.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/S3TZDeu.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/akeBV4i.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/s9OJuF0.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/cGKOeS5.jpg" alt=""></p>
+<p><strong>题目：给你一个字符串，找出里面最长的回文子串。<br>例如<br>输入abcdcef，那么输出应该是cdc<br>输入adaelele，输出应该是elele</strong></p>
+<p><img src="https://i.imgur.com/yUqucca.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/lfm6jgl.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/DLIu2OF.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/KKrGWVS.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/0dwDeMg.jpg" alt=""></p>
+<p>半分钟过去了。</p>
+<p><img src="https://i.imgur.com/o1Icp6S.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/kS6kokB.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/7oqYpcU.jpg" alt=""></p>
+<p>小史：可以遍历整个字符串，把每个字符和字符间的空隙当作回文的中心，然后向两边扩展来找到最长回文串。</p>
+<p>小史这次抢着分析时间和空间复杂度。</p>
+<p><img src="https://i.imgur.com/xy2oFFe.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/BIyMeI2.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/TzkQ023.jpg" alt=""></p>
+<p>一分钟过去了。</p>
+<p><img src="https://i.imgur.com/5a0VsmX.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/lwVbe9T.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/EDrLTFa.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/Yt7CdSH.jpg" alt=""></p>
+<h1 id="请教大神"><a href="#请教大神" class="headerlink" title="请教大神"></a>请教大神</h1><p><img src="https://i.imgur.com/IeoQIT9.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/MHXkTjD.jpg" alt=""></p>
+<p>吕老师：比如cabadabae用中心扩展的算法，我已经知道了第三位为中心的aba和第5位为中心的abadaba是回文，那么在判断第7位为中心的回文串的时候，有什么已知信息吗？</p>
+<p><img src="https://i.imgur.com/SKFaf7t.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/S2eNszG.jpg" alt=""></p>
+<p>小史：已知第5位为中心的abadaba是回文，由回文的特性，就能够知道2-4位和6-8位对称，而又知道第3位为中心的aba是回文，所以2-4位是回文。这样的话，6-8位肯定是回文。</p>
+<p><img src="https://i.imgur.com/phjrUNF.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/NUzxKZd.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/KaTmRGb.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/RKoe3Mb.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/fOzoKAE.jpg" alt=""></p>
+<p>小史拿着笔在纸上画了半天，突然大叫一声。</p>
+<p><img src="https://i.imgur.com/ZihWvwP.jpg" alt=""></p>
+<p>小史：由于之前的计算已经知道了第5位为中心的abadaba是回文，而第4位为中心的a的回文长度是1，所以第6位为中心的回文长度只能是1，不用再去扩展判断了。</p>
+<p><img src="https://i.imgur.com/16AyAHQ.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/URMlYAq.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/lkwkrJH.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/HsOnHPB.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/FRo1yfn.jpg" alt=""></p>
+<p>小史：以第7位为中心的回文串的计算，由之前分析已经知道最小长度是3了，但是还是需要进行扩展，因为第9位是什么根据之前的信息无法得知，需要扩展进行探索。</p>
+<p><img src="https://i.imgur.com/cZ6y1rn.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/xJAXkN0.jpg" alt=""></p>
+<p>小史：而以第6位为中心的回文串的计算，并不需要进行探索了，因为根据之前第5位为回文中心串的信息和第4位为回文中心串的信息已经可以推断第6位为回文中心串的长度只能为1。</p>
+<p><img src="https://i.imgur.com/DezqQFm.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/j2g5b4k.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/cs2T4Xp.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/A2X37b2.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/lZsQVkh.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/smJtE58.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/oc1inpj.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/49ISjtE.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/GkudmbK.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/6EmNcpV.jpg" alt=""></p>
+<p>小史：当然可以。<br>1、首先，我们要记录下目前已知的回文串能够覆盖到的最右边的地方，就像案例中的第8位<br>2、同时，覆盖到最右边的回文串所对应的回文中心也要记录，就像案例中的第5位<br>3、以每一位为中心的回文串的长度也要记录，后面进行推断的时候能用到，就像案例中用到的以第3位为中心的回文和第4位为中心的回文<br>4、对于新的中心，我们判断它是否在右边界内，若在，就计算它相对右边界回文中心的对称位置，从而得到一些信息，同时，如果该中心需要进行扩展，则继续扩展就行。</p>
+<h1 id="【编码实现】"><a href="#【编码实现】" class="headerlink" title="【编码实现】"></a>【编码实现】</h1><p><img src="https://i.imgur.com/ZjIYCNI.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/vXkELzR.jpg" alt=""></p>
+<p>小史：回文的中心有可能是两个字符中间，这种情况没有考虑到啊。</p>
+<p><img src="https://i.imgur.com/zJluYr8.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/BRtLjXS.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/gMlrnE8.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/D2AGZJi.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/N3gIX1d.jpg" alt=""></p>
+<p>小史：<br>1、先对字符串进行预处理，两个字符之间加上特殊符号#<br>2、然后遍历整个字符串，用一个数组来记录以该字符为中心的回文长度，为了方便计算右边界，我在数组中记录长度的一半（向下取整）<br>3、每一次遍历的时候，如果该字符在已知回文串最右边界的覆盖下，那么就计算其相对最右边界回文串中心对称的位置，得出已知回文串的长度<br>4、判断该长度和右边界，如果达到了右边界，那么需要进行中心扩展探索。当然，如果第3步该字符没有在最右边界的“羽翼”下，则直接进行中心扩展探索。进行中心扩展探索的时候，同时又更新右边界<br>5、最后得到最长回文之后，去掉其中的特殊符号即可</p>
+<p><img src="https://i.imgur.com/GdbPb1A.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/l0BdX7F.jpg" alt=""></p>
+<p>理解了算法之后，小史的代码写起来也是非常快，不一会儿就写好了：<br><strong>PlalindromeString.java</strong></p>
+<pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class PlalindromeString &#123;</span><br><span class="line"></span><br><span class="line">    // 判断一个字符串是否回文，算法中用不到了</span><br><span class="line">    @Deprecated</span><br><span class="line">    private boolean isPlalindrome(String s) &#123;</span><br><span class="line">        int len = s.length();</span><br><span class="line">        for(int i = 0; i &lt; len / 2; i++) &#123;</span><br><span class="line">            if(s.charAt(i) != s.charAt(len - 1 - i)) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 预处理字符串，在两个字符之间加上#</span><br><span class="line">    private String preHandleString(String s) &#123;</span><br><span class="line">        StringBuffer sb = new StringBuffer();</span><br><span class="line">        int len = s.length();</span><br><span class="line">        sb.append(&apos;#&apos;);</span><br><span class="line">        for(int i = 0; i &lt; len; i++) &#123;</span><br><span class="line">            sb.append(s.charAt(i));</span><br><span class="line">            sb.append(&apos;#&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">        return sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 寻找最长回文字串</span><br><span class="line">    public String findLongestPlalindromeString(String s) &#123;</span><br><span class="line">        // 先预处理字符串</span><br><span class="line">        String str = preHandleString(s);</span><br><span class="line">        // 处理后的字串长度</span><br><span class="line">        int len = str.length();</span><br><span class="line">        // 右边界</span><br><span class="line">        int rightSide = 0;</span><br><span class="line">        // 右边界对应的回文串中心</span><br><span class="line">        int rightSideCenter = 0;</span><br><span class="line">        // 保存以每个字符为中心的回文长度一半（向下取整）</span><br><span class="line">        int[] halfLenArr = new int[len];</span><br><span class="line">        // 记录回文中心</span><br><span class="line">        int center = 0;</span><br><span class="line">        // 记录最长回文长度</span><br><span class="line">        int longestHalf = 0;</span><br><span class="line">        for(int i = 0; i &lt; len; i++) &#123;</span><br><span class="line">            // 是否需要中心扩展</span><br><span class="line">            boolean needCalc = true;</span><br><span class="line">            // 如果在右边界的覆盖之内</span><br><span class="line">            if(rightSide &gt; i) &#123;</span><br><span class="line">                // 计算相对rightSideCenter的对称位置</span><br><span class="line">                int leftCenter = 2 * rightSideCenter - i;</span><br><span class="line">                // 根据回文性质得到的结论</span><br><span class="line">                halfLenArr[i] = halfLenArr[leftCenter];</span><br><span class="line">                // 如果超过了右边界，进行调整</span><br><span class="line">                if(i + halfLenArr[i] &gt; rightSide) &#123;</span><br><span class="line">                    halfLenArr[i] = rightSide - i;</span><br><span class="line">                &#125;</span><br><span class="line">                // 如果根据已知条件计算得出的最长回文小于右边界，则不需要扩展了</span><br><span class="line">                if(i + halfLenArr[leftCenter] &lt; rightSide) &#123;</span><br><span class="line">                    // 直接推出结论</span><br><span class="line">                    needCalc = false;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            // 中心扩展</span><br><span class="line">            if(needCalc) &#123;</span><br><span class="line">                while(i - 1 - halfLenArr[i] &gt;= 0 &amp;&amp; i + 1 + halfLenArr[i] &lt; len) &#123;</span><br><span class="line">                    if(str.charAt(i + 1 + halfLenArr[i]) == str.charAt(i - 1 - halfLenArr[i])) &#123;</span><br><span class="line">                        halfLenArr[i]++;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                // 更新右边界及中心</span><br><span class="line">                rightSide = i + halfLenArr[i];</span><br><span class="line">                rightSideCenter = i;</span><br><span class="line">                // 记录最长回文串</span><br><span class="line">                if(halfLenArr[i] &gt; longestHalf) &#123;</span><br><span class="line">                    center = i;</span><br><span class="line">                    longestHalf = halfLenArr[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // 去掉之前添加的#</span><br><span class="line">        StringBuffer sb = new StringBuffer();</span><br><span class="line">        for(int i = center - longestHalf + 1; i &lt;= center + longestHalf; i += 2) &#123;</span><br><span class="line">            sb.append(str.charAt(i));</span><br><span class="line">        &#125;</span><br><span class="line">        return sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><p><strong>Main.java</strong><br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        PlalindromeString ps = new PlalindromeString();</span><br><span class="line"></span><br><span class="line">        String[] testStrArr = new String[] &#123;</span><br><span class="line">            &quot;abcdcef&quot;,</span><br><span class="line">            &quot;adaelele&quot;,</span><br><span class="line">            &quot;cabadabae&quot;,</span><br><span class="line">            &quot;aaaabcdefgfedcbaa&quot;,</span><br><span class="line">            &quot;aaba&quot;,</span><br><span class="line">            &quot;aaaaaaaaa&quot;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        for(String str : testStrArr) &#123;</span><br><span class="line">            System.out.println(String.format(&quot;原字串 : %s&quot;, str));</span><br><span class="line">            System.out.println(String.format(&quot;最长回文串 : %s&quot;, ps.findLongestPlalindromeString(str)));</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>运行结果：</strong><br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">原字串 : abcdcef</span><br><span class="line">最长回文串 : cdc</span><br><span class="line"></span><br><span class="line">原字串 : adaelele</span><br><span class="line">最长回文串 : elele</span><br><span class="line"></span><br><span class="line">原字串 : cabadabae</span><br><span class="line">最长回文串 : abadaba</span><br><span class="line"></span><br><span class="line">原字串 : aaaabcdefgfedcbaa</span><br><span class="line">最长回文串 : aabcdefgfedcbaa</span><br><span class="line"></span><br><span class="line">原字串 : aaba</span><br><span class="line">最长回文串 : aba</span><br><span class="line"></span><br><span class="line">原字串 : aaaaaaaaa</span><br><span class="line">最长回文串 : aaaaaaaaa</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://i.imgur.com/gJ8q5jo.jpg" alt=""></p>
+<h1 id="【时间空间分析】"><a href="#【时间空间分析】" class="headerlink" title="【时间空间分析】"></a>【时间空间分析】</h1><p><img src="https://i.imgur.com/8rFKWMo.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/ALMCdHK.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/7f51Jk1.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/y4uWem6.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/sPDzIBL.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/O8UT3wi.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/4odlKeS.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/wYdcJGq.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/lbDpRpg.jpg" alt=""></p>
+]]></content>
+      <categories>
+        <category>休闲</category>
+      </categories>
+      <tags>
+        <tag>最长回文子串</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我的one_year</title>
+    <url>/2019/02/19/%E6%88%91%E7%9A%84one-year/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>年已经过了，今天是元宵节，南方人生活在北方，虽然没有什么元宵啊，汤圆啊，或者大鱼大肉，来到学校也是冷冷清清的。有闲情，来回顾一下去年一整年所做和所得。</p>
+<p>首先，从懵懂少年，有着雄心却有些迷茫的少年开始了实际行动。思想不在是以前那么幼稚，开始了真正的思考。</p>
+<p>自己找所需去学习，开始为自己以后的路所打算。点点滴滴，慢慢在积累，但总觉得还是有些晚了的感觉。下面，开始我的数落数落。。。</p>
+<a id="more"></a>
+<h1 id="进阶之路"><a href="#进阶之路" class="headerlink" title="进阶之路"></a>进阶之路</h1><h2 id="python以及它的爬虫"><a href="#python以及它的爬虫" class="headerlink" title="python以及它的爬虫"></a>python以及它的爬虫</h2><p>大一下学期那个暑假，我就开始接触python以及怎么爬虫。当时还仅仅是一个懵懂状态，网上教学参差不齐，五花八门，根本不知道那个是真正有用或者值得信赖！所以，学的是那么的杂乱无章，加上没有把电脑带回家，实践也就无从谈起。所以，好后悔浪费了那时的一个暑假。只能所学到了一些皮毛！</p>
+<p>后来，我才发现，必须得真正系统的学习才行。所以，大二下学期，我就开始跟着我从淘宝上买来的课程，一步一步去系统学习。可能也是年龄的增长，或者说是更系统化了，所以，更清楚的明白一门语言该怎么学习。有大相径庭。但是，真正的精髓就在那个不同。python语法简单，但是没有像c 那样更接近底层，所以，速度上会慢，这就是那个不同。</p>
+<p>学着学着，慢慢把python基础给学习完了。那时候，听说大多数人把python基础学完之后就开始学习爬虫，我暑假也尝试过，但是没有那么的要紧，所以就缓了下来（因为我开始弄算法，去参加一些算法的竞赛，开始了java的学习）。直到这个寒假，我才重拾旧本，开始继续的“有趣”玩耍。</p>
+<p><strong>下面是我的一些python的简单小案例：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Author: smile丶</span></span><br><span class="line"><span class="comment"># @Date:   2019-02-11 14:08:51</span></span><br><span class="line"><span class="comment"># @Last Modified by:   smile丶</span></span><br><span class="line"><span class="comment"># @Last Modified time: 2019-02-19 15:57:16</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">#cdsn新闻首页所有链接爬取</span></span><br><span class="line"><span class="string">url="http://www.csdn.net/"</span></span><br><span class="line"><span class="string">data=urllib.request.urlopen(url).read()</span></span><br><span class="line"><span class="string">data2=data.decode("utf-8","ignore")</span></span><br><span class="line"><span class="string">pat='href="(https://blog.csdn.net/.*?)"'</span></span><br><span class="line"><span class="string">allurl=re.compile(pat).findall(data2)</span></span><br><span class="line"><span class="string">index=1;</span></span><br><span class="line"><span class="string">for i in allurl:</span></span><br><span class="line"><span class="string">	file="C:/Users/Administrator/Desktop/爬虫/csdnnews/"+str(index)+".html";</span></span><br><span class="line"><span class="string">	urllib.request.urlretrieve(i,file)</span></span><br><span class="line"><span class="string">	print(str(index)+"success")</span></span><br><span class="line"><span class="string">	index=index+1</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">#sinanews新浪新闻首页所有链接爬取</span></span><br><span class="line"><span class="string">url="https://news.sina.com.cn/"</span></span><br><span class="line"><span class="string">data=urllib.request.urlopen(url).read()</span></span><br><span class="line"><span class="string">data2=data.decode("utf-8","ignore")</span></span><br><span class="line"><span class="string">pat='href="(https://news.sina.com.cn/.*?)"'</span></span><br><span class="line"><span class="string">allurl=re.compile(pat).findall(data2)</span></span><br><span class="line"><span class="string">index=1;</span></span><br><span class="line"><span class="string">for i in allurl:</span></span><br><span class="line"><span class="string">	file="C:/Users/Administrator/Desktop/爬虫/sinanews/"+str(index)+".html";</span></span><br><span class="line"><span class="string">	urllib.request.urlretrieve(i,file)</span></span><br><span class="line"><span class="string">	print(str(index)+"success")</span></span><br><span class="line"><span class="string">	index=index+1</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""JD商品图片爬取简单版"""</span></span><br><span class="line">keyword=<span class="string">"连衣裙"</span></span><br><span class="line"><span class="comment">#编码</span></span><br><span class="line">keyword=urllib.request.quote(keyword)</span><br><span class="line"><span class="comment">#仿浏览器访问</span></span><br><span class="line">headers=(<span class="string">"User-Agent"</span>,<span class="string">"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.81 Safari/537.36"</span>)</span><br><span class="line">opener=urllib.request.build_opener()</span><br><span class="line">opener.addheaders=[headers]</span><br><span class="line">urllib.request.install_opener(opener)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">	url=<span class="string">'https://search.jd.com/Search?keyword='</span>+keyword+<span class="string">'&amp;enc=utf-8&amp;page='</span>+str((i+<span class="number">1</span>)*<span class="number">2</span><span class="number">-1</span>)</span><br><span class="line">	<span class="comment">#print(url)</span></span><br><span class="line">	data=urllib.request.urlopen(url).read().decode(<span class="string">"utf-8"</span>,<span class="string">"ignore"</span>)</span><br><span class="line">	<span class="comment">#正则</span></span><br><span class="line">	pat=<span class="string">' source-data-lazy-img="//(.*?)" '</span></span><br><span class="line">	images=re.compile(pat).findall(data)</span><br><span class="line">	index=<span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> images:</span><br><span class="line">		file=<span class="string">"C:/Users/Administrator/Desktop/爬虫/JDIMG/连衣裙/"</span>+str(i)+str(index)+<span class="string">".jpg"</span></span><br><span class="line">		index=index+<span class="number">1</span></span><br><span class="line">		urllib.request.urlretrieve(<span class="string">"http://"</span>+j,filename=file)</span><br><span class="line">		print(<span class="string">"第"</span>+str(i)+<span class="string">"页"</span>+<span class="string">"第"</span>+str(index)+<span class="string">"张图成功！"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env python</span></span><br><span class="line"><span class="comment"># !-*-coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># ! @Time     : 16:27</span></span><br><span class="line"><span class="comment"># ! @Author   :smile丶</span></span><br><span class="line"><span class="comment"># ! @File     :糗事百科爬取.py,糗事百科爬取热门段子爬取（re与requests）</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> fake_useragent <span class="keyword">import</span> UserAgent</span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">"user-agent"</span> : UserAgent().chrome</span><br><span class="line">&#125;</span><br><span class="line">url = <span class="string">"https://www.qiushibaike.com/hot/"</span></span><br><span class="line">resp = requests.get(url,headers=headers)</span><br><span class="line">resp.encoding=<span class="string">"utf-8"</span></span><br><span class="line">info = resp.text</span><br><span class="line">infos=re.findall(<span class="string">r'&lt;div class="content"&gt;\W+&lt;span&gt;\W+(.+)'</span>,info)</span><br><span class="line"><span class="comment"># 写入到文件</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"段子.txt"</span>,<span class="string">"a"</span>,encoding=<span class="string">"utf-8"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    index=<span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> infos:</span><br><span class="line">        result=re.sub(<span class="string">r'&lt;br/&gt;'</span>,<span class="string">"\n"</span>,i)</span><br><span class="line">        <span class="comment"># print(result)</span></span><br><span class="line">        f.write(<span class="string">"第"</span>+str(index)+<span class="string">"个段子：\n\n"</span>+result+<span class="string">"\n\n\n"</span>)</span><br><span class="line">        index+=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env python</span></span><br><span class="line"><span class="comment"># !-*-coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># !@Time     : 17:18</span></span><br><span class="line"><span class="comment"># !@Author   :smile丶</span></span><br><span class="line"><span class="comment"># !@File     :JD商品图片爬取（selenium+xpath+多线程）</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"><span class="keyword">from</span> fake_useragent <span class="keyword">import</span> UserAgent</span><br><span class="line"><span class="keyword">from</span> queue <span class="keyword">import</span> Queue</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"><span class="comment">#无头打开</span></span><br><span class="line">options = webdriver.ChromeOptions()</span><br><span class="line">options.add_argument(<span class="string">"--headless"</span>)</span><br><span class="line">chrome = webdriver.Chrome(chrome_options=options)</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">"user-agent"</span> : UserAgent().chrome</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#请求</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_html</span><span class="params">(url)</span>:</span></span><br><span class="line">    chrome.get(url)</span><br><span class="line">    js = <span class="string">'document.documentElement.scrollTop=100000'</span></span><br><span class="line">    chrome.execute_script(js)</span><br><span class="line">    sleep(<span class="number">10</span>)</span><br><span class="line">    html = chrome.page_source</span><br><span class="line">    <span class="comment"># 解析</span></span><br><span class="line">    e = etree.HTML(html)</span><br><span class="line">    info = etree.tostring(e)</span><br><span class="line">    info.decode(<span class="string">"utf-8"</span>)</span><br><span class="line">    <span class="keyword">return</span> e</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_url</span><span class="params">(keyword,pages)</span>:</span></span><br><span class="line">    urls=Queue()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,pages):</span><br><span class="line">        res = <span class="string">"https://search.jd.com/Search?keyword="</span>+keyword+<span class="string">"&amp;enc=utf-8&amp;page="</span>+str(<span class="number">2</span>*(i+<span class="number">1</span>)<span class="number">-1</span>)+<span class="string">"&amp;wq="</span>+keyword</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">        urls.put(res)</span><br><span class="line">    <span class="keyword">return</span> urls</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_imgs</span><span class="params">(imgs,keyword)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> imgs:</span><br><span class="line">        <span class="keyword">if</span> i != <span class="string">"done"</span>:</span><br><span class="line">            url=<span class="string">"http:"</span>+i</span><br><span class="line">            resp = requests.get(url, headers=headers)</span><br><span class="line">            result = resp.content</span><br><span class="line">            <span class="keyword">with</span> open(<span class="string">"./imgs/"</span>+keyword+<span class="string">"/"</span>+str(uuid.uuid1())+<span class="string">".jpg"</span>,<span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">                f.write(result)</span><br><span class="line">                f.close()</span><br><span class="line"><span class="comment"># 多线程</span></span><br><span class="line"><span class="class"><span class="keyword">class</span>  <span class="title">begin_go</span><span class="params">( Thread )</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,urls,keyword)</span>:</span></span><br><span class="line">        Thread.__init__(self)</span><br><span class="line">        self.urls=urls</span><br><span class="line">        self.keyword=keyword</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">while</span> self.urls.empty() == <span class="keyword">False</span>:</span><br><span class="line">            e = get_html(urls.get())</span><br><span class="line">            imgs1 = e.xpath(<span class="string">'//li[@class="gl-item"]/div/div[@class="p-img"]/a/img/@src'</span>)</span><br><span class="line">            imgs2 = e.xpath(<span class="string">'//li[@class="gl-item"]/div/div[@class="p-img"]/a/img/@data-lazy-img'</span>)</span><br><span class="line">            imgs = imgs1 + imgs2</span><br><span class="line">            save_imgs(imgs,keyword)</span><br><span class="line">            print(<span class="string">"爬取完成"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    keyword = input(<span class="string">"请输入搜索的商品名："</span>)</span><br><span class="line">    <span class="keyword">if</span> os.path.exists(<span class="string">"./imgs/"</span>+keyword):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        os.mkdir(<span class="string">"./imgs/"</span>+keyword)</span><br><span class="line">    urls = get_url(keyword, <span class="number">10</span>)</span><br><span class="line">    crawl_list = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">10</span>):</span><br><span class="line">        crawl1 = begin_go(urls,keyword)</span><br><span class="line">        crawl_list.append(crawl1)</span><br><span class="line">        crawl1.start()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> crawl <span class="keyword">in</span> crawl_list:</span><br><span class="line">        crawl.join()</span><br><span class="line"></span><br><span class="line">    print(<span class="string">"按爬取完成，进入imgs查看结果，按CTRL+C退出吧。。。"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="linux（redhat和centos）以及它的进阶之路"><a href="#linux（redhat和centos）以及它的进阶之路" class="headerlink" title="linux（redhat和centos）以及它的进阶之路"></a>linux（redhat和centos）以及它的进阶之路</h2><p>大三上学期，我们学习了操作系统，我也从红帽竞赛的学习中对linux有了些许兴趣。后来，通过对linux的学习，我才发现linux是如此的简洁与清晰，不像windows那样，没有卸载不干净的东西，没有那么高的配置要求，简简单单，足矣！</p>
+<p>下面是我简单配置的linux（基于centos）记录</p>
+<p>还有一个关于linux的比赛和recha什么的证书我就不列出来了，感觉比较low。希望以后能即将linux作为我的PC的OS吧！</p>
+<h2 id="java以及java进阶"><a href="#java以及java进阶" class="headerlink" title="java以及java进阶"></a>java以及java进阶</h2><p>我想我应该把大部分时间都花在了java上吧！一个学期有些水课我都在课上看java的教学视频。从java基础，到java web，再到mybatis，再到现在的maven+ssm框架以及redis的缓存技术，从sublime text3到my eclipse，再到现在的IDEA。一路走来，发现一入java深似海。</p>
+<p>深入理解jvm，泛型，网络编程等等。。。仔细一看，后面还有很多的不可预知，例如nginx什么的。。。现在学无止境，就应该择优学习！</p>
+<p>下面是我上传到github的简单学习的小项目</p>
+<p><a href="https://github.com/sjsmi1e/springmybatis" target="_blank" rel="noopener">https://github.com/sjsmi1e/springmybatis</a></p>
+<p>算法什么的我就不说了，前面有写了挺多这方面的知识，现在人工智能算法特别火，希望能在以后的学习中继续探讨更深奥的算法。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>一年过去了，有收获也有遗憾，希望在新的一年，我能找到一个心仪的工作，去到我心之所向的那个地方，然后能见到那个谁谁谁，有机会的话~~~</p>
+<p>书山有路勤为径，学海无涯苦作舟！新的一年，新的征程，加油吧，少年！</p>
+]]></content>
+      <categories>
+        <category>进阶之路</category>
+      </categories>
+      <tags>
+        <tag>总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我的秋招</title>
+    <url>/2019/09/21/%E6%88%91%E7%9A%84%E7%A7%8B%E6%8B%9B/</url>
+    <content><![CDATA[<h1 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h1><p>经过一年的努力吧（感觉自己说努力有点不好意思O(∩_∩)O），从大三一直到这周，成功签约西安农行软开（还差学校签字返还）。特此作此总结，记录下自己的汗水。</p>
+<h1 id="春招"><a href="#春招" class="headerlink" title="春招"></a>春招</h1><p>从大三下学期一开始，我就开始了校园招聘的路程，虽然那时候是春招，我大三也只能找一些实习，但是有实习岂不是很好，简历不就更好看了吗？但是啊，最后也只有以失败告终，0offer。但是也收获到了许多，比如经过的几次面试。</p>
+<p>记得那是大三刚开始，因为整个宿舍（六个人）只有我和我的下铺有就业的意向，其他人都是考研。所以，我们就计划着一起开始筹备春招。当时觉得自己知识体系应该已经差不多了，所以信心满满，然而，当头棒喝。我专攻的是Java后台开发，但当有笔试传来的时候，发现出的题目竟然像是在看天书，天书，什么概念，就是有头无尾，几乎不懂的。本以为以前写过算法，参加过ACM，算法题应该不成什么大问题，然而，算法题就是最大的问题。当时就觉得自己得复习甚至是学习一波。因为当时有一些知识点是学校一起老师讲过的，因为没怎么看，也没怎么常用，所以就忘记了。</p>
+<a id="more"></a>
+<p>后来，经过一段时间的沉沦（暂停简历投递），学习得差不多了，又继续开始了笔试之战。终于有一次，过了三七互娱的笔试，迎来了面试。信心满满，因为我总结了在微信上看到的Java面试100题。然而问到的时候才发现，那100题背出来是没有用的，不懂原理仅仅只是知其一不知其二，面试问得尴尬的一匹，什么都不会。面完后，最多的还是以学习为主，发现以前学的Java只是皮毛，还有很多东西需要自己去掌握。然后，我就开始指定了Java学习计划：逐个知识点突破。边学习边投简历，边完成学校的各种课设。当时可以说是忙上加忙。忙归忙，在学习的时候，发现自己在白忙的样子，过了大半学期，依旧还是0offer。当时，参加培训班的同学一个个拿到了或多或少的offer，知道这个消息之后，当时就觉得自己的世界是如此的渺茫。曾经有一段时间精神是恍惚的，总觉得自己是那么的菜，曾经比自己差的同学经过培训之后，拿到了大厂offer，心里感到一阵落寞，唉😔。</p>
+<p>我知道，我不能沉沦，因为家里还需要我去奋斗。想到这一点，我就提起了一点劲吧。看到web老师在群里发有谁想参加互联网+的联系她，当时我觉得自己可能还需要一个奖去丰富甚至是激励自己，所以自告奋勇地对老师说自己参加了。最重要的是，经过这个，我遇见了我的那个她。记得当时上实验课，来时问我做这个项目目前有什么难处，我就说我们没有懂经济的同学，然后，老师找来了那个她。之后和她的经历我就不多在这个学习平台浪费经历了，去看我们的信去，😄O(∩_∩)O。最后，在这说一点，有了她的陪伴，我觉得我的心不再那么迷茫，也没有了以前的空荡，心里得到了许多慰藉，感谢我的那个她，爱无限♥~~~所以，之后的下半学期，我没有在投递简历，开始了内化过程。</p>
+<h1 id="暑假"><a href="#暑假" class="headerlink" title="暑假"></a>暑假</h1><p>暑假，我就开始了疯狂的训练模式，每天几乎都很有计划的样子，开始逐个击破我当时在春招总结下来的问题。早上，康康叫我起床，她去上班实习，我在宿舍复习。虽然相隔，但是依旧心连心，感觉别有一番风味。就这样，虽然枯燥无味，还挺辛苦的，但是未了将来，这点不足为惧。未了缓解压力，我们俩晚上去散心，散步，挺好的~就这样，在暑假，我完成了大部分的复习，详情请看：<a href="https://github.com/sjsmi1e/javaBaseView" target="_blank" rel="noopener">https://github.com/sjsmi1e/javaBaseView</a></p>
+<p>大约在八月份的时候，准确来说是七月第，我就加入了秋招大军的队伍，开始了提前批的投递。可能提前批招的都是大佬级人物吧，我连个笔试几乎都收不到。当时有一些低落的，但是看到网上的面经，发现都是985或者211的研究生大佬的面经，我就知道，那个时间不属于我。所以，我就等待着正式的秋招。于时在八月份之后，陆陆续续我有开始了投递，也开始了笔试风波。在笔试中遨游，也在代码中穿梭。这是我这个暑假面试写的代码：<a href="https://github.com/sjsmi1e/QiuZhaoWrittenExamination" target="_blank" rel="noopener">https://github.com/sjsmi1e/QiuZhaoWrittenExamination</a>  当时觉得笔试能A出算法题，是多么的开心，是多么的欣慰，因为为了算法笔试题，我刷完了剑指offer，leetcode的DP（简单和中等难度），树，所有简单题。但是笔试过了一段时间，发现连一个面试都没有，就觉得自己时多么的无助，委屈，垃圾。曾几次的怀疑自己，到底适不适合进入中大厂。。。一直到九月份，我都没有任何面试机会，当时，真觉得我就要被毁灭了。。。</p>
+<h1 id="秋招"><a href="#秋招" class="headerlink" title="秋招"></a>秋招</h1><p>我的第一份offer，是农行的offer。记得是8月中旬投的吧，去牛客搜索了一个内推。然后在八月底开始了笔试。她陪我去的，我们来到西北大学，她在食堂等我，我在里面考试。考完试，我觉得她绝对无聊透顶了，手机几乎都用到没电了，不过非常感谢她，能腾出时间来陪我，太感谢她了~所以，我就过了笔试，进入了面试环节。那天6点她叫我起床，给了我100元，冲去了面试场地。风尘仆仆来，风尘仆仆回，借来的西装也许不习惯，穿着走在街上还有点不好意思，但依旧很完美~记得面试过程中，我是5号，当前面一个个面试者站起来，说自己怎么怎么地，哇，好强啊，我什么都没有。。。到我起来自我介绍的时候，有些底气不足，也有些紧张，所以，就有那么一些不是很好。后来也就中规中矩，不过有一点，西电西交的研究生竟然连数据库的char或者varchar都不知道，可能他们不太关注数据库吧，但是他们的简历真的很强。这里不方便透露面试问题，所以就不阐述了。我面试完之后，我真担心自己过不了，其实过了好多天都没有消息，就早已经不报什么希望了。可能后来的论述或者其他什么的为我加分了吧，我竟然过了。当时收到体检通知的，当时我是如此的开心。后来体检通过了，今天签约了，就觉得过程是那么的奇幻，好像在做梦一样。从收到体检通知到昨晚，我一直都在担心，银行随时都会反悔，因为我觉得我是那么的不优秀。现在，心也就放下来了。感谢西安，感谢农行，感谢面试官，感谢康康，感谢自己！</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>在签约农行的时候，我也面试了其他几家大厂，下面把面经记录一下：</p>
+<h2 id="JD"><a href="#JD" class="headerlink" title="JD"></a>JD</h2><p>因为我简历上面说掌握多线，所以一面上来就多线程</p>
+<ol>
+<li>创建线程的方式</li>
+<li>run与start的区别</li>
+<li>volite关键字怎么保证变量可见性，是线程安全的吗</li>
+<li>发生死锁的情况</li>
+<li>集合类举例哪些线程安全，哪些线程不安全</li>
+<li>手写一种单例模式实现方式，为什么要用这种方式</li>
+<li>jdk1.7以前hashtable实现线程安全的原理</li>
+<li>jdk1.7concurrentHashMap 怎么实现线程安全的</li>
+<li>NIO对比于BIO优势是什么</li>
+<li>redis为什么能作为缓存，处理请求为什么能达到那么快（多路复用）</li>
+<li>你了解什么分布式的东西（然后我回答zk）<br>zk用来干什么————分布式锁（原理是什么）</li>
+<li>你用过redis做分布式锁吗，需要注意的情况有什么</li>
+<li>jion与union区别</li>
+<li>数据库的隔离级别</li>
+<li>mysql是怎么在RR情况下解决幻读的（MVCC）</li>
+<li>自己实现一个工具类，让一个对线转成JSON字符串<br>一面结束。。。</li>
+</ol>
+<p>二面：<br>上来就问项目上的问题，然后我项目用了websocket，说一下websocket的原理机制（答的不是很好）</p>
+<ol>
+<li>创建线程的方式</li>
+<li>你常用的jdk包有哪些（集合包，juc），然后我说我用过线程池，他问线程池有哪几种，一般都分别用于什么场景下</li>
+<li>你了解过AQS吗</li>
+<li>你了解什么数据结构（然后我说的基本都知道，然后嘴贱说了红黑树，然后GG）</li>
+<li>你手写一个递归函数吧</li>
+<li>tcp/ip的每一层使用到的设备<br>二面结束。。。</li>
+</ol>
+<h2 id="科大讯飞"><a href="#科大讯飞" class="headerlink" title="科大讯飞"></a>科大讯飞</h2><p>一面</p>
+<ol>
+<li>list与linked的区别，优势与劣势</li>
+<li>你了解排序算法吗，说一下选择排序，与冒泡排序的区别<br>挺多的，但都是些基础问题，不写了，下面写一些我没想到的</li>
+<li>spring是怎么把一个类加载到自己的容器的，用到了什么方法<br>一面结束。。。<br>二面</li>
+<li>你知道接口和抽象类的区别吗？什么时候用接口，什么时候用抽象类</li>
+<li>如果给你两个方法名和参数列表相同，但是返回类型不同，他们是重载吗？如果不是，会发生哪些错误</li>
+<li>讲一下适配器模式，在什么场景下应用</li>
+<li>你了解过网络吗？为什么要有MAC地址，用IP地址不行吗</li>
+<li>你们学过编译原理吗（额，怎么说，我简历上面写了。。。但是我不会）</li>
+<li>然后就问一些其他方面的（你是哪的人，了解科大讯飞吗。。。等等）<br>二面结束。。。</li>
+</ol>
+<h2 id="百度"><a href="#百度" class="headerlink" title="百度"></a>百度</h2><p>一面</p>
+<ol>
+<li>run与start的区别</li>
+<li>sychronized三种情况下锁定的对象是什么</li>
+<li>volited的作用，原理是什么</li>
+<li>计算机网络：常用的HTTP请求头有哪些</li>
+<li>spring容器有哪些组件</li>
+<li>spring事务传播机制</li>
+<li>手写算法：括号匹配问题，写完了后（我用了stack），如何实现o（1）空间的方法</li>
+<li>异常的接口，实现类（exception，error），（运行时异常，检查异常）<br>一面结束。。。</li>
+</ol>
+<h1 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h1><p>行了，这次就写到这吧，没有什么过多的，希望接下来自己在生活中学习上加油(ง •_•)ง</p>
+]]></content>
+      <tags>
+        <tag>总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我的第一篇博客</title>
+    <url>/2018/08/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>稳定与非稳定排序</title>
+    <url>/2018/10/02/%E7%A8%B3%E5%AE%9A%E4%B8%8E%E9%9D%9E%E7%A8%B3%E5%AE%9A%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h1 id="排序的稳定性"><a href="#排序的稳定性" class="headerlink" title="排序的稳定性"></a>排序的稳定性</h1><p>在数据结构课上，老师也说到数据的稳定性到底是什么，有什么用，但是啊，有这么一个问题：<br><strong>既然最后都是有序序列，为什么还要分稳定和非稳定的排序呢？</strong></p>
+<p>下面，我们来看一下面试的小史是这么办的！（在微信上看到的，记录一下，以供学习）<br><a id="more"></a></p>
+<h1 id="【面试现场】"><a href="#【面试现场】" class="headerlink" title="【面试现场】"></a>【面试现场】</h1><p><img src="https://i.imgur.com/j9FSZki.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/0PNWtwn.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/DSTsJuv.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/9LLBwuz.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/pSTbKrc.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/NLceClH.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/MJBE8lL.jpg" alt=""></p>
+<p>小史：原始数据，a2和a4的位置都是3。对于稳定排序来说，排序后的序列，a2一定还是在a4前面。但是对于非稳定排序来说，就不一定了，可能排完序之后，a4反而在a2的前面了。</p>
+<p><img src="https://i.imgur.com/bKT0NXs.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/6tH4KQm.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/g2WRI8u.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/VAlH7lt.jpg" alt=""></p>
+<p>半分钟过去了。</p>
+<p><img src="https://i.imgur.com/atEYeEi.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/4cgOy38.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/iZ7EDtI.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/6LoKXur.jpg" alt=""></p>
+<h1 id="请教大神"><a href="#请教大神" class="headerlink" title="请教大神"></a>请教大神</h1><p><img src="https://i.imgur.com/Q1OT99l.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/pzVd1JE.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/VK0xy21.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/82wbztn.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/Zj5cDAN.jpg" alt=""></p>
+<h1 id="上课了"><a href="#上课了" class="headerlink" title="上课了"></a>上课了</h1><p>吕老师一上课就把问题抛了出来。</p>
+<p><img src="https://i.imgur.com/LLaogRE.jpg" alt=""></p>
+<p>话音刚落，蛋哥就站了起来。</p>
+<p><img src="https://i.imgur.com/oHoceh2.jpg" alt=""></p>
+<p>蛋哥：咱们每次考试完成后，都会按照分数进行排序。分高的自然就是第一名。分数相同的同学怎么办呢？那就是按照上次的分数来分高低。上次分高的排在前面。这个时候就应该用稳定排序，在上次排好序的序列上，再针对这次的分数进行排序。稳定排序的结果能保证这次相同分数的人，上次分高的在前面。</p>
+<p><img src="https://i.imgur.com/LcUb8E2.jpg" alt=""></p>
+<p>蛋哥：再比如我们班的同学，已经按照学号排好序了。现在要按照身高排序。如果是稳定排序排好之后，身高相同的同学，还是按照学号顺序的。</p>
+<p><img src="https://i.imgur.com/x90sLZr.jpg" alt=""></p>
+<p>吕老师：没错，其实就是有两个排序关键字的时候，稳定排序可以让第一个关键字排序的结果服务于第二个关键字排序中数值相等的那些数。</p>
+<p>小史听完后，觉得很惭愧，其实这些场景自己也遇到过，早该想到的。</p>
+<p>吕老师：你看的东西很多，是你学到了很多知识。但是这些知识之间的关联，需要你进行深入思考才能得到的。找到知识之间的联系，找到知识和实际场景之间的联系，多想想为什么，才能做到融会贯通。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>其实就个人看法，对于按照上次排名排序这个场景是一个很不错的例子，还有就是按关键字排序，其实可以用运算符重载就能很方便解决这样一个矛盾问题，对于稳定与非稳定吧，特定场景特定分析，稳定好，非稳定也不错！</p>
+]]></content>
+      <categories>
+        <category>休闲</category>
+      </categories>
+      <tags>
+        <tag>排序的稳定性</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>贪心+二分</title>
+    <url>/2018/08/07/%E8%B4%AA%E5%BF%83-%E4%BA%8C%E5%88%86/</url>
+    <content><![CDATA[<p>在刷题时，总会遇到求最大值最小，最小值最大问题，也许它会暗喻是这样的一个问题。对于这样的一个问题，你会发现用dp和枚举都会超时超内存，或者说很麻烦，所以这是一个比较简单的解题方式。</p>
+<p>二分逼近思想<br>•对于难以直接确定解的问题,采取二分枚举+检验的思想.<br><a id="more"></a><br>•已知解为x,验证x是否满足要求.</p>
+<p>•如果答案具有特定的范围，并且验证答案是否成立的函数具有单调性。则可以在范围内对答案进行二分验证，从而快速确定答案。</p>
+<p> 对于答案判断：<br>在二分答案的时候需要判断，从而确定下一个范围。</p>
+<p>可以用一个bool Check(x)函数来判断，返回true表示满足,返回false表示不满足.</p>
+<p>可以类比数学函数f(x)&gt;=0和f(x)&lt;0来理解.</p>
+<p>根据具体问题写出相应的Check函数往往就是解决问题的关键点。</p>
+<p>下面举例一些问题：</p>
+<p><strong>poj2456</strong><br>Aggressive cows</p>
+<p>Time Limit: 1000MS         Memory Limit: 65536K<br>Total Submissions: 13139         Accepted: 6399</p>
+<p>Description</p>
+<p>Farmer John has built a new long barn, with N (2 &lt;= N &lt;= 100,000) stalls. The stalls are located along a straight line at positions x1,…,xN (0 &lt;= xi &lt;= 1,000,000,000). </p>
+<p>His C (2 &lt;= C &lt;= N) cows don’t like this barn layout and become aggressive towards each other once put into a stall. To prevent the cows from hurting each other, FJ want to assign the cows to the stalls, such that the minimum distance between any two of them is as large as possible. What is the largest minimum distance?</p>
+<p>Input</p>
+<ul>
+<li><p>Line 1: Two space-separated integers: N and C </p>
+</li>
+<li><p>Lines 2..N+1: Line i+1 contains an integer stall location, xi</p>
+</li>
+</ul>
+<p>Output</p>
+<ul>
+<li>Line 1: One integer: the largest minimum distance</li>
+</ul>
+<p>Sample Input</p>
+<p>5 3<br>1<br>2<br>8<br>4<br>9<br>Sample Output</p>
+<p>3<br>Hint</p>
+<p>OUTPUT DETAILS: </p>
+<p>FJ can put his 3 cows in the stalls at positions 1, 4 and 8, resulting in a minimum distance of 3. </p>
+<p>Huge input data,scanf is recommended.</p>
+<p>Source</p>
+<p>USACO 2005 February Gold</p>
+<p>2.题意概述：</p>
+<p>农夫有c头牛，n个隔间，c头牛很躁动，很容易相互打架，因此农夫想把它们分得越远越好，要你分配隔间使得相邻两头牛的距离越远越好，问你这c头牛分割的最小距离的最大值。</p>
+<p>3.解题思路： </p>
+<p>先对隔间的坐标排序，对于牛，最小距离是0，最大距离不会超过两端两头牛的距离值，因此二分地查找分割距离的最大值，每次mid都judge一次，judge的时候贪心地放置牛，保证前i头牛是符合这样分割标准的。</p>
+<p>AC代码：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">	int n,k,t;</span><br><span class="line">	int a[100000];</span><br><span class="line">bool fun(int d)&#123;</span><br><span class="line">	int next,last=0,k=1;</span><br><span class="line">	for(int i=1;i&lt;t;i++)&#123;</span><br><span class="line">		if(a[i]-a[last]&gt;=d)&#123;</span><br><span class="line">			k++;</span><br><span class="line">			last=i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	if(k&gt;=n)</span><br><span class="line">		return true;</span><br><span class="line">	else</span><br><span class="line">		return false;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">cin&gt;&gt;t;</span><br><span class="line">cin&gt;&gt;n;</span><br><span class="line">	for(int i=0;i&lt;t;i++)</span><br><span class="line">		cin&gt;&gt;a[i];</span><br><span class="line">	sort(a,a+t);</span><br><span class="line">	int l=0,r=a[t-1],mid=(l+r)/2;</span><br><span class="line">	while(l&lt;=r)&#123;</span><br><span class="line">		if(fun(mid))&#123;</span><br><span class="line">			l=mid+1;</span><br><span class="line">		&#125;</span><br><span class="line">		else&#123;</span><br><span class="line">			r=mid-1;	</span><br><span class="line">		&#125;</span><br><span class="line">		mid=(l+r)/2;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;r&lt;&lt;endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>poj1505 </strong><br>Copying Books</p>
+<p>Time Limit: 3000MS         Memory Limit: 10000K<br>Total Submissions: 9632         Accepted: 3013<br>Description</p>
+<p>Before the invention of book-printing, it was very hard to make a copy of a book. All the contents had to be re-written by hand by so called scribers. The scriber had been given a book and after several months he finished its copy. One of the most famous scribers lived in the 15th century and his name was Xaverius Endricus Remius Ontius Xendrianus (Xerox). Anyway, the work was very annoying and boring. And the only way to speed it up was to hire more scribers. </p>
+<p>Once upon a time, there was a theater ensemble that wanted to play famous Antique Tragedies. The scripts of these plays were divided into many books and actors needed more copies of them, of course. So they hired many scribers to make copies of these books. Imagine you have m books (numbered 1, 2 … m) that may have different number of pages (p1, p2 … pm) and you want to make one copy of each of them. Your task is to divide these books among k scribes, k &lt;= m. Each book can be assigned to a single scriber only, and every scriber must get a continuous sequence of books. That means, there exists an increasing succession of numbers 0 = b0 &lt; b1 &lt; b2, … &lt; bk-1 &lt;= bk = m such that i-th scriber gets a sequence of books with numbers between bi-1+1 and bi. The time needed to make a copy of all the books is determined by the scriber who was assigned the most work. Therefore, our goal is to minimize the maximum number of pages assigned to a single scriber. Your task is to find the optimal assignment. </p>
+<p>Input</p>
+<p>The input consists of N cases. The first line of the input contains only positive integer N. Then follow the cases. Each case consists of exactly two lines. At the first line, there are two integers m and k, 1 &lt;= k &lt;= m &lt;= 500. At the second line, there are integers p1, p2, … pm separated by spaces. All these values are positive and less than 10000000.</p>
+<p>Output</p>
+<p>For each case, print exactly one line. The line must contain the input succession p1, p2, … pm divided into exactly k parts such that the maximum sum of a single part should be as small as possible. Use the slash character (‘/‘) to separate the parts. There must be exactly one space character between any two successive numbers and between the number and the slash. </p>
+<p>If there is more than one solution, print the one that minimizes the work assigned to the first scriber, then to the second scriber etc. But each scriber must be assigned at least one book.</p>
+<p>Sample Input</p>
+<p>2<br>9 3<br>100 200 300 400 500 600 700 800 900<br>5 4<br>100 100 100 100 100<br>Sample Output</p>
+<p>100 200 300 400 500 / 600 700 / 800 900<br>100 / 100 / 100 / 100 100</p>
+<p>题意：按顺序给你N个数，将这N个数分成连续的M段，使得这M段每段的和中的最大值最小，输出最小值（1&lt;=N&lt;=100000,1&lt;=M&lt;=N,每个数在1到10000之间），如果有多种可能的话，尽量在前面进行划分。（其实第一次读题还不知道是什么意思，仔细琢磨才明白是这样的一个问题）</p>
+<p>首先以正常的思路去考虑优化这个最大值的最小化问题，好像会陷入到循环之中找不到解决的思路，但是我们如果采用猜测－判断－重来的方法不断的去尝试二分查找最大值的最小值，然后去判断这个值是否合法，进一步优化这个值，就可以解决。</p>
+<p>ac代码：</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int a[501];</span><br><span class="line">int t,m,n;</span><br><span class="line">int yes_no(int dis,int flag)&#123;</span><br><span class="line">	int last=0,next=0,tsum=a[last],cnt=1;</span><br><span class="line">	while(next&lt;m)&#123;</span><br><span class="line">		if(tsum&lt;=dis)&#123;</span><br><span class="line">			next++;</span><br><span class="line">			tsum=tsum+a[next];</span><br><span class="line">		&#125;</span><br><span class="line">		if(tsum&gt;dis)&#123;</span><br><span class="line">			cnt++;</span><br><span class="line">			last=next;</span><br><span class="line">			tsum=a[last];</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">//	cout&lt;&lt;cnt&lt;&lt;endl;</span><br><span class="line">	if(cnt&gt;flag)</span><br><span class="line">		return 2;</span><br><span class="line">	else if(cnt==flag)</span><br><span class="line">		return 1;</span><br><span class="line">	else</span><br><span class="line">		return 0;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	while(t--)&#123;</span><br><span class="line">		int sum=0,ans;</span><br><span class="line">		cin&gt;&gt;m&gt;&gt;n;</span><br><span class="line">		for(int i=0;i&lt;m;i++)&#123;</span><br><span class="line">			cin&gt;&gt;a[i];</span><br><span class="line">			sum+=a[i];</span><br><span class="line">		&#125;</span><br><span class="line">		//cout&lt;&lt;sum&lt;&lt;endl;</span><br><span class="line">		int l=0,r=sum,mid;</span><br><span class="line">		//cout&lt;&lt;mid&lt;&lt;endl;	</span><br><span class="line">		while(l&lt;=r)&#123;</span><br><span class="line">			mid=(l+r)&gt;&gt;1;</span><br><span class="line">			if(yes_no(mid,n)==2)&#123;</span><br><span class="line">				l=mid+1;</span><br><span class="line">				//cout&lt;&lt;&quot;1&quot;;</span><br><span class="line">			&#125;</span><br><span class="line">			else if(yes_no(mid,n)==1)&#123;</span><br><span class="line">				ans=mid;</span><br><span class="line">				r=mid-1;</span><br><span class="line">			&#125;</span><br><span class="line">			else&#123;</span><br><span class="line">				r=mid-1;</span><br><span class="line">			//	cout&lt;&lt;&quot;2&quot;;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		//cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">		int tsum=0;</span><br><span class="line">		int tn=n-1;</span><br><span class="line">		for(int i=0;i&lt;m;i++)&#123;</span><br><span class="line">			tsum+=a[i];</span><br><span class="line">			if(tsum&gt;=ans&amp;&amp;tn)&#123;</span><br><span class="line">				tn--;</span><br><span class="line">				cout&lt;&lt;&quot; /&quot;;</span><br><span class="line">				tsum=a[i];</span><br><span class="line">			&#125;</span><br><span class="line">			if(i==0)&#123;</span><br><span class="line">				cout&lt;&lt;a[i];</span><br><span class="line">			&#125;</span><br><span class="line">			else</span><br><span class="line">				cout&lt;&lt;&quot; &quot;&lt;&lt;a[i];				</span><br><span class="line">		&#125;	cout&lt;&lt;endl;	</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><p>以上就是这两题，是基本的贪心+二分的求法。 </p>
+<p><strong>注意：二分是在排序好的基础上进行的查找，所以，看清题目，尽量先排好序。。。</strong></p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>贪心+二分</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）</title>
+    <url>/2018/08/29/%E9%93%BE%E5%BC%8F%E5%89%8D%E5%90%91%E6%98%9F%EF%BC%88%E9%9D%99%E6%80%81%E9%82%BB%E6%8E%A5%E8%A1%A8%EF%BC%89%E5%AD%98%E5%82%A8%E5%9B%BE%E5%8F%8A%E7%AE%80%E5%8D%95%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88dijkstra-spfa%EF%BC%89/</url>
+    <content><![CDATA[<p>链式前向星，也叫静态邻接表，今天我讲的是关于图的东西，所以都以图的角度去看待这个较优化的存储结构。</p>
+<h1 id="存图优缺点"><a href="#存图优缺点" class="headerlink" title="存图优缺点"></a>存图优缺点</h1><p>存图的时候，链式前向星是一种介于邻接矩阵和和邻接表的一种存储结构。</p>
+<h2 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h2><p>存图一般都用这个呀！不过啊，当遇到稀疏图的时候，顶点特别多，而边就那么几条，空间浪费必然很大，所以我们又想到了邻接表</p>
+<h2 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h2><p>邻接表（未优化过的链式前向星）是最常用存储结构之一。 但是 vector(动态数组) 的时间效率较低 (较普通数组而言)。</p>
+<p>所以，链式前向星也就因运而生。链式前向星是介于 邻接矩阵 和 邻接表 之间比较均衡的一种数据结构。</p>
+<h2 id="链式前向星"><a href="#链式前向星" class="headerlink" title="链式前向星"></a>链式前向星</h2><p>先来看一下代码：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//链式前向星的存储结构</span><br><span class="line">struct node</span><br><span class="line">&#123;</span><br><span class="line">    int to;//边指向的终点</span><br><span class="line">    int next;//下一条边的存储下标</span><br><span class="line">    int w;//权值</span><br><span class="line">&#125;edge[maxn];</span><br><span class="line">int head[maxn];</span><br><span class="line">int cnt;</span><br><span class="line">//增边</span><br><span class="line">void add_edge(int u,int v,int w)</span><br><span class="line">&#123;</span><br><span class="line">    edge[cnt].w=w;</span><br><span class="line">    edge[cnt].to=v;</span><br><span class="line">    edge[cnt].next=head[u];</span><br><span class="line">    head[u]=cnt++;//需初始化cnt=0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>举个列子：</p>
+<p><img src="https://img-blog.csdn.net/20131123160056593" alt=""></p>
+<p>这是我拿别人家博客的图片的哦，希望不要介意呀！</p>
+<p>对于这样一个图，我们进行增边操作；</p>
+<p>1.首先，cnt初始化，可以是0，也可以是一，看你个人喜好。head[]数组初始化，可以是0也可以是1.</p>
+<p>2.调用函数增边：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(int i=0;i&lt;n;i++)//n代表边数</span><br><span class="line">  &#123;</span><br><span class="line">      cin&gt;&gt;u&gt;&gt;v&gt;&gt;w;//u是起始点，v是这条边的终点，w是权值</span><br><span class="line">      add_edge(u,v,w);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>例如上图，就是输入（我这里没权值，直接忽略吧）：</p>
+<p>1 2 </p>
+<p>2 3</p>
+<p>3 4</p>
+<p>1 3</p>
+<p>4 1</p>
+<p>1 5</p>
+<p>4 5</p>
+<p>这样就建成了一张链式前向星的图。</p>
+<p>其他相信大家都好理解，就是 edge[].next=head[]  这个比较模糊，其实就是存的是以 i 为起点，连接着 i 的顶点编号的最大编号所在的边数，就如上图（按输入顺序编号），1-&gt;2（第0条边）,1-&gt;3（第3条边）,1-&gt;5（第5条边）,而edge[5].next=3;edge[3].next=0;所以在遍历的时候，就相当于倒着遍历，就有这样的语句<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> for(int i=head[u];i!=-1;i=edge[i].next)&#123;</span><br><span class="line">        ...</span><br><span class="line">&#125;//u是起点（当前节点）</span><br></pre></td></tr></table></figure></p>
+<p>有了这样一个邻接表的基础，那么对于图的最大经典问题，最短路，在这样的存储结构下又有什么不一样呢。看下面代码：</p>
+<h2 id="dijsktra"><a href="#dijsktra" class="headerlink" title="dijsktra"></a>dijsktra</h2><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//堆优化的最短路</span><br><span class="line">typedef pair&lt;int ,int &gt; P;//存编号与距离</span><br><span class="line">void dijkstra(int s)//s为起点</span><br><span class="line">&#123;</span><br><span class="line">    priority_queue&lt; P,vector&lt;P&gt;,greater&lt;P&gt; &gt; q;</span><br><span class="line">    memset(d,inf,sizeof(d));</span><br><span class="line">    //memset(vis,0,sizeof(vis));</span><br><span class="line">    d[s]=0;</span><br><span class="line">    q.push(P(0,s));</span><br><span class="line">    while(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        P p=q.top();</span><br><span class="line">        q.pop();</span><br><span class="line">        int u=p.second;</span><br><span class="line">        if(d[u]&lt;p.first)</span><br><span class="line">            continue;</span><br><span class="line">        for(int i=head[u];i!=-1;i=edge[i].next)</span><br><span class="line">        &#123;</span><br><span class="line">            int v=edge[i].to;</span><br><span class="line">            if(d[v]&gt;d[u]+edge[i].w)&#123;</span><br><span class="line">                d[v]=d[u]+edge[i].w;</span><br><span class="line">                q.push(P(d[v],v));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><p>上面是用了堆优化（priority_queue）后的dijkstra模板，最主要的思想就是松弛到不能再松弛位置， 然后遍历的过程就是松弛过程。可能对于一些题目， priority_queue&lt; P,vector</p><p>,greater</p><p> &gt; q;中的 greater 会有一些超时，重载运算符也是一种解决办法。复杂度：</p>
+<p>O((V+E)lgV)</p>
+<h2 id="SPFA"><a href="#SPFA" class="headerlink" title="SPFA"></a>SPFA</h2><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int d[maxn];//记录最短距离</span><br><span class="line"></span><br><span class="line">int vis[maxn];//判断是否在队列中</span><br><span class="line"></span><br><span class="line">void SPFA(int s)//可以计算含负权的图</span><br><span class="line">&#123;</span><br><span class="line">    memset(d,inf,sizeof(d));</span><br><span class="line">    memset(vis,0,sizeof(vis));</span><br><span class="line">    queue&lt;int &gt; q;</span><br><span class="line">    q.push(s);</span><br><span class="line">    vis[s]=1;</span><br><span class="line">    d[s]=0;</span><br><span class="line">    while(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        int u=q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        vis[u]=0;</span><br><span class="line">        //开始遍历松弛</span><br><span class="line">        for(int i=head[u];i!=-1;i=edge[i].next)</span><br><span class="line">        &#123;</span><br><span class="line">            int v=edge[i].to;</span><br><span class="line">            if(d[v]&gt;d[u]+edge[i].w)</span><br><span class="line">            &#123;</span><br><span class="line">                d[v]=d[u]+edge[i].w;</span><br><span class="line">                if(!vis[v])</span><br><span class="line">                &#123;</span><br><span class="line">                    q.push(v);</span><br><span class="line">                    vis[v]=1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><p>有没有觉得这个非常像，就是相差了vis[]这样一个数组判断，而这也就是差别，vis[]在SPFA就是判断当前点是否在队列中，从而进行松弛操作，还有就是vis[]还能判断图中是否有“负权环”（当vis[]&gt;n， 就表示有环）。</p>
+<p>复杂度：O(kE)O(kE)。</p>
+<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>如果是稠密图，Dijkstra+heap比SPFA快。稀疏图则SPFA更快。SPFA可以有SLF和LLL两种优化，SLF就是d比队头小就插入队头，否则插入队尾。</p>
+<p> 全部代码：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;string.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxn=1e5+10;</span><br><span class="line">const int inf=0x3f3f3f3f;</span><br><span class="line">//链式前向星的存储结构</span><br><span class="line">struct node</span><br><span class="line">&#123;</span><br><span class="line">    int to;//边指向的终点</span><br><span class="line">    int next;//下一条边的存储下标</span><br><span class="line">    int w;//权值</span><br><span class="line">&#125;edge[maxn];</span><br><span class="line">int head[maxn];</span><br><span class="line">int cnt;</span><br><span class="line">//增边</span><br><span class="line">void add_edge(int u,int v,int w)</span><br><span class="line">&#123;</span><br><span class="line">    edge[cnt].w=w;</span><br><span class="line">    edge[cnt].to=v;</span><br><span class="line">    edge[cnt].next=head[u];</span><br><span class="line">    head[u]=cnt++;//需初始化cnt=0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int d[maxn];//记录最短距离</span><br><span class="line"></span><br><span class="line">int vis[maxn];//判断是否在队列中</span><br><span class="line">/*</span><br><span class="line">void SPFA(int s)//可以计算含负权的图</span><br><span class="line">&#123;</span><br><span class="line">    memset(d,inf,sizeof(d));</span><br><span class="line">    memset(vis,0,sizeof(vis));</span><br><span class="line">    queue&lt;int &gt; q;</span><br><span class="line">    q.push(s);</span><br><span class="line">    vis[s]=1;</span><br><span class="line">    d[s]=0;</span><br><span class="line">    while(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        int u=q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        vis[u]=0;</span><br><span class="line">        //开始遍历松弛</span><br><span class="line">        for(int i=head[u];i!=-1;i=edge[i].next)</span><br><span class="line">        &#123;</span><br><span class="line">            int v=edge[i].to;</span><br><span class="line">            if(d[v]&gt;d[u]+edge[i].w)</span><br><span class="line">            &#123;</span><br><span class="line">                d[v]=d[u]+edge[i].w;</span><br><span class="line">                if(!vis[v])</span><br><span class="line">                &#123;</span><br><span class="line">                    q.push(v);</span><br><span class="line">                    vis[v]=1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">*/</span><br><span class="line">//堆优化的最短路</span><br><span class="line">typedef pair&lt;int ,int &gt; P;//存编号与距离</span><br><span class="line"></span><br><span class="line">void dijkstra(int s)//s为起点</span><br><span class="line">&#123;</span><br><span class="line">    priority_queue&lt; P,vector&lt;P&gt;,greater&lt;P&gt; &gt; q;</span><br><span class="line">    memset(d,inf,sizeof(d));</span><br><span class="line">    //memset(vis,0,sizeof(vis));</span><br><span class="line">    d[s]=0;</span><br><span class="line">    q.push(P(0,s));</span><br><span class="line">    while(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        P p=q.top();</span><br><span class="line">        q.pop();</span><br><span class="line">        int u=p.second;</span><br><span class="line">        if(d[u]&lt;p.first)</span><br><span class="line">            continue;</span><br><span class="line">        for(int i=head[u];i!=-1;i=edge[i].next)</span><br><span class="line">        &#123;</span><br><span class="line">            int v=edge[i].to;</span><br><span class="line">            if(d[v]&gt;d[u]+edge[i].w)&#123;</span><br><span class="line">                d[v]=d[u]+edge[i].w;</span><br><span class="line">                q.push(P(d[v],v));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int m;//顶点数</span><br><span class="line">    int n;//边数</span><br><span class="line">    int u,v,w;</span><br><span class="line">    cnt=0;</span><br><span class="line">    cin&gt;&gt;m&gt;&gt;n;</span><br><span class="line">    memset(head,-1,sizeof(head));</span><br><span class="line">    for(int i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cin&gt;&gt;u&gt;&gt;v&gt;&gt;w;</span><br><span class="line">        add_edge(u,v,w);</span><br><span class="line">    &#125;</span><br><span class="line">    dijkstra(1);</span><br><span class="line">    //SPFA(1);</span><br><span class="line">    for(int i=1;i&lt;=m;i++)</span><br><span class="line">        cout&lt;&lt;d[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">    cout&lt;&lt;endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><p>对于inf这个定义，0x7fffffff和0x3f3f3f3f这两个也是一个大坑，</p>
+<p>很多人可能设为0x7fffffff,这个数的确是32-bit int的最大值，符号位为0，其他的都是1</p>
+<p>但在很多情况下，0x7fffffff会出现错误，比如溢出，这样两个无穷大数相加会变成负数，还有如在做dijkstra求最短路时，当做松弛操作，判断if (d[u]+w[u][v]&lt;d[v]) d[v]=d[u]+w[u][v]时，若u到v没有路劲，w[u][v]=0x7fffffff，这样d[u]+w[u][v]会变成负数，这就产生了错误。</p>
+<p>所以，memset(d,0x3f,sizeof(d));</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+</search>
