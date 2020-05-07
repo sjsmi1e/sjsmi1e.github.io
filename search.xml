@@ -1,34 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>2018暑期ccpc网络赛总结</title>
-    <url>/2018/08/25/2018%E6%9A%91%E6%9C%9Fccpc%E7%BD%91%E7%BB%9C%E8%B5%9B%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<p>从12：00到17:00，是这次网络赛的时间。我与小伙伴们约好在食堂来一场惊心动魄的脑脑裂比赛。从11:00开始准备，吃饭，预热，开始答题。</p>
-<p>由于以前了解过ACM，也参加过4C，所以也有一些经验吧。只是第一次，本以为是ccpc，中国的，可以有点中文题目，没想到全是英文题，让我这样的英文渣额。。。不过还好，能读懂一些的！</p>
-<p>煎熬中度过，漫度中煎熬。一些题似懂非懂，有思路，但数据范围的卡壳，导致更换思路。。。最后，受大佬启发，完成了一道</p>
-<p>a^n+b^n=c^n的题目：<br><a id="more"></a></p>
-<p><strong>1004 Find Integer<br>Problem<br>people in USSS love math very much, and there is a famous math problem .<br>give you two integers , ,you are required to find integers , such that + .<br>Input<br>one line contains one integer ;<br>next lines contains two integers , ; , ,<br>Output<br>print two integers , if , exits; , , ;<br>else print two integers -1 -1 instead.<br>Sample Input<br>1 2 3<br>Sample Output<br>4 5</strong></p>
-<p>思路：显而易见，对于a^n+b^n=c^n，当N&gt;2时，是没有整数解的（费马大定理），所以问题主要就来到求a^2+b^2=c^2；第一次，我们用O(N)的暴力去解，发现超时，所以第一时间就想到剪枝，寻找其中规律，发现，a*b%6==0；于是，就6个6个找，再用本源勾股在进一步剪枝，a的倍数计算；但发现还是TL了。。。我的天！！！绝望。。。最后呢，有一位大佬说其实有一个公式的，所以，我去研究了一番，发现：</p>
-<p><strong>题意：<br>给出直角三角形的一条边，求另外两条边。无解输出-1.<br>思路：<br>1、2无解。<br>n为偶数，(n <em> n / 4 - 1) ^ 2 + n </em> n = (n <em> n / 4 + 1) ^2<br>n为奇数，((n </em> n - 1) / 2) ^ 2 + n <em> n = ((n </em> n + 1) / 2) ^ 2</strong></p>
-<p>天哪，所以，，，就所以了。最后题目还卡了一下cin与cout的输出时间限制，改成printf与scanf就ok了。</p>
-<p>以下是AC代码：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">typedef long long ll;</span><br><span class="line"></span><br><span class="line">int  main()</span><br><span class="line">&#123;</span><br><span class="line">    int t;</span><br><span class="line">    int n,a;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;t);</span><br><span class="line">    while(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf(&quot;%d %d&quot;,&amp;n,&amp;a);</span><br><span class="line">        if(n&gt;2)</span><br><span class="line">        &#123;</span><br><span class="line">          printf(&quot;-1 -1\n&quot;);</span><br><span class="line">          //  cout&lt;&lt;&quot;-1 -1&quot;&lt;&lt;endl;</span><br><span class="line">        &#125;</span><br><span class="line">        else if(n==2)</span><br><span class="line">        &#123;</span><br><span class="line">            if(a%2==0)</span><br><span class="line">            &#123;</span><br><span class="line">                printf(&quot;%d %d\n&quot;,a*a/4-1,a*a/4+1);</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">                printf(&quot;%d %d\n&quot;,(a*a-1)/2,(a*a+1)/2);</span><br><span class="line">        &#125;</span><br><span class="line">        else if(n==1)</span><br><span class="line">        &#123;</span><br><span class="line">          printf(&quot;%d %d\n&quot;,a+1,a+2);</span><br><span class="line">            //cout&lt;&lt;a+1&lt;&lt;&quot; &quot;&lt;&lt;a+2&lt;&lt;endl;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">          printf(&quot;-1 -1\n&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>后面有这样一道题：</p>
-<p>**1010 YJJ’s Salesman<br>Problem<br>YJJ is a salesman who has traveled through western country. YJJ is always on journey. Either is he at the destination, or on the way to destination. One day, he is going to travel from city A to southeastern city B. Let us assume that A is on the rectangle map and B . YJJ is so busy so he never turn back or go twice the same way, he will only move to east, south or southeast, which means, if YJJ is at now , he will only forward to , or . On the rectangle map from to , there are several villages scattering on the map. Villagers will do business deals with salesmen from northwestern, but not northern or western. In mathematical language, this means when there is a village on , only the one who was from to will be able to earn dollars.(YJJ may get different number of dollars from different village.) YJJ has no time to plan the path, can you help him to find maximum of dollars YJJ can get.<br>Input<br>The first line of the input contains an integer ,which is the number of test cases.<br>In each case, the first line of the input contains an integer .The following lines, the -th line contains 3 integers, , which indicate that there is a village on and he can get dollars in that village. The positions of each village is distinct.<br>Output<br>The maximum of dollars YJJ can get.<br>(0,0) ( , ) 109 109<br>(x,y) (0 ≤ x ≤ ,0 ≤ y ≤ ) 109 109 (x +1,y) (x,y +1) (x +1,y +1) (0,0) ( , ) 109 109<br>k ( , ) xk yk (1 ≤ ≤ ,1 ≤ ≤ ) xk 109 yk 109 ( −1, −1) xk yk ( , ) xk yk vk<br>T (1 ≤ T ≤ 10)<br>N (1 ≤ N ≤ ) 105 N k , , xk yk vk (0 ≤ ≤ ) vk 103 ( , ) xk yk vk<br>Sample Input<br>1 </p>
-<p>3</p>
-<p>1 1 1</p>
-<p>1 2 2</p>
-<p>3 3 1<br>Sample Output<br>3<br>**</p>
-<p>一看这题目就是搜索+dp，思路简单；但看数字，1e9，开个二维数组，绝对爆内存，所以，我想到把二维压成一维去做，不知道有没有错误，代码码到一半，后面再慢慢研究一下，发AC代码。</p>
-<p>总的来说，英语还有待加强，做题不够多，自然就GOOD GAME了。。。 </p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>总结</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JVM 完整深入解析</title>
     <url>/2020/05/07/JVM-%E5%AE%8C%E6%95%B4%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90/</url>
     <content><![CDATA[<ul>
@@ -309,6 +281,34 @@
 ]]></content>
       <tags>
         <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2018暑期ccpc网络赛总结</title>
+    <url>/2018/08/25/2018%E6%9A%91%E6%9C%9Fccpc%E7%BD%91%E7%BB%9C%E8%B5%9B%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>从12：00到17:00，是这次网络赛的时间。我与小伙伴们约好在食堂来一场惊心动魄的脑脑裂比赛。从11:00开始准备，吃饭，预热，开始答题。</p>
+<p>由于以前了解过ACM，也参加过4C，所以也有一些经验吧。只是第一次，本以为是ccpc，中国的，可以有点中文题目，没想到全是英文题，让我这样的英文渣额。。。不过还好，能读懂一些的！</p>
+<p>煎熬中度过，漫度中煎熬。一些题似懂非懂，有思路，但数据范围的卡壳，导致更换思路。。。最后，受大佬启发，完成了一道</p>
+<p>a^n+b^n=c^n的题目：<br><a id="more"></a></p>
+<p><strong>1004 Find Integer<br>Problem<br>people in USSS love math very much, and there is a famous math problem .<br>give you two integers , ,you are required to find integers , such that + .<br>Input<br>one line contains one integer ;<br>next lines contains two integers , ; , ,<br>Output<br>print two integers , if , exits; , , ;<br>else print two integers -1 -1 instead.<br>Sample Input<br>1 2 3<br>Sample Output<br>4 5</strong></p>
+<p>思路：显而易见，对于a^n+b^n=c^n，当N&gt;2时，是没有整数解的（费马大定理），所以问题主要就来到求a^2+b^2=c^2；第一次，我们用O(N)的暴力去解，发现超时，所以第一时间就想到剪枝，寻找其中规律，发现，a*b%6==0；于是，就6个6个找，再用本源勾股在进一步剪枝，a的倍数计算；但发现还是TL了。。。我的天！！！绝望。。。最后呢，有一位大佬说其实有一个公式的，所以，我去研究了一番，发现：</p>
+<p><strong>题意：<br>给出直角三角形的一条边，求另外两条边。无解输出-1.<br>思路：<br>1、2无解。<br>n为偶数，(n <em> n / 4 - 1) ^ 2 + n </em> n = (n <em> n / 4 + 1) ^2<br>n为奇数，((n </em> n - 1) / 2) ^ 2 + n <em> n = ((n </em> n + 1) / 2) ^ 2</strong></p>
+<p>天哪，所以，，，就所以了。最后题目还卡了一下cin与cout的输出时间限制，改成printf与scanf就ok了。</p>
+<p>以下是AC代码：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">typedef long long ll;</span><br><span class="line"></span><br><span class="line">int  main()</span><br><span class="line">&#123;</span><br><span class="line">    int t;</span><br><span class="line">    int n,a;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;t);</span><br><span class="line">    while(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf(&quot;%d %d&quot;,&amp;n,&amp;a);</span><br><span class="line">        if(n&gt;2)</span><br><span class="line">        &#123;</span><br><span class="line">          printf(&quot;-1 -1\n&quot;);</span><br><span class="line">          //  cout&lt;&lt;&quot;-1 -1&quot;&lt;&lt;endl;</span><br><span class="line">        &#125;</span><br><span class="line">        else if(n==2)</span><br><span class="line">        &#123;</span><br><span class="line">            if(a%2==0)</span><br><span class="line">            &#123;</span><br><span class="line">                printf(&quot;%d %d\n&quot;,a*a/4-1,a*a/4+1);</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">                printf(&quot;%d %d\n&quot;,(a*a-1)/2,(a*a+1)/2);</span><br><span class="line">        &#125;</span><br><span class="line">        else if(n==1)</span><br><span class="line">        &#123;</span><br><span class="line">          printf(&quot;%d %d\n&quot;,a+1,a+2);</span><br><span class="line">            //cout&lt;&lt;a+1&lt;&lt;&quot; &quot;&lt;&lt;a+2&lt;&lt;endl;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">          printf(&quot;-1 -1\n&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>后面有这样一道题：</p>
+<p>**1010 YJJ’s Salesman<br>Problem<br>YJJ is a salesman who has traveled through western country. YJJ is always on journey. Either is he at the destination, or on the way to destination. One day, he is going to travel from city A to southeastern city B. Let us assume that A is on the rectangle map and B . YJJ is so busy so he never turn back or go twice the same way, he will only move to east, south or southeast, which means, if YJJ is at now , he will only forward to , or . On the rectangle map from to , there are several villages scattering on the map. Villagers will do business deals with salesmen from northwestern, but not northern or western. In mathematical language, this means when there is a village on , only the one who was from to will be able to earn dollars.(YJJ may get different number of dollars from different village.) YJJ has no time to plan the path, can you help him to find maximum of dollars YJJ can get.<br>Input<br>The first line of the input contains an integer ,which is the number of test cases.<br>In each case, the first line of the input contains an integer .The following lines, the -th line contains 3 integers, , which indicate that there is a village on and he can get dollars in that village. The positions of each village is distinct.<br>Output<br>The maximum of dollars YJJ can get.<br>(0,0) ( , ) 109 109<br>(x,y) (0 ≤ x ≤ ,0 ≤ y ≤ ) 109 109 (x +1,y) (x,y +1) (x +1,y +1) (0,0) ( , ) 109 109<br>k ( , ) xk yk (1 ≤ ≤ ,1 ≤ ≤ ) xk 109 yk 109 ( −1, −1) xk yk ( , ) xk yk vk<br>T (1 ≤ T ≤ 10)<br>N (1 ≤ N ≤ ) 105 N k , , xk yk vk (0 ≤ ≤ ) vk 103 ( , ) xk yk vk<br>Sample Input<br>1 </p>
+<p>3</p>
+<p>1 1 1</p>
+<p>1 2 2</p>
+<p>3 3 1<br>Sample Output<br>3<br>**</p>
+<p>一看这题目就是搜索+dp，思路简单；但看数字，1e9，开个二维数组，绝对爆内存，所以，我想到把二维压成一维去做，不知道有没有错误，代码码到一半，后面再慢慢研究一下，发AC代码。</p>
+<p>总的来说，英语还有待加强，做题不够多，自然就GOOD GAME了。。。 </p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>总结</tag>
       </tags>
   </entry>
   <entry>
@@ -905,6 +905,47 @@
       </tags>
   </entry>
   <entry>
+    <title>判断素数与欧拉筛</title>
+    <url>/2018/08/18/%E5%88%A4%E6%96%AD%E7%B4%A0%E6%95%B0%E4%B8%8E%E6%AC%A7%E6%8B%89%E7%AD%9B/</url>
+    <content><![CDATA[<p>对于一个数，判断是否为素数，按照性质暴力枚举每一个，时间复杂度就是O（n），今天，不讨论这个，讨论一下更高效的方法。</p>
+<p><strong>## 一、 ##</strong><br>这是我在一篇博客看到的方法，时间复杂度为O（sqr（n）/3）：</p>
+<p><a href="https://blog.csdn.net/huang_miao_xin/article/details/51331710（方法3）" target="_blank" rel="noopener">https://blog.csdn.net/huang_miao_xin/article/details/51331710（方法3）</a></p>
+<p>首先看一个关于质数分布的规律：大于等于5的质数一定和6的倍数相邻。例如5和7，11和13,17和19等等；</p>
+<p>证明：令x≥1，将大于等于5的自然数表示如下：</p>
+<p>······ 6x-1，6x，6x+1，6x+2，6x+3，6x+4，6x+5，6(x+1），6(x+1)+1 ······<br><a id="more"></a></p>
+<p>可以看到，不在6的倍数两侧，即6x两侧的数为6x+2，6x+3，6x+4，由于2(3x+1)，3(2x+1)，2(3x+2)，所以它们一定不是素数，再除去6x本身，显然，素数要出现只可能出现在6x的相邻两侧。这里有个题外话，关于孪生素数，有兴趣的道友可以再另行了解一下，由于与我们主题无关，暂且跳过。这里要注意的一点是，在6的倍数相邻两侧并不是一定就是质数。</p>
+<p>此时判断质数可以6个为单元快进，即将方法（2）循环中i++步长加大为6，加快判断速度，原因是，假如要判定的数为n，则n必定是6x-1或6x+1的形式，对于循环中6i-1，6i，6i+1,6i+2，6i+3，6i+4，其中如果n能被6i，6i+2，6i+4整除，则n至少得是一个偶数，但是6x-1或6x+1的形式明显是一个奇数，故不成立；另外，如果n能被6i+3整除，则n至少能被3整除，但是6x能被3整除，故6x-1或6x+1（即n）不可能被3整除，故不成立。综上，循环中只需要考虑6i-1和6i+1的情况，即循环的步长可以定为6，每次判断循环变量k和k+2的情况即可，理论上讲整体速度应该会是方法（2）的3倍。代码如下：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bool isPrime_3( int num )</span><br><span class="line">&#123;</span><br><span class="line">                 //两个较小数另外处理</span><br><span class="line">                 if(num ==2|| num==3 )</span><br><span class="line">                                 return 1 ;</span><br><span class="line">                 //不在6的倍数两侧的一定不是质数</span><br><span class="line">                 if(num %6!= 1&amp;&amp;num %6!= 5)</span><br><span class="line">                                 return 0 ;</span><br><span class="line">                 int tmp =sqrt( num);</span><br><span class="line">                 //在6的倍数两侧的也可能不是质数</span><br><span class="line">                 for(int i= 5;i &lt;=tmp; i+=6 )</span><br><span class="line">                                 if(num %i== 0||num %(i+ 2)==0 )</span><br><span class="line">                                                 return 0 ;</span><br><span class="line">                 //排除所有，剩余的是质数</span><br><span class="line">                 return 1 ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="二、米勒拉宾素数测试"><a href="#二、米勒拉宾素数测试" class="headerlink" title="二、米勒拉宾素数测试"></a>二、米勒拉宾素数测试</h2><p>米勒拉宾素数测试可以快速测出单个数是否为素数。</p>
+<p>**步骤：</p>
+<p>首先判断这个数n的奇偶性</p>
+<p>若为偶数仅有2是质数</p>
+<p>奇数则进入测试</p>
+<p>测试方法：</p>
+<p>首先确定几个基底a,范围在[2,n-1]</p>
+<p>因为n是奇数,所以n-1必定为偶数</p>
+<p>则n-1可以表示为(2^s)*d</p>
+<p>s、d分别求出来</p>
+<p>设t为a^d模n的数,有如下几个约定：</p>
+<p>1.若t=-1或1时则该数n可能为质数</p>
+<p>2.若此时t=n-1,则该数可能为质数</p>
+<p>3.d*2&gt;n-1时n必为合数</p>
+<p>4.若上述皆不满足则让d*2,返回2**</p>
+<p>多组测试之后就能判断是否为质数,而且错误率相当低！！</p>
+<p>　　还有一篇博客：<a href="https://www.cnblogs.com/cons/p/5188910.html，说的很清楚。" target="_blank" rel="noopener">https://www.cnblogs.com/cons/p/5188910.html，说的很清楚。</a><br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">int t,n,ans;</span><br><span class="line">long long qpow(int x,int y,int mod)//快速幂</span><br><span class="line">&#123;</span><br><span class="line">    long long ans=1,a=x;</span><br><span class="line">    while(y)</span><br><span class="line">    &#123;</span><br><span class="line">        if(y&amp;1) ans=ans*a%mod;</span><br><span class="line">        a=a*a%mod;</span><br><span class="line">        y&gt;&gt;=1;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line">bool MR_prime(int a,int n)//米勒拉宾</span><br><span class="line">&#123;</span><br><span class="line">    int r=0,d=n-1;</span><br><span class="line">    if(!(n%a)) return false;//倍数必为合数</span><br><span class="line">    while(!(d&amp;1))//找到奇数</span><br><span class="line">    &#123;</span><br><span class="line">        d&gt;&gt;=1;</span><br><span class="line">        r++;</span><br><span class="line">    &#125;</span><br><span class="line">    long long k=qpow(a,d,n);</span><br><span class="line">    if(k==1) return true;//同余1</span><br><span class="line">    for(int i=0;i&lt;r;i++,k=k*k%n) if(k==n-1) return true;//同余-1</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line">bool check_prime(int n)</span><br><span class="line">&#123;</span><br><span class="line">    if(n==2||n==3||n==7||n==61) return true;</span><br><span class="line">    if(!(n&amp;1)||n%3==0||n==1) return false;//删掉大量已知情况</span><br><span class="line">    if(MR_prime(2,n)&amp;&amp;MR_prime(7,n)&amp;&amp;MR_prime(61,n)) return true;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    while(scanf(&quot;%d&quot;,&amp;t)!=EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        ans=0;</span><br><span class="line">        while(t--)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">            if(check_prime(n)) ++ans;</span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;%d\n&quot;,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="三、欧拉筛（朴素筛和埃拉托斯特尼筛的优化）"><a href="#三、欧拉筛（朴素筛和埃拉托斯特尼筛的优化）" class="headerlink" title="三、欧拉筛（朴素筛和埃拉托斯特尼筛的优化）"></a>三、欧拉筛（朴素筛和埃拉托斯特尼筛的优化）</h2><p>•从2开始枚举i，若没有被删除，则加入素数表</p>
+<p>•枚举素数表的所有素数j，筛去i*j，直到枚举到某个j能整除i</p>
+<p>时间复杂度为线性O（n）。</p>
+<p>一般用于求一个区间的素数。</p>
+<p>代码：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">long long pri[maxn];</span><br><span class="line">bool ispri[maxn];</span><br><span class="line">void init()&#123;</span><br><span class="line">	for(int i=2;i&lt;maxn;i++)</span><br><span class="line">		ispri[i]=true;</span><br><span class="line">	for(int i=0;i&lt;maxn;i++)</span><br><span class="line">		pri[i]=0;</span><br><span class="line">&#125;</span><br><span class="line">void findpri()</span><br><span class="line">&#123;	</span><br><span class="line">	init();</span><br><span class="line">	int j=0;</span><br><span class="line">	for(int i=2;i&lt;maxn;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if(ispri[i])</span><br><span class="line">		&#123;</span><br><span class="line">			pri[j++]=i;	</span><br><span class="line">		&#125;</span><br><span class="line">		for(int k=0;k&lt;j;k++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(i*pri[k]&gt;=maxn)</span><br><span class="line">				break;</span><br><span class="line">			ispri[i*pri[k]]=false;</span><br><span class="line">			if(i%pri[k]==0)</span><br><span class="line">			&#123;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>判断素数</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>分治与归并</title>
     <url>/2018/08/09/%E5%88%86%E6%B2%BB%E4%B8%8E%E5%BD%92%E5%B9%B6/</url>
     <content><![CDATA[<p>分治算法的基本思想是将一个规模为N的问题分解为K个规模较小的子问题，这些子问题相互独立且与原问题性质相同。</p>
@@ -959,47 +1000,6 @@
       </categories>
       <tags>
         <tag>分治</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>判断素数与欧拉筛</title>
-    <url>/2018/08/18/%E5%88%A4%E6%96%AD%E7%B4%A0%E6%95%B0%E4%B8%8E%E6%AC%A7%E6%8B%89%E7%AD%9B/</url>
-    <content><![CDATA[<p>对于一个数，判断是否为素数，按照性质暴力枚举每一个，时间复杂度就是O（n），今天，不讨论这个，讨论一下更高效的方法。</p>
-<p><strong>## 一、 ##</strong><br>这是我在一篇博客看到的方法，时间复杂度为O（sqr（n）/3）：</p>
-<p><a href="https://blog.csdn.net/huang_miao_xin/article/details/51331710（方法3）" target="_blank" rel="noopener">https://blog.csdn.net/huang_miao_xin/article/details/51331710（方法3）</a></p>
-<p>首先看一个关于质数分布的规律：大于等于5的质数一定和6的倍数相邻。例如5和7，11和13,17和19等等；</p>
-<p>证明：令x≥1，将大于等于5的自然数表示如下：</p>
-<p>······ 6x-1，6x，6x+1，6x+2，6x+3，6x+4，6x+5，6(x+1），6(x+1)+1 ······<br><a id="more"></a></p>
-<p>可以看到，不在6的倍数两侧，即6x两侧的数为6x+2，6x+3，6x+4，由于2(3x+1)，3(2x+1)，2(3x+2)，所以它们一定不是素数，再除去6x本身，显然，素数要出现只可能出现在6x的相邻两侧。这里有个题外话，关于孪生素数，有兴趣的道友可以再另行了解一下，由于与我们主题无关，暂且跳过。这里要注意的一点是，在6的倍数相邻两侧并不是一定就是质数。</p>
-<p>此时判断质数可以6个为单元快进，即将方法（2）循环中i++步长加大为6，加快判断速度，原因是，假如要判定的数为n，则n必定是6x-1或6x+1的形式，对于循环中6i-1，6i，6i+1,6i+2，6i+3，6i+4，其中如果n能被6i，6i+2，6i+4整除，则n至少得是一个偶数，但是6x-1或6x+1的形式明显是一个奇数，故不成立；另外，如果n能被6i+3整除，则n至少能被3整除，但是6x能被3整除，故6x-1或6x+1（即n）不可能被3整除，故不成立。综上，循环中只需要考虑6i-1和6i+1的情况，即循环的步长可以定为6，每次判断循环变量k和k+2的情况即可，理论上讲整体速度应该会是方法（2）的3倍。代码如下：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bool isPrime_3( int num )</span><br><span class="line">&#123;</span><br><span class="line">                 //两个较小数另外处理</span><br><span class="line">                 if(num ==2|| num==3 )</span><br><span class="line">                                 return 1 ;</span><br><span class="line">                 //不在6的倍数两侧的一定不是质数</span><br><span class="line">                 if(num %6!= 1&amp;&amp;num %6!= 5)</span><br><span class="line">                                 return 0 ;</span><br><span class="line">                 int tmp =sqrt( num);</span><br><span class="line">                 //在6的倍数两侧的也可能不是质数</span><br><span class="line">                 for(int i= 5;i &lt;=tmp; i+=6 )</span><br><span class="line">                                 if(num %i== 0||num %(i+ 2)==0 )</span><br><span class="line">                                                 return 0 ;</span><br><span class="line">                 //排除所有，剩余的是质数</span><br><span class="line">                 return 1 ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="二、米勒拉宾素数测试"><a href="#二、米勒拉宾素数测试" class="headerlink" title="二、米勒拉宾素数测试"></a>二、米勒拉宾素数测试</h2><p>米勒拉宾素数测试可以快速测出单个数是否为素数。</p>
-<p>**步骤：</p>
-<p>首先判断这个数n的奇偶性</p>
-<p>若为偶数仅有2是质数</p>
-<p>奇数则进入测试</p>
-<p>测试方法：</p>
-<p>首先确定几个基底a,范围在[2,n-1]</p>
-<p>因为n是奇数,所以n-1必定为偶数</p>
-<p>则n-1可以表示为(2^s)*d</p>
-<p>s、d分别求出来</p>
-<p>设t为a^d模n的数,有如下几个约定：</p>
-<p>1.若t=-1或1时则该数n可能为质数</p>
-<p>2.若此时t=n-1,则该数可能为质数</p>
-<p>3.d*2&gt;n-1时n必为合数</p>
-<p>4.若上述皆不满足则让d*2,返回2**</p>
-<p>多组测试之后就能判断是否为质数,而且错误率相当低！！</p>
-<p>　　还有一篇博客：<a href="https://www.cnblogs.com/cons/p/5188910.html，说的很清楚。" target="_blank" rel="noopener">https://www.cnblogs.com/cons/p/5188910.html，说的很清楚。</a><br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">int t,n,ans;</span><br><span class="line">long long qpow(int x,int y,int mod)//快速幂</span><br><span class="line">&#123;</span><br><span class="line">    long long ans=1,a=x;</span><br><span class="line">    while(y)</span><br><span class="line">    &#123;</span><br><span class="line">        if(y&amp;1) ans=ans*a%mod;</span><br><span class="line">        a=a*a%mod;</span><br><span class="line">        y&gt;&gt;=1;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line">bool MR_prime(int a,int n)//米勒拉宾</span><br><span class="line">&#123;</span><br><span class="line">    int r=0,d=n-1;</span><br><span class="line">    if(!(n%a)) return false;//倍数必为合数</span><br><span class="line">    while(!(d&amp;1))//找到奇数</span><br><span class="line">    &#123;</span><br><span class="line">        d&gt;&gt;=1;</span><br><span class="line">        r++;</span><br><span class="line">    &#125;</span><br><span class="line">    long long k=qpow(a,d,n);</span><br><span class="line">    if(k==1) return true;//同余1</span><br><span class="line">    for(int i=0;i&lt;r;i++,k=k*k%n) if(k==n-1) return true;//同余-1</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line">bool check_prime(int n)</span><br><span class="line">&#123;</span><br><span class="line">    if(n==2||n==3||n==7||n==61) return true;</span><br><span class="line">    if(!(n&amp;1)||n%3==0||n==1) return false;//删掉大量已知情况</span><br><span class="line">    if(MR_prime(2,n)&amp;&amp;MR_prime(7,n)&amp;&amp;MR_prime(61,n)) return true;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    while(scanf(&quot;%d&quot;,&amp;t)!=EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        ans=0;</span><br><span class="line">        while(t--)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">            if(check_prime(n)) ++ans;</span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;%d\n&quot;,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="三、欧拉筛（朴素筛和埃拉托斯特尼筛的优化）"><a href="#三、欧拉筛（朴素筛和埃拉托斯特尼筛的优化）" class="headerlink" title="三、欧拉筛（朴素筛和埃拉托斯特尼筛的优化）"></a>三、欧拉筛（朴素筛和埃拉托斯特尼筛的优化）</h2><p>•从2开始枚举i，若没有被删除，则加入素数表</p>
-<p>•枚举素数表的所有素数j，筛去i*j，直到枚举到某个j能整除i</p>
-<p>时间复杂度为线性O（n）。</p>
-<p>一般用于求一个区间的素数。</p>
-<p>代码：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">long long pri[maxn];</span><br><span class="line">bool ispri[maxn];</span><br><span class="line">void init()&#123;</span><br><span class="line">	for(int i=2;i&lt;maxn;i++)</span><br><span class="line">		ispri[i]=true;</span><br><span class="line">	for(int i=0;i&lt;maxn;i++)</span><br><span class="line">		pri[i]=0;</span><br><span class="line">&#125;</span><br><span class="line">void findpri()</span><br><span class="line">&#123;	</span><br><span class="line">	init();</span><br><span class="line">	int j=0;</span><br><span class="line">	for(int i=2;i&lt;maxn;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if(ispri[i])</span><br><span class="line">		&#123;</span><br><span class="line">			pri[j++]=i;	</span><br><span class="line">		&#125;</span><br><span class="line">		for(int k=0;k&lt;j;k++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(i*pri[k]&gt;=maxn)</span><br><span class="line">				break;</span><br><span class="line">			ispri[i*pri[k]]=false;</span><br><span class="line">			if(i%pri[k]==0)</span><br><span class="line">			&#123;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>判断素数</tag>
       </tags>
   </entry>
   <entry>
@@ -1179,220 +1179,6 @@
       </tags>
   </entry>
   <entry>
-    <title>如何判断一个数是否在40亿个整数中？</title>
-    <url>/2018/09/02/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E6%95%B0%E6%98%AF%E5%90%A6%E5%9C%A840%E4%BA%BF%E4%B8%AA%E6%95%B4%E6%95%B0%E4%B8%AD%EF%BC%9F/</url>
-    <content><![CDATA[<p><strong>这好像是我在微信上看见的文章，挺有意思的，记录一下。</strong></p>
-<p>小史是一个应届生，虽然学的是电子专业，但是自己业余时间看了很多互联网与编程方面的书，一心想进BAT。</p>
-<p>今天他就去BAT中的一家面试了。</p>
-<p>简单的自我介绍后，面试官给了小史一个问题。</p>
-<h1 id="【面试现场】"><a href="#【面试现场】" class="headerlink" title="【面试现场】"></a>【面试现场】</h1><h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>我有40亿个整数，再给一个新的整数，我需要判断新的整数是否在40亿个整数中，你会怎么做？<br><a id="more"></a></p>
-<p><img src="https://i.imgur.com/SKeVRnM.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/TDCuI0L.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/9toxZUG.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/CnrEvV6.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/uNmDbjP.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/ydqmtjq.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/6a2boG2.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/uHFiM5b.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/eaia3t6.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/aUq6dHf.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/Ii6AXrJ.jpg" alt=""></p>
-<h1 id="【请教大神】"><a href="#【请教大神】" class="headerlink" title="【请教大神】"></a>【请教大神】</h1><p>小史回到学校，把面试的情况和计算机学院的吕老师说了一下。<br><img src="https://i.imgur.com/zTThXGV.jpg" alt=""><br><img src="https://i.imgur.com/0ckzUNw.jpg" alt=""><br>小史忙拉着吕老师问，为什么我说分8次加载数据，面试官会说太慢了呢？</p>
-<p>吕老师：哈哈，从磁盘加载数据是磁盘io操作，是非常慢的，你每次都要加载这么大的数据，还要8次，我估计你找一个数的时间可以达到分钟甚至小时级了。<br><img src="https://i.imgur.com/Eey9ZIh.jpg" alt=""></p>
-<p>小史：那如果是你，你会怎么办呢？</p>
-<p>吕老师：其实面试官已经提示得比较明显了，他说给你一批机器，就是暗示你可以用分布式算法。你把数据分散在8台机器上，然后来一个新的数据，8台机器一起找，最后再汇总结果就行了。<br><img src="https://i.imgur.com/87BMWhT.jpg" alt=""></p>
-<p>小史：这样的话能快多少？</p>
-<p>吕老师：这样应该能达到秒级。小史，你可以自己分析分析。</p>
-<p>小史：我想想……哦，这样做的话，因为每台机器都可以一次性把数据读入内存，在比较的时候不用来回加载数据了，所以可以节省加载数据的开销！这真是个好办法。</p>
-<h1 id="【更好方案】"><a href="#【更好方案】" class="headerlink" title="【更好方案】"></a>【更好方案】</h1><p>吕老师：其实这并不是最好方法，我这还有一种毫秒级的方法，想不想知道啊？</p>
-<p>小史：当然想啊，快教教我。</p>
-<p><img src="https://i.imgur.com/dNsAYbq.jpg" alt=""></p>
-<p>小史：哦，对哦，这样我就申请40亿个位就好了，新的数转换成一个位，然后判断一下这个位是0还是1就行了。</p>
-<p>吕老师：小史啊，考虑问题要考虑清楚啊，如果是40亿个位，那么这40亿个位哪些是0，哪些是1呢？来了一个新的数，怎么判断是否在40亿个位之中？<br><img src="https://i.imgur.com/RVQK1oA.jpg" alt=""></p>
-<p>小史：我想想，对啊，40亿个位，40亿个数，那么每个位都是1，这。。。</p>
-<p>吕老师：其实你可以想想，32位int的范围，总共就是2的32次方，大概42亿多点。所以你可以申请2的32次方个位。</p>
-<p>小史：意思是我把整个整数范围都覆盖了，哦，对哦。这样一来，就可以做了，1代表第一个位，2代表第二个位，2的32次方代表最后一个位。40亿个数中，存在的数就在相应的位置1，其他位就是0。</p>
-<p><img src="https://i.imgur.com/HRf4o96.jpg" alt=""></p>
-<p>吕老师：没错，那来了一个新的数呢？</p>
-<p>小史：新的数就去找相应的位，比如来了一个1234，就找一下第1234位，如果是1就存在，是0就不存在啦。</p>
-<p>吕老师：没错，那么这样的话，需要多大内存呢？</p>
-<p>小史：我想想啊，2的32次方个位，相当于2的29次方个字节，哇，才500MB，真是节省了不少内存呢。</p>
-<p><img src="https://i.imgur.com/wlg8zSa.jpg" alt=""></p>
-<p>小史：这么厉害的算法，你是怎么想到的？</p>
-<p><img src="https://i.imgur.com/pvMbBzF.jpg" alt=""></p>
-<p>吕老师：其实这是一种非常有名的大数据算法，叫位图法，英文名叫bitmap。顾名思义，就是用位来表示状态，从而节省空间。明天正好我有一节课，就讲位图法，你可以来听一听。</p>
-<h1 id="【吕老师的课】"><a href="#【吕老师的课】" class="headerlink" title="【吕老师的课】"></a>【吕老师的课】</h1><p>第二天，吕老师开始上课，他一开始就抛出了小史遇到的面试题。</p>
-<p>吕老师：同学们，这道题是BAT公司的一道面试题，大家有什么思路吗？</p>
-<p>话音刚落，蛋哥就站起来回答。蛋哥是吕老师最得意的门生，以思维活跃著称。</p>
-<p>蛋哥：我觉得可以这样。首先，32位int的范围是42亿，40亿整数中肯定有一些是连续的，我们可以先对数据进行一个外部排序，然后用一个初始的数和一个长度构成一个数据结构，来表示一段连续的数，举个例子。</p>
-<p>如果数据是1 2 3 4 6 7……这种的，那么可以用(1,4)和(6,2)来表示，这样一来，连续的数都变成了2个数表示。</p>
-<p>来了一个新数之后，就用二分法进行查找了。</p>
-<p>这样一来，最差情况就是2亿多的断点，也就是2亿多的结构体，每个结构体8个字节，大概16亿字节，1.6GB，在内存中可以放下。</p>
-<p><img src="https://i.imgur.com/1tJWVk9.jpg" alt=""></p>
-<p>吕老师：嗯，非常好，不仅给出了方案，还能主动分析空间和可行性。</p>
-<p>小史听完后深感佩服，问题的解决方法绝对不止一种，只要肯动脑筋，即使没有学过bitmap算法，也能有别的方法来解决问题。</p>
-<h1 id="【课后】"><a href="#【课后】" class="headerlink" title="【课后】"></a>【课后】</h1><p>下课后，小史又找到吕老师。<br><img src="https://i.imgur.com/TKYX8AD.jpg" alt=""><br><img src="https://i.imgur.com/CvY2UhS.jpg" alt=""></p>
-<p>吕老师：但是你的理解能力还是很强的，很多东西一听就懂，这可不是谁都能做到的。</p>
-<ul>
-<li>The End -</li>
-</ul>
-]]></content>
-      <categories>
-        <category>休闲</category>
-      </categories>
-      <tags>
-        <tag>40亿中的数</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何实现可以获取最小值的栈？</title>
-    <url>/2018/09/11/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E4%BB%A5%E8%8E%B7%E5%8F%96%E6%9C%80%E5%B0%8F%E5%80%BC%E7%9A%84%E6%A0%88%EF%BC%9F/</url>
-    <content><![CDATA[<p>又是一个微信的休闲小算法与技巧篇，记录一下。</p>
-<h1 id="【问题】"><a href="#【问题】" class="headerlink" title="【问题】"></a>【问题】</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>有这样一个问题，有一个栈，这个栈除了原本拥有的操作外，还存在这样一个功能函数（方法）：getmin();这个方法返回栈中的最小值</p>
-<p>下面就来看看这有趣小故事吧<br><a id="more"></a></p>
-<p><img src="https://i.imgur.com/KLDLmTo.jpg" alt=""><br><img src="https://i.imgur.com/2bmT0JP.jpg" alt=""><br><img src="https://i.imgur.com/DfMGles.jpg" alt=""><br><img src="https://i.imgur.com/MmkDHaa.jpg" alt=""><br><img src="https://i.imgur.com/LvMTcn7.jpg" alt=""><br><img src="https://i.imgur.com/FygkxWv.jpg" alt=""><br><img src="https://i.imgur.com/Yc5Hpuy.jpg" alt=""><br><img src="https://i.imgur.com/bODQ7Qg.jpg" alt=""><br><img src="https://i.imgur.com/QcIzNPN.jpg" alt=""><br><img src="https://i.imgur.com/kskAp6V.jpg" alt=""><br><img src="https://i.imgur.com/MhpsJTR.jpg" alt=""><br><img src="https://i.imgur.com/dnV5GyT.jpg" alt=""><br><img src="https://i.imgur.com/ExCX9kG.jpg" alt=""><br><img src="https://i.imgur.com/OMNt8Zo.jpg" alt=""><br><img src="https://i.imgur.com/WHVwKsH.jpg" alt=""><br><img src="https://i.imgur.com/izrEj0U.jpg" alt=""><br><img src="https://i.imgur.com/ac4hBiy.jpg" alt=""><br><img src="https://i.imgur.com/vOh4079.jpg" alt=""><br><img src="https://i.imgur.com/E4HHw6A.jpg" alt=""><br><img src="https://i.imgur.com/Dfp6o0K.jpg" alt=""><br><img src="https://i.imgur.com/Ebd8GX2.jpg" alt=""><br><img src="https://i.imgur.com/qNmpk9R.jpg" alt=""></p>
-<p>代码如下：</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author xiaoshi on 2018/9/1.</span><br><span class="line"> */</span><br><span class="line">public class MinStack &#123;</span><br><span class="line"></span><br><span class="line">    private List&lt;Integer&gt; data = new ArrayList&lt;Integer&gt;();</span><br><span class="line">    private List&lt;Integer&gt; mins = new ArrayList&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line">    public void push(int num) &#123;</span><br><span class="line">        data.add(num);</span><br><span class="line">        if(mins.size() == 0) &#123;</span><br><span class="line">            // 初始化mins</span><br><span class="line">            mins.add(num);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            // 辅助栈mins每次push当时最小值</span><br><span class="line">            int min = getMin();</span><br><span class="line">            if (num &gt;= min) &#123;</span><br><span class="line">                mins.add(min);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                mins.add(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int pop() &#123;</span><br><span class="line">        // 栈空，异常，返回-1</span><br><span class="line">        if(data.size() == 0) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        // pop时两栈同步pop</span><br><span class="line">        mins.remove(mins.size() - 1);</span><br><span class="line">        return data.remove(data.size() - 1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getMin() &#123;</span><br><span class="line">        // 栈空，异常，返回-1</span><br><span class="line">        if(mins.size() == 0) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        // 返回mins栈顶元素</span><br><span class="line">        return mins.get(mins.size() - 1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre><p><img src="https://i.imgur.com/hSFQWEj.jpg" alt=""><br><img src="https://i.imgur.com/AhQbzeQ.jpg" alt=""><br><img src="https://i.imgur.com/85HdSJj.jpg" alt=""></p>
-<h1 id="【大神解法】"><a href="#【大神解法】" class="headerlink" title="【大神解法】"></a>【大神解法】</h1><p>小史回到学校，把面试的情况和计算机学院的吕老师说了一下。</p>
-<p><img src="https://i.imgur.com/jjkgCJM.jpg" alt=""><br><img src="https://i.imgur.com/aKlGGW9.jpg" alt=""><br><img src="https://i.imgur.com/B5FHbPd.jpg" alt=""><br><img src="https://i.imgur.com/6nAwWyS.jpg" alt=""><br><img src="https://i.imgur.com/H1k3CQG.jpg" alt=""></p>
-<h2 id="【异常情况处理】"><a href="#【异常情况处理】" class="headerlink" title="【异常情况处理】"></a>【异常情况处理】</h2><p>吕老师：面试官已经提出了你的异常处理有点问题，当栈内为空的时候，你返回-1，但是如果用户push过-1，那么你返回-1的时候，是用户push进来的值，还是栈为空，就不得而知了。</p>
-<p><img src="https://i.imgur.com/ldc2t0l.jpg" alt=""><br><img src="https://i.imgur.com/h1zqJ0q.jpg" alt=""><br><img src="https://i.imgur.com/OLx9OTe.jpg" alt=""></p>
-<p>小史咬咬牙：那就再定义一个类，里面包括一个int的data和一个boolean的isSuccess，正常情况下isSuccess是true，栈为空的话，isSuccess是false。这样就能区分开了吧？</p>
-<p><img src="https://i.imgur.com/h67gZfE.jpg" alt=""><br><img src="https://i.imgur.com/mTUUqEi.jpg" alt=""></p>
-<p>小史突然一拍大腿：对哦，我可以用一个包装类Integer来定义返回值，如果是空，就代表栈为空就行了。它和int的区别就是它多了一个null，正好用来返回异常情况。</p>
-<p><img src="https://i.imgur.com/VSUMsOJ.jpg" alt=""></p>
-<p>吕老师：嗯，越来越好，但是还是有点问题。你并没有站在使用者的角度考虑问题。使用你这个栈的人，在pop的时候，他并不知道可能返回null，如果他不做判断，后面的代码就可能抛出空指针了。</p>
-<p><img src="https://i.imgur.com/Q13jmah.jpg" alt=""><br><img src="https://i.imgur.com/cRJMgFc.jpg" alt=""><br><img src="https://i.imgur.com/TS7OGBE.jpg" alt=""><br><img src="https://i.imgur.com/G9N6KPe.jpg" alt=""></p>
-<p>吕老师发来一个表情。</p>
-<p><img src="https://i.imgur.com/CdoBwA4.jpg" alt=""><br><img src="https://i.imgur.com/yVGFoft.jpg" alt=""><br><img src="https://i.imgur.com/8LSq2N9.jpg" alt=""><br><img src="https://i.imgur.com/dNbbffV.jpg" alt=""></p>
-<p>吕老师：没错，最关键的是，你显式抛出异常，如果使用者不捕获，那么编译就会报错，这样就把错误暴露在编译阶段，并且不需要和任何人商量所谓的特殊返回值了。</p>
-<p><img src="https://i.imgur.com/bmy08Ot.jpg" alt=""><br><img src="https://i.imgur.com/f9kgtE6.jpg" alt=""></p>
-<h2 id="【算法优化】"><a href="#【算法优化】" class="headerlink" title="【算法优化】"></a>【算法优化】</h2><p><img src="https://i.imgur.com/7fvUJjZ.jpg" alt=""><br><img src="https://i.imgur.com/Veb5YM2.jpg" alt=""><br><img src="https://i.imgur.com/qUHIgRf.jpg" alt=""><br><img src="https://i.imgur.com/QV0rwYw.jpg" alt=""><br><img src="https://i.imgur.com/Rs1zcOY.jpg" alt=""><br><img src="https://i.imgur.com/cXfcVDI.jpg" alt=""><br><img src="https://i.imgur.com/g1kpj3H.jpg" alt=""></p>
-<p>小史想了想：明白了，我可以在push的时候判断一下，如果比最小值还大，就不加入辅助栈。pop的时候，如果不是最小值，辅助栈就不出栈。这样一来，辅助栈就不会有大量重复元素了。</p>
-<p><img src="https://i.imgur.com/sqGFarg.jpg" alt=""></p>
-<p>小史：push的时候进行判断，如果数值比当前最小值大，就不动mins栈了，这样mins栈中不会保存大量冗余的最小值。pop的时候同样进行判断，只有pop出的数就是当前最小值的时候，才让mins出栈。</p>
-<p><img src="https://i.imgur.com/m0wjvdD.jpg" alt=""><br><img src="https://i.imgur.com/tMNWrvH.jpg" alt=""><br><img src="https://i.imgur.com/odcIht4.jpg" alt=""></p>
-<p>小史：如果push一个和最小值相等的元素，还是要入mins栈。不然当这个最小值pop出去的时候。data中还会有一个最小值元素，而mins中却已经没有最小值元素了。</p>
-<p><img src="https://i.imgur.com/UROzkvt.jpg" alt=""><br><img src="https://i.imgur.com/hoNy7xr.jpg" alt=""><br><img src="https://i.imgur.com/hFLVuT4.jpg" alt=""><br><img src="https://i.imgur.com/bWxNZz3.jpg" alt=""><br><img src="https://i.imgur.com/o5iZ4eZ.jpg" alt=""></p>
-<p>小史：mins栈中改存最小值在data数组中的索引。这样一来，当push了与最小值相同元素的时候，就不需要动mins栈了。而pop的时候，pop出的元素的索引如果不是mins栈顶元素，mins也不出栈。同时，获取最小值的时候，需要拿到mins栈顶元素作为索引，再去data数组中找到相应的数作为最小值。</p>
-<p><img src="https://i.imgur.com/aCpAJkh.jpg" alt=""><br><img src="https://i.imgur.com/4QFxDVA.jpg" alt=""></p>
-<p>理解了算法之后，小史的代码写起来也是非常快，不一会儿就写好了：<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author xiaoshi on 2018/9/1.</span><br><span class="line"> */</span><br><span class="line">public class MinStack &#123;</span><br><span class="line"></span><br><span class="line">    private List&lt;Integer&gt; data = new ArrayList&lt;Integer&gt;();</span><br><span class="line">    private List&lt;Integer&gt; mins = new ArrayList&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line">    public void push(int num) throws Exception &#123;</span><br><span class="line">        data.add(num);</span><br><span class="line">        if(mins.size() == 0) &#123;</span><br><span class="line">            // 初始化mins</span><br><span class="line">            mins.add(0);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            // 辅助栈mins push最小值的索引</span><br><span class="line">            int min = getMin();</span><br><span class="line">            if (num &lt; min) &#123;</span><br><span class="line">                mins.add(data.size() - 1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int pop() throws Exception &#123;</span><br><span class="line">        // 栈空，抛出异常</span><br><span class="line">        if(data.size() == 0) &#123;</span><br><span class="line">            throw new Exception(&quot;栈为空&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        // pop时先获取索引</span><br><span class="line">        int popIndex = data.size() - 1;</span><br><span class="line">        // 获取mins栈顶元素，它是最小值索引</span><br><span class="line">        int minIndex = mins.get(mins.size() - 1);</span><br><span class="line">        // 如果pop出去的索引就是最小值索引，mins才出栈</span><br><span class="line">        if(popIndex == minIndex) &#123;</span><br><span class="line">            mins.remove(mins.size() - 1);</span><br><span class="line">        &#125;</span><br><span class="line">        return data.remove(data.size() - 1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getMin() throws Exception &#123;</span><br><span class="line">        // 栈空，抛出异常</span><br><span class="line">        if(data.size() == 0) &#123;</span><br><span class="line">            throw new Exception(&quot;栈为空&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        // 获取mins栈顶元素，它是最小值索引</span><br><span class="line">        int minIndex = mins.get(mins.size() - 1);</span><br><span class="line">        return data.get(minIndex);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="【小史的疑惑】"><a href="#【小史的疑惑】" class="headerlink" title="【小史的疑惑】"></a>【小史的疑惑】</h2><p>小史又问吕老师：</p>
-<p><img src="https://i.imgur.com/aX0JRCv.jpg" alt=""><br><img src="https://i.imgur.com/JacosHA.jpg" alt=""></p>
-<p>吕老师：数据结构和算法的设计是一个程序员的内功，工作时虽然用不到这么细，但是你在学习其他知识的底层原理的时候，到处都是数据结构和算法。</p>
-<p><img src="https://i.imgur.com/8Es66TN.jpg" alt=""></p>
-]]></content>
-      <categories>
-        <category>休闲</category>
-      </categories>
-      <tags>
-        <tag>最小值的栈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>字符串中的最长回文子串</title>
-    <url>/2018/10/02/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</url>
-    <content><![CDATA[<h1 id="回文"><a href="#回文" class="headerlink" title="回文"></a>回文</h1><p>对于回文的问题，从学c开始就一直在接触，包括算法什么的，几乎都能见到身影，回文定义：从头到尾或者从尾到头看都是同一个字符串。例如：abcba！</p>
-<p>今天就有这样一个问题：</p>
-<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p><strong>字符串中的最长回文子串</strong></p>
-<a id="more"></a>
-<h1 id="面试现场"><a href="#面试现场" class="headerlink" title="面试现场"></a>面试现场</h1><p><img src="https://i.imgur.com/75kyFKU.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/iANQAQq.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/zQQkyUw.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/T78IbqR.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/S3TZDeu.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/akeBV4i.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/s9OJuF0.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/cGKOeS5.jpg" alt=""></p>
-<p><strong>题目：给你一个字符串，找出里面最长的回文子串。<br>例如<br>输入abcdcef，那么输出应该是cdc<br>输入adaelele，输出应该是elele</strong></p>
-<p><img src="https://i.imgur.com/yUqucca.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/lfm6jgl.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/DLIu2OF.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/KKrGWVS.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/0dwDeMg.jpg" alt=""></p>
-<p>半分钟过去了。</p>
-<p><img src="https://i.imgur.com/o1Icp6S.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/kS6kokB.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/7oqYpcU.jpg" alt=""></p>
-<p>小史：可以遍历整个字符串，把每个字符和字符间的空隙当作回文的中心，然后向两边扩展来找到最长回文串。</p>
-<p>小史这次抢着分析时间和空间复杂度。</p>
-<p><img src="https://i.imgur.com/xy2oFFe.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/BIyMeI2.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/TzkQ023.jpg" alt=""></p>
-<p>一分钟过去了。</p>
-<p><img src="https://i.imgur.com/5a0VsmX.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/lwVbe9T.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/EDrLTFa.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/Yt7CdSH.jpg" alt=""></p>
-<h1 id="请教大神"><a href="#请教大神" class="headerlink" title="请教大神"></a>请教大神</h1><p><img src="https://i.imgur.com/IeoQIT9.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/MHXkTjD.jpg" alt=""></p>
-<p>吕老师：比如cabadabae用中心扩展的算法，我已经知道了第三位为中心的aba和第5位为中心的abadaba是回文，那么在判断第7位为中心的回文串的时候，有什么已知信息吗？</p>
-<p><img src="https://i.imgur.com/SKFaf7t.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/S2eNszG.jpg" alt=""></p>
-<p>小史：已知第5位为中心的abadaba是回文，由回文的特性，就能够知道2-4位和6-8位对称，而又知道第3位为中心的aba是回文，所以2-4位是回文。这样的话，6-8位肯定是回文。</p>
-<p><img src="https://i.imgur.com/phjrUNF.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/NUzxKZd.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/KaTmRGb.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/RKoe3Mb.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/fOzoKAE.jpg" alt=""></p>
-<p>小史拿着笔在纸上画了半天，突然大叫一声。</p>
-<p><img src="https://i.imgur.com/ZihWvwP.jpg" alt=""></p>
-<p>小史：由于之前的计算已经知道了第5位为中心的abadaba是回文，而第4位为中心的a的回文长度是1，所以第6位为中心的回文长度只能是1，不用再去扩展判断了。</p>
-<p><img src="https://i.imgur.com/16AyAHQ.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/URMlYAq.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/lkwkrJH.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/HsOnHPB.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/FRo1yfn.jpg" alt=""></p>
-<p>小史：以第7位为中心的回文串的计算，由之前分析已经知道最小长度是3了，但是还是需要进行扩展，因为第9位是什么根据之前的信息无法得知，需要扩展进行探索。</p>
-<p><img src="https://i.imgur.com/cZ6y1rn.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/xJAXkN0.jpg" alt=""></p>
-<p>小史：而以第6位为中心的回文串的计算，并不需要进行探索了，因为根据之前第5位为回文中心串的信息和第4位为回文中心串的信息已经可以推断第6位为回文中心串的长度只能为1。</p>
-<p><img src="https://i.imgur.com/DezqQFm.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/j2g5b4k.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/cs2T4Xp.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/A2X37b2.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/lZsQVkh.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/smJtE58.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/oc1inpj.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/49ISjtE.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/GkudmbK.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/6EmNcpV.jpg" alt=""></p>
-<p>小史：当然可以。<br>1、首先，我们要记录下目前已知的回文串能够覆盖到的最右边的地方，就像案例中的第8位<br>2、同时，覆盖到最右边的回文串所对应的回文中心也要记录，就像案例中的第5位<br>3、以每一位为中心的回文串的长度也要记录，后面进行推断的时候能用到，就像案例中用到的以第3位为中心的回文和第4位为中心的回文<br>4、对于新的中心，我们判断它是否在右边界内，若在，就计算它相对右边界回文中心的对称位置，从而得到一些信息，同时，如果该中心需要进行扩展，则继续扩展就行。</p>
-<h1 id="【编码实现】"><a href="#【编码实现】" class="headerlink" title="【编码实现】"></a>【编码实现】</h1><p><img src="https://i.imgur.com/ZjIYCNI.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/vXkELzR.jpg" alt=""></p>
-<p>小史：回文的中心有可能是两个字符中间，这种情况没有考虑到啊。</p>
-<p><img src="https://i.imgur.com/zJluYr8.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/BRtLjXS.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/gMlrnE8.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/D2AGZJi.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/N3gIX1d.jpg" alt=""></p>
-<p>小史：<br>1、先对字符串进行预处理，两个字符之间加上特殊符号#<br>2、然后遍历整个字符串，用一个数组来记录以该字符为中心的回文长度，为了方便计算右边界，我在数组中记录长度的一半（向下取整）<br>3、每一次遍历的时候，如果该字符在已知回文串最右边界的覆盖下，那么就计算其相对最右边界回文串中心对称的位置，得出已知回文串的长度<br>4、判断该长度和右边界，如果达到了右边界，那么需要进行中心扩展探索。当然，如果第3步该字符没有在最右边界的“羽翼”下，则直接进行中心扩展探索。进行中心扩展探索的时候，同时又更新右边界<br>5、最后得到最长回文之后，去掉其中的特殊符号即可</p>
-<p><img src="https://i.imgur.com/GdbPb1A.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/l0BdX7F.jpg" alt=""></p>
-<p>理解了算法之后，小史的代码写起来也是非常快，不一会儿就写好了：<br><strong>PlalindromeString.java</strong></p>
-<pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class PlalindromeString &#123;</span><br><span class="line"></span><br><span class="line">    // 判断一个字符串是否回文，算法中用不到了</span><br><span class="line">    @Deprecated</span><br><span class="line">    private boolean isPlalindrome(String s) &#123;</span><br><span class="line">        int len = s.length();</span><br><span class="line">        for(int i = 0; i &lt; len / 2; i++) &#123;</span><br><span class="line">            if(s.charAt(i) != s.charAt(len - 1 - i)) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 预处理字符串，在两个字符之间加上#</span><br><span class="line">    private String preHandleString(String s) &#123;</span><br><span class="line">        StringBuffer sb = new StringBuffer();</span><br><span class="line">        int len = s.length();</span><br><span class="line">        sb.append(&apos;#&apos;);</span><br><span class="line">        for(int i = 0; i &lt; len; i++) &#123;</span><br><span class="line">            sb.append(s.charAt(i));</span><br><span class="line">            sb.append(&apos;#&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">        return sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 寻找最长回文字串</span><br><span class="line">    public String findLongestPlalindromeString(String s) &#123;</span><br><span class="line">        // 先预处理字符串</span><br><span class="line">        String str = preHandleString(s);</span><br><span class="line">        // 处理后的字串长度</span><br><span class="line">        int len = str.length();</span><br><span class="line">        // 右边界</span><br><span class="line">        int rightSide = 0;</span><br><span class="line">        // 右边界对应的回文串中心</span><br><span class="line">        int rightSideCenter = 0;</span><br><span class="line">        // 保存以每个字符为中心的回文长度一半（向下取整）</span><br><span class="line">        int[] halfLenArr = new int[len];</span><br><span class="line">        // 记录回文中心</span><br><span class="line">        int center = 0;</span><br><span class="line">        // 记录最长回文长度</span><br><span class="line">        int longestHalf = 0;</span><br><span class="line">        for(int i = 0; i &lt; len; i++) &#123;</span><br><span class="line">            // 是否需要中心扩展</span><br><span class="line">            boolean needCalc = true;</span><br><span class="line">            // 如果在右边界的覆盖之内</span><br><span class="line">            if(rightSide &gt; i) &#123;</span><br><span class="line">                // 计算相对rightSideCenter的对称位置</span><br><span class="line">                int leftCenter = 2 * rightSideCenter - i;</span><br><span class="line">                // 根据回文性质得到的结论</span><br><span class="line">                halfLenArr[i] = halfLenArr[leftCenter];</span><br><span class="line">                // 如果超过了右边界，进行调整</span><br><span class="line">                if(i + halfLenArr[i] &gt; rightSide) &#123;</span><br><span class="line">                    halfLenArr[i] = rightSide - i;</span><br><span class="line">                &#125;</span><br><span class="line">                // 如果根据已知条件计算得出的最长回文小于右边界，则不需要扩展了</span><br><span class="line">                if(i + halfLenArr[leftCenter] &lt; rightSide) &#123;</span><br><span class="line">                    // 直接推出结论</span><br><span class="line">                    needCalc = false;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            // 中心扩展</span><br><span class="line">            if(needCalc) &#123;</span><br><span class="line">                while(i - 1 - halfLenArr[i] &gt;= 0 &amp;&amp; i + 1 + halfLenArr[i] &lt; len) &#123;</span><br><span class="line">                    if(str.charAt(i + 1 + halfLenArr[i]) == str.charAt(i - 1 - halfLenArr[i])) &#123;</span><br><span class="line">                        halfLenArr[i]++;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                // 更新右边界及中心</span><br><span class="line">                rightSide = i + halfLenArr[i];</span><br><span class="line">                rightSideCenter = i;</span><br><span class="line">                // 记录最长回文串</span><br><span class="line">                if(halfLenArr[i] &gt; longestHalf) &#123;</span><br><span class="line">                    center = i;</span><br><span class="line">                    longestHalf = halfLenArr[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // 去掉之前添加的#</span><br><span class="line">        StringBuffer sb = new StringBuffer();</span><br><span class="line">        for(int i = center - longestHalf + 1; i &lt;= center + longestHalf; i += 2) &#123;</span><br><span class="line">            sb.append(str.charAt(i));</span><br><span class="line">        &#125;</span><br><span class="line">        return sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre><p><strong>Main.java</strong><br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        PlalindromeString ps = new PlalindromeString();</span><br><span class="line"></span><br><span class="line">        String[] testStrArr = new String[] &#123;</span><br><span class="line">            &quot;abcdcef&quot;,</span><br><span class="line">            &quot;adaelele&quot;,</span><br><span class="line">            &quot;cabadabae&quot;,</span><br><span class="line">            &quot;aaaabcdefgfedcbaa&quot;,</span><br><span class="line">            &quot;aaba&quot;,</span><br><span class="line">            &quot;aaaaaaaaa&quot;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        for(String str : testStrArr) &#123;</span><br><span class="line">            System.out.println(String.format(&quot;原字串 : %s&quot;, str));</span><br><span class="line">            System.out.println(String.format(&quot;最长回文串 : %s&quot;, ps.findLongestPlalindromeString(str)));</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><strong>运行结果：</strong><br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">原字串 : abcdcef</span><br><span class="line">最长回文串 : cdc</span><br><span class="line"></span><br><span class="line">原字串 : adaelele</span><br><span class="line">最长回文串 : elele</span><br><span class="line"></span><br><span class="line">原字串 : cabadabae</span><br><span class="line">最长回文串 : abadaba</span><br><span class="line"></span><br><span class="line">原字串 : aaaabcdefgfedcbaa</span><br><span class="line">最长回文串 : aabcdefgfedcbaa</span><br><span class="line"></span><br><span class="line">原字串 : aaba</span><br><span class="line">最长回文串 : aba</span><br><span class="line"></span><br><span class="line">原字串 : aaaaaaaaa</span><br><span class="line">最长回文串 : aaaaaaaaa</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://i.imgur.com/gJ8q5jo.jpg" alt=""></p>
-<h1 id="【时间空间分析】"><a href="#【时间空间分析】" class="headerlink" title="【时间空间分析】"></a>【时间空间分析】</h1><p><img src="https://i.imgur.com/8rFKWMo.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/ALMCdHK.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/7f51Jk1.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/y4uWem6.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/sPDzIBL.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/O8UT3wi.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/4odlKeS.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/wYdcJGq.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/lbDpRpg.jpg" alt=""></p>
-]]></content>
-      <categories>
-        <category>休闲</category>
-      </categories>
-      <tags>
-        <tag>最长回文子串</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>我的one_year</title>
     <url>/2019/02/19/%E6%88%91%E7%9A%84one-year/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>年已经过了，今天是元宵节，南方人生活在北方，虽然没有什么元宵啊，汤圆啊，或者大鱼大肉，来到学校也是冷冷清清的。有闲情，来回顾一下去年一整年所做和所得。</p>
@@ -1498,53 +1284,6 @@
     <title>我的第一篇博客</title>
     <url>/2018/08/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>稳定与非稳定排序</title>
-    <url>/2018/10/02/%E7%A8%B3%E5%AE%9A%E4%B8%8E%E9%9D%9E%E7%A8%B3%E5%AE%9A%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<h1 id="排序的稳定性"><a href="#排序的稳定性" class="headerlink" title="排序的稳定性"></a>排序的稳定性</h1><p>在数据结构课上，老师也说到数据的稳定性到底是什么，有什么用，但是啊，有这么一个问题：<br><strong>既然最后都是有序序列，为什么还要分稳定和非稳定的排序呢？</strong></p>
-<p>下面，我们来看一下面试的小史是这么办的！（在微信上看到的，记录一下，以供学习）<br><a id="more"></a></p>
-<h1 id="【面试现场】"><a href="#【面试现场】" class="headerlink" title="【面试现场】"></a>【面试现场】</h1><p><img src="https://i.imgur.com/j9FSZki.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/0PNWtwn.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/DSTsJuv.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/9LLBwuz.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/pSTbKrc.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/NLceClH.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/MJBE8lL.jpg" alt=""></p>
-<p>小史：原始数据，a2和a4的位置都是3。对于稳定排序来说，排序后的序列，a2一定还是在a4前面。但是对于非稳定排序来说，就不一定了，可能排完序之后，a4反而在a2的前面了。</p>
-<p><img src="https://i.imgur.com/bKT0NXs.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/6tH4KQm.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/g2WRI8u.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/VAlH7lt.jpg" alt=""></p>
-<p>半分钟过去了。</p>
-<p><img src="https://i.imgur.com/atEYeEi.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/4cgOy38.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/iZ7EDtI.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/6LoKXur.jpg" alt=""></p>
-<h1 id="请教大神"><a href="#请教大神" class="headerlink" title="请教大神"></a>请教大神</h1><p><img src="https://i.imgur.com/Q1OT99l.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/pzVd1JE.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/VK0xy21.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/82wbztn.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/Zj5cDAN.jpg" alt=""></p>
-<h1 id="上课了"><a href="#上课了" class="headerlink" title="上课了"></a>上课了</h1><p>吕老师一上课就把问题抛了出来。</p>
-<p><img src="https://i.imgur.com/LLaogRE.jpg" alt=""></p>
-<p>话音刚落，蛋哥就站了起来。</p>
-<p><img src="https://i.imgur.com/oHoceh2.jpg" alt=""></p>
-<p>蛋哥：咱们每次考试完成后，都会按照分数进行排序。分高的自然就是第一名。分数相同的同学怎么办呢？那就是按照上次的分数来分高低。上次分高的排在前面。这个时候就应该用稳定排序，在上次排好序的序列上，再针对这次的分数进行排序。稳定排序的结果能保证这次相同分数的人，上次分高的在前面。</p>
-<p><img src="https://i.imgur.com/LcUb8E2.jpg" alt=""></p>
-<p>蛋哥：再比如我们班的同学，已经按照学号排好序了。现在要按照身高排序。如果是稳定排序排好之后，身高相同的同学，还是按照学号顺序的。</p>
-<p><img src="https://i.imgur.com/x90sLZr.jpg" alt=""></p>
-<p>吕老师：没错，其实就是有两个排序关键字的时候，稳定排序可以让第一个关键字排序的结果服务于第二个关键字排序中数值相等的那些数。</p>
-<p>小史听完后，觉得很惭愧，其实这些场景自己也遇到过，早该想到的。</p>
-<p>吕老师：你看的东西很多，是你学到了很多知识。但是这些知识之间的关联，需要你进行深入思考才能得到的。找到知识之间的联系，找到知识和实际场景之间的联系，多想想为什么，才能做到融会贯通。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>其实就个人看法，对于按照上次排名排序这个场景是一个很不错的例子，还有就是按关键字排序，其实可以用运算符重载就能很方便解决这样一个矛盾问题，对于稳定与非稳定吧，特定场景特定分析，稳定好，非稳定也不错！</p>
-]]></content>
-      <categories>
-        <category>休闲</category>
-      </categories>
-      <tags>
-        <tag>排序的稳定性</tag>
-      </tags>
   </entry>
   <entry>
     <title>贪心+二分</title>
