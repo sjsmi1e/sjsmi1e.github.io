@@ -98,31 +98,31 @@
 <meta property="og:site_name" content="MY STUDY BLOG">
 <meta property="og:description" content="最近越来越频繁地遇到需要配置反向代理的场景，在自己搭建博客的时候，也不可避免要用到 Nginx，所以这段时间集中学习了一下 Nginx，同时做了一些笔记，希望也可以帮助到大家～ 😜 这篇文章会在 CentOS 环境下安装和使用 Nginx，如果对 CentOS 基本操作还不太清楚的，可以先看看 &amp;lt;半小时搞会 CentOS 入门必备基础知识&amp;gt; 一文先做了解。 相信作为开发者，大家都知道">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_56_26_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_56_26_1.jpg">
 <meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
 <meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_56_53_1.jpg">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_57_00_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_56_53_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_57_00_1.jpg">
 <meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_57_12_1.jpg">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_57_35_1.jpg">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_58_47_1.jpg">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_58_57_1.jpg">
-<meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
-<meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_21_03_45_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_57_12_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_57_35_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_58_47_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_58_57_1.jpg">
 <meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
 <meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_21_04_05_1.jpg">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_21_04_56_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_03_45_1.jpg">
 <meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_21_28_02_1.jpg">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_21_28_35_1.jpg">
-<meta property="og:updated_time" content="2020-05-07T13:29:21.881Z">
+<meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_04_05_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_04_56_1.jpg">
+<meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_28_02_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_28_35_1.jpg">
+<meta property="og:updated_time" content="2020-05-09T06:03:36.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx 从入门到实践，万字详解！">
 <meta name="twitter:description" content="最近越来越频繁地遇到需要配置反向代理的场景，在自己搭建博客的时候，也不可避免要用到 Nginx，所以这段时间集中学习了一下 Nginx，同时做了一些笔记，希望也可以帮助到大家～ 😜 这篇文章会在 CentOS 环境下安装和使用 Nginx，如果对 CentOS 基本操作还不太清楚的，可以先看看 &amp;lt;半小时搞会 CentOS 入门必备基础知识&amp;gt; 一文先做了解。 相信作为开发者，大家都知道">
-<meta name="twitter:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_56_26_1.jpg">
+<meta name="twitter:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_56_26_1.jpg">
 
 
 
@@ -443,7 +443,7 @@
 <p>CentOS 版本：<code>7.6</code></p>
 <p>Nginx 版本：<code>1.16.1</code></p>
 <h2 id="1-Nginx-介绍"><a href="#1-Nginx-介绍" class="headerlink" title="1. Nginx 介绍"></a><strong>1. Nginx 介绍</strong></h2><p>传统的 Web 服务器，每个客户端连接作为一个单独的进程或线程处理，需在切换任务时将 CPU 切换到新的任务并创建一个新的运行时上下文，消耗额外的内存和 CPU 时间，当并发请求增加时，服务器响应变慢，从而对性能产生负面影响。</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_56_26_1.jpg" alt="img">Nginx</p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_56_26_1.jpg" alt="img">Nginx</p>
 <p>Nginx 是开源、高性能、高可靠的 Web 和反向代理服务器，而且支持热部署，几乎可以做到 7 * 24 小时不间断运行，即使运行几个月也不需要重新启动，还能在不间断服务的情况下对软件版本进行热更新。性能是 Nginx 最重要的考量，其占用内存少、并发能力强、能支持高达 5w 个并发连接数，最重要的是，Nginx 是免费的并可以商业化，配置使用也比较简单。</p>
 <p>Nginx 的最重要的几个使用场景：</p>
 <ol>
@@ -486,19 +486,19 @@
 <p>举个具体的例子 🌰，晚高峰乘坐地铁的时候，入站口经常会有地铁工作人员大喇叭“请走 B 口，B 口人少车空….”，这个工作人员的作用就是负载均衡。</p>
 <p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img">负载均衡</p>
 <h3 id="2-5-动静分离"><a href="#2-5-动静分离" class="headerlink" title="2.5 动静分离"></a>2.5 动静分离</h3><p>为了加快网站的解析速度，可以把动态页面和静态页面由不同的服务器来解析，加快解析速度，降低原来单个服务器的压力。</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_56_53_1.jpg" alt="img">动静分离</p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_56_53_1.jpg" alt="img">动静分离</p>
 <p>一般来说，都需要将动态资源和静态资源分开，由于 Nginx 的高并发和静态资源缓存等特性，经常将静态资源部署在 Nginx 上。如果请求的是静态资源，直接到静态资源目录获取资源，如果是动态资源的请求，则利用反向代理的原理，把请求转发给对应后台应用去处理，从而实现动静分离。</p>
 <p>使用前后端分离后，可以很大程度提升静态资源的访问速度，即使动态服务不可用，静态资源的访问也不会受到影响。</p>
 <h2 id="3-Nginx-快速安装"><a href="#3-Nginx-快速安装" class="headerlink" title="3. Nginx 快速安装"></a><strong>3. Nginx 快速安装</strong></h2><h3 id="3-1-安装"><a href="#3-1-安装" class="headerlink" title="3.1 安装"></a>3.1 安装</h3><p>我们可以先看看</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list | grep nginx</span><br></pre></td></tr></table></figure>
 <p>来看看</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_57_00_1.jpg" alt="img"></p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_57_00_1.jpg" alt="img"></p>
 <p>然后</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install nginx</span><br></pre></td></tr></table></figure>
 <p>来安装 Nginx，然后我们在命令行中 <code>nginx -v</code> 就可以看到具体的 Nginx 版本信息，也就安装完毕了。</p>
 <p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img">image-20200307180545816</p>
 <h3 id="3-2-相关文件夹"><a href="#3-2-相关文件夹" class="headerlink" title="3.2 相关文件夹"></a>3.2 相关文件夹</h3><p>然后我们可以使用 <code>rpm -ql nginx</code> 来查看 Nginx 被安装到了什么地方，有哪些相关目录，其中位于 <code>/etc</code> 目录下的主要是配置文件，还有一些文件见下图：</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_57_12_1.jpg" alt="img"></p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_57_12_1.jpg" alt="img"></p>
 <p>主要关注的文件夹有两个：</p>
 <ol>
 <li><code>/etc/nginx/conf.d/</code> 文件夹，是我们进行子配置的配置项存放处，<code>/etc/nginx/nginx.conf</code> 主配置文件会默认把这个文件夹中所有子配置项都引入；</li>
@@ -618,17 +618,17 @@
 </table>
 <p>还有更多的内置预定义变量，可以直接搜索关键字「nginx内置预定义变量」可以看到一堆博客写这个，这些变量都可以在配置文件中直接使用。</p>
 <h2 id="6-设置二级域名虚拟主机"><a href="#6-设置二级域名虚拟主机" class="headerlink" title="6. 设置二级域名虚拟主机"></a><strong>6. 设置二级域名虚拟主机</strong></h2><p>在某某云 ☁️ 上购买了域名之后，就可以配置虚拟主机了，一般配置的路径在<code>域名管理 -&gt; 解析 -&gt; 添加记录</code> 中添加二级域名，配置后某某云会把二级域名也解析到我们配置的服务器 IP 上，然后我们在 Nginx 上配置一下虚拟主机的访问监听，就可以拿到从这个二级域名过来的请求了。</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_57_35_1.jpg" alt="img">image-20200426150644768</p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_57_35_1.jpg" alt="img">image-20200426150644768</p>
 <p>现在我自己的服务器上配置了一个 fe 的二级域名，也就是说在外网访问 <code>fe.sherlocked93.club</code> 的时候，也可以访问到我们的服务器了。</p>
 <p>由于默认配置文件 <code>/etc/nginx/nginx.conf</code> 的 http 模块中有一句 <code>include /etc/nginx/conf.d/*.conf</code> 也就是说 <code>conf.d</code> 文件夹下的所有 <code>*.conf</code> 文件都会作为子配置项被引入配置文件中。为了维护方便，我在 <code>/etc/nginx/conf.d</code> 文件夹中新建一个 <code>fe.sherlocked93.club.conf</code> ：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># /etc/nginx/conf.d/fe.sherlocked93.club.conf</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">  listen 80;</span><br><span class="line">	server_name fe.sherlocked93.club;</span><br><span class="line"></span><br><span class="line">	location / &#123;</span><br><span class="line">		root  /usr/share/nginx/html/fe;</span><br><span class="line">		index index.html;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后在 <code>/usr/share/nginx/html</code> 文件夹下新建 fe 文件夹，新建文件<code>index.html</code>，内容随便写点，改完 <code>nginx -s reload</code> 重新加载，浏览器中输入<code>fe.sherlocked93.club</code>，发现从二级域名就可以访问到我们刚刚新建的 fe 文件夹：</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_58_47_1.jpg" alt="img"></p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_58_47_1.jpg" alt="img"></p>
 <h2 id="7-配置反向代理"><a href="#7-配置反向代理" class="headerlink" title="7. 配置反向代理"></a><strong>7. 配置反向代理</strong></h2><p>反向代理是工作中最常用的服务器功能，经常被用来解决跨域问题，下面简单介绍一下如何实现反向代理。</p>
 <p>首先进入 Nginx 的主配置文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure>
 <p>为了看起来方便，把行号显示出来 <code>:set nu</code> （个人习惯），然后我们去 <code>http</code>模块的 <code>server</code> 块中的 <code>location /</code>，增加一行将默认网址重定向到最大学习网站 Bilibili 的 <code>proxy_pass</code> 配置 🤓 ：</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_58_57_1.jpg" alt="img"></p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_58_57_1.jpg" alt="img"></p>
 <p>改完保存退出，<code>nginx -s reload</code> 重新加载，进入默认网址，那么现在就直接跳转到 B 站了，实现了一个简单的代理。</p>
 <p>实际使用中，可以将请求转发到本机另一个服务器上，也可以根据访问的路径跳转到不同端口的服务中。</p>
 <p>比如我们监听 <code>9001</code> 端口，然后把访问不同路径的请求进行反向代理：</p>
@@ -665,7 +665,7 @@
 <p>在 <code>/etc/nginx/conf.d/</code> 文件夹中新建一个配置文件，对应二级域名 <code>be.sherlocked93.club</code> ：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># /etc/nginx/conf.d/be.sherlocked93.club.conf</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">  listen       80;</span><br><span class="line">  server_name  be.sherlocked93.club;</span><br><span class="line">  </span><br><span class="line">	add_header &apos;Access-Control-Allow-Origin&apos; $http_origin;   # 全局变量获得当前请求origin，带cookie的请求不支持*</span><br><span class="line">	add_header &apos;Access-Control-Allow-Credentials&apos; &apos;true&apos;;    # 为 true 可带上 cookie</span><br><span class="line">	add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;  # 允许请求方法</span><br><span class="line">	add_header &apos;Access-Control-Allow-Headers&apos; $http_access_control_request_headers;  # 允许请求的 header，可以为 *</span><br><span class="line">	add_header &apos;Access-Control-Expose-Headers&apos; &apos;Content-Length,Content-Range&apos;;</span><br><span class="line">	</span><br><span class="line">  if ($request_method = &apos;OPTIONS&apos;) &#123;</span><br><span class="line">		add_header &apos;Access-Control-Max-Age&apos; 1728000;   # OPTIONS 请求的有效期，在有效期内不用发出另一条预检请求</span><br><span class="line">		add_header &apos;Content-Type&apos; &apos;text/plain; charset=utf-8&apos;;</span><br><span class="line">		add_header &apos;Content-Length&apos; 0;</span><br><span class="line">    </span><br><span class="line">		return 204;                  # 200 也可以</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">	location / &#123;</span><br><span class="line">		root  /usr/share/nginx/html/be;</span><br><span class="line">		index index.html;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后 <code>nginx -s reload</code> 重新加载配置。这时再访问 <code>fe.sherlocked93.club/index.html</code> 结果如下，请求中出现了我们刚刚配置的 Header：</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_21_03_45_1.jpg" alt="img"></p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_03_45_1.jpg" alt="img"></p>
 <p>解决了跨域问题。</p>
 <h2 id="9-开启-gzip-压缩"><a href="#9-开启-gzip-压缩" class="headerlink" title="9. 开启 gzip 压缩"></a><strong>9. 开启 gzip 压缩</strong></h2><p>gzip 是一种常用的网页压缩技术，传输的网页经过 gzip 压缩之后大小通常可以变为原来的一半甚至更小（官网原话），更小的网页体积也就意味着带宽的节约和传输速度的提升，特别是对于访问量巨大大型网站来说，每一个静态资源体积的减小，都会带来可观的流量与带宽的节省。</p>
 <p>百度可以找到很多检测站点来查看目标网页有没有开启 gzip 压缩，在下随便找了一个 &lt;网页GZIP压缩检测&gt; 输入掘金 <code>juejin.im</code> 来偷窥下掘金有没有开启 gzip。</p>
@@ -689,9 +689,9 @@
 <p>其他更全的配置信息可以查看 &lt;官网文档ngx_http_gzip_module&gt;，配置前是这样的：</p>
 <p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
 <p>配置之后 response 的 header 里面多了一个 <code>Content-Encoding: gzip</code>，返回信息被压缩了：</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_21_04_05_1.jpg" alt="img"></p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_04_05_1.jpg" alt="img"></p>
 <p>注意了，一般 gzip 的配置建议加上 <code>gzip_min_length 1k</code>，不加的话：</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_21_04_56_1.jpg" alt="img"></p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_04_56_1.jpg" alt="img"></p>
 <p>由于文件太小，gzip 压缩之后得到了 -48% 的体积优化，压缩之后体积还比压缩之前体积大了，所以最好设置低于 <code>1kb</code> 的文件就不要 gzip 压缩了 🤪</p>
 <h3 id="9-2-Webpack-的-gzip-配置"><a href="#9-2-Webpack-的-gzip-配置" class="headerlink" title="9.2 Webpack 的 gzip 配置"></a>9.2 Webpack 的 gzip 配置</h3><p>当前端项目使用 Webpack 进行打包的时候，也可以开启 gzip 压缩：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// vue-cli3 的 vue.config.js 文件</span><br><span class="line">const CompressionWebpackPlugin = require(&apos;compression-webpack-plugin&apos;)</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  // gzip 配置</span><br><span class="line">  configureWebpack: config =&gt; &#123;</span><br><span class="line">    if (process.env.NODE_ENV === &apos;production&apos;) &#123;</span><br><span class="line">      // 生产环境</span><br><span class="line">      return &#123;</span><br><span class="line">        plugins: [new CompressionWebpackPlugin(&#123;</span><br><span class="line">          test: /\.js$|\.html$|\.css/,    // 匹配文件名</span><br><span class="line">          threshold: 10240,               // 文件压缩阈值，对超过10k的进行压缩</span><br><span class="line">          deleteOriginalAssets: false     // 是否删除源文件</span><br><span class="line">        &#125;)]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -714,7 +714,7 @@
 <p>通过 location 指定不同的后缀名实现不同的请求转发。通过 expires 参数设置，可以使浏览器缓存过期时间，减少与服务器之前的请求和流量。具体 expires 定义：是给一个资源设定一个过期时间，也就是说无需去服务端验证，直接通过浏览器自身确认是否过期即可，所以不会产生额外的流量。此种方法非常适合不经常变动的资源。（如果经常更新的文件，不建议使用 expires 来缓存），我这里设置 3d，表示在这 3 天之内访问这个URL，发送一个请求，比对服务器该文件最后更新时间没有变化。则不会从服务器抓取，返回状态码 304，如果有修改，则直接从服务器重新下载，返回状态码 200。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  location /www/ &#123;</span><br><span class="line">  	root /data/;</span><br><span class="line">    index index.html index.htm;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  location /image/ &#123;</span><br><span class="line">  	root /data/;</span><br><span class="line">    autoindex on;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="12-配置高可用集群（双机热备）"><a href="#12-配置高可用集群（双机热备）" class="headerlink" title="12. 配置高可用集群（双机热备）"></a><strong>12. 配置高可用集群（双机热备）</strong></h2><p>当主 Nginx 服务器宕机之后，切换到备份 Nginx 服务器</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_21_28_02_1.jpg" alt="img">2020-03-13-双机热备</p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_28_02_1.jpg" alt="img">2020-03-13-双机热备</p>
 <p>首先安装 keepalived，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install keepalived -y</span><br></pre></td></tr></table></figure>
 <p>然后编辑 <code>/etc/keepalived/keepalived.conf</code> 配置文件，并在配置文件中增加 <code>vrrp_script</code> 定义一个外围检测机制，并在 <code>vrrp_instance</code> 中通过定义 <code>track_script</code> 来追踪脚本执行过程，实现节点转移：</p>
@@ -731,7 +731,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># /etc/nginx/conf.d/fe.sherlocked93.club.conf</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">  listen 80;</span><br><span class="line">	server_name fe.sherlocked93.club;</span><br><span class="line"></span><br><span class="line">	location / &#123;</span><br><span class="line">		root  /usr/share/nginx/html/pc;</span><br><span class="line">    if ($http_user_agent ~* &apos;(Android|webOS|iPhone|iPod|BlackBerry)&apos;) &#123;</span><br><span class="line">      root /usr/share/nginx/html/mobile;</span><br><span class="line">    &#125;</span><br><span class="line">		index index.html;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>配置基本没什么不一样的，主要多了一个 <code>if</code> 语句，然后使用<code>$http_user_agent</code> 全局变量来判断用户请求的 <code>user-agent</code>，指向不同的 root 路径，返回对应站点。</p>
 <p>在浏览器访问这个站点，然后 F12 中模拟使用手机访问：</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_21_28_35_1.jpg" alt="img"></p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_28_35_1.jpg" alt="img"></p>
 <p>可以看到在模拟使用移动端访问的时候，Nginx 返回的站点变成了移动端对应的 html 了。</p>
 <h2 id="14-配置-HTTPS"><a href="#14-配置-HTTPS" class="headerlink" title="14. 配置 HTTPS"></a><strong>14. 配置 HTTPS</strong></h2><p>具体配置过程网上挺多的了，也可以使用你购买的某某云，一般都会有免费申请的服务器证书，安装直接看所在云的操作指南即可。</p>
 <p>我购买的腾讯云提供的亚洲诚信机构颁发的免费证书只能一个域名使用，二级域名什么的需要另外申请，但是申请审批比较快，一般几分钟就能成功，然后下载证书的压缩文件，里面有个 nginx 文件夹，把 <code>xxx.crt</code> 和 <code>xxx.key</code> 文件拷贝到服务器目录，再配置下：</p>
@@ -896,7 +896,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

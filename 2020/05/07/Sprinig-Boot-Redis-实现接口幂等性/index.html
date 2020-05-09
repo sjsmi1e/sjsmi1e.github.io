@@ -98,20 +98,20 @@
 <meta property="og:site_name" content="MY STUDY BLOG">
 <meta property="og:description" content="一、概念幂等性, 通俗的说就是一个接口, 多次发起同一个请求, 必须保证操作只能执行一次 比如:  订单接口, 不能多次创建订单 支付接口, 重复支付同一笔订单只能扣一次钱 支付宝回调接口, 可能会多次回调, 必须处理重复回调 普通表单提交接口, 因为网络超时等原因多次点击提交, 只能成功一次 等等  二、常见解决方案 唯一索引 – 防止新增脏数据 token机制 – 防止页面重复提交 悲观锁 –">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_08_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_08_1.jpg">
 <meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_13_1.jpg">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_19_1.jpg">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_25_1.jpg">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_29_1.jpg">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_34_1.jpg">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_40_1.jpg">
-<meta property="og:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_44_1.jpg">
-<meta property="og:updated_time" content="2020-05-07T12:44:55.983Z">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_13_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_19_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_25_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_29_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_34_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_40_1.jpg">
+<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_44_1.jpg">
+<meta property="og:updated_time" content="2020-05-09T06:04:47.293Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sprinig Boot + Redis 实现接口幂等性">
 <meta name="twitter:description" content="一、概念幂等性, 通俗的说就是一个接口, 多次发起同一个请求, 必须保证操作只能执行一次 比如:  订单接口, 不能多次创建订单 支付接口, 重复支付同一笔订单只能扣一次钱 支付宝回调接口, 可能会多次回调, 必须处理重复回调 普通表单提交接口, 因为网络超时等原因多次点击提交, 只能成功一次 等等  二、常见解决方案 唯一索引 – 防止新增脏数据 token机制 – 防止页面重复提交 悲观锁 –">
-<meta name="twitter:image" content="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_08_1.jpg">
+<meta name="twitter:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_08_1.jpg">
 
 
 
@@ -494,30 +494,30 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.wangzaiplus.test.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.wangzaiplus.test.annotation.ApiIdempotent;</span><br><span class="line"><span class="keyword">import</span> com.wangzaiplus.test.common.ServerResponse;</span><br><span class="line"><span class="keyword">import</span> com.wangzaiplus.test.service.TestService;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PostMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/test"</span>)</span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> TestService testService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiIdempotent</span></span><br><span class="line">    <span class="meta">@PostMapping</span>(<span class="string">"testIdempotence"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse <span class="title">testIdempotence</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> testService.testIdempotence();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
 <li><p>获取<code>token</code></p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_08_1.jpg" alt="img"></p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_08_1.jpg" alt="img"></p>
 </li>
 </ol>
 <p>查看redis</p>
 <p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
 <ol>
 <li><p>测试接口安全性: 利用jmeter测试工具模拟50个并发请求, 将上一步获取到的token作为参数</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_13_1.jpg" alt="img"></p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_13_1.jpg" alt="img"></p>
 </li>
 </ol>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_19_1.jpg" alt="img"></p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_19_1.jpg" alt="img"></p>
 <ol>
 <li><p>header或参数均不传token, 或者token值为空, 或者token值乱填, 均无法通过校验, 如token值为”abcd”</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_25_1.jpg" alt="img"></p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_25_1.jpg" alt="img"></p>
 </li>
 </ol>
-<h3 id="八、注意点-非常重要"><a href="#八、注意点-非常重要" class="headerlink" title="八、注意点(非常重要)"></a>八、注意点(非常重要)</h3><p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_29_1.jpg" alt="img"></p>
+<h3 id="八、注意点-非常重要"><a href="#八、注意点-非常重要" class="headerlink" title="八、注意点(非常重要)"></a>八、注意点(非常重要)</h3><p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_29_1.jpg" alt="img"></p>
 <p>上图中, 不能单纯的直接删除token而不校验是否删除成功, 会出现并发安全性问题, 因为, 有可能多个线程同时走到第46行, 此时token还未被删除, 所以继续往下执行, 如果不校验<code>jedisUtil.del(token)</code>的删除结果而直接放行, 那么还是会出现重复提交问题, 即使实际上只有一次真正的删除操作, 下面重现一下</p>
 <p>稍微修改一下代码:</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_34_1.jpg" alt="img"></p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_34_1.jpg" alt="img"></p>
 <p>再次请求</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_40_1.jpg" alt="img"></p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_40_1.jpg" alt="img"></p>
 <p>再看看控制台</p>
-<p><img src="http://q9qx9gs6u.bkt.clouddn.com/2020_05_07_20_44_44_1.jpg" alt="img"></p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_44_44_1.jpg" alt="img"></p>
 <p>虽然只有一个真正删除掉token, 但由于没有对删除结果进行校验, 所以还是有并发问题, 因此, 必须校验</p>
 <h3 id="九、总结"><a href="#九、总结" class="headerlink" title="九、总结"></a>九、总结</h3><p>其实思路很简单, 就是每次请求保证唯一性, 从而保证幂等性, 通过拦截器+注解, 就不用每次请求都写重复代码, 其实也可以利用spring aop实现, 无所谓</p>
 
@@ -653,7 +653,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
