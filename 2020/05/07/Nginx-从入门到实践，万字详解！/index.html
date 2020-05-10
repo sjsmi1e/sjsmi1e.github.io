@@ -1,162 +1,51 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<script>
-    (function(){
-        if(''){
-            if (prompt('请输入文章密码') !== ''){
-                alert('密码错误！');
-                history.back();
-            }
-        }
-    })();
- </script>
+<meta name="generator" content="Hexo 3.7.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="nginx," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml" />
-
-
-
-
-
-
-<meta name="description" content="最近越来越频繁地遇到需要配置反向代理的场景，在自己搭建博客的时候，也不可避免要用到 Nginx，所以这段时间集中学习了一下 Nginx，同时做了一些笔记，希望也可以帮助到大家～ 😜 这篇文章会在 CentOS 环境下安装和使用 Nginx，如果对 CentOS 基本操作还不太清楚的，可以先看看 &amp;lt;半小时搞会 CentOS 入门必备基础知识&amp;gt; 一文先做了解。 相信作为开发者，大家都知道">
+  <meta name="description" content="最近越来越频繁地遇到需要配置反向代理的场景，在自己搭建博客的时候，也不可避免要用到 Nginx，所以这段时间集中学习了一下 Nginx，同时做了一些笔记，希望也可以帮助到大家～ 😜 这篇文章会在 CentOS 环境下安装和使用 Nginx，如果对 CentOS 基本操作还不太清楚的，可以先看看 &amp;lt;半小时搞会 CentOS 入门必备基础知识&amp;gt; 一文先做了解。 相信作为开发者，大家都知道">
 <meta name="keywords" content="nginx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nginx 从入门到实践，万字详解！">
 <meta property="og:url" content="http://yoursite.com/2020/05/07/Nginx-从入门到实践，万字详解！/index.html">
 <meta property="og:site_name" content="MY STUDY BLOG">
 <meta property="og:description" content="最近越来越频繁地遇到需要配置反向代理的场景，在自己搭建博客的时候，也不可避免要用到 Nginx，所以这段时间集中学习了一下 Nginx，同时做了一些笔记，希望也可以帮助到大家～ 😜 这篇文章会在 CentOS 环境下安装和使用 Nginx，如果对 CentOS 基本操作还不太清楚的，可以先看看 &amp;lt;半小时搞会 CentOS 入门必备基础知识&amp;gt; 一文先做了解。 相信作为开发者，大家都知道">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_56_26_1.jpg">
-<meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
-<meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
-<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_56_53_1.jpg">
-<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_57_00_1.jpg">
-<meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
-<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_57_12_1.jpg">
-<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_57_35_1.jpg">
-<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_58_47_1.jpg">
-<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_58_57_1.jpg">
-<meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
-<meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
-<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_03_45_1.jpg">
-<meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
-<meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
-<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_04_05_1.jpg">
-<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_04_56_1.jpg">
-<meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
-<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_28_02_1.jpg">
-<meta property="og:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_28_35_1.jpg">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-05-09T06:03:36.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx 从入门到实践，万字详解！">
 <meta name="twitter:description" content="最近越来越频繁地遇到需要配置反向代理的场景，在自己搭建博客的时候，也不可避免要用到 Nginx，所以这段时间集中学习了一下 Nginx，同时做了一些笔记，希望也可以帮助到大家～ 😜 这篇文章会在 CentOS 环境下安装和使用 Nginx，如果对 CentOS 基本操作还不太清楚的，可以先看看 &amp;lt;半小时搞会 CentOS 入门必备基础知识&amp;gt; 一文先做了解。 相信作为开发者，大家都知道">
-<meta name="twitter:image" content="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_56_26_1.jpg">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/07/Nginx-从入门到实践，万字详解！/">
 
 
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2020/05/07/Nginx-从入门到实践，万字详解！/"/>
-
-
-
-
 
   <title>Nginx 从入门到实践，万字详解！ | MY STUDY BLOG</title>
   
@@ -166,275 +55,218 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
-	<a href="https://your-url" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
 
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">MY STUDY BLOG</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MY STUDY BLOG</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">喜欢争取，得到珍惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
   </div>
 </div>
+
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home                          //首页"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive          //归档"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th           //分类"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags                     //标签"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user                   //关于"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-schedule">
-          <a href="/schedule/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-calendar        //日程表"></i> <br />
-            
-            日程表
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
+  </li>
+        <li class="menu-item menu-item-tags">
 
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
+  </li>
+        <li class="menu-item menu-item-categories">
 
-    </div>
-  
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
 </nav>
 
 
 
- </div>
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/07/Nginx-从入门到实践，万字详解！/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="Smile">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="MY STUDY BLOG">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">Nginx 从入门到实践，万字详解！</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          Nginx 从入门到实践，万字详解！
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-07T20:54:46+08:00">
-                2020-05-07
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
+              <time title="创建时间：2020-05-07 20:54:46" itemprop="dateCreated datePublished" datetime="2020-05-07T20:54:46+08:00">2020-05-07</time>
+            </span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  11,531
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  46
-                </span>
-              
-            </div>
-          
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-09 14:03:36" itemprop="dateModified" datetime="2020-05-09T14:03:36+08:00">2020-05-09</time>
+              </span>
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/07/Nginx-从入门到实践，万字详解！/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/07/Nginx-从入门到实践，万字详解！/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>23k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>21 分钟</span>
+            </span>
 
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <p>最近越来越频繁地遇到需要配置反向代理的场景，在自己搭建博客的时候，也不可避免要用到 Nginx，所以这段时间集中学习了一下 Nginx，同时做了一些笔记，希望也可以帮助到大家～ 😜</p>
@@ -443,7 +275,7 @@
 <p>CentOS 版本：<code>7.6</code></p>
 <p>Nginx 版本：<code>1.16.1</code></p>
 <h2 id="1-Nginx-介绍"><a href="#1-Nginx-介绍" class="headerlink" title="1. Nginx 介绍"></a><strong>1. Nginx 介绍</strong></h2><p>传统的 Web 服务器，每个客户端连接作为一个单独的进程或线程处理，需在切换任务时将 CPU 切换到新的任务并创建一个新的运行时上下文，消耗额外的内存和 CPU 时间，当并发请求增加时，服务器响应变慢，从而对性能产生负面影响。</p>
-<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_56_26_1.jpg" alt="img">Nginx</p>
+<p><img data-src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_56_26_1.jpg" alt="img">Nginx</p>
 <p>Nginx 是开源、高性能、高可靠的 Web 和反向代理服务器，而且支持热部署，几乎可以做到 7 * 24 小时不间断运行，即使运行几个月也不需要重新启动，还能在不间断服务的情况下对软件版本进行热更新。性能是 Nginx 最重要的考量，其占用内存少、并发能力强、能支持高达 5w 个并发连接数，最重要的是，Nginx 是免费的并可以商业化，配置使用也比较简单。</p>
 <p>Nginx 的最重要的几个使用场景：</p>
 <ol>
@@ -478,27 +310,27 @@
 <p>举个具体的例子 🌰，去饭店吃饭，可以点川菜、粤菜、江浙菜，饭店也分别有三个菜系的厨师 👨‍🍳，但是你作为顾客不用管哪个厨师给你做的菜，只用点菜即可，小二将你菜单中的菜分配给不同的厨师来具体处理，那么这个小二就是反向代理服务器。</p>
 <p>简单的说，一般给客户端做代理的都是正向代理，给服务器做代理的就是反向代理。</p>
 <p>正向代理和反向代理主要的原理区别可以参见下图：</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
+<p><img data-src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
 <h3 id="2-4-负载均衡"><a href="#2-4-负载均衡" class="headerlink" title="2.4 负载均衡"></a>2.4 负载均衡</h3><p>一般情况下，客户端发送多个请求到服务器，服务器处理请求，其中一部分可能要操作一些资源比如数据库、静态资源等，服务器处理完毕后，再将结果返回给客户端。</p>
 <p>这种模式对于早期的系统来说，功能要求不复杂，且并发请求相对较少的情况下还能胜任，成本也低。随着信息数量不断增长，访问量和数据量飞速增长，以及系统业务复杂度持续增加，这种做法已无法满足要求，并发量特别大时，服务器容易崩。</p>
 <p>很明显这是由于服务器性能的瓶颈造成的问题，除了堆机器之外，最重要的做法就是负载均衡。</p>
 <p>请求爆发式增长的情况下，单个机器性能再强劲也无法满足要求了，这个时候集群的概念产生了，单个服务器解决不了的问题，可以使用多个服务器，然后将请求分发到各个服务器上，将负载分发到不同的服务器，这就是<strong>负载均衡</strong>，核心是「分摊压力」。Nginx 实现负载均衡，一般来说指的是将请求转发给服务器集群。</p>
 <p>举个具体的例子 🌰，晚高峰乘坐地铁的时候，入站口经常会有地铁工作人员大喇叭“请走 B 口，B 口人少车空….”，这个工作人员的作用就是负载均衡。</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img">负载均衡</p>
+<p><img data-src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img">负载均衡</p>
 <h3 id="2-5-动静分离"><a href="#2-5-动静分离" class="headerlink" title="2.5 动静分离"></a>2.5 动静分离</h3><p>为了加快网站的解析速度，可以把动态页面和静态页面由不同的服务器来解析，加快解析速度，降低原来单个服务器的压力。</p>
-<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_56_53_1.jpg" alt="img">动静分离</p>
+<p><img data-src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_56_53_1.jpg" alt="img">动静分离</p>
 <p>一般来说，都需要将动态资源和静态资源分开，由于 Nginx 的高并发和静态资源缓存等特性，经常将静态资源部署在 Nginx 上。如果请求的是静态资源，直接到静态资源目录获取资源，如果是动态资源的请求，则利用反向代理的原理，把请求转发给对应后台应用去处理，从而实现动静分离。</p>
 <p>使用前后端分离后，可以很大程度提升静态资源的访问速度，即使动态服务不可用，静态资源的访问也不会受到影响。</p>
 <h2 id="3-Nginx-快速安装"><a href="#3-Nginx-快速安装" class="headerlink" title="3. Nginx 快速安装"></a><strong>3. Nginx 快速安装</strong></h2><h3 id="3-1-安装"><a href="#3-1-安装" class="headerlink" title="3.1 安装"></a>3.1 安装</h3><p>我们可以先看看</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list | grep nginx</span><br></pre></td></tr></table></figure>
 <p>来看看</p>
-<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_57_00_1.jpg" alt="img"></p>
+<p><img data-src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_57_00_1.jpg" alt="img"></p>
 <p>然后</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install nginx</span><br></pre></td></tr></table></figure>
 <p>来安装 Nginx，然后我们在命令行中 <code>nginx -v</code> 就可以看到具体的 Nginx 版本信息，也就安装完毕了。</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img">image-20200307180545816</p>
+<p><img data-src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img">image-20200307180545816</p>
 <h3 id="3-2-相关文件夹"><a href="#3-2-相关文件夹" class="headerlink" title="3.2 相关文件夹"></a>3.2 相关文件夹</h3><p>然后我们可以使用 <code>rpm -ql nginx</code> 来查看 Nginx 被安装到了什么地方，有哪些相关目录，其中位于 <code>/etc</code> 目录下的主要是配置文件，还有一些文件见下图：</p>
-<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_57_12_1.jpg" alt="img"></p>
+<p><img data-src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_57_12_1.jpg" alt="img"></p>
 <p>主要关注的文件夹有两个：</p>
 <ol>
 <li><code>/etc/nginx/conf.d/</code> 文件夹，是我们进行子配置的配置项存放处，<code>/etc/nginx/nginx.conf</code> 主配置文件会默认把这个文件夹中所有子配置项都引入；</li>
@@ -618,17 +450,17 @@
 </table>
 <p>还有更多的内置预定义变量，可以直接搜索关键字「nginx内置预定义变量」可以看到一堆博客写这个，这些变量都可以在配置文件中直接使用。</p>
 <h2 id="6-设置二级域名虚拟主机"><a href="#6-设置二级域名虚拟主机" class="headerlink" title="6. 设置二级域名虚拟主机"></a><strong>6. 设置二级域名虚拟主机</strong></h2><p>在某某云 ☁️ 上购买了域名之后，就可以配置虚拟主机了，一般配置的路径在<code>域名管理 -&gt; 解析 -&gt; 添加记录</code> 中添加二级域名，配置后某某云会把二级域名也解析到我们配置的服务器 IP 上，然后我们在 Nginx 上配置一下虚拟主机的访问监听，就可以拿到从这个二级域名过来的请求了。</p>
-<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_57_35_1.jpg" alt="img">image-20200426150644768</p>
+<p><img data-src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_57_35_1.jpg" alt="img">image-20200426150644768</p>
 <p>现在我自己的服务器上配置了一个 fe 的二级域名，也就是说在外网访问 <code>fe.sherlocked93.club</code> 的时候，也可以访问到我们的服务器了。</p>
 <p>由于默认配置文件 <code>/etc/nginx/nginx.conf</code> 的 http 模块中有一句 <code>include /etc/nginx/conf.d/*.conf</code> 也就是说 <code>conf.d</code> 文件夹下的所有 <code>*.conf</code> 文件都会作为子配置项被引入配置文件中。为了维护方便，我在 <code>/etc/nginx/conf.d</code> 文件夹中新建一个 <code>fe.sherlocked93.club.conf</code> ：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># /etc/nginx/conf.d/fe.sherlocked93.club.conf</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">  listen 80;</span><br><span class="line">	server_name fe.sherlocked93.club;</span><br><span class="line"></span><br><span class="line">	location / &#123;</span><br><span class="line">		root  /usr/share/nginx/html/fe;</span><br><span class="line">		index index.html;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后在 <code>/usr/share/nginx/html</code> 文件夹下新建 fe 文件夹，新建文件<code>index.html</code>，内容随便写点，改完 <code>nginx -s reload</code> 重新加载，浏览器中输入<code>fe.sherlocked93.club</code>，发现从二级域名就可以访问到我们刚刚新建的 fe 文件夹：</p>
-<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_58_47_1.jpg" alt="img"></p>
+<p><img data-src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_58_47_1.jpg" alt="img"></p>
 <h2 id="7-配置反向代理"><a href="#7-配置反向代理" class="headerlink" title="7. 配置反向代理"></a><strong>7. 配置反向代理</strong></h2><p>反向代理是工作中最常用的服务器功能，经常被用来解决跨域问题，下面简单介绍一下如何实现反向代理。</p>
 <p>首先进入 Nginx 的主配置文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure>
 <p>为了看起来方便，把行号显示出来 <code>:set nu</code> （个人习惯），然后我们去 <code>http</code>模块的 <code>server</code> 块中的 <code>location /</code>，增加一行将默认网址重定向到最大学习网站 Bilibili 的 <code>proxy_pass</code> 配置 🤓 ：</p>
-<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_58_57_1.jpg" alt="img"></p>
+<p><img data-src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_58_57_1.jpg" alt="img"></p>
 <p>改完保存退出，<code>nginx -s reload</code> 重新加载，进入默认网址，那么现在就直接跳转到 B 站了，实现了一个简单的代理。</p>
 <p>实际使用中，可以将请求转发到本机另一个服务器上，也可以根据访问的路径跳转到不同端口的服务中。</p>
 <p>比如我们监听 <code>9001</code> 端口，然后把访问不同路径的请求进行反向代理：</p>
@@ -647,7 +479,7 @@
 <li><code>proxy_redirect</code>：用于修改后端服务器返回的响应头中的 Location 和 Refresh。</li>
 </ol>
 <h2 id="8-跨域-CORS-配置"><a href="#8-跨域-CORS-配置" class="headerlink" title="8. 跨域 CORS 配置"></a><strong>8. 跨域 CORS 配置</strong></h2><p>关于简单请求、非简单请求、跨域的概念，前面已经介绍过了，还不了解的可以看看前面的讲解。现在前后端分离的项目一统天下，经常本地起了前端服务，需要访问不同的后端地址，不可避免遇到跨域问题。</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
+<p><img data-src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
 <p>要解决跨域问题，我们来制造一个跨域问题。首先和前面设置二级域名的方式一样，先设置好 <code>fe.sherlocked93.club</code> 和 <code>be.sherlocked93.club</code> 二级域名，都指向本云服务器地址，虽然对应 IP 是一样的，但是在 <code>fe.sherlocked93.club</code> 域名发出的请求访问 <code>be.sherlocked93.club</code> 域名的请求还是跨域了，因为访问的 host 不一致（如果不知道啥原因参见前面跨域的内容）。</p>
 <h3 id="8-1-使用反向代理解决跨域"><a href="#8-1-使用反向代理解决跨域" class="headerlink" title="8.1 使用反向代理解决跨域"></a>8.1 使用反向代理解决跨域</h3><p>在前端服务地址为 <code>fe.sherlocked93.club</code> 的页面请求 <code>be.sherlocked93.club</code> 的后端服务导致的跨域，可以这样配置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen 9001;</span><br><span class="line">  server_name fe.sherlocked93.club;</span><br><span class="line"></span><br><span class="line">  location / &#123;</span><br><span class="line">    proxy_pass be.sherlocked93.club;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -660,16 +492,16 @@
 <p>比如前端站点是 <code>fe.sherlocked93.club</code>，这个地址下的前端页面请求 <code>be.sherlocked93.club</code> 下的资源，比如前者的 <code>fe.sherlocked93.club/index.html</code> 内容是这样的：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;welcome fe.sherlocked93.club!!&lt;h1&gt;</span><br><span class="line">    &lt;script type=&apos;text/javascript&apos;&gt;</span><br><span class="line">    var xmlhttp = new XMLHttpRequest()</span><br><span class="line">    xmlhttp.open(&quot;GET&quot;, &quot;http://be.sherlocked93.club/index.html&quot;, true);</span><br><span class="line">    xmlhttp.send();</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 <p>打开浏览器访问 <code>fe.sherlocked93.club/index.html</code> 的结果如下：</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
+<p><img data-src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
 <p>很明显这里是跨域请求，在浏览器中直接访问 <code>http://be.sherlocked93.club/index.html</code> 是可以访问到的，但是在 <code>fe.sherlocked93.club</code> 的 html 页面访问就会出现跨域。</p>
 <p>在 <code>/etc/nginx/conf.d/</code> 文件夹中新建一个配置文件，对应二级域名 <code>be.sherlocked93.club</code> ：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># /etc/nginx/conf.d/be.sherlocked93.club.conf</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">  listen       80;</span><br><span class="line">  server_name  be.sherlocked93.club;</span><br><span class="line">  </span><br><span class="line">	add_header &apos;Access-Control-Allow-Origin&apos; $http_origin;   # 全局变量获得当前请求origin，带cookie的请求不支持*</span><br><span class="line">	add_header &apos;Access-Control-Allow-Credentials&apos; &apos;true&apos;;    # 为 true 可带上 cookie</span><br><span class="line">	add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;  # 允许请求方法</span><br><span class="line">	add_header &apos;Access-Control-Allow-Headers&apos; $http_access_control_request_headers;  # 允许请求的 header，可以为 *</span><br><span class="line">	add_header &apos;Access-Control-Expose-Headers&apos; &apos;Content-Length,Content-Range&apos;;</span><br><span class="line">	</span><br><span class="line">  if ($request_method = &apos;OPTIONS&apos;) &#123;</span><br><span class="line">		add_header &apos;Access-Control-Max-Age&apos; 1728000;   # OPTIONS 请求的有效期，在有效期内不用发出另一条预检请求</span><br><span class="line">		add_header &apos;Content-Type&apos; &apos;text/plain; charset=utf-8&apos;;</span><br><span class="line">		add_header &apos;Content-Length&apos; 0;</span><br><span class="line">    </span><br><span class="line">		return 204;                  # 200 也可以</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">	location / &#123;</span><br><span class="line">		root  /usr/share/nginx/html/be;</span><br><span class="line">		index index.html;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后 <code>nginx -s reload</code> 重新加载配置。这时再访问 <code>fe.sherlocked93.club/index.html</code> 结果如下，请求中出现了我们刚刚配置的 Header：</p>
-<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_03_45_1.jpg" alt="img"></p>
+<p><img data-src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_03_45_1.jpg" alt="img"></p>
 <p>解决了跨域问题。</p>
 <h2 id="9-开启-gzip-压缩"><a href="#9-开启-gzip-压缩" class="headerlink" title="9. 开启 gzip 压缩"></a><strong>9. 开启 gzip 压缩</strong></h2><p>gzip 是一种常用的网页压缩技术，传输的网页经过 gzip 压缩之后大小通常可以变为原来的一半甚至更小（官网原话），更小的网页体积也就意味着带宽的节约和传输速度的提升，特别是对于访问量巨大大型网站来说，每一个静态资源体积的减小，都会带来可观的流量与带宽的节省。</p>
 <p>百度可以找到很多检测站点来查看目标网页有没有开启 gzip 压缩，在下随便找了一个 &lt;网页GZIP压缩检测&gt; 输入掘金 <code>juejin.im</code> 来偷窥下掘金有没有开启 gzip。</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
+<p><img data-src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
 <p>这里可以看到掘金是开启了 gzip 的，压缩效果还挺不错，达到了 52% 之多，本来 <code>34kb</code> 的网页体积，压缩完只需要 <code>16kb</code>，可以想象网页传输速度提升了不少。</p>
 <h3 id="9-1-Nginx-配置-gzip"><a href="#9-1-Nginx-配置-gzip" class="headerlink" title="9.1 Nginx 配置 gzip"></a>9.1 Nginx 配置 gzip</h3><p>使用 gzip 不仅需要 Nginx 配置，浏览器端也需要配合，需要在请求消息头中包含 <code>Accept-Encoding: gzip</code>（IE5 之后所有的浏览器都支持了，是现代浏览器的默认设置）。一般在请求 html 和 css 等静态资源的时候，支持的浏览器在 request 请求静态资源的时候，会加上 <code>Accept-Encoding: gzip</code> 这个 header，表示自己支持 gzip 的压缩方式，Nginx 在拿到这个请求的时候，如果有相应配置，就会返回经过 gzip 压缩过的文件给浏览器，并在 response 相应的时候加上 <code>content-encoding: gzip</code> 来告诉浏览器自己采用的压缩方式（因为浏览器在传给服务器的时候一般还告诉服务器自己支持好几种压缩方式），浏览器拿到压缩的文件后，根据自己的解压方式进行解析。</p>
 <p>先来看看 Nginx 怎么进行 gzip 配置，和之前的配置一样，为了方便管理，还是在 <code>/etc/nginx/conf.d/</code> 文件夹中新建配置文件 <code>gzip.conf</code> ：</p>
@@ -687,16 +519,16 @@
 </ol>
 <p>这个配置可以插入到 http 模块整个服务器的配置里，也可以插入到需要使用的虚拟主机的 <code>server</code> 或者下面的 <code>location</code> 模块中，当然像上面我们这样写的话就是被 include 到 http 模块中了。</p>
 <p>其他更全的配置信息可以查看 &lt;官网文档ngx_http_gzip_module&gt;，配置前是这样的：</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
+<p><img data-src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
 <p>配置之后 response 的 header 里面多了一个 <code>Content-Encoding: gzip</code>，返回信息被压缩了：</p>
-<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_04_05_1.jpg" alt="img"></p>
+<p><img data-src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_04_05_1.jpg" alt="img"></p>
 <p>注意了，一般 gzip 的配置建议加上 <code>gzip_min_length 1k</code>，不加的话：</p>
-<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_04_56_1.jpg" alt="img"></p>
+<p><img data-src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_04_56_1.jpg" alt="img"></p>
 <p>由于文件太小，gzip 压缩之后得到了 -48% 的体积优化，压缩之后体积还比压缩之前体积大了，所以最好设置低于 <code>1kb</code> 的文件就不要 gzip 压缩了 🤪</p>
 <h3 id="9-2-Webpack-的-gzip-配置"><a href="#9-2-Webpack-的-gzip-配置" class="headerlink" title="9.2 Webpack 的 gzip 配置"></a>9.2 Webpack 的 gzip 配置</h3><p>当前端项目使用 Webpack 进行打包的时候，也可以开启 gzip 压缩：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// vue-cli3 的 vue.config.js 文件</span><br><span class="line">const CompressionWebpackPlugin = require(&apos;compression-webpack-plugin&apos;)</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  // gzip 配置</span><br><span class="line">  configureWebpack: config =&gt; &#123;</span><br><span class="line">    if (process.env.NODE_ENV === &apos;production&apos;) &#123;</span><br><span class="line">      // 生产环境</span><br><span class="line">      return &#123;</span><br><span class="line">        plugins: [new CompressionWebpackPlugin(&#123;</span><br><span class="line">          test: /\.js$|\.html$|\.css/,    // 匹配文件名</span><br><span class="line">          threshold: 10240,               // 文件压缩阈值，对超过10k的进行压缩</span><br><span class="line">          deleteOriginalAssets: false     // 是否删除源文件</span><br><span class="line">        &#125;)]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>由此打包出来的文件如下图：</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
+<p><img data-src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
 <p>这里可以看到某些打包之后的文件下面有一个对应的 <code>.gz</code> 经过 <code>gzip</code> 压缩之后的文件，这是因为这个文件超过了 <code>10kb</code>，有的文件没有超过 <code>10kb</code> 就没有进行<code>gzip</code> 打包，如果你期望压缩文件的体积阈值小一点，可以在 <code>compression-webpack-plugin</code> 这个插件的配置里进行对应配置。</p>
 <p>那么为啥这里 Nginx 已经有了 gzip 压缩，Webpack 这里又整了个 gzip 呢，因为如果全都是使用 Nginx 来压缩文件，会耗费服务器的计算资源，如果服务器的 <code>gzip_comp_level</code> 配置的比较高，就更增加服务器的开销，相应增加客户端的请求时间，得不偿失。</p>
 <p>如果压缩的动作在前端打包的时候就做了，把打包之后的高压缩等级文件作为静态资源放在服务器上，Nginx 会优先查找这些压缩之后的文件返回给客户端，相当于把压缩文件的动作从 Nginx 提前给 Webpack 打包的时候完成，节约了服务器资源，所以一般推介在生产环境应用 Webpack 配置 gzip 压缩。</p>
@@ -714,7 +546,7 @@
 <p>通过 location 指定不同的后缀名实现不同的请求转发。通过 expires 参数设置，可以使浏览器缓存过期时间，减少与服务器之前的请求和流量。具体 expires 定义：是给一个资源设定一个过期时间，也就是说无需去服务端验证，直接通过浏览器自身确认是否过期即可，所以不会产生额外的流量。此种方法非常适合不经常变动的资源。（如果经常更新的文件，不建议使用 expires 来缓存），我这里设置 3d，表示在这 3 天之内访问这个URL，发送一个请求，比对服务器该文件最后更新时间没有变化。则不会从服务器抓取，返回状态码 304，如果有修改，则直接从服务器重新下载，返回状态码 200。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  location /www/ &#123;</span><br><span class="line">  	root /data/;</span><br><span class="line">    index index.html index.htm;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  location /image/ &#123;</span><br><span class="line">  	root /data/;</span><br><span class="line">    autoindex on;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="12-配置高可用集群（双机热备）"><a href="#12-配置高可用集群（双机热备）" class="headerlink" title="12. 配置高可用集群（双机热备）"></a><strong>12. 配置高可用集群（双机热备）</strong></h2><p>当主 Nginx 服务器宕机之后，切换到备份 Nginx 服务器</p>
-<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_28_02_1.jpg" alt="img">2020-03-13-双机热备</p>
+<p><img data-src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_28_02_1.jpg" alt="img">2020-03-13-双机热备</p>
 <p>首先安装 keepalived，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install keepalived -y</span><br></pre></td></tr></table></figure>
 <p>然后编辑 <code>/etc/keepalived/keepalived.conf</code> 配置文件，并在配置文件中增加 <code>vrrp_script</code> 定义一个外围检测机制，并在 <code>vrrp_instance</code> 中通过定义 <code>track_script</code> 来追踪脚本执行过程，实现节点转移：</p>
@@ -731,7 +563,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># /etc/nginx/conf.d/fe.sherlocked93.club.conf</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">  listen 80;</span><br><span class="line">	server_name fe.sherlocked93.club;</span><br><span class="line"></span><br><span class="line">	location / &#123;</span><br><span class="line">		root  /usr/share/nginx/html/pc;</span><br><span class="line">    if ($http_user_agent ~* &apos;(Android|webOS|iPhone|iPod|BlackBerry)&apos;) &#123;</span><br><span class="line">      root /usr/share/nginx/html/mobile;</span><br><span class="line">    &#125;</span><br><span class="line">		index index.html;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>配置基本没什么不一样的，主要多了一个 <code>if</code> 语句，然后使用<code>$http_user_agent</code> 全局变量来判断用户请求的 <code>user-agent</code>，指向不同的 root 路径，返回对应站点。</p>
 <p>在浏览器访问这个站点，然后 F12 中模拟使用手机访问：</p>
-<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_28_35_1.jpg" alt="img"></p>
+<p><img data-src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_21_28_35_1.jpg" alt="img"></p>
 <p>可以看到在模拟使用移动端访问的时候，Nginx 返回的站点变成了移动端对应的 html 了。</p>
 <h2 id="14-配置-HTTPS"><a href="#14-配置-HTTPS" class="headerlink" title="14. 配置 HTTPS"></a><strong>14. 配置 HTTPS</strong></h2><p>具体配置过程网上挺多的了，也可以使用你购买的某某云，一般都会有免费申请的服务器证书，安装直接看所在云的操作指南即可。</p>
 <p>我购买的腾讯云提供的亚洲诚信机构颁发的免费证书只能一个域名使用，二级域名什么的需要另外申请，但是申请审批比较快，一般几分钟就能成功，然后下载证书的压缩文件，里面有个 nginx 文件夹，把 <code>xxx.crt</code> 和 <code>xxx.key</code> 文件拷贝到服务器目录，再配置下：</p>
@@ -768,313 +600,234 @@
 <hr>
 <p>网上的帖子大多深浅不一，甚至有些前后矛盾，在下的文章都是学习过程中的总结，如果发现错误，欢迎留言指出~</p>
 
-      
     </div>
-    
-    
-    
 
     
-
-	<div>
-  	
-    	<div>
-
-    <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读!-------------</div>
-
-</div>
-  	
-	</div>
-
     
-
     
+        
 
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/nginx/" rel="tag"><i class="fa fa-tag"></i> nginx</a>
-          
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
         </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2020/05/07/Java8-14的有哪些重要的新特性/" rel="next" title="Java8~14的有哪些重要的新特性">
-                <i class="fa fa-chevron-left"></i> Java8~14的有哪些重要的新特性
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/10/synchronized-and-volatile/" rel="prev" title="synchronized and volatile">
-                synchronized and volatile <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </div>
   </div>
-  
-  
-  
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/nginx/" rel="tag"># nginx</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/07/Java8-14的有哪些重要的新特性/" rel="prev" title="Java8~14的有哪些重要的新特性">
+      <i class="fa fa-chevron-left"></i> Java8~14的有哪些重要的新特性
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/10/synchronized-and-volatile/" rel="next" title="synchronized and volatile">
+      synchronized and volatile <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="/images/avatar.jpg"
-                alt="Smile" />
-            
-              <p class="site-author-name" itemprop="name">Smile</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">17</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-            <div class="feed-link motion-element">
-              <a href="/atom.xml" rel="alternate">
-                <i class="fa fa-rss"></i>
-                RSS
-              </a>
-            </div>
-          
-
-          
-            <div class="links-of-author motion-element">
-                
-                  <span class="links-of-author-item">
-                    <a href="https://github.com/sjsmi1e" target="_blank" title="GitHub">
-                      
-                        <i class="fa fa-fw fa-github"></i>GitHub</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="mailto:1043110319@qq.com" target="_blank" title="E-Mail">
-                      
-                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="https://blog.csdn.net/sjs_caomei" target="_blank" title="csdn">
-                      
-                        <i class="fa fa-fw fa-heartbeat"></i>csdn</a>
-                  </span>
-                
-            </div>
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Nginx-介绍"><span class="nav-number">1.</span> <span class="nav-text">1. Nginx 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-相关概念"><span class="nav-number">2.</span> <span class="nav-text">2. 相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-简单请求和非简单请求"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 简单请求和非简单请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-跨域"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-正向代理和反向代理"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 正向代理和反向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-负载均衡"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-动静分离"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 动静分离</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Nginx-快速安装"><span class="nav-number">3.</span> <span class="nav-text">3. Nginx 快速安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-安装"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-相关文件夹"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 相关文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-跑起来康康"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 跑起来康康</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-安装-nvm-amp-node-amp-git"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 安装 nvm &amp; node &amp; git</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Nginx-操作常用命令"><span class="nav-number">4.</span> <span class="nav-text">4. Nginx 操作常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Nginx-配置语法"><span class="nav-number">5.</span> <span class="nav-text">5. Nginx 配置语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-典型配置"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 典型配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-全局变量"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 全局变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-设置二级域名虚拟主机"><span class="nav-number">6.</span> <span class="nav-text">6. 设置二级域名虚拟主机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-配置反向代理"><span class="nav-number">7.</span> <span class="nav-text">7. 配置反向代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-跨域-CORS-配置"><span class="nav-number">8.</span> <span class="nav-text">8. 跨域 CORS 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-使用反向代理解决跨域"><span class="nav-number">8.1.</span> <span class="nav-text">8.1 使用反向代理解决跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-配置-header-解决跨域"><span class="nav-number">8.2.</span> <span class="nav-text">8.2 配置 header 解决跨域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-开启-gzip-压缩"><span class="nav-number">9.</span> <span class="nav-text">9. 开启 gzip 压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-Nginx-配置-gzip"><span class="nav-number">9.1.</span> <span class="nav-text">9.1 Nginx 配置 gzip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-Webpack-的-gzip-配置"><span class="nav-number">9.2.</span> <span class="nav-text">9.2 Webpack 的 gzip 配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-配置负载均衡"><span class="nav-number">10.</span> <span class="nav-text">10. 配置负载均衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-配置动静分离"><span class="nav-number">11.</span> <span class="nav-text">11. 配置动静分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-配置高可用集群（双机热备）"><span class="nav-number">12.</span> <span class="nav-text">12. 配置高可用集群（双机热备）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-适配-PC-或移动设备"><span class="nav-number">13.</span> <span class="nav-text">13. 适配 PC 或移动设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-配置-HTTPS"><span class="nav-number">14.</span> <span class="nav-text">14. 配置 HTTPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-一些常用技巧"><span class="nav-number">15.</span> <span class="nav-text">15. 一些常用技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#15-1-静态服务"><span class="nav-number">15.1.</span> <span class="nav-text">15.1 静态服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-2-图片防盗链"><span class="nav-number">15.2.</span> <span class="nav-text">15.2 图片防盗链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-3-请求过滤"><span class="nav-number">15.3.</span> <span class="nav-text">15.3 请求过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-4-配置图片、字体等静态文件缓存"><span class="nav-number">15.4.</span> <span class="nav-text">15.4 配置图片、字体等静态文件缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-5-单页面项目-history-路由配置"><span class="nav-number">15.5.</span> <span class="nav-text">15.5 单页面项目 history 路由配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-6-HTTP-请求转发到-HTTPS"><span class="nav-number">15.6.</span> <span class="nav-text">15.6 HTTP 请求转发到 HTTPS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-7-泛域名路径分离"><span class="nav-number">15.7.</span> <span class="nav-text">15.7 泛域名路径分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-8-泛域名转发"><span class="nav-number">15.8.</span> <span class="nav-text">15.8 泛域名转发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-最佳实践"><span class="nav-number">16.</span> <span class="nav-text">16. 最佳实践</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=466881971&auto=1&height=66"></iframe>
-
-    </div>
-  </aside>
-
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Smile</span>
-
-  
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
-    </span>
-    
-      <span class="post-meta-item-text">Site words total count&#58;</span>
-    
-    <span title="Site words total count">57.7k</span>
-  
-</div>
-
-
-  <!--
-<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
--->
-
-
-
-<div class="theme-info">
-  <div class="powered-by"></div>
-  <span class="post-count">博客全站共57.7k字</span>
-</div>
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        <!--网易云插件-->
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+            src="//music.163.com/outchain/player?type=2&id=466881971&auto=1&height=66">
+        </iframe>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Nginx-介绍"><span class="nav-number">1.</span> <span class="nav-text">1. Nginx 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-相关概念"><span class="nav-number">2.</span> <span class="nav-text">2. 相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-简单请求和非简单请求"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 简单请求和非简单请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-跨域"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-正向代理和反向代理"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 正向代理和反向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-负载均衡"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-动静分离"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 动静分离</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Nginx-快速安装"><span class="nav-number">3.</span> <span class="nav-text">3. Nginx 快速安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-安装"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-相关文件夹"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 相关文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-跑起来康康"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 跑起来康康</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-安装-nvm-amp-node-amp-git"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 安装 nvm &amp; node &amp; git</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Nginx-操作常用命令"><span class="nav-number">4.</span> <span class="nav-text">4. Nginx 操作常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Nginx-配置语法"><span class="nav-number">5.</span> <span class="nav-text">5. Nginx 配置语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-典型配置"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 典型配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-全局变量"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 全局变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-设置二级域名虚拟主机"><span class="nav-number">6.</span> <span class="nav-text">6. 设置二级域名虚拟主机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-配置反向代理"><span class="nav-number">7.</span> <span class="nav-text">7. 配置反向代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-跨域-CORS-配置"><span class="nav-number">8.</span> <span class="nav-text">8. 跨域 CORS 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-使用反向代理解决跨域"><span class="nav-number">8.1.</span> <span class="nav-text">8.1 使用反向代理解决跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-配置-header-解决跨域"><span class="nav-number">8.2.</span> <span class="nav-text">8.2 配置 header 解决跨域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-开启-gzip-压缩"><span class="nav-number">9.</span> <span class="nav-text">9. 开启 gzip 压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-Nginx-配置-gzip"><span class="nav-number">9.1.</span> <span class="nav-text">9.1 Nginx 配置 gzip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-Webpack-的-gzip-配置"><span class="nav-number">9.2.</span> <span class="nav-text">9.2 Webpack 的 gzip 配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-配置负载均衡"><span class="nav-number">10.</span> <span class="nav-text">10. 配置负载均衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-配置动静分离"><span class="nav-number">11.</span> <span class="nav-text">11. 配置动静分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-配置高可用集群（双机热备）"><span class="nav-number">12.</span> <span class="nav-text">12. 配置高可用集群（双机热备）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-适配-PC-或移动设备"><span class="nav-number">13.</span> <span class="nav-text">13. 适配 PC 或移动设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-配置-HTTPS"><span class="nav-number">14.</span> <span class="nav-text">14. 配置 HTTPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-一些常用技巧"><span class="nav-number">15.</span> <span class="nav-text">15. 一些常用技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#15-1-静态服务"><span class="nav-number">15.1.</span> <span class="nav-text">15.1 静态服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-2-图片防盗链"><span class="nav-number">15.2.</span> <span class="nav-text">15.2 图片防盗链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-3-请求过滤"><span class="nav-number">15.3.</span> <span class="nav-text">15.3 请求过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-4-配置图片、字体等静态文件缓存"><span class="nav-number">15.4.</span> <span class="nav-text">15.4 配置图片、字体等静态文件缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-5-单页面项目-history-路由配置"><span class="nav-number">15.5.</span> <span class="nav-text">15.5 单页面项目 history 路由配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-6-HTTP-请求转发到-HTTPS"><span class="nav-number">15.6.</span> <span class="nav-text">15.6 HTTP 请求转发到 HTTPS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-7-泛域名路径分离"><span class="nav-number">15.7.</span> <span class="nav-text">15.7 泛域名路径分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-8-泛域名转发"><span class="nav-number">15.8.</span> <span class="nav-text">15.8 泛域名转发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-最佳实践"><span class="nav-number">16.</span> <span class="nav-text">16. 最佳实践</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Smile"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Smile</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sjsmi1e" title="GitHub → https://github.com/sjsmi1e" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1043110319@qq.com" title="E-Mail → mailto:1043110319@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/sjs_caomei" title="csdn → https://blog.csdn.net/sjs_caomei" rel="noopener" target="_blank"><i class="heartbeat fa-fw"></i>csdn</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Smile</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">141k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:08</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
 
 
 
@@ -1085,445 +838,39 @@
 
   
 
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
 
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
     });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz',
+      appKey     : 'DVHJikdL744Xv15hyvirW00X',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
     });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
+  }, window.Valine);
+});
+</script>
 
+      <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/clicklove.js"></script>
 
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-<!-- 页面点击小红心 -->
-<script type="text/javascript" src="/js/src/love.js"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/wanko.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false});</script></body>
 </html>
