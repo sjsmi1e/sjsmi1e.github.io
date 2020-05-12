@@ -1197,7 +1197,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #fbffd7;
+  background: #58ff8a;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2615,6 +2615,8 @@ article {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -100%);
+  width: 100%;
+  text-align: center;
 }
 .cover-inner h1 {
   font-family: Titillium Web, PingFang SC, Hiragino Sans GB, "Microsoft JhengHei", "Microsoft YaHei", Helvetica Neue, Helvetica, Arial, sans-serif;
