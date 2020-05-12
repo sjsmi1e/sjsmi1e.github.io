@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="fonts.lug.ustc.edu.cn/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
   <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
@@ -199,6 +199,22 @@
 
 
     <main class="main">
+      <section id="cover" class="cover">
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover2.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1>smile的学习书屋</h1>
+      <div id="subtitle-box">
+          <span id="subtitle">喜欢争取，得到珍惜</span>
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <img id="go_main" src="/images/down.png"></img>
+  </div>
+</section>
       <div class="main-inner">
         <div class="content-wrap">
           
@@ -560,7 +576,19 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     </div>
       <!-- 页面点击小红心 -->
   <script type="text/javascript" src="/js/clicklove.js"></script>
-
+<script>
+  //
+// $(document).pjax('a[target!=_blank][rel!=group]', '#pjax-container', {
+//   fragment: '#pjax-container',
+//   timeout: 15000,
+// });
+// $(document).ready(function(){
+//   $('#go_main').click(function(event) {
+//       /* Act on the event */
+//        $(".main-inner").animate( {scrollTop : 100  },1000 );
+//     });
+// }
+</script>
 
 </body>
 </html>
