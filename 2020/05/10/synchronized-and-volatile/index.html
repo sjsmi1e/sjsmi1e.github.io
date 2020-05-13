@@ -1,300 +1,245 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.7.1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-<link rel="stylesheet" href="fonts.lug.ustc.edu.cn/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-
-  <meta name="description" content="用户态与内核态 JDK早期，synchronized 叫做重量级锁， 因为申请锁资源必须通过kernel, 系统调用 1234567891011121314151617181920;hello.asm;write(int fd, const void *buffer, size_t nbytes)section data    msg db &amp;quot;Hello&amp;quot;, 0xA    le">
-<meta name="keywords" content="java">
-<meta property="og:type" content="article">
-<meta property="og:title" content="synchronized and volatile">
-<meta property="og:url" content="http://yoursite.com/2020/05/10/synchronized-and-volatile/index.html">
-<meta property="og:site_name" content="MY STUDY BLOG">
-<meta property="og:description" content="用户态与内核态 JDK早期，synchronized 叫做重量级锁， 因为申请锁资源必须通过kernel, 系统调用 1234567891011121314151617181920;hello.asm;write(int fd, const void *buffer, size_t nbytes)section data    msg db &amp;quot;Hello&amp;quot;, 0xA    le">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-10T02:18:35.171Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="synchronized and volatile">
-<meta name="twitter:description" content="用户态与内核态 JDK早期，synchronized 叫做重量级锁， 因为申请锁资源必须通过kernel, 系统调用 1234567891011121314151617181920;hello.asm;write(int fd, const void *buffer, size_t nbytes)section data    msg db &amp;quot;Hello&amp;quot;, 0xA    le">
-
-<link rel="canonical" href="http://yoursite.com/2020/05/10/synchronized-and-volatile/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
-#needsharebutton-float {
-  bottom: 88px;
-  cursor: pointer;
-  left: -8px;
-  position: fixed;
-  z-index: 9999;
-}
-#needsharebutton-float .btn {
-  border: 1px solid $btn-default-border-color;
-  border-radius: 4px;
-  padding: 0 10px 0 14px;
-}
-</style>
-  <title>synchronized and volatile | MY STUDY BLOG</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+    <meta charset="utf-8">
+    
+    
+    <title>synchronized and volatile | MY STUDY BLOG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="java">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css" />
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
 <link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
+<body>
+    <div id="loading" class="active"></div>
 
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">MY STUDY BLOG</h1>
-      <span class="logo-line-after"><i></i></span>
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
     </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
         </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-
-
-    <main class="main">
-      <section id="cover" class="cover">
-  <div class="cover-frame">
-    <div class="bg-box">
-      <img src="http://q9qx9gs6u.bkt.clouddn.com/cover2.jpg" alt="image frame" />
-    </div>
-    <div class="cover-inner text-center text-white">
-      <h1>smile的学习书屋</h1>
-      <div id="subtitle-box">
-          <span id="subtitle">喜欢争取，得到珍惜</span>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
       </div>
     </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+      </ul>
+    </div>
   </div>
-  <div class="cover-learn-more">
-    <img id="go_main" src="/images/down.png"></img>
-  </div>
-</section>
-      <div class="main-inner">
-        <div class="content-wrap">
-          
+</aside>
 
-          <div class="content post posts-expand">
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>synchronized and volatile</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/banner.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">synchronized and volatile</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-05-10T02:01:51.000Z" itemprop="datePublished" class="page-time">
+  2020-05-10
+</time>
+
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-synchronized-and-volatile"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">synchronized and volatile</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-05-10 10:01:51" datetime="2020-05-10T02:01:51.000Z"  itemprop="datePublished">2020-05-10</time>
+
             
 
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/10/synchronized-and-volatile/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Smile">
-      <meta itemprop="description" content="喜欢争取，得到珍惜">
+            
+	<span id="/2020/05/10/synchronized-and-volatile/" class="leancloud_visitors" data-flag-title="synchronized and volatile" title="synchronized and volatile">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/10/synchronized-and-volatile/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/10/synchronized-and-volatile/"></span>
+        </a>
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MY STUDY BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          synchronized and volatile
-        </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-05-10 10:01:51 / 修改时间：10:18:35" itemprop="dateCreated datePublished" datetime="2020-05-10T10:01:51+08:00">2020-05-10</time>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/05/10/synchronized-and-volatile/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/10/synchronized-and-volatile/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>17k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>15 分钟</span>
-            </span>
-
+            
         </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <p>用户态与内核态</p>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <p>用户态与内核态</p>
 <p>JDK早期，synchronized 叫做重量级锁， 因为申请锁资源必须通过kernel, 系统调用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">;hello.asm</span><br><span class="line">;write(int fd, const void *buffer, size_t nbytes)</span><br><span class="line"></span><br><span class="line">section data</span><br><span class="line">    msg db &quot;Hello&quot;, 0xA</span><br><span class="line">    len equ $ - msg</span><br><span class="line"></span><br><span class="line">section .text</span><br><span class="line">global _start</span><br><span class="line">_start:</span><br><span class="line"></span><br><span class="line">    mov edx, len</span><br><span class="line">    mov ecx, msg</span><br><span class="line">    mov ebx, 1 ;文件描述符1 std_out</span><br><span class="line">    mov eax, 4 ;write函数系统调用号 4</span><br><span class="line">    int 0x80</span><br><span class="line"></span><br><span class="line">    mov ebx, 0</span><br><span class="line">    mov eax, 1 ;exit函数系统调用号</span><br><span class="line">    int 0x80</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -346,8 +291,14 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> ObjectSynchronizer::fast_enter(Handle obj, BasicLock* lock, <span class="keyword">bool</span> attempt_rebias, TRAPS) &#123;</span><br><span class="line"> <span class="keyword">if</span> (UseBiasedLocking) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!SafepointSynchronize::is_at_safepoint()) &#123;</span><br><span class="line">      BiasedLocking::Condition cond = BiasedLocking::revoke_and_rebias(obj, attempt_rebias, THREAD);</span><br><span class="line">      <span class="keyword">if</span> (cond == BiasedLocking::BIAS_REVOKED_AND_REBIASED) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      assert(!attempt_rebias, <span class="string">"can not rebias toward VM thread"</span>);</span><br><span class="line">      BiasedLocking::revoke_at_safepoint(obj);</span><br><span class="line">    &#125;</span><br><span class="line">    assert(!obj-&gt;mark()-&gt;has_bias_pattern(), <span class="string">"biases should be revoked by now"</span>);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> slow_enter (obj, lock, THREAD) ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> ObjectSynchronizer::slow_enter(Handle obj, BasicLock* lock, TRAPS) &#123;</span><br><span class="line">  markOop mark = obj-&gt;mark();</span><br><span class="line">  assert(!mark-&gt;has_bias_pattern(), <span class="string">"should not see bias pattern here"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (mark-&gt;is_neutral()) &#123;</span><br><span class="line">    <span class="comment">// Anticipate successful CAS -- the ST of the displaced mark must</span></span><br><span class="line">    <span class="comment">// be visible &lt;= the ST performed by the CAS.</span></span><br><span class="line">    lock-&gt;set_displaced_header(mark);</span><br><span class="line">    <span class="keyword">if</span> (mark == (markOop) Atomic::cmpxchg_ptr(lock, obj()-&gt;mark_addr(), mark)) &#123;</span><br><span class="line">      TEVENT (slow_enter: release stacklock) ;</span><br><span class="line">      <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Fall through to inflate() ...</span></span><br><span class="line">  &#125; <span class="keyword">else</span></span><br><span class="line">  <span class="keyword">if</span> (mark-&gt;has_locker() &amp;&amp; THREAD-&gt;is_lock_owned((address)mark-&gt;locker())) &#123;</span><br><span class="line">    assert(lock != mark-&gt;locker(), <span class="string">"must not re-lock the same lock"</span>);</span><br><span class="line">    assert(lock != (BasicLock*)obj-&gt;mark(), <span class="string">"don't relock with same BasicLock"</span>);</span><br><span class="line">    lock-&gt;set_displaced_header(<span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 0</span></span><br><span class="line">  <span class="comment">// The following optimization isn't particularly useful.</span></span><br><span class="line">  <span class="keyword">if</span> (mark-&gt;has_monitor() &amp;&amp; mark-&gt;monitor()-&gt;is_entered(THREAD)) &#123;</span><br><span class="line">    lock-&gt;set_displaced_header (<span class="literal">NULL</span>) ;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// The object header will never be displaced to this lock,</span></span><br><span class="line">  <span class="comment">// so it does not matter what the value is, except that it</span></span><br><span class="line">  <span class="comment">// must be non-zero to avoid looking like a re-entrant lock,</span></span><br><span class="line">  <span class="comment">// and must not look locked either.</span></span><br><span class="line">  lock-&gt;set_displaced_header(markOopDesc::unused_mark());</span><br><span class="line">  ObjectSynchronizer::inflate(THREAD, obj())-&gt;enter(THREAD);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>inflate方法：膨胀为重量级锁</p>
-<h1 id="锁升级过程"><a href="#锁升级过程" class="headerlink" title="锁升级过程"></a>锁升级过程</h1><h2 id="JDK8-markword实现表："><a href="#JDK8-markword实现表：" class="headerlink" title="JDK8 markword实现表："></a>JDK8 markword实现表：</h2><p><img data-src="C:\work\courses\公开课\面试题\你以为你真的懂Synchronized\lock_step.png" alt="image-20200419213508934"></p>
-<p><img data-src="C:\work\courses\公开课\面试题\你以为你真的懂Synchronized\markword-64.png" alt=""></p>
+<h1 id="锁升级过程"><a href="#锁升级过程" class="headerlink" title="锁升级过程"></a>锁升级过程</h1><h2 id="JDK8-markword实现表："><a href="#JDK8-markword实现表：" class="headerlink" title="JDK8 markword实现表："></a>JDK8 markword实现表：</h2><figure class="image-box">
+                <a rel=synchronized and volatile href="C:\work\courses\公开课\面试题\你以为你真的懂Synchronized\lock_step.png" title="image-20200419213508934" data-fancybox="images"><img src="C:\work\courses\公开课\面试题\你以为你真的懂Synchronized\lock_step.png" alt="image-20200419213508934" title="" class=""></a>
+                <p>image-20200419213508934</p>
+            </figure>
+<figure class="image-box">
+                <a rel=synchronized and volatile href="C:\work\courses\公开课\面试题\你以为你真的懂Synchronized\markword-64.png" title="" data-fancybox="images"><img src="C:\work\courses\公开课\面试题\你以为你真的懂Synchronized\markword-64.png" alt="" title="" class=""></a>
+                <p></p>
+            </figure>
 <p><strong>自旋锁什么时候升级为重量级锁？</strong></p>
 <p><strong>为什么有自旋锁还需要重量级锁？</strong></p>
 <blockquote>
@@ -469,349 +420,326 @@
 <p><strong>LOCK 用于在多处理器中执行指令时对共享内存的独占使用。<br>它的作用是能够将当前处理器对应缓存的内容刷新到内存，并使其他处理器对应的缓存失效。</strong><br><strong>另外还提供了有序的指令无法越过这个内存屏障的作用。</strong></p>
 </blockquote>
 
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-05-10T02:18:35.171Z" itemprop="dateUpdated">2020-05-10 10:18:35</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2020/05/10/synchronized-and-volatile/" target="_blank" rel="external">http://yoursite.com/2020/05/10/synchronized-and-volatile/</a>
+        
     </div>
-	<div>
-	  
-	    <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
-    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="Smile">
+            Smile
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
 </div>
-	  
-	</div>
-    
-    
-    
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/java/" rel="tag"># java</a>
-          </div>
-
+            
         
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/05/07/Nginx-从入门到实践，万字详解！/" rel="prev" title="Nginx 从入门到实践，万字详解！">
-      <i class="fa fa-chevron-left"></i> Nginx 从入门到实践，万字详解！
-    </a></div>
-      <div class="post-nav-item"></div>
-    </div>
-      </footer>
+            <div class="page-share-wrap">
     
-  </article>
-  
-  
-  
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/05/10/synchronized-and-volatile/&title=《synchronized and volatile》 — MY STUDY BLOG&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/10/synchronized-and-volatile/&title=《synchronized and volatile》 — MY STUDY BLOG&source=用户态与内核态
+JDK早期，synchronized 叫做重量级锁， 因为申请锁资源必须通过kernel, 系统调用
+123456789101112131..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
 
 
 
-          </div>
-          
-    <div class="comments" id="valine-comments"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
 
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-        <!--网易云插件-->
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
-            src="//music.163.com/outchain/player?type=2&id=466881971&auto=1&height=66">
-        </iframe>
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CAS"><span class="nav-number">1.</span> <span class="nav-text">CAS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unsafe"><span class="nav-number">2.</span> <span class="nav-text">Unsafe</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#markword"><span class="nav-number">3.</span> <span class="nav-text">markword</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工具：JOL-Java-Object-Layout"><span class="nav-number">4.</span> <span class="nav-text">工具：JOL = Java Object Layout</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#synchronized的横切面详解"><span class="nav-number">5.</span> <span class="nav-text">synchronized的横切面详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java源码层级"><span class="nav-number">5.1.</span> <span class="nav-text">java源码层级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字节码层级"><span class="nav-number">5.2.</span> <span class="nav-text">字节码层级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM层级（Hotspot）"><span class="nav-number">5.3.</span> <span class="nav-text">JVM层级（Hotspot）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#锁升级过程"><span class="nav-number">6.</span> <span class="nav-text">锁升级过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK8-markword实现表："><span class="nav-number">6.1.</span> <span class="nav-text">JDK8 markword实现表：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁重入"><span class="nav-number">6.2.</span> <span class="nav-text">锁重入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized最底层实现"><span class="nav-number">6.3.</span> <span class="nav-text">synchronized最底层实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized-vs-Lock-CAS"><span class="nav-number">6.4.</span> <span class="nav-text">synchronized vs Lock (CAS)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#锁消除-lock-eliminate"><span class="nav-number">7.</span> <span class="nav-text">锁消除 lock eliminate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#锁粗化-lock-coarsening"><span class="nav-number">8.</span> <span class="nav-text">锁粗化 lock coarsening</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#锁降级（不重要）"><span class="nav-number">9.</span> <span class="nav-text">锁降级（不重要）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#超线程"><span class="nav-number">10.</span> <span class="nav-text">超线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">11.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#volatile的用途"><span class="nav-number">12.</span> <span class="nav-text">volatile的用途</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-线程可见性"><span class="nav-number">12.1.</span> <span class="nav-text">1.线程可见性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-防止指令重排序"><span class="nav-number">12.2.</span> <span class="nav-text">2.防止指令重排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题：DCL单例需不需要加volatile？"><span class="nav-number">12.2.1.</span> <span class="nav-text">问题：DCL单例需不需要加volatile？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU的基础知识"><span class="nav-number">12.2.2.</span> <span class="nav-text">CPU的基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统底层如何实现数据一致性"><span class="nav-number">12.2.3.</span> <span class="nav-text">系统底层如何实现数据一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统底层如何保证有序性"><span class="nav-number">12.2.4.</span> <span class="nav-text">系统底层如何保证有序性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile如何解决指令重排序"><span class="nav-number">12.2.5.</span> <span class="nav-text">volatile如何解决指令重排序</span></a></li></ol></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Smile"
-      src="/images/avatar.jpg">
-  <p class="site-author-name" itemprop="name">Smile</p>
-  <div class="site-description" itemprop="description">喜欢争取，得到珍惜</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">2</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">9</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/sjsmi1e" title="GitHub → https://github.com/sjsmi1e" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:1043110319@qq.com" title="E-Mail → mailto:1043110319@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://blog.csdn.net/sjs_caomei" title="csdn → https://blog.csdn.net/sjs_caomei" rel="noopener" target="_blank"><i class="heartbeat fa-fw"></i>csdn</a>
-      </span>
-  </div>
+            
+    <div id="comment"></div>
 
 
 
-      </div>
-
+        
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="next">
+      <a href="/2020/05/07/Nginx-从入门到实践，万字详解！/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Nginx 从入门到实践，万字详解！</h4>
+      </a>
+    </div>
+  
+</nav>
 
 
-      </div>
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CAS"><span class="post-toc-number">1.</span> <span class="post-toc-text">CAS</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Unsafe"><span class="post-toc-number">2.</span> <span class="post-toc-text">Unsafe</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#markword"><span class="post-toc-number">3.</span> <span class="post-toc-text">markword</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#工具：JOL-Java-Object-Layout"><span class="post-toc-number">4.</span> <span class="post-toc-text">工具：JOL = Java Object Layout</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#synchronized的横切面详解"><span class="post-toc-number">5.</span> <span class="post-toc-text">synchronized的横切面详解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#java源码层级"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">java源码层级</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#字节码层级"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">字节码层级</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JVM层级（Hotspot）"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">JVM层级（Hotspot）</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#锁升级过程"><span class="post-toc-number">6.</span> <span class="post-toc-text">锁升级过程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JDK8-markword实现表："><span class="post-toc-number">6.1.</span> <span class="post-toc-text">JDK8 markword实现表：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#锁重入"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">锁重入</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#synchronized最底层实现"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">synchronized最底层实现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#synchronized-vs-Lock-CAS"><span class="post-toc-number">6.4.</span> <span class="post-toc-text">synchronized vs Lock (CAS)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#锁消除-lock-eliminate"><span class="post-toc-number">7.</span> <span class="post-toc-text">锁消除 lock eliminate</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#锁粗化-lock-coarsening"><span class="post-toc-number">8.</span> <span class="post-toc-text">锁粗化 lock coarsening</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#锁降级（不重要）"><span class="post-toc-number">9.</span> <span class="post-toc-text">锁降级（不重要）</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#超线程"><span class="post-toc-number">10.</span> <span class="post-toc-text">超线程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考资料"><span class="post-toc-number">11.</span> <span class="post-toc-text">参考资料</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#volatile的用途"><span class="post-toc-number">12.</span> <span class="post-toc-text">volatile的用途</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-线程可见性"><span class="post-toc-number">12.1.</span> <span class="post-toc-text">1.线程可见性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-防止指令重排序"><span class="post-toc-number">12.2.</span> <span class="post-toc-text">2.防止指令重排序</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题：DCL单例需不需要加volatile？"><span class="post-toc-number">12.2.1.</span> <span class="post-toc-text">问题：DCL单例需不需要加volatile？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CPU的基础知识"><span class="post-toc-number">12.2.2.</span> <span class="post-toc-text">CPU的基础知识</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#系统底层如何实现数据一致性"><span class="post-toc-number">12.2.3.</span> <span class="post-toc-text">系统底层如何实现数据一致性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#系统底层如何保证有序性"><span class="post-toc-number">12.2.4.</span> <span class="post-toc-text">系统底层如何保证有序性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#volatile如何解决指令重排序"><span class="post-toc-number">12.2.5.</span> <span class="post-toc-text">volatile如何解决指令重排序</span></a></li></ol></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
     </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
+    <footer class="footer ">
+    
+    <div class="top">
         
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
 
         
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2020
+            </span>
+        		
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
 
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Smile</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="站点总字数">141k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="站点阅读时长">2:08</span>
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/05/10/synchronized-and-volatile/&title=《synchronized and volatile》 — MY STUDY BLOG&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/10/synchronized-and-volatile/&title=《synchronized and volatile》 — MY STUDY BLOG&source=用户态与内核态
+JDK早期，synchronized 叫做重量级锁， 因为申请锁资源必须通过kernel, 系统调用
+123456789101112131..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3aS27DMAwFwNz/0um2QGv1kXQKWBqtAjeWNS6giJ/XKx7vH+P79avPyV1XT3l9YmBgYDyW8V6OZFnrRUxmTtaGgYFxDuNqB1t/Zz3PGpY8K1kbBgYGRjJ1fnCsLhEDAwPjE4zokcunYGBgYEyC2F6wWk20fTwWx8DAeCAjz7r//+eP1DcwMDAexXgXx11lznxLjVaFgYGxNaOa9E9geUDbC3ovn4KBgbEpIwky7w1Hq3NGRVAMDIytGfNiwL0BcN6E8ccaMDAwNmIkt1VLjMld69eRp94wMDBOY8wbJvINuvr9QhSOgYGxKSMPR/NEWDL/XWAMDIy9GZO0fq8xohqsNkkYGBgHMJIreaK/Wk6o/hhgYGCcw5h3v/YC0V45s/B/wMDA2ILRazbtbb7zQmazUoqBgfFYRjOZFb+IfL+vgn8pYWJgYBzAuCuMvKtDLS9FYGBg7M1YH85616tHwOpx8PIuDAyMrRm9jXgegk5SbLf9nmBgYDyEUS1SVsuZk1dQCJgxMDAOYFSTXJNtdJKMu7yOgYFxJKNXMEi2zt78UbMFBgbGdox3cfQKlr3SQoGKgYGxNaPaTtE7uhVS+b1mCwwMjAMY1U023xargNGGi4GBcQCjkIJffie/axIkY2BgYORHtCStNok3C4k8DAwMjHHDRHIArRYS/ugZwcDA2I6RBLHJX6u8XriLgYFxGmNyUOvlvnplhurBFAMDYwvGFxwq7s3BeVizAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
-        
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4"></script>
+
+<!-- third-party -->
 
 
 
 
 
 
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/pjax/pjax.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/muse.js"></script>
-<script src="/js/next-boot.js"></script>
-  <script>
-var pjax = new Pjax({
-  selectors: [
-    'head title',
-    '#page-configurations',
-    '.content-wrap',
-    '.post-toc-wrap',
-    '.languages',
-    '#pjax'
-  ],
-  switches: {
-    '.post-toc-wrap': Pjax.switches.innerHTML
-  },
-  analytics: false,
-  cacheBust: false,
-  scrollTo : !CONFIG.bookmark.enable
-});
-
-window.addEventListener('pjax:success', () => {
-  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
-    var code = element.text || element.textContent || element.innerHTML || '';
-    var parent = element.parentNode;
-    parent.removeChild(element);
-    var script = document.createElement('script');
-    if (element.id) {
-      script.id = element.id;
-    }
-    if (element.className) {
-      script.className = element.className;
-    }
-    if (element.type) {
-      script.type = element.type;
-    }
-    if (element.src) {
-      script.src = element.src;
-      // Force synchronous loading of peripheral JS.
-      script.async = false;
-    }
-    if (element.dataset.pjax !== undefined) {
-      script.dataset.pjax = '';
-    }
-    if (code !== '') {
-      script.appendChild(document.createTextNode(code));
-    }
-    parent.appendChild(script);
-  });
-  NexT.boot.refresh();
-  // Define Motion Sequence & Bootstrap Motion.
-  if (CONFIG.motion.enable) {
-    NexT.motion.integrator
-      .init()
-      .add(NexT.motion.middleWares.subMenu)
-      .add(NexT.motion.middleWares.postList)
-      .bootstrap();
-  }
-  NexT.utils.updateSidebarPosition();
-});
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
 </script>
 
 
 
-
-  
-
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
-  <script src="/js/local-search.js"></script>
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4"></script>
+    
+    
 
 
 
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
 
 
 
-
-
-
-
-
-
-    <div id="pjax">
-  
-
-  
-<div id="needsharebutton-float">
-      <span class="btn">
-        <i class="fa fa-share-alt" aria-hidden="true"></i>
-      </span>
-    </div>
-  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
-  <script>
-      flOptions = {};
-        flOptions.iconStyle = "box";
-        flOptions.boxForm = "horizontal";
-        flOptions.position = "middleRight";
-        flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
-      new needShareButton('#needsharebutton-float', flOptions);
-  </script>
-
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
     });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : false,
-      notify     : false,
-      appId      : 'EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz',
-      appKey     : 'DVHJikdL744Xv15hyvirW00X',
-      placeholder: "Just go go",
-      avatar     : 'mm',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : false,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : false,
-      serverURLs : ''
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
     });
-  }, window.Valine);
-});
 </script>
 
-    </div>
-      <!-- 页面点击小红心 -->
-  <script type="text/javascript" src="/js/clicklove.js"></script>
-<script>
-  //
-// $(document).pjax('a[target!=_blank][rel!=group]', '#pjax-container', {
-//   fragment: '#pjax-container',
-//   timeout: 15000,
-// });
-// $(document).ready(function(){
-//   $('#go_main').click(function(event) {
-//       /* Act on the event */
-//        $(".main-inner").animate( {scrollTop : 100  },1000 );
-//     });
-// }
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
 </script>
 
+
+
+
+
+    
 </body>
 </html>
