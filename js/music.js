@@ -2,7 +2,7 @@
 * @Author: smile
 * @Date:   2020-05-15 10:28:50
 * @Last Modified by:   smile
-* @Last Modified time: 2020-05-15 10:40:03
+* @Last Modified time: 2020-05-15 16:47:09
 */
 $(function(){
 	if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
@@ -27,5 +27,5 @@ $(function(){
         'order="random"\n'+
         'list-folded="true">')
 	}
-	$('#main').append('</meting-js>')
+	$('#main').append('</meting-js>');
 })
