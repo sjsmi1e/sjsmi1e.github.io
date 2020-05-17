@@ -210,12 +210,193 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
-                <article id="post-周末之ACM之旅：焦作网络赛与青岛网络赛"
+                <article id="post-java/Sprinig-Boot-Redis-实现接口幂等性"
   class="article-card article-type-post" itemprop="blogPost">
   
         
 <div class="item-thumb">
-    <a class="thumb-link" href="/2018/09/16/周末之ACM之旅：焦作网络赛与青岛网络赛/"></a>
+    <a class="thumb-link" href="/2020/05/07/java/Sprinig-Boot-Redis-实现接口幂等性/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/10.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/07/java/Sprinig-Boot-Redis-实现接口幂等性/">Sprinig Boot + Redis 实现接口幂等性</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-07 20:42:12" datetime="2020-05-07T12:42:12.000Z"  itemprop="datePublished">2020-05-07</time>
+
+        
+
+
+        
+	<span id="/2020/05/07/java/Sprinig-Boot-Redis-实现接口幂等性/" class="leancloud_visitors" data-flag-title="Sprinig Boot + Redis 实现接口幂等性" title="Sprinig Boot + Redis 实现接口幂等性">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/07/java/Sprinig-Boot-Redis-实现接口幂等性/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/07/java/Sprinig-Boot-Redis-实现接口幂等性/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 2,446</span>
+<span class="post-count">阅读时长 ≈ 12分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h3 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h3><p>幂等性, 通俗的说就是一个接口, 多次发起同一个请求, 必须保证操作只能执行一次 比如:</p>
+<ul>
+<li>订单接口, 不能多次创建订单</li>
+<li>支付接口, 重复支付同一笔订单只能扣一次钱</li>
+<li>支付宝回调接口, 可能会多次回调, 必须处理重复回调</li>
+<li>普通表单提交接口, 因为网络超时等原因多次点击提交, 只能成功一次 等等</li>
+</ul>
+<h3 id="二、常见解决方案"><a href="#二、常见解决方案" class="headerlink" title="二、常见解决方案"></a>二、常见解决方案</h3><ol>
+<li>唯一索引 – 防止新增脏数据</li>
+<li>token机制 – 防止页面重复提交</li>
+<li>悲观锁 – 获取数据的时候加锁(锁表或锁行)</li>
+<li>乐观锁 – 基于版本号version实现, 在更新数据那一刻校验数据</li>
+<li>分布式锁 – redis(jedis、redisson)或zookeeper实现</li>
+<li>状态机 – 状态变更, 更新数据时判断状态</li>
+</ol>
+<h3 id="三、本文实现"><a href="#三、本文实现" class="headerlink" title="三、本文实现"></a>三、本文实现</h3><p>本文采用第2种方式实现, 即通过redis + token机制实现接口幂等性校验</p>
+<h3 id="四、实现思路"><a href="#四、实现思路" class="headerlink" title="四、实现思路"></a>四、实现思路</h3><p>为需要保证幂等性的每一次请求创建一个唯一标识<code>token</code>, 先获取<code>token</code>, 并将此<code>token</code>存入redis, 请求接口时, 将此<code>token</code>放到header或者作为请求参数请求接口, 后端接口判断redis中是否存在此<code>token</code>:</p>
+<ul>
+<li>如果存在, 正常处理业务逻辑, 并从redis中删除此<code>token</code>, 那么, 如果是重复请求, 由于<code>token</code>已被删除, 则不能通过校验, 返回<code>请勿重复操作</code>提示</li>
+<li>如果不存在, 说明参数不合法或者是重复请求, 返回提示即可</li>
+</ul>
+<h3 id="五、项目简介"><a href="#五、项目简介" class="headerlink" title="五、项目简介"></a>五、项目简介</h3>
+    
+    <a href="/2020/05/07/java/Sprinig-Boot-Redis-实现接口幂等性/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-java/关于Spring中的参数校验的一点思考"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/07/java/关于Spring中的参数校验的一点思考/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/9.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/07/java/关于Spring中的参数校验的一点思考/">关于Spring中的参数校验的一点思考</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-07 20:21:00" datetime="2020-05-07T12:21:00.000Z"  itemprop="datePublished">2020-05-07</time>
+
+        
+
+
+        
+	<span id="/2020/05/07/java/关于Spring中的参数校验的一点思考/" class="leancloud_visitors" data-flag-title="关于Spring中的参数校验的一点思考" title="关于Spring中的参数校验的一点思考">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/07/java/关于Spring中的参数校验的一点思考/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/07/java/关于Spring中的参数校验的一点思考/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 2,553</span>
+<span class="post-count">阅读时长 ≈ 12分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>数据的校验的重要性就不用说了，即使在前端对数据进行校验的情况下，我们还是要对传入后端的数据再进行一遍校验，避免用户绕过浏览器直接通过一些 HTTP 工具直接向后端请求一些违法数据。</p>
+<p>最近工作中很多地方需要对参数做一些校验，刚开始的时候除了Controller层接受的对象我是直接通过一些 Spring 提供好的注解来实现校验比如<code>@Valid</code>、<code>@NotNull</code> 等等，在一些需要对参数做校验的其他地方我都是通过手动编程if else判断的方式来实现。后面重构代码发现有更好的方式来满足我的需求，然后花了半天时间对这部分内容做了一个简单的总结，希望可以对不了解这部分知识的朋友有帮助。</p>
+<p>下面我会通过实例程序演示如何在 Java 程序中尤其是 Spring 程序中优雅地的进行参数验证。</p>
+    
+    <a href="/2020/05/07/java/关于Spring中的参数校验的一点思考/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-后端开发必备的-RestFul-API-知识"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/07/后端开发必备的-RestFul-API-知识/"></a>
     <div class="thumb-hover">
         <span class="icon icon-eye"></span>
     </div>
@@ -225,7 +406,252 @@
 
   
     <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2018/09/16/周末之ACM之旅：焦作网络赛与青岛网络赛/">周末之ACM之旅：焦作网络赛与青岛网络赛</a>
+      <a class="post-title-link" href="/2020/05/07/后端开发必备的-RestFul-API-知识/">后端开发必备的 RestFul API 知识</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-07 20:13:40" datetime="2020-05-07T12:13:40.000Z"  itemprop="datePublished">2020-05-07</time>
+
+        
+
+
+        
+	<span id="/2020/05/07/后端开发必备的-RestFul-API-知识/" class="leancloud_visitors" data-flag-title="后端开发必备的 RestFul API 知识" title="后端开发必备的 RestFul API 知识">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/07/后端开发必备的-RestFul-API-知识/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/07/后端开发必备的-RestFul-API-知识/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 2,494</span>
+<span class="post-count">阅读时长 ≈ 9分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_16_06_1.png" alt="image-20200507201600488"></p  class="index-item-img">
+<p>RestFul API 是每个程序员都应该了解并掌握的基本知识，我们在开发过程中设计API的时候也应该至少要满足RestFul API的最基本的要求（比如接口中尽量使用名词，使用POST 请求创建资源，DELETE请求删除资源等等，示例：GET   /notes/id：获取某个指定id的笔记的信息）。最近学习过程中接触到这些东西，自己没有时间总结，所以分享一些不错的文章给大家。</p>
+<p>相关阅读：</p>
+    
+    <a href="/2020/05/07/后端开发必备的-RestFul-API-知识/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-心得/我的秋招"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2019/09/21/心得/我的秋招/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/7.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2019/09/21/心得/我的秋招/">我的秋招</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-09-21 19:43:31" datetime="2019-09-21T11:43:31.000Z"  itemprop="datePublished">2019-09-21</time>
+
+        
+
+
+        
+	<span id="/2019/09/21/心得/我的秋招/" class="leancloud_visitors" data-flag-title="我的秋招" title="我的秋招">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2019/09/21/心得/我的秋招/#comment">
+            <span class="valine-comment-count" data-xid="/2019/09/21/心得/我的秋招/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 2,868</span>
+<span class="post-count">阅读时长 ≈ 10分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h1 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h1><p>经过一年的努力吧（感觉自己说努力有点不好意思O(∩_∩)O），从大三一直到这周，成功签约西安农行软开（还差学校签字返还）。特此作此总结，记录下自己的汗水。</p>
+<h1 id="春招"><a href="#春招" class="headerlink" title="春招"></a>春招</h1><p>从大三下学期一开始，我就开始了校园招聘的路程，虽然那时候是春招，我大三也只能找一些实习，但是有实习岂不是很好，简历不就更好看了吗？但是啊，最后也只有以失败告终，0offer。但是也收获到了许多，比如经过的几次面试。</p>
+<p>记得那是大三刚开始，因为整个宿舍（六个人）只有我和我的下铺有就业的意向，其他人都是考研。所以，我们就计划着一起开始筹备春招。当时觉得自己知识体系应该已经差不多了，所以信心满满，然而，当头棒喝。我专攻的是Java后台开发，但当有笔试传来的时候，发现出的题目竟然像是在看天书，天书，什么概念，就是有头无尾，几乎不懂的。本以为以前写过算法，参加过ACM，算法题应该不成什么大问题，然而，算法题就是最大的问题。当时就觉得自己得复习甚至是学习一波。因为当时有一些知识点是学校一起老师讲过的，因为没怎么看，也没怎么常用，所以就忘记了。</p>
+    
+    <a href="/2019/09/21/心得/我的秋招/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-心得/我的one-year"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2019/02/19/心得/我的one-year/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/6.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2019/02/19/心得/我的one-year/">我的one_year</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-02-19 19:58:31" datetime="2019-02-19T11:58:31.000Z"  itemprop="datePublished">2019-02-19</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/进阶之路/">进阶之路</a></li></ul>
+
+
+
+        
+	<span id="/2019/02/19/心得/我的one-year/" class="leancloud_visitors" data-flag-title="我的one_year" title="我的one_year">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2019/02/19/心得/我的one-year/#comment">
+            <span class="valine-comment-count" data-xid="/2019/02/19/心得/我的one-year/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 1,975</span>
+<span class="post-count">阅读时长 ≈ 9分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>年已经过了，今天是元宵节，南方人生活在北方，虽然没有什么元宵啊，汤圆啊，或者大鱼大肉，来到学校也是冷冷清清的。有闲情，来回顾一下去年一整年所做和所得。</p>
+<p>首先，从懵懂少年，有着雄心却有些迷茫的少年开始了实际行动。思想不在是以前那么幼稚，开始了真正的思考。</p>
+<p>自己找所需去学习，开始为自己以后的路所打算。点点滴滴，慢慢在积累，但总觉得还是有些晚了的感觉。下面，开始我的数落数落。。。</p>
+    
+    <a href="/2019/02/19/心得/我的one-year/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-算法/周末之ACM之旅：焦作网络赛与青岛网络赛"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/5.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/">周末之ACM之旅：焦作网络赛与青岛网络赛</a>
     </h3>
   
 
@@ -246,7 +672,7 @@
 
 
         
-	<span id="/2018/09/16/周末之ACM之旅：焦作网络赛与青岛网络赛/" class="leancloud_visitors" data-flag-title="周末之ACM之旅：焦作网络赛与青岛网络赛" title="周末之ACM之旅：焦作网络赛与青岛网络赛">
+	<span id="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/" class="leancloud_visitors" data-flag-title="周末之ACM之旅：焦作网络赛与青岛网络赛" title="周末之ACM之旅：焦作网络赛与青岛网络赛">
 		
 			<i class="icon icon-eye"></i>
 		
@@ -257,8 +683,8 @@
         
     <span class="leancloud-comment">
         <i class="icon icon-comment-o"></i>
-        <a href="/2018/09/16/周末之ACM之旅：焦作网络赛与青岛网络赛/#comment">
-            <span class="valine-comment-count" data-xid="/2018/09/16/周末之ACM之旅：焦作网络赛与青岛网络赛/"></span>
+        <a href="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/#comment">
+            <span class="valine-comment-count" data-xid="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/"></span>
         </a>
     </span>
 
@@ -275,7 +701,7 @@
     
         <h1 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h1><p>  这两天呢，几乎赖床般的，十点半左右起床，然后做好准备，拿好电脑，走向创客，和伙伴讨论，解题。也不知是没睡好还是怎么的，五点做完题后是特别的困，打英雄联盟都能连跪的（也不排除楼下的奥斯卡影帝的给与吧），脑力消耗，几万亿个脑细胞就这样莫得了。。。天是阴沉，也是凉爽，“空山新雨后，天气晚来秋！”啊。<br>
     
-    <a href="/2018/09/16/周末之ACM之旅：焦作网络赛与青岛网络赛/" class="post-more waves-effect waves-button">
+    <a href="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/" class="post-more waves-effect waves-button">
         more
     </a>
     </div>
@@ -291,22 +717,22 @@
             </li>
         
             <li class="post-list-item fade">
-                <article id="post-链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）"
+                <article id="post-算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）"
   class="article-card article-type-post" itemprop="blogPost">
   
         
 <div class="item-thumb">
-    <a class="thumb-link" href="/2018/08/29/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/"></a>
+    <a class="thumb-link" href="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/"></a>
     <div class="thumb-hover">
         <span class="icon icon-eye"></span>
     </div>
-    <img src="/img/thumb/7.jpg" alt="图片路径不正确">
+    <img src="/img/thumb/4.jpg" alt="图片路径不正确">
     
 
 
   
     <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2018/08/29/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/">链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）</a>
+      <a class="post-title-link" href="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/">链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）</a>
     </h3>
   
 
@@ -327,7 +753,7 @@
 
 
         
-	<span id="/2018/08/29/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/" class="leancloud_visitors" data-flag-title="链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）" title="链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）">
+	<span id="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/" class="leancloud_visitors" data-flag-title="链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）" title="链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）">
 		
 			<i class="icon icon-eye"></i>
 		
@@ -338,8 +764,8 @@
         
     <span class="leancloud-comment">
         <i class="icon icon-comment-o"></i>
-        <a href="/2018/08/29/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/#comment">
-            <span class="valine-comment-count" data-xid="/2018/08/29/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/"></span>
+        <a href="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/#comment">
+            <span class="valine-comment-count" data-xid="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/"></span>
         </a>
     </span>
 
@@ -398,7 +824,7 @@
 <p>所以，memset(d,0x3f,sizeof(d));</p>
 
     
-    <a href="/2018/08/29/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/" class="post-more waves-effect waves-button">
+    <a href="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/" class="post-more waves-effect waves-button">
         more
     </a>
     </div>
@@ -414,22 +840,22 @@
             </li>
         
             <li class="post-list-item fade">
-                <article id="post-2018暑期ccpc网络赛总结"
+                <article id="post-算法/2018暑期ccpc网络赛总结"
   class="article-card article-type-post" itemprop="blogPost">
   
         
 <div class="item-thumb">
-    <a class="thumb-link" href="/2018/08/25/2018暑期ccpc网络赛总结/"></a>
+    <a class="thumb-link" href="/2018/08/25/算法/2018暑期ccpc网络赛总结/"></a>
     <div class="thumb-hover">
         <span class="icon icon-eye"></span>
     </div>
-    <img src="/img/thumb/6.jpg" alt="图片路径不正确">
+    <img src="/img/thumb/3.jpg" alt="图片路径不正确">
     
 
 
   
     <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2018/08/25/2018暑期ccpc网络赛总结/">2018暑期ccpc网络赛总结</a>
+      <a class="post-title-link" href="/2018/08/25/算法/2018暑期ccpc网络赛总结/">2018暑期ccpc网络赛总结</a>
     </h3>
   
 
@@ -450,7 +876,7 @@
 
 
         
-	<span id="/2018/08/25/2018暑期ccpc网络赛总结/" class="leancloud_visitors" data-flag-title="2018暑期ccpc网络赛总结" title="2018暑期ccpc网络赛总结">
+	<span id="/2018/08/25/算法/2018暑期ccpc网络赛总结/" class="leancloud_visitors" data-flag-title="2018暑期ccpc网络赛总结" title="2018暑期ccpc网络赛总结">
 		
 			<i class="icon icon-eye"></i>
 		
@@ -461,8 +887,8 @@
         
     <span class="leancloud-comment">
         <i class="icon icon-comment-o"></i>
-        <a href="/2018/08/25/2018暑期ccpc网络赛总结/#comment">
-            <span class="valine-comment-count" data-xid="/2018/08/25/2018暑期ccpc网络赛总结/"></span>
+        <a href="/2018/08/25/算法/2018暑期ccpc网络赛总结/#comment">
+            <span class="valine-comment-count" data-xid="/2018/08/25/算法/2018暑期ccpc网络赛总结/"></span>
         </a>
     </span>
 
@@ -482,7 +908,7 @@
 <p>煎熬中度过，漫度中煎熬。一些题似懂非懂，有思路，但数据范围的卡壳，导致更换思路。。。最后，受大佬启发，完成了一道</p>
 <p>a^n+b^n=c^n的题目：<br>
     
-    <a href="/2018/08/25/2018暑期ccpc网络赛总结/" class="post-more waves-effect waves-button">
+    <a href="/2018/08/25/算法/2018暑期ccpc网络赛总结/" class="post-more waves-effect waves-button">
         more
     </a>
     </div>
@@ -498,22 +924,22 @@
             </li>
         
             <li class="post-list-item fade">
-                <article id="post-判断素数与欧拉筛"
+                <article id="post-算法/判断素数与欧拉筛"
   class="article-card article-type-post" itemprop="blogPost">
   
         
 <div class="item-thumb">
-    <a class="thumb-link" href="/2018/08/18/判断素数与欧拉筛/"></a>
+    <a class="thumb-link" href="/2018/08/18/算法/判断素数与欧拉筛/"></a>
     <div class="thumb-hover">
         <span class="icon icon-eye"></span>
     </div>
-    <img src="/img/thumb/5.jpg" alt="图片路径不正确">
+    <img src="/img/thumb/2.jpg" alt="图片路径不正确">
     
 
 
   
     <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2018/08/18/判断素数与欧拉筛/">判断素数与欧拉筛</a>
+      <a class="post-title-link" href="/2018/08/18/算法/判断素数与欧拉筛/">判断素数与欧拉筛</a>
     </h3>
   
 
@@ -534,7 +960,7 @@
 
 
         
-	<span id="/2018/08/18/判断素数与欧拉筛/" class="leancloud_visitors" data-flag-title="判断素数与欧拉筛" title="判断素数与欧拉筛">
+	<span id="/2018/08/18/算法/判断素数与欧拉筛/" class="leancloud_visitors" data-flag-title="判断素数与欧拉筛" title="判断素数与欧拉筛">
 		
 			<i class="icon icon-eye"></i>
 		
@@ -545,8 +971,8 @@
         
     <span class="leancloud-comment">
         <i class="icon icon-comment-o"></i>
-        <a href="/2018/08/18/判断素数与欧拉筛/#comment">
-            <span class="valine-comment-count" data-xid="/2018/08/18/判断素数与欧拉筛/"></span>
+        <a href="/2018/08/18/算法/判断素数与欧拉筛/#comment">
+            <span class="valine-comment-count" data-xid="/2018/08/18/算法/判断素数与欧拉筛/"></span>
         </a>
     </span>
 
@@ -568,7 +994,7 @@
 <p>证明：令x≥1，将大于等于5的自然数表示如下：</p>
 <p>······ 6x-1，6x，6x+1，6x+2，6x+3，6x+4，6x+5，6(x+1），6(x+1)+1 ······<br>
     
-    <a href="/2018/08/18/判断素数与欧拉筛/" class="post-more waves-effect waves-button">
+    <a href="/2018/08/18/算法/判断素数与欧拉筛/" class="post-more waves-effect waves-button">
         more
     </a>
     </div>
@@ -584,22 +1010,22 @@
             </li>
         
             <li class="post-list-item fade">
-                <article id="post-KMP"
+                <article id="post-算法/KMP"
   class="article-card article-type-post" itemprop="blogPost">
   
         
 <div class="item-thumb">
-    <a class="thumb-link" href="/2018/08/18/KMP/"></a>
+    <a class="thumb-link" href="/2018/08/18/算法/KMP/"></a>
     <div class="thumb-hover">
         <span class="icon icon-eye"></span>
     </div>
-    <img src="/img/thumb/4.jpg" alt="图片路径不正确">
+    <img src="/img/thumb/1.jpg" alt="图片路径不正确">
     
 
 
   
     <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2018/08/18/KMP/">KMP</a>
+      <a class="post-title-link" href="/2018/08/18/算法/KMP/">KMP</a>
     </h3>
   
 
@@ -620,7 +1046,7 @@
 
 
         
-	<span id="/2018/08/18/KMP/" class="leancloud_visitors" data-flag-title="KMP" title="KMP">
+	<span id="/2018/08/18/算法/KMP/" class="leancloud_visitors" data-flag-title="KMP" title="KMP">
 		
 			<i class="icon icon-eye"></i>
 		
@@ -631,8 +1057,8 @@
         
     <span class="leancloud-comment">
         <i class="icon icon-comment-o"></i>
-        <a href="/2018/08/18/KMP/#comment">
-            <span class="valine-comment-count" data-xid="/2018/08/18/KMP/"></span>
+        <a href="/2018/08/18/算法/KMP/#comment">
+            <span class="valine-comment-count" data-xid="/2018/08/18/算法/KMP/"></span>
         </a>
     </span>
 
@@ -651,7 +1077,7 @@
 <p>核心为求匹配的字符串的next[]数组（以当前位置结束的最长前缀的位置），代码如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getnext</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">0</span>,j=<span class="number">-1</span>,len=<span class="built_in">strlen</span>(str2);</span><br><span class="line">		a[<span class="number">0</span>]=<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">while</span>(i&lt;len)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(j==<span class="number">-1</span>||str2[i]==str2[j])</span><br><span class="line">				a[++i]=++j;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				j=a[j];</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     
-    <a href="/2018/08/18/KMP/" class="post-more waves-effect waves-button">
+    <a href="/2018/08/18/算法/KMP/" class="post-more waves-effect waves-button">
         more
     </a>
     </div>
@@ -666,260 +1092,11 @@
 
             </li>
         
-            <li class="post-list-item fade">
-                <article id="post-分治与归并"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-        
-<div class="item-thumb">
-    <a class="thumb-link" href="/2018/08/09/分治与归并/"></a>
-    <div class="thumb-hover">
-        <span class="icon icon-eye"></span>
-    </div>
-    <img src="/img/thumb/3.jpg" alt="图片路径不正确">
-    
-
-
-  
-    <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2018/08/09/分治与归并/">分治与归并</a>
-    </h3>
-  
-
-
-
-</div>
-
-        
-    
-    
-    
-    <div class="post-meta">
-        <time class="post-time" title="2018-08-09 10:16:05" datetime="2018-08-09T02:16:05.000Z"  itemprop="datePublished">2018-08-09</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
-
-
-
-        
-	<span id="/2018/08/09/分治与归并/" class="leancloud_visitors" data-flag-title="分治与归并" title="分治与归并">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-    <span class="leancloud-comment">
-        <i class="icon icon-comment-o"></i>
-        <a href="/2018/08/09/分治与归并/#comment">
-            <span class="valine-comment-count" data-xid="/2018/08/09/分治与归并/"></span>
-        </a>
-    </span>
-
-
-
-        
-        
-        <span class="post-count">文章字数: 2,137</span>
-<span class="post-count">阅读时长 ≈ 11分钟</span>
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <p>分治算法的基本思想是将一个规模为N的问题分解为K个规模较小的子问题，这些子问题相互独立且与原问题性质相同。</p>
-<p>求出子问题的解，就可得到原问题的解。就像前面的我说过的二分查找，也有类似的思想。</p>
-<p>其实，学习中也有许多类似的问题可以用到分治与归并，快排与归并排序就是这样。<br>
-    
-    <a href="/2018/08/09/分治与归并/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分治/">分治</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-贪心-二分"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-        
-<div class="item-thumb">
-    <a class="thumb-link" href="/2018/08/07/贪心-二分/"></a>
-    <div class="thumb-hover">
-        <span class="icon icon-eye"></span>
-    </div>
-    <img src="/img/thumb/2.jpg" alt="图片路径不正确">
-    
-
-
-  
-    <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2018/08/07/贪心-二分/">贪心+二分</a>
-    </h3>
-  
-
-
-
-</div>
-
-        
-    
-    
-    
-    <div class="post-meta">
-        <time class="post-time" title="2018-08-07 16:04:23" datetime="2018-08-07T08:04:23.000Z"  itemprop="datePublished">2018-08-07</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
-
-
-
-        
-	<span id="/2018/08/07/贪心-二分/" class="leancloud_visitors" data-flag-title="贪心+二分" title="贪心+二分">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-    <span class="leancloud-comment">
-        <i class="icon icon-comment-o"></i>
-        <a href="/2018/08/07/贪心-二分/#comment">
-            <span class="valine-comment-count" data-xid="/2018/08/07/贪心-二分/"></span>
-        </a>
-    </span>
-
-
-
-        
-        
-        <span class="post-count">文章字数: 1,780</span>
-<span class="post-count">阅读时长 ≈ 9分钟</span>
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <p>在刷题时，总会遇到求最大值最小，最小值最大问题，也许它会暗喻是这样的一个问题。对于这样的一个问题，你会发现用dp和枚举都会超时超内存，或者说很麻烦，所以这是一个比较简单的解题方式。</p>
-<p>二分逼近思想<br>•对于难以直接确定解的问题,采取二分枚举+检验的思想.<br>
-    
-    <a href="/2018/08/07/贪心-二分/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/贪心-二分/">贪心+二分</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-dfs&amp;bfs"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-        
-<div class="item-thumb">
-    <a class="thumb-link" href="/2018/08/06/dfs&bfs/"></a>
-    <div class="thumb-hover">
-        <span class="icon icon-eye"></span>
-    </div>
-    <img src="/img/thumb/1.jpg" alt="图片路径不正确">
-    
-
-
-  
-    <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2018/08/06/dfs&bfs/">dfs&amp;dfs</a>
-    </h3>
-  
-
-
-
-</div>
-
-        
-    
-    
-    
-    <div class="post-meta">
-        <time class="post-time" title="2018-08-06 15:22:09" datetime="2018-08-06T07:22:09.000Z"  itemprop="datePublished">2018-08-06</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
-
-
-
-        
-	<span id="/2018/08/06/dfs&bfs/" class="leancloud_visitors" data-flag-title="dfs&dfs" title="dfs&dfs">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-    <span class="leancloud-comment">
-        <i class="icon icon-comment-o"></i>
-        <a href="/2018/08/06/dfs&bfs/#comment">
-            <span class="valine-comment-count" data-xid="/2018/08/06/dfs&bfs/"></span>
-        </a>
-    </span>
-
-
-
-        
-        
-        <span class="post-count">文章字数: 1,923</span>
-<span class="post-count">阅读时长 ≈ 8分钟</span>
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <p>dfs（深度优先搜索）</p>
-<p>bfs（广度优先搜索）</p>
-<p><strong>前言</strong><br>作为初学者，可能会想，搜索吗，就是作用在图上啊，树上什么的算法。其实，搜索（这里主要说dfs和bfs），就是以一种特定方式，在大多数场景寻找真正想要结果的方式。而dfs就是以一种现已一种单一方式走到黑，然后通过回溯等得到答案的过程。而bfs则是先看有多少种方式可以走，然后先记录每一种方式，在一一按这种方式一层一层遍历，直到得到最后结果。这两种搜索大体上没什么差别，都是搜索出所有可能满足自己的答案而已。有的人可能会说，bfs适合求最短路径，dfs适合求所有答案，其实，两个都可以相互转化（这里不多说，其实我也不怎么懂，哈哈~），只不过方便与否的问题罢了。</p>
-<p>下面就对这两种经典搜索进行简单探讨。<br>
-    
-    <a href="/2018/08/06/dfs&bfs/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搜索/">搜索</a></li></ul>
-
-</div>
-
-
-            </li>
-        
         </ul>
         
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
     </div>
 </nav>
 

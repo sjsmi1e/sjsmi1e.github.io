@@ -210,6 +210,647 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-redis/Streams：深入剖析Redis5-0全新数据结构"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/10.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/">Streams：深入剖析Redis5.0全新数据结构</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-17 12:17:11" datetime="2020-05-17T04:17:11.000Z"  itemprop="datePublished">2020-05-17</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+
+
+        
+	<span id="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/" class="leancloud_visitors" data-flag-title="Streams：深入剖析Redis5.0全新数据结构" title="Streams：深入剖析Redis5.0全新数据结构">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 4,422</span>
+<span class="post-count">阅读时长 ≈ 19分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>转载：<a href="https://mp.weixin.qq.com/s/GpG3t_O_SxLGNklVnoOiYQ" target="_blank" rel="noopener">原文地址</a></p>
+</blockquote>
+<p>Redis 5.0 全新的数据类型：streams，官方把它定义为：<strong>以更抽象的方式建模日志的数据结构</strong>。Redis的streams主要是一个append only的数据结构，至少在概念上它是一种在内存中表示的抽象数据类型，只不过它们实现了更强大的操作，以克服日志文件本身的限制。</p>
+<p>如果你了解MQ，那么可以把streams当做MQ。如果你还了解kafka，那么甚至可以把streams当做kafka。</p>
+<p>另外，这个功能有点类似于redis以前的<strong>Pub/Sub</strong>，但是也有基本的不同：</p>
+<ul>
+<li>streams支持多个客户端（消费者）等待数据（Linux环境开多个窗口执行XREAD即可模拟），并且每个客户端得到的是完全相同的数据。</li>
+<li>Pub/Sub是发送忘记的方式，并且不存储任何数据；而streams模式下，所有消息被无限期追加在streams中，除非用于显示执行删除（XDEL）。</li>
+<li>streams的Consumer Groups也是Pub/Sub无法实现的控制方式。</li>
+</ul>
+<h3 id="1-streams数据结构"><a href="#1-streams数据结构" class="headerlink" title="1. streams数据结构"></a>1. streams数据结构</h3><p>streams数据结构本身非常简单，但是streams依然是Redis到目前为止最复杂的类型，其原因是实现的一些额外的功能：一系列的阻塞操作允许消费者等待生产者加入到streams的新数据。另外还有一个称为<strong>Consumer Groups</strong>的概念，这个概念最先由kafka提出，Redis有一个类似实现，和kafka的Consumer Groups的目的是一样的：允许一组客户端协调消费相同的信息流！</p>
+<p>redis源码中定义streams结构的源码如下，由源码可知，stream的核心数据结构是radix tree：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">stream</span> &#123;</span></span><br><span class="line">    rax *rax;               <span class="comment">/* The radix tree holding the stream. */</span></span><br><span class="line">    <span class="keyword">uint64_t</span> length;        <span class="comment">/* Number of elements inside this stream. */</span></span><br><span class="line">    streamID last_id;       <span class="comment">/* Zero if there are yet no items. */</span></span><br><span class="line">    rax *cgroups;           <span class="comment">/* Consumer groups dictionary: name -&gt; streamCG */</span></span><br><span class="line">&#125; stream;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>源码参考：<a href="https://github.com/antirez/redis/blob/5.0.0/src/stream.h；" target="_blank" rel="noopener">https://github.com/antirez/redis/blob/5.0.0/src/stream.h；</a></p>
+</blockquote>
+<p>至于redis对radix tree的实现，参考源码：<a href="https://github.com/antirez/redis/blob/5.0.0/src/rax.c" target="_blank" rel="noopener">https://github.com/antirez/redis/blob/5.0.0/src/rax.c</a> 和 <a href="https://github.com/antirez/redis/blob/5.0.0/src/rax.h" target="_blank" rel="noopener">https://github.com/antirez/redis/blob/5.0.0/src/rax.h</a> 。网上也有很多radix tree的文章，本篇文章就不做过多的介绍了。下面给出一张从官方源码中的部分截图：</p>
+<figure class="image-box">
+                <a rel=Streams：深入剖析Redis5.0全新数据结构 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589689130577.webp" title="radix tree" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589689130577.webp" alt="radix tree" title="" class=""></a>
+                <p>radix tree</p>
+            </figure>
+<h3 id="2-streams基础"><a href="#2-streams基础" class="headerlink" title="2. streams基础"></a>2. streams基础</h3><p>为了理解streams的目的，以及如何使用它，我们先忽略掉所有高级特性，只把注意力放在数据结构本身，以及那些操作和访问streams的命令。这基本上也是大多数其他Redis数据类型共有的部分，例如Lists，Sets，Sorted Sets等。然而需要注意的是，Lists也有一个更复杂的阻塞式的API，例如BLPOP，BRPOP等。streams这方便的API也没什么不同，只是更复杂，更强大（更牛逼，哈）！</p>
+<h3 id="3-streams命令"><a href="#3-streams命令" class="headerlink" title="3. streams命令"></a>3. streams命令</h3><p>废话不多说，先上手玩玩这个全新的数据类型。streams这个数据类型对应有如下13个操作命令，所有命令都以”<strong>X</strong>“开头：</p>
+<h4 id="1-XADD"><a href="#1-XADD" class="headerlink" title="1. XADD"></a>1. XADD</h4><p><strong>用法</strong>：XADD key ID field string [field string …]<br>正如其名，这个命令就是用来添加的，给streams追加（append，前面提到过：streams主要是一个append only的数据结构）一个新的entry（和Java里的Map类似，Redis里的streams中的数据也称为entry）。</p>
+<p><strong>key</strong>：的含义就是同一类型streams的名称；<br><strong>ID</strong>: streams中entry的唯一标识符，如果执行XADD命令时，传入星号（*），那么，ID会自动生成，且自动生成的ID会在执行XADD后返回，默认生成的ID格式为millisecondsTime+sequenceNumber，即当前毫秒级别的时间戳加上一个自增序号值，例如<code>&quot;1540013735401-0&quot;</code>。并且执行XADD时，不接受少于或等于上一次执行XADD的ID，否则会报错：<code>ERR The ID specified in XADD is equal or smaller than the target stream top item</code>；<br><strong>field&amp;string</strong>：接下来就是若干组field string。可以把它理解为表示属性的json中的key-value。例如，某一streams的key命名为userInfo，且某个用户信息为{“username”:”afei”, “password”:”123456”}，那么执行XADD命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; xadd userInfo * username afei password 123456</span><br><span class="line">"1540014082060-0"</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>由于命令中ID字段的值是星号，所以自定生成ID，<code>1540014082060-0</code>就是自动生成的ID。 XADD命令也支持显示指定ID，例如：<code>XADD streamname 0-2 foo bar</code>。</p>
+</blockquote>
+<ul>
+<li>时钟回拨</li>
+</ul>
+<p>需要注意的是，ID的时间戳部分是部署Redis服务器的本地时间，如果发生时钟回拨会怎么样？如果发生始终回拨，生成的ID的时间戳部分就是回拨后的时间，然后加上这个时间的递增序列号。例如当前时间戳1540014082060，然后这时候发生了时钟回拨，且回拨5ms，那么时间戳就是1540014082055。假设以前已经生成了1540014082055-0，1540014082055-1，那么这次由于时钟回拨，生成的ID就是1540014082055-2。所以允许自动生成的ID在发生时钟回拨时少于上次的ID，但是不允许显示指定一个少于上次的ID。</p>
+<h4 id="2-XDEL"><a href="#2-XDEL" class="headerlink" title="2. XDEL"></a>2. XDEL</h4><p><strong>用法</strong>：XDEL key ID [ID …]<br>和XADD相反，这是命令用来从streams中删除若干个entry，并且会返回<strong>实际</strong>删除数，这个删除数可能和参数ID个数不等，因为某些ID表示的消息可能不存在。执行命令如下，第二个参数ID是不存在的，所以XDEL的返回结果是1：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XDEL userInfo "1540014379642-0" "1540014379642-1"</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+<h4 id="3-XLEN"><a href="#3-XLEN" class="headerlink" title="3. XLEN"></a>3. XLEN</h4><p><strong>用法</strong>：XLEN key<br>很好理解，这个命令就是用来返回streams中有多少个entry。执行如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XLEN userInfo</span><br><span class="line">(integer) 2</span><br></pre></td></tr></table></figure>
+<h4 id="4-streams三种查询模式"><a href="#4-streams三种查询模式" class="headerlink" title="4. streams三种查询模式"></a>4. streams三种查询模式</h4><p>redis提供了三种查询streams数据的模式：</p>
+<ol>
+<li><strong>范围查询</strong>：因为streams的每个entry，其默认生成的ID是基于时间且递增的；</li>
+<li><strong>监听模式</strong>：类比linux中的tailf命令，实时接收新增加到streams中的entry（也有点像一个消息系统，事实上笔者认为它就是借鉴了kafka）；</li>
+<li><strong>消费者组</strong>：即Consumer Groups，特殊的监听模式。从一个消费者的角度来看streams，一个streams能被分区到多个处理消息的消费者，对于任意一条消息，同一个消费者组中只有一个消费者可以处理（和kafka的消费者组完全一样）。这样还能够横向扩容消费者，从而提升处理消息的能力，而不需要只让把让一个消费者处理所有消息。</li>
+</ol>
+<p>接下里分别介绍这三种模式。</p>
+<h4 id="5-XRANGE"><a href="#5-XRANGE" class="headerlink" title="5. XRANGE"></a>5. XRANGE</h4><p><strong>用法</strong>：XRANGE key start end [COUNT count]<br>这个命令属于第1种模式，即基于范围查询。这个命令用来返回streams某个顺序范围下的元素，start参数是更小的ID，end参数是更大的ID。有两个特殊的ID用符号”-“和”+”表示，符号”-“表示最小的ID，符号”+”表示最大的ID：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XRANGE userInfo "1540014096298-0" "1540014477236-0"</span><br><span class="line">1) 1) "1540014096298-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "root"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "666666"</span><br><span class="line">2) 1) "1540014477236-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "test"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "111111"</span><br><span class="line">127.0.0.1:6379&gt; </span><br><span class="line">127.0.0.1:6379&gt; XRANGE userInfo - +</span><br><span class="line">1) 1) "1540014082060-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "afei"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "123456"</span><br><span class="line">2) 1) "1540014096298-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "root"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "666666"</span><br><span class="line">3) 1) "1540014477236-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "test"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "111111"</span><br><span class="line">4) 1) "1540014493402-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "u1"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "111111"</span><br></pre></td></tr></table></figure>
+<p>XRANGE还能实现遍历某个范围区间的功能，例如我想遍历2018-10-20号新增的用户信息。首先得到2018-10-20 00:00:00对应的时间戳为1539964800000，再得到2018-10-20 23:59:59对应的时间戳为1540051199000，然后执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XRANGE userInfo 1539964800000-0  1540051199000-0 COUNT 5</span><br><span class="line">1) 1) "1540014082060-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "afei"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "123456"</span><br><span class="line">... ...</span><br><span class="line">5) 1) "1540014496505-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "u2"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "111111"</span><br><span class="line">127.0.0.1:6379&gt; </span><br><span class="line"><span class="meta">#</span> 需要注意的是，接下来再遍历的start参数是上一次遍历结果最大的ID加1，即"1540014496505-0"加1就是"1540014496505-1"。</span><br><span class="line">127.0.0.1:6379&gt; XRANGE userInfo 1540014496505-1  1540051199000-0 COUNT 5</span><br><span class="line">1) 1) "1540014499863-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "u3"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "111111"</span><br></pre></td></tr></table></figure>
+<h4 id="6-XREVRANGE"><a href="#6-XREVRANGE" class="headerlink" title="6. XREVRANGE"></a>6. XREVRANGE</h4><p><strong>用法</strong>：XREVRANGE key end start [COUNT count]<br>这个命令也属于第1种模式，且和XRANGE相反，返回一个逆序范围。end参数是更大的ID，start参数是更小的ID。执行示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XREVRANGE userInfo "1540014477236-0" "1540014096298-0"</span><br></pre></td></tr></table></figure>
+<h4 id="7-XREAD"><a href="#7-XREAD" class="headerlink" title="7. XREAD"></a>7. XREAD</h4><p><strong>用法</strong>：XREAD [COUNT count] [BLOCK milliseconds] STREAMS key [key …] ID [ID …]<br>很明显，这个命令就是用来实现第2个模式，即监听模式。其作用是返回streams中从来没有读取的，且比参数ID更大的元素。</p>
+<p>这个命令的使用方式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XREAD COUNT 10 BLOCK 60000 STREAMS userInfo "1540041139268-0"</span><br><span class="line">1) 1) "userInfo"</span><br><span class="line">   2) 1) 1) "1540041264182-0"</span><br><span class="line">         2) 1) "u2"</span><br><span class="line">            2) "p2"</span><br><span class="line">(9.26s)</span><br><span class="line"><span class="meta">#</span> "1540041264182-0"这条消息时通过XADD添加的然后被XREAD监听到的消息。</span><br><span class="line">127.0.0.1:6379&gt; XREAD COUNT 2 STREAMS userInfo 0</span><br><span class="line">1) 1) "userInfo"</span><br><span class="line">   2) 1) 1) "1540014082060-0"</span><br><span class="line">         2) 1) "username"</span><br><span class="line">            2) "afei"</span><br><span class="line">            3) "password"</span><br><span class="line">            4) "123456"</span><br><span class="line">      2) 1) "1540014096298-0"</span><br><span class="line">         2) 1) "username"</span><br><span class="line">            2) "root"</span><br><span class="line">            3) "password"</span><br><span class="line">            4) "666666"</span><br><span class="line"><span class="meta">#</span> 这条命令实现类似XRANGE的功能。</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; XREAD BLOCK 0 STREAMS userInfo $</span><br><span class="line">1) 1) "userInfo"</span><br><span class="line">   2) 1) 1) "1540042613437-0"</span><br><span class="line">         2) 1) "u7"</span><br><span class="line">            2) "p7"</span><br><span class="line"><span class="meta">#</span> 说明BLOCK为0表示一致等待知道有新的数据，否则永远不会超时。并且ID的值我们用特殊字符`$`表示，这个特殊字符表示我们只获取最新添加的消息。</span><br></pre></td></tr></table></figure>
+<p>此外，XREAD还支持同时监听多个streams，用法如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XREAD BLOCK 0 STREAMS userInfo_01 userInfo_02 userInfo_03 userInfo_04  $ $ $ $</span><br><span class="line">1) 1) "userInfo_03"</span><br><span class="line">   2) 1) 1) "1540043348287-0"</span><br><span class="line">         2) 1) "u1"</span><br><span class="line">            2) "p1"</span><br><span class="line">(3.49s)</span><br><span class="line"><span class="meta">#</span> 监听userInfo_01~userInfo_04这4个streams的新的消息。</span><br></pre></td></tr></table></figure>
+<p>XREAD除了COUNT和BLOCK，没有其他选项了。所有XREAD是一个非常基本的命令。更多高级特性可以往下看接下来要介绍的XREADGROUP。</p>
+<h4 id="8-XREADGROUP"><a href="#8-XREADGROUP" class="headerlink" title="8. XREADGROUP"></a>8. XREADGROUP</h4><p>用法：XREADGROUP GROUP group consumer [COUNT count] [BLOCK milliseconds] STREAMS key [key …] ID [ID …]<br>很明显，这就是第三种模式：消费者组模式。</p>
+<p>如果你了解kafka的消费者组，那么你就也了解了streams的消费者组。如果不了解也没关系，笔者简单解释一下，假设有三个消费者C1，C2，C3。在streams中总计有7条消息：1， 2， 3， 4， 5， 6， 7，那么消费关系如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1 -&gt; C1</span><br><span class="line">2 -&gt; C2</span><br><span class="line">3 -&gt; C3</span><br><span class="line">4 -&gt; C1</span><br><span class="line">5 -&gt; C2</span><br><span class="line">6 -&gt; C3</span><br><span class="line">7 -&gt; C1</span><br></pre></td></tr></table></figure>
+<p>消费者组具备如下几个特点：</p>
+<ol>
+<li>同一个消息不会被投递到一个消费者组下的多个消费者，只可能是一个消费者。</li>
+<li>同一个消费者组下，每个消费者都是唯一的，通过大小写敏感的名字区分。</li>
+<li>消费者组中的消费者请求的消息，一定是新的，从来没有投递过的消息。</li>
+<li>消费一个消息后，需要用命令（XACK）确认，意思是说：这条消息已经给成功处理。正因为如此，当访问streams的历史消息时，每个消费者只能看到投递给它自己的消息。</li>
+</ol>
+<p>消费者组抽象的想象成如下这个样子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">+----------------------------------------+</span><br><span class="line">| consumer_group_name: afeigroup         |</span><br><span class="line">| consumer_group_stream: somekey         |</span><br><span class="line">| last_delivered_id: 1292309234234-92    |</span><br><span class="line">|                                        |</span><br><span class="line">| consumers:                             |</span><br><span class="line">|    &quot;consumer-1&quot; with pending messages  |</span><br><span class="line">|       1292309234234-4                  |</span><br><span class="line">|       1292309234232-8                  |</span><br><span class="line">|    &quot;consumer-42&quot; with pending messages |</span><br><span class="line">|       ... (and so forth)               |</span><br><span class="line">+----------------------------------------+</span><br></pre></td></tr></table></figure>
+<h4 id="9-XACK"><a href="#9-XACK" class="headerlink" title="9. XACK"></a>9. XACK</h4><p><strong>用法</strong>：XACK key group ID [ID …]<br>这是消费者组相关的另一个重要的命令。标记一个处理中的消息为已被正确处理，如此一来，这条消息就会被从消费者组的pending消息集合中删除，类似MQ中的ack。</p>
+<h4 id="10-XGROUP"><a href="#10-XGROUP" class="headerlink" title="10. XGROUP"></a>10. XGROUP</h4><p><strong>用法</strong>：XGROUP [CREATE key groupname id-or-<code>$</code>] [SETID key id-or-<code>$</code>] [DESTROY key groupname] [DELCONSUMER key groupname consumername]</p>
+<p>这也是消费者组的一个重要命令，这个命令用来管理消费者组，例如创建，删除等。</p>
+<p>XREADGROUP，XACK，XGROUP三种命令构成了消费者组相关的操作命令，下面是消费者组一些操作示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 创建一个消费者组</span><br><span class="line">127.0.0.1:6379&gt; XGROUP CREATE userInfo GRP-AFEI $</span><br><span class="line">OK</span><br><span class="line"><span class="meta">#</span> 需要注意的是，目前XGROUP CREATE的streams必须是一个存在的streams，否则会报错：</span><br><span class="line">127.0.0.1:6379&gt; XGROUP CREATE userinfo GRP-AFEI $</span><br><span class="line">(error) ERR The XGROUP subcommand requires the key to exist. Note that for CREATE you may want to use the MKSTREAM option to create an empty stream automatically.</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 名为zhangsan的消费者，需要注意的是streams名称userInfo后面的特殊符号`&gt;`表示这个消费者只接收从来没有被投递给其他消费者的消息，即新的消息。当然我们也可以指定具体的ID，例如指定0表示访问所有投递给该消费者的历史消息，指定1540081890919-1表示投递给该消费者且大于这个ID的历史消息：</span><br><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP mygroup zhangsan COUNT 1 BLOCK 0 STREAMS userInfo &gt;</span><br><span class="line"><span class="meta">#</span> 名为lisi的消费者：</span><br><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP mygroup lisi COUNT 1 BLOCK 0 STREAMS userInfo &gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 接下来分别添加两条信息，一条就会被zhangsan消费，另一条被lisi消费：</span><br><span class="line">127.0.0.1:6379&gt; XADD userInfo * username u102102 password p102102</span><br><span class="line">"1540081873370-0"</span><br><span class="line">127.0.0.1:6379&gt; XADD userInfo * username u102103 password p102103</span><br><span class="line">"1540081890919-0"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>现在消费者lisi有一条消息：</span><br><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP mygroup lisi COUNT 5 BLOCK 0 STREAMS userInfo 0</span><br><span class="line">1) 1) "userInfo"</span><br><span class="line">   2) 1) 1) "1540081890919-0"</span><br><span class="line">         2) 1) "username"</span><br><span class="line">            2) "u102103"</span><br><span class="line">            3) "password"</span><br><span class="line">            4) "p102103"</span><br><span class="line"><span class="meta">#</span>然后通过命令ack这条消息：</span><br><span class="line">127.0.0.1:6379&gt; XACK userInfo mygroup 1540081890919-0</span><br><span class="line">(integer) 1</span><br><span class="line"><span class="meta">#</span> 再看消费者lisi的pending队列，已经为空：</span><br><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP mygroup lisi COUNT 5 BLOCK 0 STREAMS userInfo 0</span><br><span class="line">1) 1) "userInfo"</span><br><span class="line">   2) (empty list or set)</span><br></pre></td></tr></table></figure>
+<h4 id="11-XPENDING"><a href="#11-XPENDING" class="headerlink" title="11. XPENDING"></a>11. XPENDING</h4><p>用法：XPENDING key group [start end count] [consumer]<br>返回streams中消费者组的pending消息，即消费者接收到但是还没有ack的消息，用法参考：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 查看消费者组下总计最多10条pending消息</span><br><span class="line">127.0.0.1:6379&gt; XPENDING userInfo mygroup - + 10</span><br><span class="line">1) 1) "1540083260408-0"</span><br><span class="line">   2) "zhangsan"</span><br><span class="line">   3) (integer) 183551</span><br><span class="line">   4) (integer) 1</span><br><span class="line">2) 1) "1540083266293-0"</span><br><span class="line">   2) "lisi"</span><br><span class="line">   3) (integer) 177666</span><br><span class="line">   4) (integer) 1</span><br><span class="line"><span class="meta">#</span> 查看消费者组下zhangsan这个消费者总计最多10条pending消息</span><br><span class="line">127.0.0.1:6379&gt; XPENDING userInfo mygroup - + 10 zhangsan</span><br><span class="line">1) 1) "1540083260408-0"</span><br><span class="line">   2) "zhangsan"</span><br><span class="line">   3) (integer) 187006</span><br><span class="line">   4) (integer) 1</span><br></pre></td></tr></table></figure>
+<h4 id="12-XCLAIM"><a href="#12-XCLAIM" class="headerlink" title="12. XCLAIM"></a>12. XCLAIM</h4><p>用法：XCLAIM key group consumer min-idle-time ID [ID …] [IDLE ms] [TIME ms-unix-time] [RETRYCOUNT count] [FORCE] [JUSTID]<br>作用是改变消费者组中消息的所有权，用法参考：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP mygroup zhangsan COUNT 5 BLOCK 0 STREAMS userInfo 0</span><br><span class="line">1) 1) "userInfo"</span><br><span class="line">   2) 1) 1) "1540083260408-0"</span><br><span class="line">         2) 1) "username"</span><br><span class="line">            2) "u102106"</span><br><span class="line">            3) "password"</span><br><span class="line">            4) "p102106"</span><br><span class="line"><span class="meta">#</span> zhangsan本来有1条消息，现在将另一条本来属于lisi的消息的所有权转给它：</span><br><span class="line">127.0.0.1:6379&gt; XCLAIM userInfo mygroup zhangsan 360 1540083266293-0</span><br><span class="line">1) 1) "1540083266293-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "u102107"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "p102107"</span><br><span class="line"><span class="meta">#</span> 现在zhangsan有两条消息了</span><br><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP mygroup zhangsan COUNT 5 BLOCK 0 STREAMS userInfo 0</span><br><span class="line">1) 1) "userInfo"</span><br><span class="line">   2) 1) 1) "1540083260408-0"</span><br><span class="line">         2) 1) "username"</span><br><span class="line">            2) "u102106"</span><br><span class="line">            3) "password"</span><br><span class="line">            4) "p102106"</span><br><span class="line">      2) 1) "1540083266293-0"</span><br><span class="line">         2) 1) "username"</span><br><span class="line">            2) "u102107"</span><br><span class="line">            3) "password"</span><br><span class="line">            4) "p102107"</span><br></pre></td></tr></table></figure>
+<h4 id="13-XINFO"><a href="#13-XINFO" class="headerlink" title="13. XINFO"></a>13. XINFO</h4><p><strong>用法</strong>：XINFO [CONSUMERS key groupname] [GROUPS key] [STREAM key] [HELP]<br>其作用是得到streams和消费者组的一些信息，使用参考：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XINFO CONSUMERS userInfo mygroup </span><br><span class="line">1) 1) "name"</span><br><span class="line">   2) "lisi"</span><br><span class="line">   3) "pending"</span><br><span class="line">   4) (integer) 0</span><br><span class="line">   5) "idle"</span><br><span class="line">   6) (integer) 201086</span><br><span class="line">2) 1) "name"</span><br><span class="line">   2) "zhangsan"</span><br><span class="line">   3) "pending"</span><br><span class="line">   4) (integer) 2</span><br><span class="line">   5) "idle"</span><br><span class="line">   6) (integer) 701954</span><br><span class="line">127.0.0.1:6379&gt; XINFO STREAM userInfo</span><br><span class="line"> 1) "length"</span><br><span class="line"> 2) (integer) 22</span><br><span class="line"> 3) "radix-tree-keys"</span><br><span class="line"> 4) (integer) 1</span><br><span class="line"> 5) "radix-tree-nodes"</span><br><span class="line"> 6) (integer) 2</span><br><span class="line"> 7) "groups"</span><br><span class="line"> 8) (integer) 2</span><br><span class="line"> 9) "last-generated-id"</span><br><span class="line">10) "1540082298051-0"</span><br><span class="line">11) "first-entry"</span><br><span class="line">12) 1) "1540014082060-0"</span><br><span class="line">    2) 1) "username"</span><br><span class="line">       2) "afei"</span><br><span class="line">       3) "password"</span><br><span class="line">       4) "123456"</span><br><span class="line">13) "last-entry"</span><br><span class="line">14) 1) "1540082298051-0"</span><br><span class="line">    2) 1) "username"</span><br><span class="line">       2) "u102105"</span><br><span class="line">       3) "password"</span><br><span class="line">       4) "p102105"</span><br></pre></td></tr></table></figure>
+<h4 id="14-XTRIM"><a href="#14-XTRIM" class="headerlink" title="14. XTRIM"></a>14. XTRIM</h4><p><strong>用法</strong>：XTRIM key MAXLEN [~] count<br>修剪streams到一个确定的size。Trims the stream to (approximately if ‘~’ is passed) a certain size，用法参考：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> streams只保留10条消息，其返回结果表示被剪去多少条消息：</span><br><span class="line">127.0.0.1:6379&gt; XTRIM userInfo MAXLEN 10</span><br><span class="line">(integer) 14</span><br></pre></td></tr></table></figure>
+<p>说明：streams目前的修剪策略比较简单，比如连根据ID范围修剪都没有实现。根据具体某一个ID删除，可以通过XDEL实现。</p>
+<h3 id="4-持久化，复制以及消息安全性"><a href="#4-持久化，复制以及消息安全性" class="headerlink" title="4. 持久化，复制以及消息安全性"></a>4. 持久化，复制以及消息安全性</h3><p>和其他数据类型一样，streams也会异步复制到slave，并也会持久化到AOF和RDB文件中。然而，消费者组的全部状态是被传播（propagated ）到AOF，RDB和slave中。</p>
+<p>需要注意的是，Redis的streams和消费者组使用Redis默认复制进行持久化和复制，因此：<strong>如果消息的持久性在您的应用程序中很重要，则必须将AOF与强fsync策略一起使用</strong>。<br>默认情况下，异步复制不保证能复制每一个数据添加或使用者组状态更改：在故障转移之后，可能会丢失某些内容，具体取决于slave从master接收数据的能力。</p>
+<ul>
+<li>长度为0的streams</li>
+</ul>
+<p>这是streams和其他redis数据类型的不同，其他数据类型，例如Lists，Sets等，如果所有元素都被删除，那么key也不存在。而streams允许所有entry都被删除。</p>
+<p>存在这种不对称性的原因是因为streams可能具有关联的消费者组，并且我们不希望由于streams中不再有任何entry而丢失消费者组定义的状态。 目前，即使没有关联的消费者群体，也不会删除该streams。</p>
+
+    
+    <a href="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis5-0/">redis5.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/streams/">streams</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-redis/Redis高级玩法：如何利用SortedSet实现多维度排序"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/9.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/">Redis高级玩法：如何利用SortedSet实现多维度排序</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-17 12:13:19" datetime="2020-05-17T04:13:19.000Z"  itemprop="datePublished">2020-05-17</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+
+
+        
+	<span id="/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/" class="leancloud_visitors" data-flag-title="Redis高级玩法：如何利用SortedSet实现多维度排序" title="Redis高级玩法：如何利用SortedSet实现多维度排序">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 1,061</span>
+<span class="post-count">阅读时长 ≈ 4分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>转载：<a href="https://mp.weixin.qq.com/s/LpHLnmtHi35SEGiArd0Mag" target="_blank" rel="noopener">原文地址</a></p>
+</blockquote>
+<h1 id="一、关于SortedSet"><a href="#一、关于SortedSet" class="headerlink" title="一、关于SortedSet"></a>一、关于SortedSet</h1><p>首先，我们都知道Redis的SortedSet是可以根据score进行排序的，以手机应用商店的热门榜单排序为例，根据下载量倒序排列，其简单用法如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; zadd TopApp 12000000 wechat</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd TopApp 8000000 taobao 10000000 alipay</span><br><span class="line">(integer) 2</span><br><span class="line">127.0.0.1:6379&gt; ZREVRANGE TopApp 0 -1</span><br><span class="line">1) "wechat"</span><br><span class="line">2) "alipay"</span><br><span class="line">3) "taobao"</span><br></pre></td></tr></table></figure>
+<p>对SortedSet做一下简单总结：</p>
+<ol>
+<li>默认升序排列，即通过命令<strong>ZRANGE</strong>实现；如果要按照降序排列，需要通过命令<strong>ZREVRANGE</strong>实现；</li>
+<li>当score即得分一样时，按照<strong>字典顺序</strong>对member进行排序，字典排序用的是二进制，它比较的是字符串的字节数组，所以实际上是比较ASCII码。</li>
+</ol>
+<p>简单用法介绍完后，接下来给出几种方案，介绍<strong>如何利用Redis实现多维度排序</strong>。同样的，还是以手机应用商店的热门榜单排序为例：首先按照APP的下载量倒序排序，如果下载量一样，则按照最后更新时间倒序排列。</p>
+<h2 id="1-方案1"><a href="#1-方案1" class="headerlink" title="1. 方案1"></a>1. 方案1</h2><p>介绍的第一个方案，并不需要依赖SortedSet，它的实现非常简单，但是需要产品做简单的妥协，即不能实时更新榜单。其实现方案是：定时每隔1分钟（可以由产品确定时间间隔）通过SQL（select * from tb_apps order by download_count desc, updated_time desc limit 300）或者其他方式计算热门榜单，然后把TOP300用List结构保存到缓存中。</p>
+<blockquote>
+<p>说明：根据应用商店的用户行为分析，真实用户很少会预览10页以后的数据，即使有这种用户，我们也可以忽略掉。所以只需要将总计10页，即10x30=300个APP信息用List结构保存即可。分页取数据时，通过lrange命令即可轻松实现。</p>
+</blockquote>
+<p>这种方案虽然简单，但是非常有用。即使不能做到实时，但是并没有影响用户体验。在项目初期需要快速发布，是一个比较推荐的做法。</p>
+<h2 id="2-方案2"><a href="#2-方案2" class="headerlink" title="2. 方案2"></a>2. 方案2</h2><p>方案2就是本文重点介绍的利用SortedSet实现多维度排序。</p>
+<p>介绍方案之前，我们再看一下SortedSet排序因子score，<strong>它是一个双精度64位的浮点型数字字符串。+inf和-inf都是有效值</strong>，能包括的整数范围是-(2^53) 到 +(2^53)，或者说是-9007199254740992 到 9007199254740992。</p>
+<p>那么，我们如何实现多维度排序呢？答案是<strong>构造一个特殊的score</strong>。以本文案例为例，排序影响因子是下载量和更新时间，那么我们可以构造一个这样特殊的浮点类型的score：<strong>整数部分就是下载量，小数部分就是最后更新时间戳</strong>。</p>
+<p>talk is cheap，show me the code。假设有5个app的下载量和最后更新时间分别如下（说明：更新时间只精确到秒）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wechat-下载量：12000000，最后更新时间：1564022201；其score为：12000000.1564022201</span><br><span class="line">qq-下载量：12000000，最后更新时间：1564022222；其score为：12000000.1564022222</span><br><span class="line">tiktok-下载量：9808900，最后更新时间：1563552267；其score为：9808900.1563552267</span><br><span class="line">taobao-下载量：11006600，最后更新时间：1564345601；其score为：11006600.1564345601</span><br><span class="line">alipay-下载量：11006600，最后更新时间：1564345600；其score为：11006600.1564345600</span><br></pre></td></tr></table></figure>
+<p>接下来，我们通过如下命令将这5个APP用SortedSet数据类型保存到Redis中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zadd TopApp 12000000.1564022201 wechat 12000000.1564022222 qq 9808900.1563552267 tiktok 11006600.1564345601 taobao 11006600.1564345600 alipay</span><br></pre></td></tr></table></figure>
+<p>保存后，我们看一下排序结果是否符合我们的预期：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; zrevrange TopApp 0 -1</span><br><span class="line">1) "qq"</span><br><span class="line">2) "wechat"</span><br><span class="line">3) "taobao"</span><br><span class="line">4) "alipay"</span><br><span class="line">5) "tiktok"</span><br></pre></td></tr></table></figure>
+<h1 id="二、写在最后"><a href="#二、写在最后" class="headerlink" title="二、写在最后"></a>二、写在最后</h1><p>是不是很完美？</p>
+<p>还不完美，这种讨巧的方式只能实现二维排序。如果有三维排序，四维排序呢？这里笔者提供一种实现参考，即<strong>自定义得分权重计算公式</strong>，这个公式包含所有影响排序的因子，例如：downloadCount*1000+updatedTime。这种实现无论排序维度多少都搞得定，但是需要注意的是，在具体实现时一定注意不要让score溢出。</p>
+
+    
+    <a href="/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多维排序/">多维排序</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-redis/Redis-9种数据结构以及它们的内部编码实现"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/8.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/">Redis 9种数据结构以及它们的内部编码实现</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-17 12:02:30" datetime="2020-05-17T04:02:30.000Z"  itemprop="datePublished">2020-05-17</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+
+
+        
+	<span id="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/" class="leancloud_visitors" data-flag-title="Redis 9种数据结构以及它们的内部编码实现" title="Redis 9种数据结构以及它们的内部编码实现">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 3,892</span>
+<span class="post-count">阅读时长 ≈ 16分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>转载：<a href="https://mp.weixin.qq.com/s/oPDm0Jud1AuTDjtOT7BbNw" target="_blank" rel="noopener">原文地址</a></p>
+</blockquote>
+<p>90%的人知道Redis 5种最基本的数据结构，只有不到10%的人知道8种基本数据结构（5种基本+bitmap+GeoHash+HyperLogLog），只有不到5%的人知道9种基本数据结构（5.0最新版本数据结构Streams），只有不到1%的人掌握了所有9种基本数据结构以及8种内部编码，掌握这篇文章的知识点，让你<strong>成为面试官眼中Redis方面最靓的仔</strong>！</p>
+<blockquote>
+<p>说明：本文基于<strong>Redis-3.2.11</strong>版本源码进行分析。</p>
+</blockquote>
+<h1 id="一、5种普通数据结构"><a href="#一、5种普通数据结构" class="headerlink" title="一、5种普通数据结构"></a><strong>一、5种普通数据结构</strong></h1><p>这个没什么好说的，对Redis稍微有点了解的都知道5种最基本的数据结构：String，List，Hash，Set，Sorted Set。不过，需要注意的是，这里依然有几个高频面试题。</p>
+<ul>
+<li>Set和Hash的关系</li>
+</ul>
+<p>答案就是Set是一个特殊的value为空的Hash。Set类型操作的源码在t_set.c中。以新增一个元素为例（<code>int setTypeAdd(robj *subject, sds value)</code>），如果编码类型是<strong>OBJ_ENCODING_HT</strong>，那么新增源码的源码如下，事实上就是对dict即Hash数据结构进行操作，并且dictSetVal时value是NULL：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dictEntry *de = dictAddRaw(ht,value,<span class="literal">NULL</span>);</span><br><span class="line"><span class="keyword">if</span> (de) &#123;</span><br><span class="line">    dictSetKey(ht,de,sdsdup(value));</span><br><span class="line">    dictSetVal(ht,de,<span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同样的，我们在t_hash.c中看到Hash类型新增元素时，当判断编码类型是<strong>OBJ_ENCODING_HT</strong>时，也是调用dict的方法：dictAdd(o-&gt;ptr,f,v)，dictAdd最终也是调用dictSetVal()方法，只不过v即value不为NULL：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Add an element to the target hash table */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dictAdd</span><span class="params">(dict *d, <span class="keyword">void</span> *key, <span class="keyword">void</span> *val)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    dictEntry *entry = dictAddRaw(d,key,<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!entry) <span class="keyword">return</span> DICT_ERR;</span><br><span class="line">    dictSetVal(d, entry, val);</span><br><span class="line">    <span class="keyword">return</span> DICT_OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以，Redis中Set和Hash的关系就很清楚了，当编码是OBJ_ENCODING_HT时，两者都是dict数据类型，只不过Set是value为NULL的特殊的dict。</p>
+<ul>
+<li>谈谈你对Sorted Set的理解</li>
+</ul>
+<p>Sorted Set的数据结构是一种跳表，即SkipList，如下图所示，红线是查找10的过程：</p>
+<figure class="image-box">
+                <a rel=Redis 9种数据结构以及它们的内部编码实现 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248131.webp" title="SkipList" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248131.webp" alt="SkipList" title="" class=""></a>
+                <p>SkipList</p>
+            </figure>
+<ul>
+<li>如何借助Sorted set实现多维排序</li>
+</ul>
+<p>Sorted Set默认情况下只能根据一个因子score进行排序。如此一来，局限性就很大，举个栗子：热门排行榜需要按照下载量&amp;最近更新时间排序，即类似数据库中的ORDER BY download_count, update_time DESC。那这样的需求如果用Redis的Sorted Set实现呢？</p>
+<p>事实上很简单，思路就是将涉及排序的多个维度的列通过一定的方式转换成一个特殊的列，即result = function(x, y, z)，即x，y，z是三个排序因子，例如下载量、时间等，通过自定义函数function()计算得到result，将result作为Sorted Set中的score的值，就能实现任意维度的排序需求了。</p>
+<h1 id="二、Redis内部编码"><a href="#二、Redis内部编码" class="headerlink" title="二、Redis内部编码"></a><strong>二、Redis内部编码</strong></h1><p>我们常说的String，List，Hash，Set，Sorted Set只是对外的编码，实际上每种数据结构都有自己底层的内部编码实现，而且是多种实现，这样Redis可以在合适的场景选择更合适的内部编码。</p>
+<p>如下图所示（图片纠正：<strong>intset</strong>编码，而不是inset编码），可以看到每种数据结构都有2种以上的内部编码实现，例如String数据结构就包含了raw、int和embstr三种内部编码。同时，有些内部编码可以作为多种外部数据结构的内部实现，例如ziplist就是hash、list和zset共有的内部编码，而set的内部编码可能是hashtable或者intset：</p>
+<figure class="image-box">
+                <a rel=Redis 9种数据结构以及它们的内部编码实现 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248139.webp" title="Redis内部编码" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248139.webp" alt="Redis内部编码" title="" class=""></a>
+                <p>Redis内部编码</p>
+            </figure>Redis内部编码<br><br>Redis这样设计有两个好处：<br><br>1. 可以偷偷的改进内部编码，而对外的数据结构和命令没有影响，这样一旦开发出更优秀的内部编码，无需改动对外数据结构和命令。<br>2. 多种内部编码实现可以在不同场景下发挥各自的优势。例如ziplist比较节省内存，但是在列表元素比较多的情况下，性能会有所下降。这时候Redis会根据配置选项将列表类型的内部实现转换为linkedlist。<br><br>### 1. String的3种内部编码<br><br>由上图可知，String的3种内部编码分别是：int、embstr、raw。int类型很好理解，当一个key的value是整型时，Redis就将其编码为int类型（另外还有一个条件：把这个value当作字符串来看，它的长度不能超过20）。如下所示。这种编码类型为了节省内存。Redis默认会缓存10000个整型值（#define OBJ_SHARED_INTEGERS 10000），这就意味着，如果有10个不同的KEY，其value都是10000以内的值，事实上全部都是共享同一个对象：<br><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set number "7890"</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; object encoding number</span><br><span class="line">"int"</span><br></pre></td></tr></table></figure>
+<p>接下来就是ebmstr和raw两种内部编码的长度界限，请看下面的源码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_ENCODING_EMBSTR_SIZE_LIMIT 44</span></span><br><span class="line"><span class="function">robj *<span class="title">createStringObject</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *ptr, <span class="keyword">size_t</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (len &lt;= OBJ_ENCODING_EMBSTR_SIZE_LIMIT)</span><br><span class="line">        <span class="keyword">return</span> createEmbeddedStringObject(ptr,len);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> createRawStringObject(ptr,len);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也就是说，embstr和raw编码的长度界限是44，我们可以做如下验证。长度超过44以后，就是raw编码类型，不会有任何优化，是多长，就要消耗多少内存：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set name "a1234567890123456789012345678901234567890123"</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; object encoding name</span><br><span class="line">"embstr"</span><br><span class="line">127.0.0.1:6379&gt; set name "a12345678901234567890123456789012345678901234"</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; object encoding name</span><br><span class="line">"raw"</span><br></pre></td></tr></table></figure>
+<p>那么为什么有embstr编码呢？它相比raw的优势在哪里？embstr编码将创建字符串对象所需的空间分配的次数从raw编码的两次降低为一次。因为embstr编码的字符串对象的所有数据都保存在一块连续的内存里面，所以这种编码的字符串对象比起raw编码的字符串对象能更好地利用缓存带来的优势。并且释放embstr编码的字符串对象只需要调用一次内存释放函数，而释放raw编码对象的字符串对象需要调用两次内存释放函数。如下图所示，左边是embstr编码，右边是raw编码：</p>
+<figure class="image-box">
+                <a rel=Redis 9种数据结构以及它们的内部编码实现 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248148.webp" title="embstr V.S. raw" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248148.webp" alt="embstr V.S. raw" title="" class=""></a>
+                <p>embstr V.S. raw</p>
+            </figure>
+<h3 id="2-ziplist"><a href="#2-ziplist" class="headerlink" title="2. ziplist"></a>2. ziplist</h3><p>由前面的图可知，List，Hash，Sorted Set三种对外结构，在特殊情况下的内部编码都是ziplist，那么这个ziplist有什么神奇之处呢？</p>
+<p>以Hash为例，我们首先看一下什么条件下它的内部编码是ziplist：</p>
+<ol>
+<li>当哈希类型元素个数小于hash-max-ziplist-entries配置（默认512个）；</li>
+<li>所有值都小于hash-max-ziplist-value配置（默认64个字节）；</li>
+</ol>
+<p>如果是sorted set的话，同样需要满足两个条件：</p>
+<ol>
+<li>元素个数小于zset-max-ziplist-entries配置，默认128；</li>
+<li>所有值都小于zset-max-ziplist-value配置，默认64。</li>
+</ol>
+<p>实际上，ziplist充分体现了Redis对于存储效率的追求。一个普通的双向链表，链表中每一项都占用独立的一块内存，各项之间用地址指针（或引用）连接起来。这种方式会带来大量的内存碎片，而且地址指针也会占用额外的内存。而ziplist却是将表中<strong>每一项存放在前后连续的地址空间内</strong>，一个ziplist整体占用一大块内存。它是一个表（list），但其实不是一个链表（linked list）。</p>
+<p>ziplist的源码在ziplist.c这个文件中，其中有一段这样的描述 – The general layout of the ziplist is as follows:：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;zlbytes&gt; &lt;zltail&gt; &lt;zllen&gt; &lt;entry&gt; &lt;entry&gt; ... &lt;entry&gt; &lt;zlend&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>zlbytes</strong>：表示这个ziplist占用了多少空间，或者说占了多少字节，这其中包括了zlbytes本身占用的4个字节；</li>
+<li><strong>zltail</strong>：表示到ziplist中最后一个元素的偏移量，有了这个值，pop操作的时间复杂度就是O(1)了，即不需要遍历整个ziplist；</li>
+<li><strong>zllen</strong>：表示ziplist中有多少个entry，即保存了多少个元素。由于这个字段占用16个字节，所以最大值是2^16-1，也就意味着，如果entry的数量超过2^16-1时，需要遍历整个ziplist才知道entry的数量；</li>
+<li><strong>entry</strong>：真正保存的数据，有它自己的编码；</li>
+<li><strong>zlend</strong>：专门用来表示ziplist尾部的特殊字符，占用8个字节，值固定为255，即8个字节每一位都是1。</li>
+</ul>
+<p>如下就是一个真实的ziplist编码，包含了2和5两个元素：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[0f 00 00 00] [0c 00 00 00] [02 00] [00 f3] [02 f6] [ff]</span><br><span class="line">      |             |          |       |       |     |</span><br><span class="line">   zlbytes        zltail    entries   &quot;2&quot;     &quot;5&quot;   end</span><br></pre></td></tr></table></figure>
+<h3 id="3-linkedlist"><a href="#3-linkedlist" class="headerlink" title="3. linkedlist"></a>3. linkedlist</h3><p>这是List的一种编码数据结构非常简单，就是我们非常熟悉的双向链表，对应Java中的LinkedList。</p>
+<h3 id="4-skiplist"><a href="#4-skiplist" class="headerlink" title="4. skiplist"></a>4. skiplist</h3><p>这个前面也已经提及，就是经典的跳表数据结构。</p>
+<h3 id="5-hashtable"><a href="#5-hashtable" class="headerlink" title="5. hashtable"></a>5. hashtable</h3><p>这个也很容易，对应Java中的HashMap。</p>
+<h3 id="6-intset"><a href="#6-intset" class="headerlink" title="6. intset"></a>6. intset</h3><p>Set特殊内部编码，当满足下面的条件时Set的内部编码就是intset而不是hashtable：</p>
+<ol>
+<li>Set集合中必须是64位有符号的十进制整型；</li>
+<li>元素个数不能超过set-max-intset-entries配置，默认512；</li>
+</ol>
+<p>验证如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd scores 135</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; sadd scores 128</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; object encoding scores</span><br><span class="line">"intset"</span><br></pre></td></tr></table></figure>
+<p>那么intset编码到底是个什么东西呢？看它的源码定义如下，很明显，就是整型数组，并且是一个<strong>有序的整型数组</strong>。它在内存分配上与ziplist有些类似，是连续的一整块内存空间，而且对于大整数和小整数采取了不同的编码，尽量对内存的使用进行了优化。这样的数据结构，如果执行SISMEMBER命令，即查看某个元素是否在集合中时，事实上使用的是二分查找法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">intset</span> &#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span> encoding;</span><br><span class="line">    <span class="keyword">uint32_t</span> length;</span><br><span class="line">    <span class="keyword">int8_t</span> contents[];</span><br><span class="line">&#125; intset;</span><br><span class="line"></span><br><span class="line"><span class="comment">// intset编码查找方法源码（人为简化），标准的二分查找法：</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> uint8_t <span class="title">intsetSearch</span><span class="params">(intset *is, <span class="keyword">int64_t</span> value, <span class="keyword">uint32_t</span> *pos)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> min = <span class="number">0</span>, max = intrev32ifbe(is-&gt;length)<span class="number">-1</span>, mid = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int64_t</span> cur = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(max &gt;= min) &#123;</span><br><span class="line">        mid = ((<span class="keyword">unsigned</span> <span class="keyword">int</span>)min + (<span class="keyword">unsigned</span> <span class="keyword">int</span>)max) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        cur = _intsetGet(is,mid);</span><br><span class="line">        <span class="keyword">if</span> (value &gt; cur) &#123;</span><br><span class="line">            min = mid+<span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value &lt; cur) &#123;</span><br><span class="line">            max = mid<span class="number">-1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (value == cur) &#123;</span><br><span class="line">        <span class="keyword">if</span> (pos) *pos = mid;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (pos) *pos = min;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INTSET_ENC_INT16 (sizeof(int16_t))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INTSET_ENC_INT32 (sizeof(int32_t))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INTSET_ENC_INT64 (sizeof(int64_t))</span></span><br></pre></td></tr></table></figure>
+<h1 id="三、3种高级数据结构"><a href="#三、3种高级数据结构" class="headerlink" title="三、3种高级数据结构"></a><strong>三、3种高级数据结构</strong></h1><p>Redis中3种高级数据结构分别是bitmap、GEO、HyperLogLog，针对这3种数据结构，笔者之前也有文章介绍过。其中，最重要的就是<strong>bitmap</strong>。</p>
+<h3 id="1-bitmap"><a href="#1-bitmap" class="headerlink" title="1. bitmap"></a>1. bitmap</h3><p>这个就是Redis实现的BloomFilter，BloomFilter非常简单，如下图所示，假设已经有3个元素a、b和c，分别通过3个hash算法h1()、h2()和h2()计算然后对一个bit进行赋值，接下来假设需要判断d是否已经存在，那么也需要使用3个hash算法h1()、h2()和h2()对d进行计算，然后得到3个bit的值，恰好这3个bit的值为1，这就能够说明：<strong>d可能存在集合中</strong>。再判断e，由于h1(e)算出来的bit之前的值是0，那么说明：<strong>e一定不存在集合中</strong>：</p>
+<figure class="image-box">
+                <a rel=Redis 9种数据结构以及它们的内部编码实现 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248166.webp" title="BloomFilter" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248166.webp" alt="BloomFilter" title="" class=""></a>
+                <p>BloomFilter</p>
+            </figure>BloomFilter<br><br>需要说明的是，bitmap并不是一种真实的数据结构，它本质上是String数据结构，只不过操作的粒度变成了位，即bit。因为String类型最大长度为512MB，所以bitmap最多可以存储2^32个bit。<br><br>### 2. GEO<br><br>GEO数据结构可以在Redis中存储地理坐标，并且坐标有限制，由EPSG:900913 / EPSG:3785 / OSGEO:41001 规定如下：<br><br>1. 有效的经度从-180度到180度。<br>2. 有效的纬度从-85.05112878度到85.05112878度。<br><br>当坐标位置超出上述指定范围时，该命令将会返回一个错误。添加地理位置命令如下：<br><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">redis&gt;</span> GEOADD city 114.031040 22.324386 "shenzhen" 112.572154 22.267832 "guangzhou"</span><br><span class="line">(integer) 2</span><br><span class="line"><span class="meta">redis&gt;</span> GEODIST city shenzhen guangzhou</span><br><span class="line">"150265.8106"</span><br></pre></td></tr></table></figure>
+<p>但是，需要说明的是，Geo本身不是一种数据结构，它<strong>本质上还是借助于Sorted Set（ZSET）</strong>，并且使用<strong>GeoHash</strong>技术进行填充。Redis中将经纬度使用52位的整数进行编码，放进zset中，score就是GeoHash的52位整数值。在使用Redis进行Geo查询时，其内部对应的操作其实就是zset(skiplist)的操作。通过zset的score进行排序就可以得到坐标附近的其它元素，通过将score还原成坐标值就可以得到元素的原始坐标。</p>
+<p>总之，Redis中处理这些地理位置坐标点的思想是：二维平面坐标点 –&gt; 一维整数编码值 –&gt; zset(score为编码值) –&gt; zrangebyrank(获取score相近的元素)、zrangebyscore –&gt; 通过score(整数编码值)反解坐标点 –&gt; 附近点的地理位置坐标。</p>
+<ul>
+<li>GEOHASH原理</li>
+</ul>
+<p>使用wiki上的例子，纬度为42.6，经度为-5.6的点，转化为base32的话要如何转呢？<br>首先拿纬度来进行说明，纬度的范围为-90到90，将这个范围划为两段，则为[-90,0]、[0,90]，然后看给定的纬度在哪个范围，在前面的范围的话，就设当前位为0，后面的话值便为1.然后继续将确定的范围1分为2，继续以确定值在前段还是后段来确定bit的值。就这样慢慢的缩小范围，一般最多缩小13次就可以了(经纬度的二进制位相加最多25位，经度13位，纬度12位)。这时的中间值，将跟给定的值最相近。如下图所示：</p>
+<figure class="image-box">
+                <a rel=Redis 9种数据结构以及它们的内部编码实现 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248175.webp" title="Geohash" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248175.webp" alt="Geohash" title="" class=""></a>
+                <p>Geohash</p>
+            </figure>
+<p>第1行，纬度42.6位于[0, 90]之间，所以bit=1；第2行，纬度42.6位于[0, 45]之间，所以bit=0；第3行，纬度42.6位于[22.5, 45]之间，所以bit=1，以此类推。这样，取出图中的bit位：1011 1100 1001，同样的方法，将经度(范围-180到180)算出来为 ：0111 1100 0000 0。结果对其如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 经度</span><br><span class="line">0111 1100 0000 0</span><br><span class="line"><span class="meta">#</span> 纬度</span><br><span class="line">1011 1100 1001</span><br></pre></td></tr></table></figure>
+<p>得到了经纬度的二进制位后，下面需要将两者进行结合：从经度、纬度的循环，每次取其二进制的一位(不足位取0)，合并为新的二进制数：01101111 11110000 01000001 0。每5位为一个十进制数，结合base32对应表映射为base32值为：ezs42。这样就完成了encode的过程。</p>
+<h3 id="3-Streams"><a href="#3-Streams" class="headerlink" title="3. Streams"></a>3. Streams</h3><p>这是Redis5.0引入的全新数据结构，用一句话概括Streams就是Redis实现的内存版kafka。而且，Streams也有<strong>Consumer Groups</strong>的概念。通过Redis源码中对stream的定义我们可知，streams底层的数据结构是<strong>radix tree</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">stream</span> &#123;</span></span><br><span class="line">    rax *rax;               <span class="comment">/* The radix tree holding the stream. */</span></span><br><span class="line">    <span class="keyword">uint64_t</span> length;        <span class="comment">/* Number of elements inside this stream. */</span></span><br><span class="line">    streamID last_id;       <span class="comment">/* Zero if there are yet no items. */</span></span><br><span class="line">    rax *cgroups;           <span class="comment">/* Consumer groups dictionary: name -&gt; streamCG */</span></span><br><span class="line">&#125; stream;</span><br></pre></td></tr></table></figure>
+<p>那么这个radix tree长啥样呢？在Redis源码的rax.h文件中有一段这样的描述，这样看起来是不是就比较直观了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">*                    (f) &quot;&quot;</span><br><span class="line">*                    /</span><br><span class="line">*                 (i o) &quot;f&quot;</span><br><span class="line">*                 /   \</span><br><span class="line">*    &quot;firs&quot;  (&quot;rst&quot;)  (o) &quot;fo&quot;</span><br><span class="line">*              /        \</span><br><span class="line">*    &quot;first&quot; []       [t   b] &quot;foo&quot;</span><br><span class="line">*                     /     \</span><br><span class="line">*           &quot;foot&quot; (&quot;er&quot;)    (&quot;ar&quot;) &quot;foob&quot;</span><br><span class="line">*                    /          \</span><br><span class="line">*          &quot;footer&quot; []          [] &quot;foobar&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>Radix Tree(基数树) 事实上就几乎相同是传统的二叉树</strong>。仅仅是在寻找方式上，以一个unsigned int类型数为例，利用这个数的每个比特位作为树节点的推断。能够这样说，比方一个数10001010101010110101010，那么依照Radix 树的插入就是在根节点，假设遇到0，就指向左节点，假设遇到1就指向右节点，在插入过程中构造树节点，在删除过程中删除树节点。如下是一个保存了7个单词的Radix Tree：</p>
+<figure class="image-box">
+                <a rel=Redis 9种数据结构以及它们的内部编码实现 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248187.webp" title="radix tree" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248187.webp" alt="radix tree" title="" class=""></a>
+                <p>radix tree</p>
+            </figure>
+    
+    <a href="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-java/SpringBoot-集成邮件服务以及邮件发送的几种方式"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/17/java/SpringBoot-集成邮件服务以及邮件发送的几种方式/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/7.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/java/SpringBoot-集成邮件服务以及邮件发送的几种方式/">SpringBoot 集成邮件服务以及邮件发送的几种方式</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-17 11:53:58" datetime="2020-05-17T03:53:58.000Z"  itemprop="datePublished">2020-05-17</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+        
+	<span id="/2020/05/17/java/SpringBoot-集成邮件服务以及邮件发送的几种方式/" class="leancloud_visitors" data-flag-title="SpringBoot 集成邮件服务以及邮件发送的几种方式" title="SpringBoot 集成邮件服务以及邮件发送的几种方式">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/17/java/SpringBoot-集成邮件服务以及邮件发送的几种方式/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/17/java/SpringBoot-集成邮件服务以及邮件发送的几种方式/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 1,794</span>
+<span class="post-count">阅读时长 ≈ 7分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>[原文地址]（）</p>
+</blockquote>
+<blockquote>
+<p>转载：<a href="https://mp.weixin.qq.com/s/SxdiqaFqHyK5hNcJz1uoAQ" target="_blank" rel="noopener">原文地址</a></p>
+</blockquote>
+<h1 id="一、SMTP协议简介"><a href="#一、SMTP协议简介" class="headerlink" title="一、SMTP协议简介"></a>一、SMTP协议简介</h1><p>  SMTP是一种提供可靠且有效的<strong>电子邮件传输</strong>的协议。SMTP是建立在<strong>FTP</strong>文件传输服务上的一种邮件服务，主要用于系统之间的邮件信息传递，并提供有关来信的通知。SMTP独立于特定的传输子系统，且只需要可靠有序的数据流信道支持，SMTP的重要特性之一是其能<strong>跨越网络传输邮件</strong>，即“SMTP邮件中继”。使用SMTP，可实现相同网络处理进程之间的邮件传输，也可通过中继器或网关实现某处理进程与其他网络之间的邮件传输。</p>
+<p> 简单来说：我们使用的这些邮件发送功能，他们之间都有一个专门的电子邮件的服务器，类似于邮局，你将邮件发给邮局，邮局又会根据你的邮寄地址发送给相应的邮局，然后接收方去邮局取邮件。而邮件服务器呢，就是互联网之间的一个邮局，不同的网络之间也能实现电子邮件的发送。</p>
+<p> Spring框架在java邮件服务的基础上进行了封装，SpringBoot在Spring的基础上对邮件服务进一步的封装，让SpringBoot发送邮件更为便利，灵活。</p>
+    
+    <a href="/2020/05/17/java/SpringBoot-集成邮件服务以及邮件发送的几种方式/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/">springboot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/邮件/">邮件</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-java/30-分钟学会如何使用-Shiro"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/17/java/30-分钟学会如何使用-Shiro/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/6.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/java/30-分钟学会如何使用-Shiro/">30 分钟学会如何使用 Shiro</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-17 11:17:54" datetime="2020-05-17T03:17:54.000Z"  itemprop="datePublished">2020-05-17</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+        
+	<span id="/2020/05/17/java/30-分钟学会如何使用-Shiro/" class="leancloud_visitors" data-flag-title="30 分钟学会如何使用 Shiro" title="30 分钟学会如何使用 Shiro">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/17/java/30-分钟学会如何使用-Shiro/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/17/java/30-分钟学会如何使用-Shiro/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 4,108</span>
+<span class="post-count">阅读时长 ≈ 17分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>a</p>
+<blockquote>
+<p>原文作者：冷豪；<a href="www.cnblogs.com/learnhow/p/5694876.html">原文地址</a></p>
+</blockquote>
+<h1 id="一、架构"><a href="#一、架构" class="headerlink" title="一、架构"></a><strong>一、架构</strong></h1><p>要学习如何使用Shiro必须先从它的架构谈起，作为一款安全框架Shiro的设计相当精妙。Shiro的应用不依赖任何容器，它也可以在JavaSE下使用。但是最常用的环境还是JavaEE。下面以用户登录为例：</p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640.webp" alt="img"></p  class="index-item-img">
+    
+    <a href="/2020/05/17/java/30-分钟学会如何使用-Shiro/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shiro/">shiro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安全/">安全</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-深入浅出-Kafka-和-ZooKeeper-的分布式消息队列"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -219,7 +860,7 @@
     <div class="thumb-hover">
         <span class="icon icon-eye"></span>
     </div>
-    <img src="/img/thumb/10.jpg" alt="图片路径不正确">
+    <img src="/img/thumb/5.jpg" alt="图片路径不正确">
     
 
 
@@ -298,22 +939,22 @@
             </li>
         
             <li class="post-list-item fade">
-                <article id="post-synchronized-and-volatile"
+                <article id="post-java/synchronized-and-volatile"
   class="article-card article-type-post" itemprop="blogPost">
   
         
 <div class="item-thumb">
-    <a class="thumb-link" href="/2020/05/10/synchronized-and-volatile/"></a>
+    <a class="thumb-link" href="/2020/05/10/java/synchronized-and-volatile/"></a>
     <div class="thumb-hover">
         <span class="icon icon-eye"></span>
     </div>
-    <img src="/img/thumb/9.jpg" alt="图片路径不正确">
+    <img src="/img/thumb/4.jpg" alt="图片路径不正确">
     
 
 
   
     <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2020/05/10/synchronized-and-volatile/">synchronized and volatile</a>
+      <a class="post-title-link" href="/2020/05/10/java/synchronized-and-volatile/">synchronized and volatile</a>
     </h3>
   
 
@@ -332,7 +973,7 @@
 
 
         
-	<span id="/2020/05/10/synchronized-and-volatile/" class="leancloud_visitors" data-flag-title="synchronized and volatile" title="synchronized and volatile">
+	<span id="/2020/05/10/java/synchronized-and-volatile/" class="leancloud_visitors" data-flag-title="synchronized and volatile" title="synchronized and volatile">
 		
 			<i class="icon icon-eye"></i>
 		
@@ -343,8 +984,8 @@
         
     <span class="leancloud-comment">
         <i class="icon icon-comment-o"></i>
-        <a href="/2020/05/10/synchronized-and-volatile/#comment">
-            <span class="valine-comment-count" data-xid="/2020/05/10/synchronized-and-volatile/"></span>
+        <a href="/2020/05/10/java/synchronized-and-volatile/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/10/java/synchronized-and-volatile/"></span>
         </a>
     </span>
 
@@ -363,7 +1004,7 @@
 <p>JDK早期，synchronized 叫做重量级锁， 因为申请锁资源必须通过kernel, 系统调用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">;hello.asm</span><br><span class="line">;write(int fd, const void *buffer, size_t nbytes)</span><br><span class="line"></span><br><span class="line">section data</span><br><span class="line">    msg db &quot;Hello&quot;, 0xA</span><br><span class="line">    len equ $ - msg</span><br><span class="line"></span><br><span class="line">section .text</span><br><span class="line">global _start</span><br><span class="line">_start:</span><br><span class="line"></span><br><span class="line">    mov edx, len</span><br><span class="line">    mov ecx, msg</span><br><span class="line">    mov ebx, 1 ;文件描述符1 std_out</span><br><span class="line">    mov eax, 4 ;write函数系统调用号 4</span><br><span class="line">    int 0x80</span><br><span class="line"></span><br><span class="line">    mov ebx, 0</span><br><span class="line">    mov eax, 1 ;exit函数系统调用号</span><br><span class="line">    int 0x80</span><br></pre></td></tr></table></figure>
     
-    <a href="/2020/05/10/synchronized-and-volatile/" class="post-more waves-effect waves-button">
+    <a href="/2020/05/10/java/synchronized-and-volatile/" class="post-more waves-effect waves-button">
         more
     </a>
     </div>
@@ -388,7 +1029,7 @@
     <div class="thumb-hover">
         <span class="icon icon-eye"></span>
     </div>
-    <img src="/img/thumb/8.jpg" alt="图片路径不正确">
+    <img src="/img/thumb/3.jpg" alt="图片路径不正确">
     
 
 
@@ -467,22 +1108,22 @@
             </li>
         
             <li class="post-list-item fade">
-                <article id="post-Java8-14的有哪些重要的新特性"
+                <article id="post-java/Java8-14的有哪些重要的新特性"
   class="article-card article-type-post" itemprop="blogPost">
   
         
 <div class="item-thumb">
-    <a class="thumb-link" href="/2020/05/07/Java8-14的有哪些重要的新特性/"></a>
+    <a class="thumb-link" href="/2020/05/07/java/Java8-14的有哪些重要的新特性/"></a>
     <div class="thumb-hover">
         <span class="icon icon-eye"></span>
     </div>
-    <img src="/img/thumb/7.jpg" alt="图片路径不正确">
+    <img src="/img/thumb/2.jpg" alt="图片路径不正确">
     
 
 
   
     <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2020/05/07/Java8-14的有哪些重要的新特性/">Java8~14的有哪些重要的新特性</a>
+      <a class="post-title-link" href="/2020/05/07/java/Java8-14的有哪些重要的新特性/">Java8~14的有哪些重要的新特性</a>
     </h3>
   
 
@@ -501,7 +1142,7 @@
 
 
         
-	<span id="/2020/05/07/Java8-14的有哪些重要的新特性/" class="leancloud_visitors" data-flag-title="Java8~14的有哪些重要的新特性" title="Java8~14的有哪些重要的新特性">
+	<span id="/2020/05/07/java/Java8-14的有哪些重要的新特性/" class="leancloud_visitors" data-flag-title="Java8~14的有哪些重要的新特性" title="Java8~14的有哪些重要的新特性">
 		
 			<i class="icon icon-eye"></i>
 		
@@ -512,8 +1153,8 @@
         
     <span class="leancloud-comment">
         <i class="icon icon-comment-o"></i>
-        <a href="/2020/05/07/Java8-14的有哪些重要的新特性/#comment">
-            <span class="valine-comment-count" data-xid="/2020/05/07/Java8-14的有哪些重要的新特性/"></span>
+        <a href="/2020/05/07/java/Java8-14的有哪些重要的新特性/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/07/java/Java8-14的有哪些重要的新特性/"></span>
         </a>
     </span>
 
@@ -540,7 +1181,7 @@
 </ul>
 <h3 id="进程-API"><a href="#进程-API" class="headerlink" title="进程 API"></a>进程 API</h3><p>Java 9 增加了 <code>ProcessHandle</code> 接口，可以对原生进程进行管理，尤其适合于管理长时间运行的进程</p>
     
-    <a href="/2020/05/07/Java8-14的有哪些重要的新特性/" class="post-more waves-effect waves-button">
+    <a href="/2020/05/07/java/Java8-14的有哪些重要的新特性/" class="post-more waves-effect waves-button">
         more
     </a>
     </div>
@@ -556,22 +1197,22 @@
             </li>
         
             <li class="post-list-item fade">
-                <article id="post-JVM-完整深入解析"
+                <article id="post-java/JVM-完整深入解析"
   class="article-card article-type-post" itemprop="blogPost">
   
         
 <div class="item-thumb">
-    <a class="thumb-link" href="/2020/05/07/JVM-完整深入解析/"></a>
+    <a class="thumb-link" href="/2020/05/07/java/JVM-完整深入解析/"></a>
     <div class="thumb-hover">
         <span class="icon icon-eye"></span>
     </div>
-    <img src="/img/thumb/6.jpg" alt="图片路径不正确">
+    <img src="/img/thumb/1.jpg" alt="图片路径不正确">
     
 
 
   
     <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2020/05/07/JVM-完整深入解析/">JVM 完整深入解析</a>
+      <a class="post-title-link" href="/2020/05/07/java/JVM-完整深入解析/">JVM 完整深入解析</a>
     </h3>
   
 
@@ -590,7 +1231,7 @@
 
 
         
-	<span id="/2020/05/07/JVM-完整深入解析/" class="leancloud_visitors" data-flag-title="JVM 完整深入解析" title="JVM 完整深入解析">
+	<span id="/2020/05/07/java/JVM-完整深入解析/" class="leancloud_visitors" data-flag-title="JVM 完整深入解析" title="JVM 完整深入解析">
 		
 			<i class="icon icon-eye"></i>
 		
@@ -601,8 +1242,8 @@
         
     <span class="leancloud-comment">
         <i class="icon icon-comment-o"></i>
-        <a href="/2020/05/07/JVM-完整深入解析/#comment">
-            <span class="valine-comment-count" data-xid="/2020/05/07/JVM-完整深入解析/"></span>
+        <a href="/2020/05/07/java/JVM-完整深入解析/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/07/java/JVM-完整深入解析/"></span>
         </a>
     </span>
 
@@ -628,7 +1269,7 @@
 </ul>
 <hr>
     
-    <a href="/2020/05/07/JVM-完整深入解析/" class="post-more waves-effect waves-button">
+    <a href="/2020/05/07/java/JVM-完整深入解析/" class="post-more waves-effect waves-button">
         more
     </a>
     </div>
@@ -637,432 +1278,6 @@
 <div class="post-footer">
     
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-Sprinig-Boot-Redis-实现接口幂等性"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-        
-<div class="item-thumb">
-    <a class="thumb-link" href="/2020/05/07/Sprinig-Boot-Redis-实现接口幂等性/"></a>
-    <div class="thumb-hover">
-        <span class="icon icon-eye"></span>
-    </div>
-    <img src="/img/thumb/5.jpg" alt="图片路径不正确">
-    
-
-
-  
-    <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2020/05/07/Sprinig-Boot-Redis-实现接口幂等性/">Sprinig Boot + Redis 实现接口幂等性</a>
-    </h3>
-  
-
-
-
-</div>
-
-        
-    
-    
-    
-    <div class="post-meta">
-        <time class="post-time" title="2020-05-07 20:42:12" datetime="2020-05-07T12:42:12.000Z"  itemprop="datePublished">2020-05-07</time>
-
-        
-
-
-        
-	<span id="/2020/05/07/Sprinig-Boot-Redis-实现接口幂等性/" class="leancloud_visitors" data-flag-title="Sprinig Boot + Redis 实现接口幂等性" title="Sprinig Boot + Redis 实现接口幂等性">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-    <span class="leancloud-comment">
-        <i class="icon icon-comment-o"></i>
-        <a href="/2020/05/07/Sprinig-Boot-Redis-实现接口幂等性/#comment">
-            <span class="valine-comment-count" data-xid="/2020/05/07/Sprinig-Boot-Redis-实现接口幂等性/"></span>
-        </a>
-    </span>
-
-
-
-        
-        
-        <span class="post-count">文章字数: 2,446</span>
-<span class="post-count">阅读时长 ≈ 12分钟</span>
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h3 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h3><p>幂等性, 通俗的说就是一个接口, 多次发起同一个请求, 必须保证操作只能执行一次 比如:</p>
-<ul>
-<li>订单接口, 不能多次创建订单</li>
-<li>支付接口, 重复支付同一笔订单只能扣一次钱</li>
-<li>支付宝回调接口, 可能会多次回调, 必须处理重复回调</li>
-<li>普通表单提交接口, 因为网络超时等原因多次点击提交, 只能成功一次 等等</li>
-</ul>
-<h3 id="二、常见解决方案"><a href="#二、常见解决方案" class="headerlink" title="二、常见解决方案"></a>二、常见解决方案</h3><ol>
-<li>唯一索引 – 防止新增脏数据</li>
-<li>token机制 – 防止页面重复提交</li>
-<li>悲观锁 – 获取数据的时候加锁(锁表或锁行)</li>
-<li>乐观锁 – 基于版本号version实现, 在更新数据那一刻校验数据</li>
-<li>分布式锁 – redis(jedis、redisson)或zookeeper实现</li>
-<li>状态机 – 状态变更, 更新数据时判断状态</li>
-</ol>
-<h3 id="三、本文实现"><a href="#三、本文实现" class="headerlink" title="三、本文实现"></a>三、本文实现</h3><p>本文采用第2种方式实现, 即通过redis + token机制实现接口幂等性校验</p>
-<h3 id="四、实现思路"><a href="#四、实现思路" class="headerlink" title="四、实现思路"></a>四、实现思路</h3><p>为需要保证幂等性的每一次请求创建一个唯一标识<code>token</code>, 先获取<code>token</code>, 并将此<code>token</code>存入redis, 请求接口时, 将此<code>token</code>放到header或者作为请求参数请求接口, 后端接口判断redis中是否存在此<code>token</code>:</p>
-<ul>
-<li>如果存在, 正常处理业务逻辑, 并从redis中删除此<code>token</code>, 那么, 如果是重复请求, 由于<code>token</code>已被删除, 则不能通过校验, 返回<code>请勿重复操作</code>提示</li>
-<li>如果不存在, 说明参数不合法或者是重复请求, 返回提示即可</li>
-</ul>
-<h3 id="五、项目简介"><a href="#五、项目简介" class="headerlink" title="五、项目简介"></a>五、项目简介</h3>
-    
-    <a href="/2020/05/07/Sprinig-Boot-Redis-实现接口幂等性/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-关于Spring中的参数校验的一点思考"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-        
-<div class="item-thumb">
-    <a class="thumb-link" href="/2020/05/07/关于Spring中的参数校验的一点思考/"></a>
-    <div class="thumb-hover">
-        <span class="icon icon-eye"></span>
-    </div>
-    <img src="/img/thumb/4.jpg" alt="图片路径不正确">
-    
-
-
-  
-    <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2020/05/07/关于Spring中的参数校验的一点思考/">关于Spring中的参数校验的一点思考</a>
-    </h3>
-  
-
-
-
-</div>
-
-        
-    
-    
-    
-    <div class="post-meta">
-        <time class="post-time" title="2020-05-07 20:21:00" datetime="2020-05-07T12:21:00.000Z"  itemprop="datePublished">2020-05-07</time>
-
-        
-
-
-        
-	<span id="/2020/05/07/关于Spring中的参数校验的一点思考/" class="leancloud_visitors" data-flag-title="关于Spring中的参数校验的一点思考" title="关于Spring中的参数校验的一点思考">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-    <span class="leancloud-comment">
-        <i class="icon icon-comment-o"></i>
-        <a href="/2020/05/07/关于Spring中的参数校验的一点思考/#comment">
-            <span class="valine-comment-count" data-xid="/2020/05/07/关于Spring中的参数校验的一点思考/"></span>
-        </a>
-    </span>
-
-
-
-        
-        
-        <span class="post-count">文章字数: 2,553</span>
-<span class="post-count">阅读时长 ≈ 12分钟</span>
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <p>数据的校验的重要性就不用说了，即使在前端对数据进行校验的情况下，我们还是要对传入后端的数据再进行一遍校验，避免用户绕过浏览器直接通过一些 HTTP 工具直接向后端请求一些违法数据。</p>
-<p>最近工作中很多地方需要对参数做一些校验，刚开始的时候除了Controller层接受的对象我是直接通过一些 Spring 提供好的注解来实现校验比如<code>@Valid</code>、<code>@NotNull</code> 等等，在一些需要对参数做校验的其他地方我都是通过手动编程if else判断的方式来实现。后面重构代码发现有更好的方式来满足我的需求，然后花了半天时间对这部分内容做了一个简单的总结，希望可以对不了解这部分知识的朋友有帮助。</p>
-<p>下面我会通过实例程序演示如何在 Java 程序中尤其是 Spring 程序中优雅地的进行参数验证。</p>
-    
-    <a href="/2020/05/07/关于Spring中的参数校验的一点思考/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-后端开发必备的-RestFul-API-知识"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-        
-<div class="item-thumb">
-    <a class="thumb-link" href="/2020/05/07/后端开发必备的-RestFul-API-知识/"></a>
-    <div class="thumb-hover">
-        <span class="icon icon-eye"></span>
-    </div>
-    <img src="/img/thumb/3.jpg" alt="图片路径不正确">
-    
-
-
-  
-    <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2020/05/07/后端开发必备的-RestFul-API-知识/">后端开发必备的 RestFul API 知识</a>
-    </h3>
-  
-
-
-
-</div>
-
-        
-    
-    
-    
-    <div class="post-meta">
-        <time class="post-time" title="2020-05-07 20:13:40" datetime="2020-05-07T12:13:40.000Z"  itemprop="datePublished">2020-05-07</time>
-
-        
-
-
-        
-	<span id="/2020/05/07/后端开发必备的-RestFul-API-知识/" class="leancloud_visitors" data-flag-title="后端开发必备的 RestFul API 知识" title="后端开发必备的 RestFul API 知识">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-    <span class="leancloud-comment">
-        <i class="icon icon-comment-o"></i>
-        <a href="/2020/05/07/后端开发必备的-RestFul-API-知识/#comment">
-            <span class="valine-comment-count" data-xid="/2020/05/07/后端开发必备的-RestFul-API-知识/"></span>
-        </a>
-    </span>
-
-
-
-        
-        
-        <span class="post-count">文章字数: 2,494</span>
-<span class="post-count">阅读时长 ≈ 9分钟</span>
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_16_06_1.png" alt="image-20200507201600488"></p  class="index-item-img">
-<p>RestFul API 是每个程序员都应该了解并掌握的基本知识，我们在开发过程中设计API的时候也应该至少要满足RestFul API的最基本的要求（比如接口中尽量使用名词，使用POST 请求创建资源，DELETE请求删除资源等等，示例：GET   /notes/id：获取某个指定id的笔记的信息）。最近学习过程中接触到这些东西，自己没有时间总结，所以分享一些不错的文章给大家。</p>
-<p>相关阅读：</p>
-    
-    <a href="/2020/05/07/后端开发必备的-RestFul-API-知识/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-我的秋招"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-        
-<div class="item-thumb">
-    <a class="thumb-link" href="/2019/09/21/我的秋招/"></a>
-    <div class="thumb-hover">
-        <span class="icon icon-eye"></span>
-    </div>
-    <img src="/img/thumb/2.jpg" alt="图片路径不正确">
-    
-
-
-  
-    <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2019/09/21/我的秋招/">我的秋招</a>
-    </h3>
-  
-
-
-
-</div>
-
-        
-    
-    
-    
-    <div class="post-meta">
-        <time class="post-time" title="2019-09-21 19:43:31" datetime="2019-09-21T11:43:31.000Z"  itemprop="datePublished">2019-09-21</time>
-
-        
-
-
-        
-	<span id="/2019/09/21/我的秋招/" class="leancloud_visitors" data-flag-title="我的秋招" title="我的秋招">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-    <span class="leancloud-comment">
-        <i class="icon icon-comment-o"></i>
-        <a href="/2019/09/21/我的秋招/#comment">
-            <span class="valine-comment-count" data-xid="/2019/09/21/我的秋招/"></span>
-        </a>
-    </span>
-
-
-
-        
-        
-        <span class="post-count">文章字数: 2,868</span>
-<span class="post-count">阅读时长 ≈ 10分钟</span>
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h1 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h1><p>经过一年的努力吧（感觉自己说努力有点不好意思O(∩_∩)O），从大三一直到这周，成功签约西安农行软开（还差学校签字返还）。特此作此总结，记录下自己的汗水。</p>
-<h1 id="春招"><a href="#春招" class="headerlink" title="春招"></a>春招</h1><p>从大三下学期一开始，我就开始了校园招聘的路程，虽然那时候是春招，我大三也只能找一些实习，但是有实习岂不是很好，简历不就更好看了吗？但是啊，最后也只有以失败告终，0offer。但是也收获到了许多，比如经过的几次面试。</p>
-<p>记得那是大三刚开始，因为整个宿舍（六个人）只有我和我的下铺有就业的意向，其他人都是考研。所以，我们就计划着一起开始筹备春招。当时觉得自己知识体系应该已经差不多了，所以信心满满，然而，当头棒喝。我专攻的是Java后台开发，但当有笔试传来的时候，发现出的题目竟然像是在看天书，天书，什么概念，就是有头无尾，几乎不懂的。本以为以前写过算法，参加过ACM，算法题应该不成什么大问题，然而，算法题就是最大的问题。当时就觉得自己得复习甚至是学习一波。因为当时有一些知识点是学校一起老师讲过的，因为没怎么看，也没怎么常用，所以就忘记了。</p>
-    
-    <a href="/2019/09/21/我的秋招/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-我的one-year"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-        
-<div class="item-thumb">
-    <a class="thumb-link" href="/2019/02/19/我的one-year/"></a>
-    <div class="thumb-hover">
-        <span class="icon icon-eye"></span>
-    </div>
-    <img src="/img/thumb/1.jpg" alt="图片路径不正确">
-    
-
-
-  
-    <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2019/02/19/我的one-year/">我的one_year</a>
-    </h3>
-  
-
-
-
-</div>
-
-        
-    
-    
-    
-    <div class="post-meta">
-        <time class="post-time" title="2019-02-19 19:58:31" datetime="2019-02-19T11:58:31.000Z"  itemprop="datePublished">2019-02-19</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/进阶之路/">进阶之路</a></li></ul>
-
-
-
-        
-	<span id="/2019/02/19/我的one-year/" class="leancloud_visitors" data-flag-title="我的one_year" title="我的one_year">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-    <span class="leancloud-comment">
-        <i class="icon icon-comment-o"></i>
-        <a href="/2019/02/19/我的one-year/#comment">
-            <span class="valine-comment-count" data-xid="/2019/02/19/我的one-year/"></span>
-        </a>
-    </span>
-
-
-
-        
-        
-        <span class="post-count">文章字数: 1,975</span>
-<span class="post-count">阅读时长 ≈ 9分钟</span>
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>年已经过了，今天是元宵节，南方人生活在北方，虽然没有什么元宵啊，汤圆啊，或者大鱼大肉，来到学校也是冷冷清清的。有闲情，来回顾一下去年一整年所做和所得。</p>
-<p>首先，从懵懂少年，有着雄心却有些迷茫的少年开始了实际行动。思想不在是以前那么幼稚，开始了真正的思考。</p>
-<p>自己找所需去学习，开始为自己以后的路所打算。点点滴滴，慢慢在积累，但总觉得还是有些晚了的感觉。下面，开始我的数落数落。。。</p>
-    
-    <a href="/2019/02/19/我的one-year/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
 
 </div>
 
@@ -1073,7 +1288,7 @@
         
 <nav id="page-nav">
     <div class="inner">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
     </div>
 </nav>
 
