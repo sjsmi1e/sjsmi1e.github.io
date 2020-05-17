@@ -258,6 +258,7 @@
 <li>当score即得分一样时，按照<strong>字典顺序</strong>对member进行排序，字典排序用的是二进制，它比较的是字符串的字节数组，所以实际上是比较ASCII码。</li>
 </ol>
 <p>简单用法介绍完后，接下来给出几种方案，介绍<strong>如何利用Redis实现多维度排序</strong>。同样的，还是以手机应用商店的热门榜单排序为例：首先按照APP的下载量倒序排序，如果下载量一样，则按照最后更新时间倒序排列。</p>
+<a id="more"></a>
 <h2 id="1-方案1"><a href="#1-方案1" class="headerlink" title="1. 方案1"></a>1. 方案1</h2><p>介绍的第一个方案，并不需要依赖SortedSet，它的实现非常简单，但是需要产品做简单的妥协，即不能实时更新榜单。其实现方案是：定时每隔1分钟（可以由产品确定时间间隔）通过SQL（select * from tb_apps order by download_count desc, updated_time desc limit 300）或者其他方式计算热门榜单，然后把TOP300用List结构保存到缓存中。</p>
 <blockquote>
 <p>说明：根据应用商店的用户行为分析，真实用户很少会预览10页以后的数据，即使有这种用户，我们也可以忽略掉。所以只需要将总计10页，即10x30=300个APP信息用List结构保存即可。分页取数据时，通过lrange命令即可轻松实现。</p>
@@ -281,7 +282,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2020-05-17T04:16:35.169Z" itemprop="dateUpdated">2020-05-17 12:16:35</time>
+    最后更新时间：<time datetime="2020-05-17T04:27:09.349Z" itemprop="dateUpdated">2020-05-17 12:27:09</time>
 </span><br>
 
 
@@ -327,7 +328,10 @@
       </li>
       
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/&title=《Redis高级玩法：如何利用SortedSet实现多维度排序》 — MY STUDY BLOG&source=喜欢争取，得到珍惜" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/&title=《Redis高级玩法：如何利用SortedSet实现多维度排序》 — MY STUDY BLOG&source=
+转载：原文地址
+
+一、关于SortedSet首先，我们都知道Redis的SortedSet是可以根据score进行排序的，以手机应用商店的热门榜单排序为..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -488,7 +492,10 @@
       </li>
       
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/&title=《Redis高级玩法：如何利用SortedSet实现多维度排序》 — MY STUDY BLOG&source=喜欢争取，得到珍惜" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/&title=《Redis高级玩法：如何利用SortedSet实现多维度排序》 — MY STUDY BLOG&source=
+转载：原文地址
+
+一、关于SortedSet首先，我们都知道Redis的SortedSet是可以根据score进行排序的，以手机应用商店的热门榜单排序为..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

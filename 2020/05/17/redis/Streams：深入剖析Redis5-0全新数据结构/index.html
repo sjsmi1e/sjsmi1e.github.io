@@ -254,9 +254,13 @@
 <p>如果你了解MQ，那么可以把streams当做MQ。如果你还了解kafka，那么甚至可以把streams当做kafka。</p>
 <p>另外，这个功能有点类似于redis以前的<strong>Pub/Sub</strong>，但是也有基本的不同：</p>
 <ul>
-<li>streams支持多个客户端（消费者）等待数据（Linux环境开多个窗口执行XREAD即可模拟），并且每个客户端得到的是完全相同的数据。</li>
-<li>Pub/Sub是发送忘记的方式，并且不存储任何数据；而streams模式下，所有消息被无限期追加在streams中，除非用于显示执行删除（XDEL）。</li>
-<li>streams的Consumer Groups也是Pub/Sub无法实现的控制方式。</li>
+<li><p>streams支持多个客户端（消费者）等待数据（Linux环境开多个窗口执行XREAD即可模拟），并且每个客户端得到的是完全相同的数据。</p>
+</li>
+<li><p>Pub/Sub是发送忘记的方式，并且不存储任何数据；而streams模式下，所有消息被无限期追加在streams中，除非用于显示执行删除（XDEL）。</p>
+</li>
+<li><p>streams的Consumer Groups也是Pub/Sub无法实现的控制方式。</p>
+<a id="more"></a>
+</li>
 </ul>
 <h3 id="1-streams数据结构"><a href="#1-streams数据结构" class="headerlink" title="1. streams数据结构"></a>1. streams数据结构</h3><p>streams数据结构本身非常简单，但是streams依然是Redis到目前为止最复杂的类型，其原因是实现的一些额外的功能：一系列的阻塞操作允许消费者等待生产者加入到streams的新数据。另外还有一个称为<strong>Consumer Groups</strong>的概念，这个概念最先由kafka提出，Redis有一个类似实现，和kafka的Consumer Groups的目的是一样的：允许一组客户端协调消费相同的信息流！</p>
 <p>redis源码中定义streams结构的源码如下，由源码可知，stream的核心数据结构是radix tree：</p>
@@ -344,7 +348,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2020-05-17T04:22:12.537Z" itemprop="dateUpdated">2020-05-17 12:22:12</time>
+    最后更新时间：<time datetime="2020-05-17T04:27:21.696Z" itemprop="dateUpdated">2020-05-17 12:27:21</time>
 </span><br>
 
 
@@ -390,7 +394,10 @@
       </li>
       
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/&title=《Streams：深入剖析Redis5.0全新数据结构》 — MY STUDY BLOG&source=喜欢争取，得到珍惜" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/&title=《Streams：深入剖析Redis5.0全新数据结构》 — MY STUDY BLOG&source=
+转载：原文地址
+
+Redis 5.0 全新的数据类型：streams，官方把它定义为：以更抽象的方式建模日志的数据结构。Redis的streams主要是..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -544,7 +551,10 @@
       </li>
       
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/&title=《Streams：深入剖析Redis5.0全新数据结构》 — MY STUDY BLOG&source=喜欢争取，得到珍惜" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/&title=《Streams：深入剖析Redis5.0全新数据结构》 — MY STUDY BLOG&source=
+转载：原文地址
+
+Redis 5.0 全新的数据类型：streams，官方把它定义为：以更抽象的方式建模日志的数据结构。Redis的streams主要是..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
