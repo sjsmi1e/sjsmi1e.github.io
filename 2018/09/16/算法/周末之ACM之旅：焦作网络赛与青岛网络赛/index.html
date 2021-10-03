@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        周末之ACM之旅：焦作网络赛与青岛网络赛 |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="总结">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>周末之ACM之旅：焦作网络赛与青岛网络赛</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">周末之ACM之旅：焦作网络赛与青岛网络赛</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-09-16T12:24:50.000Z" itemprop="datePublished" class="page-time">
+  2018-09-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-算法/周末之ACM之旅：焦作网络赛与青岛网络赛"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">周末之ACM之旅：焦作网络赛与青岛网络赛</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-09-16 20:24:50" datetime="2018-09-16T12:24:50.000Z"  itemprop="datePublished">2018-09-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+            
+	<span id="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/" class="leancloud_visitors" data-flag-title="周末之ACM之旅：焦作网络赛与青岛网络赛" title="周末之ACM之旅：焦作网络赛与青岛网络赛">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/#comment">
+            <span class="valine-comment-count" data-xid="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/"></span>
+        </a>
+    </span>
+
+
+
+            
+            <span class="post-count">文章字数: 3,854</span>
+<span class="post-count">阅读时长 ≈ 22分钟</span>
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h1 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h1><p>  这两天呢，几乎赖床般的，十点半左右起床，然后做好准备，拿好电脑，走向创客，和伙伴讨论，解题。也不知是没睡好还是怎么的，五点做完题后是特别的困，打英雄联盟都能连跪的（也不排除楼下的奥斯卡影帝的给与吧），脑力消耗，几万亿个脑细胞就这样莫得了。。。天是阴沉，也是凉爽，“空山新雨后，天气晚来秋！”啊。<br><a id="more"></a></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="ACM-ICPC-2018-焦作赛区网络预赛"><a href="#ACM-ICPC-2018-焦作赛区网络预赛" class="headerlink" title="ACM-ICPC 2018 焦作赛区网络预赛"></a>ACM-ICPC 2018 焦作赛区网络预赛</h2><h3 id="Mathematical-Curse"><a href="#Mathematical-Curse" class="headerlink" title="Mathematical Curse"></a>Mathematical Curse</h3><p>B. Mathematical Curse<br>A prince of the Science Continent was imprisoned in a castle because of his contempt for mathematics when he was young, and was entangled in some mathematical curses. He studied hard until he reached adulthood and decided to use his knowledge to escape the castle.</p>
+<p>There are NN rooms from the place where he was imprisoned to the exit of the castle. In the i^{th}ith room, there is a wizard who has a resentment value of a[i]a[i]. The prince has MM curses, the j^{th}jth curse is f[j]f[j], and f[j]f[j] represents one of the four arithmetic operations, namely addition(‘+’), subtraction(‘-‘), multiplication(‘*’), and integer division(‘/‘). The prince’s initial resentment value is KK. Entering a room and fighting with the wizard will eliminate a curse, but the prince’s resentment value will become the result of the arithmetic operation f[j]f[j] with the wizard’s resentment value. That is, if the prince eliminates the j^{th}jth curse in the i^{th}ith room, then his resentment value will change from xx to (x\ f[j]\ a[i]x f[j] a[i]), for example, when x=1, a[i]=2, f[j]=x=1,a[i]=2,f[j]=’+’, then xx will become 1+2=31+2=3.</p>
+<p>Before the prince escapes from the castle, he must eliminate all the curses. He must go from a[1]a[1] to a[N]a[N] in order and cannot turn back. He must also eliminate the f[1]f[1] to f[M]f[M] curses in order(It is guaranteed that N\ge MN≥M). What is the maximum resentment value that the prince may have when he leaves the castle?</p>
+<p>Input<br>The first line contains an integer T(1 \le T \le 1000)T(1≤T≤1000), which is the number of test cases.</p>
+<p>For each test case, the first line contains three non-zero integers: N(1 \le N \le 1000), M(1 \le M \le 5)N(1≤N≤1000),M(1≤M≤5) and K(-1000 \le K \le 1000K(−1000≤K≤1000), the second line contains NN non-zero integers: a[1], a[2], …, a<a href="-1000 \le a[i] \le 1000">N</a>a[1],a[2],…,a<a href="−1000≤a[i]≤1000">N</a>, and the third line contains MM characters: f[1], f[2], …, f[M](f[j] =f[1],f[2],…,f[M](f[j]=’+’,’-‘,’*’,’/‘, with no spaces in between.</p>
+<p>Output<br>For each test case, output one line containing a single integer.</p>
+<p>样例输入复制</p>
+<p>3<br>2 1 5<br>2 3<br>/<br>3 2 1<br>1 2 3<br>++<br>4 4 5<br>1 2 3 4<br>+-*/<br>样例输出复制</p>
+<p>2<br>6<br>3</p>
+<h4 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h4><p>在给定的N个数中依次使用M个运算符，初始值为K，求最大值。</p>
+<h4 id="题解（学习一位大神的题解）："><a href="#题解（学习一位大神的题解）：" class="headerlink" title="题解（学习一位大神的题解）："></a>题解（学习一位大神的题解）：</h4><p>动态规划，设状态dp[i][j]表示取前i个数，j个字符时能获得的最值（最大和最小值都要维护）</p>
+<p>设mul(dp,i,j)表示之前的结果为dp，第i个数字第j个运算符运算后的结果</p>
+<p>有转移方程：</p>
+<p>dpmax[i][j]=max(dpmax[i-1][j]，mul(dpmax[i-1][j-1],i,j)，mul(dpmin[i-1][j-1],i,j))</p>
+<p>//别忘了负数乘以负数可能会转移到最大值。最小值同理。</p>
+<p>dpmin同上（详见代码）</p>
+<p>边界自然是</p>
+<p>dpmax=-inf</p>
+<p>dpmin=inf</p>
+<p>dp[i][0]=k</p>
+<h4 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line">ll dpmin[<span class="number">1005</span>][<span class="number">10</span>];</span><br><span class="line">ll dpmax[<span class="number">1005</span>][<span class="number">10</span>];</span><br><span class="line">ll <span class="keyword">const</span> inf=<span class="number">0x3f3f3f3f3f3f</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> numb[<span class="number">1005</span>];</span><br><span class="line"><span class="keyword">char</span> s[<span class="number">10</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">mul</span><span class="params">(ll v,<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>(s[j])&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'+'</span>:<span class="keyword">return</span> v+numb[i];</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'-'</span>:<span class="keyword">return</span> v-numb[i];</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'*'</span>:<span class="keyword">return</span> v*numb[i];</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'/'</span>:<span class="keyword">return</span> v/numb[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;T;</span><br><span class="line">    <span class="keyword">int</span> n,m,k;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;k);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>,numb+i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=m;j++)&#123;</span><br><span class="line">                dpmax[i][j]=-inf;</span><br><span class="line">                dpmin[i][j]=inf;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        dpmin[<span class="number">0</span>][<span class="number">0</span>]=dpmax[<span class="number">0</span>][<span class="number">0</span>]=k;</span><br><span class="line">        getchar();</span><br><span class="line">        gets(s+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">            dpmin[i][<span class="number">0</span>]=k;</span><br><span class="line">            dpmax[i][<span class="number">0</span>]=k;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)&#123;</span><br><span class="line">                dpmin[i][j]=dpmin[i<span class="number">-1</span>][j]; </span><br><span class="line">                dpmax[i][j]=dpmax[i<span class="number">-1</span>][j]; </span><br><span class="line">                <span class="keyword">if</span>(dpmax[i<span class="number">-1</span>][j<span class="number">-1</span>]!=-inf)</span><br><span class="line">                    dpmax[i][j]=max(dpmax[i][j],mul(dpmax[i<span class="number">-1</span>][j<span class="number">-1</span>],i,j));</span><br><span class="line">                <span class="keyword">if</span>(dpmin[i<span class="number">-1</span>][j<span class="number">-1</span>]!=inf)</span><br><span class="line">                    dpmax[i][j]=max(dpmax[i][j],mul(dpmin[i<span class="number">-1</span>][j<span class="number">-1</span>],i,j));</span><br><span class="line">            </span><br><span class="line">                <span class="keyword">if</span>(dpmin[i<span class="number">-1</span>][j<span class="number">-1</span>]!=inf)</span><br><span class="line">                    dpmin[i][j]=min(dpmin[i][j],mul(dpmin[i<span class="number">-1</span>][j<span class="number">-1</span>],i,j));    </span><br><span class="line">                <span class="keyword">if</span>(dpmax[i<span class="number">-1</span>][j<span class="number">-1</span>]!=-inf)</span><br><span class="line">                    dpmin[i][j]=min(dpmin[i][j],mul(dpmax[i<span class="number">-1</span>][j<span class="number">-1</span>],i,j));</span><br><span class="line">            </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;dpmax[n][m]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Give-Candies"><a href="#Give-Candies" class="headerlink" title="Give Candies"></a>Give Candies</h3><p>There are N children in kindergarten. Miss Li bought them N candies. To make the process more interesting, Miss Li comes up with the rule: All the children line up according to their student number (1…N), and each time a child is invited, Miss Li randomly gives him some candies (at least one). The process goes on until there is no candy. Miss Li wants to know how many possible different distribution results are there.</p>
+<p>Input<br>The first line contains an integer T, the number of test case.</p>
+<p>The next TT lines, each contains an integer N.</p>
+<p>1≤T≤100</p>
+<p>1≤N≤10^100000</p>
+<p>Output<br>For each test case output the number of possible results (mod 1000000007).</p>
+<p>样例输入复制</p>
+<p>1<br>4<br>样例输出复制</p>
+<p>8</p>
+<h4 id="题目大意-："><a href="#题目大意-：" class="headerlink" title="题目大意 ："></a>题目大意 ：</h4><p>一个老师买了N个苹果分给N位同学（这N个同学编了不同的号码），问一共有多少种分发？</p>
+<h4 id="题解-："><a href="#题解-：" class="headerlink" title="题解 ："></a>题解 ：</h4><p>很容易发现答案就是2^n-1，但是，N有10^100000，会发现快速幂也会超时。所以，就有费马小定理，如下：</p>
+<p>ans=2^(n-1)%mod=2^((n-1)%(mod-1)+(n-1)/(mod-1)<em>(mod-1))%mod=2^((n-1)%(mod-1))%mod</em>2^((n-1)/(mod-1)*(mod-1))%mod=2^((n-1)%(mod-1))%mod</p>
+<h4 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">2e5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="built_in">string</span> s;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">ipow</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a, <span class="keyword">long</span> <span class="keyword">long</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (x) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &amp; <span class="number">1</span>) ans = ans * a % mod;</span><br><span class="line">        a = a * a % mod;</span><br><span class="line">        x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;t;</span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; s;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); i++) num = (num*<span class="number">10</span>+(s[i]-<span class="string">'0'</span>))%(mod<span class="number">-1</span>);</span><br><span class="line">        num = (num<span class="number">-1</span>+mod<span class="number">-1</span>) % (mod<span class="number">-1</span>);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ipow(<span class="number">2</span>, num) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Save-the-Room"><a href="#Save-the-Room" class="headerlink" title="Save the Room"></a>Save the Room</h3><p>Bob is a sorcerer. He lives in a cuboid room which has a length of A, a width of B and a height of C, so we represent it as A <em> B </em> C. One day, he finds that his room is filled with unknown dark energy. Bob wants to neutralize all the dark energy in his room with his light magic. He can summon a 1 <em> 1 </em> 2 cuboid at a time to neutralize dark energy. But the cuboid must be totally in dark energy to take effect. Can you foresee whether Bob can save his room or not?</p>
+<p>Input<br>Input has T test cases. T≤100</p>
+<p>For each line, there are three integers A, B, C</p>
+<p>1≤A,B,C≤100</p>
+<p>Output<br>For each test case, if Bob can save his room, print”Yes”, otherwise print”No”.</p>
+<p>样例输入复制</p>
+<p>1 1 2<br>1 1 4<br>1 1 1<br>样例输出复制</p>
+<p>Yes<br>Yes<br>No</p>
+<h4 id="题目大意-：-1"><a href="#题目大意-：-1" class="headerlink" title="题目大意 ："></a>题目大意 ：</h4><p>给一个方体的长宽高，填入1<em>1</em>2的小方体，问能否填满</p>
+<h4 id="题解-：-1"><a href="#题解-：-1" class="headerlink" title="题解 ："></a>题解 ：</h4><p>感觉有点水，也不水（哈哈~），应该一会就能发现答案就是 a<em>b</em>c%2=0就YES</p>
+<h4 id="AC代码：-1"><a href="#AC代码：-1" class="headerlink" title="AC代码："></a>AC代码：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//freopen("test.in","r",stdin);</span></span><br><span class="line">    <span class="comment">//freopen("test.in","w+",stdout);</span></span><br><span class="line">    <span class="keyword">int</span> A, B, C;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;A&gt;&gt;B&gt;&gt;C)</span><br><span class="line">    &#123;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(A%<span class="number">2</span>==<span class="number">0</span>||B%<span class="number">2</span>==<span class="number">0</span>||C%<span class="number">2</span>==<span class="number">0</span>)  flag = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(flag)    <span class="built_in">cout</span>&lt;&lt;<span class="string">"Yes"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">else</span>    <span class="built_in">cout</span>&lt;&lt;<span class="string">"No"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="The-2018-ACM-ICPC-Asia-Qingdao-Regional-Contest-Online"><a href="#The-2018-ACM-ICPC-Asia-Qingdao-Regional-Contest-Online" class="headerlink" title="The 2018 ACM-ICPC Asia Qingdao Regional Contest, Online"></a>The 2018 ACM-ICPC Asia Qingdao Regional Contest, Online</h2><h3 id="XOR-Clique"><a href="#XOR-Clique" class="headerlink" title="XOR Clique"></a>XOR Clique</h3><p>BaoBao has a sequence a​1​​,a​2​​,…,a​n​​. He would like to find a subset S of {1,2,…,n} such that ∀i,j∈S, a​i​​⊕a​j​​&lt;min(a​i​​,a​j​​) and ∣S∣ is maximum, where ⊕ means bitwise exclusive or.</p>
+<p>Input</p>
+<p>There are multiple test cases. The first line of input contains an integer T, indicating the number of test cases. For each test case:</p>
+<p>The first line contains an integer n (1≤n≤10​5​​), indicating the length of the sequence.</p>
+<p>The second line contains n integers: a​1​​,a​2​​,…,a​n​​ (1≤a​i​​≤10​9​​), indicating the sequence.</p>
+<p>It is guaranteed that the sum of n in all cases does not exceed 10​5​​.</p>
+<p>Output</p>
+<p>For each test case, output an integer denoting the maximum size of S.</p>
+<p>Sample Input</p>
+<p>3<br>3<br>1 2 3<br>3<br>1 1 1<br>5<br>1 2323 534 534 5<br>Sample Output</p>
+<p>2<br>3<br>2</p>
+<h4 id="题意："><a href="#题意：" class="headerlink" title="题意："></a>题意：</h4><p>给N个数，从中选取一些书作为集合S，并且 ∀i,j∈S, a​i​​⊕a​j​​&lt;min(a​i​​,a​j​​)，求max（|S|）。</p>
+<h4 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h4><p>思路应该比较简单，就是求这N个数里面2进制最高位位数有数时对应范围的数的个数谁最多，例如最高第三位有数，则100~111，最高第二位有数时，10~11；</p>
+<h4 id="AC代码：-2"><a href="#AC代码：-2" class="headerlink" title="AC代码："></a>AC代码：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> a[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m,n,t;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;t;</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">        sort(a+<span class="number">1</span>,a+n+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> flag=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> tj=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> tflag=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">            if(a[i]==1&amp;&amp;i==1)</span></span><br><span class="line"><span class="comment">                continue;</span></span><br><span class="line"><span class="comment">            if(a[i]==1&amp;&amp;a[i-1]==1)&#123;</span></span><br><span class="line"><span class="comment">                tflag++;</span></span><br><span class="line"><span class="comment">                continue;</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">            if(a[i]==1&amp;&amp;a[i+1]!=1)</span></span><br><span class="line"><span class="comment">            &#123;</span></span><br><span class="line"><span class="comment">                flag=max(flag,tflag);</span></span><br><span class="line"><span class="comment">                tflag=0;</span></span><br><span class="line"><span class="comment">                continue;</span></span><br><span class="line"><span class="comment">            &#125;*/</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">pow</span>(<span class="number">2</span>,tj)&lt;=a[i])</span><br><span class="line">           &#123;        </span><br><span class="line">                        </span><br><span class="line">                        <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">                       &#123;</span><br><span class="line">                            tj++;</span><br><span class="line">                           <span class="keyword">if</span>(<span class="built_in">pow</span>(<span class="number">2</span>,tj)&gt;a[i])</span><br><span class="line">                           &#123;</span><br><span class="line">                               flag=max(flag,tflag);</span><br><span class="line">                               tflag=<span class="number">0</span>;</span><br><span class="line">                               <span class="keyword">break</span>;</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125;</span><br><span class="line">           &#125;</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">if</span>(a[i]&lt;<span class="built_in">pow</span>(<span class="number">2</span>,tj))&#123;</span><br><span class="line">                tflag++;</span><br><span class="line">               <span class="comment">//cout&lt;&lt;tflag&lt;&lt;endl;</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        flag=max(tflag,flag);</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;flag&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Halting-Problem"><a href="#Halting-Problem" class="headerlink" title="Halting Problem"></a>Halting Problem</h3><p>In computability theory, the halting problem is the problem of determining, from a description of an arbitrary computer program, whether the program will finish running (i.e., halt) or continue to run forever.</p>
+<p>Alan Turing proved in 1936 that a general algorithm to solve the halting problem cannot exist, but DreamGrid, our beloved algorithm scientist, declares that he has just found a solution to the halting problem in a specific programming language – the Dream Language!</p>
+<p>Dream Language is a programming language consists of only 5 types of instructions. All these instructions will read from or write to a 8-bit register r, whose value is initially set to 0. We now present the 5 types of instructions in the following table. Note that we denote the current instruction as the i-th instruction.</p>
+<p>Instruction    Description<br>add v    Add v to the register r. As r is a 8-bit register, this instruction actually calculates (r+v)mod256 and stores the result into r, i.e. r←(r+v)mod256. After that, go on to the (i+1)-th instruction.<br>beq v k    If the value of r is equal to v, jump to the k-th instruction, otherwise go on to the (i+1)-th instruction.<br>bne v k    If the value of r isn’t equal to v, jump to the k-th instruction, otherwise go on to the (i+1)-th instruction.<br>blt v k    If the value of r is strictly smaller than v, jump to the k-th instruction, otherwise go on to the (i+1)-th instruction.<br>bgt v k    If the value of r is strictly larger than v, jump to the k-th instruction, otherwise go on to the (i+1)-th instruction.<br>A Dream Language program consisting of n instructions will always start executing from the 1st instruction, and will only halt (that is to say, stop executing) when the program tries to go on to the (n+1)-th instruction.</p>
+<p>As DreamGrid’s assistant, in order to help him win the Turing Award, you are asked to write a program to determine whether a given Dream Language program will eventually halt or not.</p>
+<p>Input</p>
+<p>There are multiple test cases. The first line of the input is an integer T, indicating the number of test cases. For each test case:</p>
+<p>The first line contains an integer n (1≤n≤10​4​​), indicating the number of instructions in the following Dream Language program.</p>
+<p>For the following n lines, the i-th line first contains a string s (s∈{“add”,“beq”,“bne”,“blt”,“bgt”}), indicating the type of the i-th instruction of the program.</p>
+<p>If s equals to “add”, an integer v follows (0≤v≤255), indicating the value added to the register;<br>Otherwise, two integers v and k follow (0≤v≤255, 1≤k≤n), indicating the condition value and the destination of the jump.<br>It’s guaranteed that the sum of n of all test cases will not exceed 10​5​​.</p>
+<p>Output</p>
+<p>For each test case output one line. If the program will eventually halt, output “Yes” (without quotes); If the program will continue to run forever, output “No” (without quotes).</p>
+<p>Sample Input</p>
+<p>4<br>2<br>add 1<br>blt 5 1<br>3<br>add 252<br>add 1<br>bgt 252 2<br>2<br>add 2<br>bne 7 1<br>3<br>add 1<br>bne 252 1<br>beq 252 1<br>Sample Output</p>
+<p>Yes<br>Yes<br>No<br>No<br>Hint</p>
+<p>For the second sample test case, note that r is a 8-bit register, so after four “add 1” instructions the value of r will change from 252 to 0, and the program will halt.</p>
+<p>For the third sample test case, it’s easy to discover that the value of r will always be even, so it’s impossible for the value of r to be equal to 7, and the program will run forever.</p>
+<h4 id="题意：-1"><a href="#题意：-1" class="headerlink" title="题意："></a>题意：</h4><p>就是一般的模拟，然后判断是否为无限循环或者不是无限循环</p>
+<h4 id="题解：-1"><a href="#题解：-1" class="headerlink" title="题解："></a>题解：</h4><p>就是用一个二维数组记录下是否经过这一步，经过则为无限循环。</p>
+<h4 id="AC代码：-3"><a href="#AC代码：-3" class="headerlink" title="AC代码："></a>AC代码：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> llong;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">10000</span> + <span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> p, v, k;</span><br><span class="line">&#125; node;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">bool</span> book[MAXN][<span class="number">260</span>];</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t, n, i, r, sgn;</span><br><span class="line">	<span class="keyword">char</span> str[<span class="number">7</span>];</span><br><span class="line">	<span class="keyword">int</span> p, v, k;</span><br><span class="line">	node a[MAXN];</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">	getchar();</span><br><span class="line">	<span class="keyword">while</span>(t--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">		getchar();</span><br><span class="line">		<span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%s"</span>, str);</span><br><span class="line">			getchar();</span><br><span class="line">			<span class="keyword">if</span>(str[<span class="number">1</span>] == <span class="string">'d'</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;k);</span><br><span class="line">				getchar();</span><br><span class="line">				p = <span class="number">1</span>;</span><br><span class="line">				a[i] = (node)&#123;p, v, k&#125;;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;v, &amp;k);</span><br><span class="line">			getchar();</span><br><span class="line">			<span class="keyword">if</span>(str[<span class="number">1</span>] == <span class="string">'e'</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				p = <span class="number">2</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(str[<span class="number">1</span>] == <span class="string">'n'</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				p = <span class="number">3</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(str[<span class="number">1</span>] == <span class="string">'l'</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				p = <span class="number">4</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(str[<span class="number">1</span>] == <span class="string">'g'</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				p = <span class="number">5</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			a[i] = (node)&#123;p, v, k&#125;;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">memset</span>(book, <span class="literal">false</span>, <span class="keyword">sizeof</span>(book));</span><br><span class="line">		i = <span class="number">1</span>; r = <span class="number">0</span>;</span><br><span class="line">		book[i][r] = <span class="literal">true</span>;</span><br><span class="line">		sgn = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(i &lt;= n)</span><br><span class="line">		&#123;</span><br><span class="line">			p = a[i].p;</span><br><span class="line">			v = a[i].v;</span><br><span class="line">			k = a[i].k;</span><br><span class="line">			<span class="keyword">if</span>(p == <span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				r += k;</span><br><span class="line">				r %= <span class="number">256</span>;</span><br><span class="line">				i++;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(p == <span class="number">2</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				i = (r == v) ? k : i + <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(p == <span class="number">3</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				i = (r != v) ? k : i + <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(p == <span class="number">4</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				i = (r &lt; v) ? k : i + <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(p == <span class="number">5</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				i = (r &gt; v) ? k : i + <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(book[i][r] == <span class="literal">true</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				sgn = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			book[i][r] = <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(sgn == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"Yes\n"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"No\n"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Live-Love"><a href="#Live-Love" class="headerlink" title="Live Love"></a>Live Love</h3><p>DreamGrid is playing the music game Live Love. He has just finished a song consisting of nnotes and got a result sequence A​1​​,A​2​​,…,A​n​​ (A​i​​∈ {PERFECT, NON-PERFECT}). The score of the song is equal to the max-combo of the result sequence, which is defined as the maximum number of continuous PERFECTs in the sequence.</p>
+<p>Formally speaking, max-combo(A)=max { k | k is an integer and there exists an integer i (1≤i≤n−k+1) such that A​i​​=A​i+1​​=A​i+2​​=…=A​i+k−1​​= PERFECT }. For completeness, we define max(∅)=0.</p>
+<p>As DreamGrid is forgetful, he forgets the result sequence immediately after finishing the song. All he knows is the sequence length n and the total number of PERFECTs in the sequence, indicated by m. Any possible score s he may get must satisfy that there exists a sequence A​′​​ of length n containing exactly m PERFECTs and (n−m) NON-PERFECTs and max-combo(A​′​​)=s. Now he needs your help to find the maximum and minimum samong all possible scores.</p>
+<p>Input</p>
+<p>There are multiple test cases. The first line of the input contains an integer T (1≤T≤100), indicating the number of test cases. For each test case:</p>
+<p>The only line contains two integers n and m (1≤n≤10​3​​, 0≤m≤10​3​​, m≤n), indicating the sequence length and the number of PERFECTs DreamGrid gets.</p>
+<p>Output</p>
+<p>For each test case output one line containing two integers s​max​​ and s​min​​, indicating the maximum and minimum possible score.</p>
+<p>Sample Input</p>
+<p>5<br>5 4<br>100 50<br>252 52<br>3 0<br>10 10<br>Sample Output</p>
+<p>4 2<br>50 1<br>52 1<br>0 0<br>10 10<br>Hint</p>
+<p>Let’s indicate a PERFECT as P and a NON-PERFECT as N.</p>
+<p>For the first sample test case, the sequence (P,P,P,P,N) leads to the maximum score and the sequence (P,P,N,P,P) leads to the minimum score.</p>
+<h4 id="题解：-2"><a href="#题解：-2" class="headerlink" title="题解："></a>题解：</h4><p>这题是我队友做的，感觉也比较简单，直接上代码了。</p>
+<h4 id="AC代码：-4"><a href="#AC代码：-4" class="headerlink" title="AC代码："></a>AC代码：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> T;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">		<span class="keyword">int</span> nc = n - m + <span class="number">1</span>;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,m,n/nc);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>真的有时候发现就是孰能生巧，当题目出来，有点思路的时候刷新看下解题情况（也就2-3分吧），哇，就有AC了，天哪！所以说，做得多就是一种好处，像小儿科一样。还有就是啊，明明“Halting Problem”就是无解，还出这个，弄得我晕头转向额，壳卡在输出这的代码BUG，调了快半把个小时，心累！不过，也是一种有趣的体验，图灵啊图灵，图灵机。。。。。。为我以后助我一臂之力吧！！！<br>学无止境，继续前行。</p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-05-13T02:51:18.592Z" itemprop="dateUpdated">2020-05-13 10:51:18</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/" target="_blank" rel="external">http://www.sjsmile.cn/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sjsmile.cn">
+            <img src="/img/avatar.jpg" alt="Smile">
+            Smile
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/&title=《周末之ACM之旅：焦作网络赛与青岛网络赛》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/&title=《周末之ACM之旅：焦作网络赛与青岛网络赛》 — MY STUDY BLOG&source=经历  这两天呢，几乎赖床般的，十点半左右起床，然后做好准备，拿好电脑，走向创客，和伙伴讨论，解题。也不知是没睡好还是怎么的，五点做完题后是特别的困，打英..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2019/02/19/心得/我的one-year/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">我的one_year</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#经历"><span class="post-toc-text">经历</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#题解"><span class="post-toc-text">题解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ACM-ICPC-2018-焦作赛区网络预赛"><span class="post-toc-text">ACM-ICPC 2018 焦作赛区网络预赛</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Mathematical-Curse"><span class="post-toc-text">Mathematical Curse</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#题目大意"><span class="post-toc-text">题目大意</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#题解（学习一位大神的题解）："><span class="post-toc-text">题解（学习一位大神的题解）：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#AC代码"><span class="post-toc-text">AC代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Give-Candies"><span class="post-toc-text">Give Candies</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#题目大意-："><span class="post-toc-text">题目大意 ：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#题解-："><span class="post-toc-text">题解 ：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#AC代码："><span class="post-toc-text">AC代码：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Save-the-Room"><span class="post-toc-text">Save the Room</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#题目大意-：-1"><span class="post-toc-text">题目大意 ：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#题解-：-1"><span class="post-toc-text">题解 ：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#AC代码：-1"><span class="post-toc-text">AC代码：</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#The-2018-ACM-ICPC-Asia-Qingdao-Regional-Contest-Online"><span class="post-toc-text">The 2018 ACM-ICPC Asia Qingdao Regional Contest, Online</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#XOR-Clique"><span class="post-toc-text">XOR Clique</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#题意："><span class="post-toc-text">题意：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#题解："><span class="post-toc-text">题解：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#AC代码：-2"><span class="post-toc-text">AC代码：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Halting-Problem"><span class="post-toc-text">Halting Problem</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#题意：-1"><span class="post-toc-text">题意：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#题解：-1"><span class="post-toc-text">题解：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#AC代码：-3"><span class="post-toc-text">AC代码：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Live-Love"><span class="post-toc-text">Live Love</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#题解：-2"><span class="post-toc-text">题解：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#AC代码：-4"><span class="post-toc-text">AC代码：</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/&title=《周末之ACM之旅：焦作网络赛与青岛网络赛》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/&title=《周末之ACM之旅：焦作网络赛与青岛网络赛》 — MY STUDY BLOG&source=经历  这两天呢，几乎赖床般的，十点半左右起床，然后做好准备，拿好电脑，走向创客，和伙伴讨论，解题。也不知是没睡好还是怎么的，五点做完题后是特别的困，打英..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADNUlEQVR42u3aQW7bUAwEUN//0i5QdFEgsTwkZcCinlYBmsh83wuWnP94xM/z7/P/zz+f6hte/evPT0lqeHziwcbGxr4I+3n4HBd9/JHHZeWlv/qdV3VGXww2Njb2OvZZTSs/oOPDTcD514CNjY2NnTSY+f/28/aGjY2NjT1vYJOx5LhRTVZU2NjY2HdmJ22mugDqjS7VEeXjuzRsbGzsr2f3gt7v/Pnj+TY2Njb2l7GfxacXACShbB4PT+r/905sbGzsReyk3ElBk9VV/rbkcE8oERsbG/si7OqaphrZTqKCXmN7+bfY2NjYi9hJi8pHjmRUSJpTL66ofiXY2NjYO9ifu0DTWy3NR52ofmxsbOx17LzZ5A0sbyqTQaW6hMLGxsbeyu4NJ3np81GkGicUdmnY2NjYi9j5ur+6hGoWVzziQjvExsbGvgG72ormg0SyTuodNzY2NvYd2D1ML4JN1v15K+otwrCxsbE3satr/aTV5av8fOSYf0qEx8bGxr4UezJmTI4sj2OrEXLy+9jY2Nhb2b1mMO+T1WGmenxvZi9sbGzsRezJ5ZjqlZ1zr/Lkbe9N38bGxsa+IPus1jJph9VIuBdLP/IHGxsb+4Ls8lKmuLivxrRVZDNswMbGxl7Bzi/KJAdRveJTjX7nrQsbGxt7K7uKPzcM7h1ur+ZHDsDGxsa+CLu64p+X0mtOvcN6Uwk2Njb2CvZklT8vLlkhNZON45qxsbGxb8CuBr3VwWMeA/dCAmxsbOw7sPMxYxLQ5rDeF/Pm/djY2NhL2fmLqs2jN5BU11jJ6PIy38bGxsa+LDtvY/lxJG0sX2b1rmBGXxs2Njb2CnZvZVMNg6tHkI86OfiXpRI2Njb2IvZ8CJlc9Ek+PX9P+cISNjY29gp2r1Xkg0QvDKhODYWDxsbGxl7E7rW6apwwuaxTXRvl6ypsbGzsTezqtZvqb04u/VSbYt4asbGxsfex85VTNVSYR7mT0SLKt7GxsbFvw+7t3nvrpGpzLYfW2NjY2DdmVy/QTC7Z5Eul8kFgY2Njr2P3mkSvuHwUmayu3gQV2NjY2IvY1dVMXmhv2DgrQp4MVNjY2NgXYf8BEgPeco79fqoAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

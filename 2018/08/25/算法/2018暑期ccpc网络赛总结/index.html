@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        2018暑期ccpc网络赛总结 |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="总结">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>2018暑期ccpc网络赛总结</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">2018暑期ccpc网络赛总结</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-08-25T10:29:22.000Z" itemprop="datePublished" class="page-time">
+  2018-08-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-算法/2018暑期ccpc网络赛总结"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">2018暑期ccpc网络赛总结</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-08-25 18:29:22" datetime="2018-08-25T10:29:22.000Z"  itemprop="datePublished">2018-08-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+            
+	<span id="/2018/08/25/算法/2018暑期ccpc网络赛总结/" class="leancloud_visitors" data-flag-title="2018暑期ccpc网络赛总结" title="2018暑期ccpc网络赛总结">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/08/25/算法/2018暑期ccpc网络赛总结/#comment">
+            <span class="valine-comment-count" data-xid="/2018/08/25/算法/2018暑期ccpc网络赛总结/"></span>
+        </a>
+    </span>
+
+
+
+            
+            <span class="post-count">文章字数: 1,052</span>
+<span class="post-count">阅读时长 ≈ 5分钟</span>
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <p>从12：00到17:00，是这次网络赛的时间。我与小伙伴们约好在食堂来一场惊心动魄的脑脑裂比赛。从11:00开始准备，吃饭，预热，开始答题。</p>
+<p>由于以前了解过ACM，也参加过4C，所以也有一些经验吧。只是第一次，本以为是ccpc，中国的，可以有点中文题目，没想到全是英文题，让我这样的英文渣额。。。不过还好，能读懂一些的！</p>
+<p>煎熬中度过，漫度中煎熬。一些题似懂非懂，有思路，但数据范围的卡壳，导致更换思路。。。最后，受大佬启发，完成了一道</p>
+<p>a^n+b^n=c^n的题目：<br><a id="more"></a></p>
+<p><strong>1004 Find Integer<br>Problem<br>people in USSS love math very much, and there is a famous math problem .<br>give you two integers , ,you are required to find integers , such that + .<br>Input<br>one line contains one integer ;<br>next lines contains two integers , ; , ,<br>Output<br>print two integers , if , exits; , , ;<br>else print two integers -1 -1 instead.<br>Sample Input<br>1 2 3<br>Sample Output<br>4 5</strong></p>
+<p>思路：显而易见，对于a^n+b^n=c^n，当N&gt;2时，是没有整数解的（费马大定理），所以问题主要就来到求a^2+b^2=c^2；第一次，我们用O(N)的暴力去解，发现超时，所以第一时间就想到剪枝，寻找其中规律，发现，a*b%6==0；于是，就6个6个找，再用本源勾股在进一步剪枝，a的倍数计算；但发现还是TL了。。。我的天！！！绝望。。。最后呢，有一位大佬说其实有一个公式的，所以，我去研究了一番，发现：</p>
+<p><strong>题意：<br>给出直角三角形的一条边，求另外两条边。无解输出-1.<br>思路：<br>1、2无解。<br>n为偶数，(n <em> n / 4 - 1) ^ 2 + n </em> n = (n <em> n / 4 + 1) ^2<br>n为奇数，((n </em> n - 1) / 2) ^ 2 + n <em> n = ((n </em> n + 1) / 2) ^ 2</strong></p>
+<p>天哪，所以，，，就所以了。最后题目还卡了一下cin与cout的输出时间限制，改成printf与scanf就ok了。</p>
+<p>以下是AC代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="keyword">int</span> n,a;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;n,&amp;a);</span><br><span class="line">        <span class="keyword">if</span>(n&gt;<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="built_in">printf</span>(<span class="string">"-1 -1\n"</span>);</span><br><span class="line">          <span class="comment">//  cout&lt;&lt;"-1 -1"&lt;&lt;endl;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(n==<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(a%<span class="number">2</span>==<span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,a*a/<span class="number">4</span><span class="number">-1</span>,a*a/<span class="number">4</span>+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,(a*a<span class="number">-1</span>)/<span class="number">2</span>,(a*a+<span class="number">1</span>)/<span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(n==<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,a+<span class="number">1</span>,a+<span class="number">2</span>);</span><br><span class="line">            <span class="comment">//cout&lt;&lt;a+1&lt;&lt;" "&lt;&lt;a+2&lt;&lt;endl;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">          <span class="built_in">printf</span>(<span class="string">"-1 -1\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>后面有这样一道题：</p>
+<p>**1010 YJJ’s Salesman<br>Problem<br>YJJ is a salesman who has traveled through western country. YJJ is always on journey. Either is he at the destination, or on the way to destination. One day, he is going to travel from city A to southeastern city B. Let us assume that A is on the rectangle map and B . YJJ is so busy so he never turn back or go twice the same way, he will only move to east, south or southeast, which means, if YJJ is at now , he will only forward to , or . On the rectangle map from to , there are several villages scattering on the map. Villagers will do business deals with salesmen from northwestern, but not northern or western. In mathematical language, this means when there is a village on , only the one who was from to will be able to earn dollars.(YJJ may get different number of dollars from different village.) YJJ has no time to plan the path, can you help him to find maximum of dollars YJJ can get.<br>Input<br>The first line of the input contains an integer ,which is the number of test cases.<br>In each case, the first line of the input contains an integer .The following lines, the -th line contains 3 integers, , which indicate that there is a village on and he can get dollars in that village. The positions of each village is distinct.<br>Output<br>The maximum of dollars YJJ can get.<br>(0,0) ( , ) 109 109<br>(x,y) (0 ≤ x ≤ ,0 ≤ y ≤ ) 109 109 (x +1,y) (x,y +1) (x +1,y +1) (0,0) ( , ) 109 109<br>k ( , ) xk yk (1 ≤ ≤ ,1 ≤ ≤ ) xk 109 yk 109 ( −1, −1) xk yk ( , ) xk yk vk<br>T (1 ≤ T ≤ 10)<br>N (1 ≤ N ≤ ) 105 N k , , xk yk vk (0 ≤ ≤ ) vk 103 ( , ) xk yk vk<br>Sample Input<br>1 </p>
+<p>3</p>
+<p>1 1 1</p>
+<p>1 2 2</p>
+<p>3 3 1<br>Sample Output<br>3<br>**</p>
+<p>一看这题目就是搜索+dp，思路简单；但看数字，1e9，开个二维数组，绝对爆内存，所以，我想到把二维压成一维去做，不知道有没有错误，代码码到一半，后面再慢慢研究一下，发AC代码。</p>
+<p>总的来说，英语还有待加强，做题不够多，自然就GOOD GAME了。。。 </p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-05-09T05:56:45.459Z" itemprop="dateUpdated">2020-05-09 13:56:45</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2018/08/25/算法/2018暑期ccpc网络赛总结/" target="_blank" rel="external">http://www.sjsmile.cn/2018/08/25/算法/2018暑期ccpc网络赛总结/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sjsmile.cn">
+            <img src="/img/avatar.jpg" alt="Smile">
+            Smile
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2018/08/25/算法/2018暑期ccpc网络赛总结/&title=《2018暑期ccpc网络赛总结》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2018/08/25/算法/2018暑期ccpc网络赛总结/&title=《2018暑期ccpc网络赛总结》 — MY STUDY BLOG&source=从12：00到17:00，是这次网络赛的时间。我与小伙伴们约好在食堂来一场惊心动魄的脑脑裂比赛。从11:00开始准备，吃饭，预热，开始答题。
+由于以前了解..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2018/08/18/算法/判断素数与欧拉筛/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">判断素数与欧拉筛</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2018/08/25/算法/2018暑期ccpc网络赛总结/&title=《2018暑期ccpc网络赛总结》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2018/08/25/算法/2018暑期ccpc网络赛总结/&title=《2018暑期ccpc网络赛总结》 — MY STUDY BLOG&source=从12：00到17:00，是这次网络赛的时间。我与小伙伴们约好在食堂来一场惊心动魄的脑脑裂比赛。从11:00开始准备，吃饭，预热，开始答题。
+由于以前了解..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACr0lEQVR42u3aQXLCQAwEwPz/0+RKFRhG0oryoX1KEcds+7DajPT3F1+Pp+v5k9d7rv7q9ap+b/5X5QsPDw9vsPSrxyWfX32SfP55Jfmdb14BHh4e3hrvakft3ZMUiWr5qa4HDw8P7z68CeMRXL0DPR4eHt79ecmXJSlBL/7Aw8PDuwMvDwKqC52UkGpsgYeHh/cbXnUTv8PPK/09PDw8vHFX/Wzw2ouJR6vFw8PDW+BNHp3fkw8BzI/LeHh4eNu85BG9ReeBQi+ASNaGh4eHt8eLqkfQdkrKxm9aa4Xl4uHh4a2Fs72D77wxlq/nzdPw8PDwlnnzELY6BDAaQg3KGB4eHt4GL1nopPWVMCbH+nIDDA8PD2/Mm39lHgFXD+u98nAZ4+Lh4eEd5U1Gr6ohRR7L5kXlS8XDw8PDO8rLm1jVwan5sXvS27rMXfDw8PAO8ZJBqOo2nTxh8lIKh288PDy8o7xerJC8s89H7fzd56XiQI8ODw8Pr/UPf9L4z4exqkf2alwbVTw8PDy8Bd68ACSLyAPfXiH5MjqAh4eHt8CrNvJ7I1PJb3uH8mgyAg8PD+8QrxqtJpt+NRmoFonoleHh4eEt8Hqb+KQ1VQ1w88GCaNwKDw8Pb4FXLQ/5obx6ZJ8cu/Hw8PB+yat+Po9i87LUPPTj4eHhrfGqDf7qUNSpw3cOxsPDw/slb1Iwqvh5mPvlHjw8PLxlXvXqBQ35gNeBCw8PD28Bll+9bb06CtAbX3izKjw8PLwFXm+P7QWsez8fKHJ4eHh4RV6+lVdb+9VQIw8aCuvBw8PDW+P1WlbJoEC1Fk3iCTw8PLx78nrt/1NDWtWCgYeHh3cfXq+tdSqqKBQPPDw8vDVevmX3GmbVmKOXQI+yFjw8PLxDXfXeo/NtvToEMAmU8fDw8Ma8f03fxTo8SdhZAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

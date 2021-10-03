@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        看完让你彻底理解 WebSocket 原理 |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="WebSocket">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>看完让你彻底理解 WebSocket 原理</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">看完让你彻底理解 WebSocket 原理</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-08-02T06:40:00.000Z" itemprop="datePublished" class="page-time">
+  2020-08-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/网络/">网络</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-看完让你彻底理解-WebSocket-原理"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">看完让你彻底理解 WebSocket 原理</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-08-02 14:40:00" datetime="2020-08-02T06:40:00.000Z"  itemprop="datePublished">2020-08-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/网络/">网络</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2020/08/02/看完让你彻底理解-WebSocket-原理/" class="leancloud_visitors" data-flag-title="看完让你彻底理解 WebSocket 原理" title="看完让你彻底理解 WebSocket 原理">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/08/02/看完让你彻底理解-WebSocket-原理/#comment">
+            <span class="valine-comment-count" data-xid="/2020/08/02/看完让你彻底理解-WebSocket-原理/"></span>
+        </a>
+    </span>
+
+
+
+            
+            <span class="post-count">文章字数: 2,332</span>
+<span class="post-count">阅读时长 ≈ 9分钟</span>
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <blockquote>
+<p>转载:<a href="https://www.cnblogs.com/nnngu/p/9347635.html" target="_blank" rel="noopener">点击查看原文</a></p>
+</blockquote>
+<h2 id="1、前言"><a href="#1、前言" class="headerlink" title="1、前言"></a>1、前言</h2><p>最近有同学问我有没有做过在线咨询功能。同时，公司也刚好让我接手一个 IM 项目。所以今天抽时间记录一下最近学习的内容。</p>
+<p>本文主要剖析了 WebSocket 的原理，以及附上一个完整的聊天室实战 Demo （包含前端和后端，代码下载链接在文末）。</p>
+<h2 id="2、WebSocket-与-HTTP"><a href="#2、WebSocket-与-HTTP" class="headerlink" title="2、WebSocket 与 HTTP"></a>2、WebSocket 与 HTTP</h2><p>WebSocket 协议在2008年诞生，2011年成为国际标准。现在所有浏览器都已经支持了。WebSocket 的最大特点就是，服务器可以主动向客户端推送信息，客户端也可以主动向服务器发送信息，是真正的双向平等对话。</p>
+<p>HTTP 有 1.1 和 1.0 之说，也就是所谓的 keep-alive ，把多个 HTTP 请求合并为一个，但是 Websocket 其实是一个新协议，跟 HTTP 协议基本没有关系，只是为了兼容现有浏览器，所以在握手阶段使用了 HTTP 。</p>
+<p>下面一张图说明了 HTTP 与 WebSocket 的主要区别：</p>
+<figure class="image-box">
+                <a rel=看完让你彻底理解 WebSocket 原理 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1596350538206.webp" title="" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1596350538206.webp" alt="" title="" class=""></a>
+                <p></p>
+            </figure>
+<a id="more"></a>
+<p>WebSocket 的其他特点：</p>
+<ul>
+<li>建立在 TCP 协议之上，服务器端的实现比较容易。</li>
+<li>与 HTTP 协议有着良好的兼容性。默认端口也是80和443，并且握手阶段采用 HTTP 协议，因此握手时不容易屏蔽，能通过各种 HTTP 代理服务器。</li>
+<li>数据格式比较轻量，性能开销小，通信高效。</li>
+<li>可以发送文本，也可以发送二进制数据。</li>
+<li>没有同源限制，客户端可以与任意服务器通信。</li>
+<li>协议标识符是ws（如果加密，则为wss），服务器网址就是 URL。</li>
+</ul>
+<h2 id="3、WebSocket-是什么样的协议，具体有什么优点"><a href="#3、WebSocket-是什么样的协议，具体有什么优点" class="headerlink" title="3、WebSocket 是什么样的协议，具体有什么优点"></a>3、WebSocket 是什么样的协议，具体有什么优点</h2><p>首先，WebSocket 是一个持久化的协议，相对于 HTTP 这种非持久的协议来说。简单的举个例子吧，用目前应用比较广泛的 PHP 生命周期来解释。</p>
+<p>HTTP 的生命周期通过 Request 来界定，也就是一个 Request 一个 Response ，那么在 HTTP1.0 中，这次 HTTP 请求就结束了。</p>
+<p>在 HTTP1.1 中进行了改进，使得有一个 keep-alive，也就是说，在一个 HTTP 连接中，可以发送多个 Request，接收多个 Response。但是请记住 Request = Response， 在 HTTP 中永远是这样，也就是说一个 Request 只能有一个 Response。而且这个 Response 也是被动的，不能主动发起。</p>
+<p>你 BB 了这么多，跟 WebSocket 有什么关系呢？好吧，我正准备说 WebSocket 呢。</p>
+<p>首先 WebSocket 是基于 HTTP 协议的，或者说借用了 HTTP 协议来完成一部分握手。</p>
+<p>首先我们来看个典型的 WebSocket 握手</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET /chat HTTP/1.1</span><br><span class="line">Host: server.example.com</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br><span class="line">Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==</span><br><span class="line">Sec-WebSocket-Protocol: chat, superchat</span><br><span class="line">Sec-WebSocket-Version: 13</span><br><span class="line">Origin: http://example.com</span><br></pre></td></tr></table></figure>
+<p>熟悉 HTTP 的童鞋可能发现了，这段类似 HTTP 协议的握手请求中，多了这么几个东西。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br></pre></td></tr></table></figure>
+<p>这个就是 WebSocket 的核心了，告诉 Apache 、 Nginx 等服务器：注意啦，我发起的请求要用 WebSocket 协议，快点帮我找到对应的助理处理~而不是那个老土的 HTTP。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==</span><br><span class="line">Sec-WebSocket-Protocol: chat, superchat</span><br><span class="line">Sec-WebSocket-Version: 13</span><br></pre></td></tr></table></figure>
+<p>首先， Sec-WebSocket-Key 是一个 Base64 encode 的值，这个是浏览器随机生成的，告诉服务器：泥煤，不要忽悠我，我要验证你是不是真的是 WebSocket 助理。</p>
+<p>然后， Sec_WebSocket-Protocol 是一个用户定义的字符串，用来区分同 URL 下，不同的服务所需要的协议。简单理解：今晚我要服务A，别搞错啦~</p>
+<p>最后， Sec-WebSocket-Version 是告诉服务器所使用的 WebSocket Draft （协议版本），在最初的时候，WebSocket 协议还在 Draft 阶段，各种奇奇怪怪的协议都有，而且还有很多期奇奇怪怪不同的东西，什么 Firefox 和 Chrome 用的不是一个版本之类的，当初 WebSocket 协议太多可是一个大难题。。不过现在还好，已经定下来啦~大家都使用同一个版本：服务员，我要的是13岁的噢→_→</p>
+<p>然后服务器会返回下列东西，表示已经接受到请求， 成功建立 WebSocket 啦！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 101 Switching Protocols</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br><span class="line">Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=</span><br><span class="line">Sec-WebSocket-Protocol: chat</span><br></pre></td></tr></table></figure>
+<p>这里开始就是 HTTP 最后负责的区域了，告诉客户，我已经成功切换协议啦~</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br></pre></td></tr></table></figure>
+<p>依然是固定的，告诉客户端即将升级的是 WebSocket 协议，而不是 mozillasocket，lurnarsocket 或者 shitsocket。</p>
+<p>然后， Sec-WebSocket-Accept 这个则是经过服务器确认，并且加密过后的 Sec-WebSocket-Key 。服务器：好啦好啦，知道啦，给你看我的 ID CARD 来证明行了吧。</p>
+<p>后面的， Sec-WebSocket-Protocol 则是表示最终使用的协议。</p>
+<p>至此，HTTP 已经完成它所有工作了，接下来就是完全按照 WebSocket 协议进行了。</p>
+<h2 id="4、WebSocket-的作用"><a href="#4、WebSocket-的作用" class="headerlink" title="4、WebSocket 的作用"></a>4、WebSocket 的作用</h2><p>在讲 WebSocket之前，我就顺带着讲下 ajax轮询 和 long poll 的原理。</p>
+<h3 id="4-1、ajax轮询"><a href="#4-1、ajax轮询" class="headerlink" title="4-1、ajax轮询"></a>4-1、ajax轮询</h3><p>ajax轮询的原理非常简单，让浏览器隔个几秒就发送一次请求，询问服务器是否有新信息。</p>
+<p><strong>场景再现：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">客户端：啦啦啦，有没有新信息(Request)</span><br><span class="line"></span><br><span class="line">服务端：没有（Response）</span><br><span class="line"></span><br><span class="line">客户端：啦啦啦，有没有新信息(Request)</span><br><span class="line"></span><br><span class="line">服务端：没有。。（Response）</span><br><span class="line"></span><br><span class="line">客户端：啦啦啦，有没有新信息(Request)</span><br><span class="line"></span><br><span class="line">服务端：你好烦啊，没有啊。。（Response）</span><br><span class="line"></span><br><span class="line">客户端：啦啦啦，有没有新消息（Request）</span><br><span class="line"></span><br><span class="line">服务端：好啦好啦，有啦给你。（Response）</span><br><span class="line"></span><br><span class="line">客户端：啦啦啦，有没有新消息（Request）</span><br><span class="line"></span><br><span class="line">服务端：。。。。。没。。。。没。。。没有（Response） —- loop</span><br></pre></td></tr></table></figure>
+<h3 id="4-2、long-poll"><a href="#4-2、long-poll" class="headerlink" title="4-2、long poll"></a>4-2、long poll</h3><p>long poll 其实原理跟 ajax轮询 差不多，都是采用轮询的方式，不过采取的是阻塞模型（一直打电话，没收到就不挂电话），也就是说，客户端发起请求后，如果没消息，就一直不返回 Response 给客户端。直到有消息才返回，返回完之后，客户端再次建立连接，周而复始。</p>
+<p><strong>场景再现：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">客户端：啦啦啦，有没有新信息，没有的话就等有了才返回给我吧（Request）</span><br><span class="line"></span><br><span class="line">服务端：额。。 等待到有消息的时候。。来 给你（Response）</span><br><span class="line"></span><br><span class="line">客户端：啦啦啦，有没有新信息，没有的话就等有了才返回给我吧（Request） -loop</span><br></pre></td></tr></table></figure>
+<p><strong>从上面可以看出其实这两种方式，都是在不断地建立HTTP连接，然后等待服务端处理，可以体现HTTP协议的另外一个特点，被动性。</strong></p>
+<p>何为被动性呢，其实就是，服务端不能主动联系客户端，只能有客户端发起。</p>
+<p>从上面很容易看出来，不管怎么样，上面这两种都是非常消耗资源的。</p>
+<p>ajax轮询 需要服务器有很快的处理速度和资源。long poll 需要有很高的并发，也就是说同时接待客户的能力。</p>
+<p>所以 ajax轮询 和 long poll 都有可能发生这种情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">客户端：啦啦啦啦，有新信息么？</span><br><span class="line"></span><br><span class="line">服务端：正忙，请稍后再试（503 Server Unavailable）</span><br><span class="line"></span><br><span class="line">客户端：。。。。好吧，啦啦啦，有新信息么？</span><br><span class="line"></span><br><span class="line">服务端：正忙，请稍后再试（503 Server Unavailable）</span><br></pre></td></tr></table></figure>
+<h3 id="4-3、WebSocket"><a href="#4-3、WebSocket" class="headerlink" title="4-3、WebSocket"></a>4-3、WebSocket</h3><p>通过上面这两个例子，我们可以看出，这两种方式都不是最好的方式，需要很多资源。</p>
+<p>一种需要更快的速度，一种需要更多的’电话’。这两种都会导致’电话’的需求越来越高。</p>
+<p>哦对了，忘记说了 HTTP 还是一个无状态协议。通俗的说就是，服务器因为每天要接待太多客户了，是个健忘鬼，你一挂电话，他就把你的东西全忘光了，把你的东西全丢掉了。你第二次还得再告诉服务器一遍。</p>
+<p>所以在这种情况下出现了 WebSocket 。他解决了 HTTP 的这几个难题。首先，被动性，当服务器完成协议升级后（HTTP-&gt;Websocket），服务端就可以主动推送信息给客户端啦。所以上面的情景可以做如下修改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">客户端：啦啦啦，我要建立Websocket协议，需要的服务：chat，Websocket协议版本：17（HTTP Request）</span><br><span class="line"></span><br><span class="line">服务端：ok，确认，已升级为Websocket协议（HTTP Protocols Switched）</span><br><span class="line"></span><br><span class="line">客户端：麻烦你有信息的时候推送给我噢。。</span><br><span class="line"></span><br><span class="line">服务端：ok，有的时候会告诉你的。</span><br><span class="line"></span><br><span class="line">服务端：balabalabalabala</span><br><span class="line"></span><br><span class="line">服务端：balabalabalabala</span><br><span class="line"></span><br><span class="line">服务端：哈哈哈哈哈啊哈哈哈哈</span><br><span class="line"></span><br><span class="line">服务端：笑死我了哈哈哈哈哈哈哈</span><br></pre></td></tr></table></figure>
+<p>这样，只需要经过一次 HTTP 请求，就可以做到源源不断的信息传送了。</p>
+<h2 id="5、实战代码"><a href="#5、实战代码" class="headerlink" title="5、实战代码"></a>5、实战代码</h2><p>本文的更新源 托管于GitHub</p>
+<p>参考文档：</p>
+<blockquote>
+<p><a href="http://php.net/manual/zh/ref.sockets.php" target="_blank" rel="noopener">http://php.net/manual/zh/ref.sockets.php</a> <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/WebSocket</a></p>
+</blockquote>
+<p>前端代码：<a href="https://github.com/nnngu/WebSocketDemo-js" target="_blank" rel="noopener">https://github.com/nnngu/WebSocketDemo-js</a><br>后端代码：<a href="https://github.com/nnngu/WebSocketDemo-php" target="_blank" rel="noopener">https://github.com/nnngu/WebSocketDemo-php</a></p>
+<p>运行步骤：</p>
+<ol>
+<li>在终端打开 <code>WebSocketDemo-php</code> 目录，执行 <code>php -q server.php</code></li>
+<li>用浏览器访问 <code>WebSocketDemo-js</code> 目录里面的 <code>index.html</code></li>
+</ol>
+<p>运行截图：</p>
+<figure class="image-box">
+                <a rel=看完让你彻底理解 WebSocket 原理 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1596350538215.webp" title="" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1596350538215.webp" alt="" title="" class=""></a>
+                <p></p>
+            </figure>
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-09-06T11:46:52.449Z" itemprop="dateUpdated">2020-09-06 19:46:52</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2020/08/02/看完让你彻底理解-WebSocket-原理/" target="_blank" rel="external">http://www.sjsmile.cn/2020/08/02/看完让你彻底理解-WebSocket-原理/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sjsmile.cn">
+            <img src="/img/avatar.jpg" alt="Smile">
+            Smile
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebSocket/">WebSocket</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2020/08/02/看完让你彻底理解-WebSocket-原理/&title=《看完让你彻底理解 WebSocket 原理》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2020/08/02/看完让你彻底理解-WebSocket-原理/&title=《看完让你彻底理解 WebSocket 原理》 — MY STUDY BLOG&source=
+转载:点击查看原文
+
+1、前言最近有同学问我有没有做过在线咨询功能。同时，公司也刚好让我接手一个 IM 项目。所以今天抽时间记录一下最近学习的内容。
+本..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2020/09/06/java/为什么String的hashCode选择31作为乘子/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">为什么String的hashCode选择31作为乘子?</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2020/08/02/java/最简单的-6-种防止数据重复提交的方法！/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">最简单的 6 种防止数据重复提交的方法！</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1、前言"><span class="post-toc-text">1、前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2、WebSocket-与-HTTP"><span class="post-toc-text">2、WebSocket 与 HTTP</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3、WebSocket-是什么样的协议，具体有什么优点"><span class="post-toc-text">3、WebSocket 是什么样的协议，具体有什么优点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4、WebSocket-的作用"><span class="post-toc-text">4、WebSocket 的作用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1、ajax轮询"><span class="post-toc-text">4-1、ajax轮询</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2、long-poll"><span class="post-toc-text">4-2、long poll</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-3、WebSocket"><span class="post-toc-text">4-3、WebSocket</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5、实战代码"><span class="post-toc-text">5、实战代码</span></a></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2020/08/02/看完让你彻底理解-WebSocket-原理/&title=《看完让你彻底理解 WebSocket 原理》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2020/08/02/看完让你彻底理解-WebSocket-原理/&title=《看完让你彻底理解 WebSocket 原理》 — MY STUDY BLOG&source=
+转载:点击查看原文
+
+1、前言最近有同学问我有没有做过在线咨询功能。同时，公司也刚好让我接手一个 IM 项目。所以今天抽时间记录一下最近学习的内容。
+本..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuUlEQVR42u3aQW7CQAwF0N7/0q3UVaVC8m2PgcXLCkGZmZdKsbH99RVf37/X9af/r3y1v+/8XyFZc3Th4eHhtY5+fcR8+2eHePZp8q3rM9zsjoeHh7fGy5fON6sy8k+TM+Ph4eF9Au/66EkISfLe/Ibi4eHhfT4vT8R75Ybeazw8PLx38ZJiRPVvqsEgqcEu1lrw8PDwYl61AfYJrxf7e3h4eHiDrnq1JTYv8iblicI58fDw8BZ4vZGmyYjV5CZWm2F4eHh4G7xTP/KrpYoknFRP+2AdPDw8vAVe3uxPxqF6Rd7egEIhvOHh4eEd5eXbV9PiJFlPxhHyZLrwf8PDw8Mb8KKhpSC2VAPJhFdNr/Hw8PA2eNViRLMoEKfvvVGtmwYYHh4e3iFe3uDPX+eP9RzZK47g4eHhbfB6ZYhjMwvxOnnSH3Xn8PDw8Aa8XrsrH6s6tVc+cPAg7uHh4eGt8fJrkoLnBdw8Kb/5xYCHh4e3wDuV7BbmvOKUfTJMgIeHh7fBm5df84d7ctx5+o6Hh4f3Gt48SCSH7iXWp0IIHh4e3ine5PE9KT2cYt+sgIeHh/cSXg9QbYNVb0TzhHh4eHgLvOvS6qQd1Xu456WKPPDg4eHhbfCSYug8za0esXojbqoseHh4eAu8ajm1WnI9W8Yt3BQ8PDy8BV7+OK6m43m6fP3dU8k3Hh4e3ilesuWpom2vHFw954O4h4eHh7fGm5Cug0FvrzwgPX0HDw8P7yjvu3hVk+BJwOi9j4eHh7fN6zWo8mJBFZDvVW3I4eHh4Z3l5W2tJHWeJMo9QKHphYeHh3eUNymnnhoyaCbESWDAw8PDeysvDy35U3o+nvV0Xzw8PLy38qqN/7xVlqxZTffx8PDwtnnV9Lf6aX778oJvFHLw8PDwFnjVBlgv7e4VOyYDBHh4eHgLvB9WWdpP3sYOYAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

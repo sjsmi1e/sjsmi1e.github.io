@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        API接口的安全设计 |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Spring,API">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>API接口的安全设计</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">API接口的安全设计</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-06-24T01:02:33.000Z" itemprop="datePublished" class="page-time">
+  2020-06-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-java/API接口的安全设计"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">API接口的安全设计</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-06-24 09:02:33" datetime="2020-06-24T01:02:33.000Z"  itemprop="datePublished">2020-06-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+            
+	<span id="/2020/06/24/java/API接口的安全设计/" class="leancloud_visitors" data-flag-title="API接口的安全设计" title="API接口的安全设计">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/06/24/java/API接口的安全设计/#comment">
+            <span class="valine-comment-count" data-xid="/2020/06/24/java/API接口的安全设计/"></span>
+        </a>
+    </span>
+
+
+
+            
+            <span class="post-count">文章字数: 5,583</span>
+<span class="post-count">阅读时长 ≈ 25分钟</span>
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <blockquote>
+<p>转载，<a href="https://mp.weixin.qq.com/s/G94Z3BC5pZxPdbFxEnCyrw" target="_blank" rel="noopener">原文地址</a></p>
+</blockquote>
+<p><strong>说明：在实际的业务中，难免会跟第三方系统进行数据的交互与传递，那么如何保证数据在传输过程中的安全呢（防窃取）？除了https的协议之外，能不能加上通用的一套算法以及规范来保证传输的安全性呢？</strong></p>
+<p><strong>下面我们就来讨论下常用的一些API设计的安全方法，可能不一定是最好的，有更牛逼的实现方式，但是这篇是我自己的经验分享.</strong></p>
+<h1 id="一：token-简介"><a href="#一：token-简介" class="headerlink" title="一：token 简介"></a>一：token 简介</h1><p>Token：访问令牌access token, 用于接口中, 用于标识接口调用者的身份、凭证，减少用户名和密码的传输次数。一般情况下客户端(接口调用方)需要先向服务器端申请一个接口调用的账号，服务器会给出一个appId和一个key, key用于参数签名使用，注意key保存到客户端，需要做一些安全处理，防止泄露。</p>
+<p>Token的值一般是UUID，服务端生成Token后需要将token做为key，将一些和token关联的信息作为value保存到缓存服务器中(redis)，当一个请求过来后，服务器就去缓存服务器中查询这个Token是否存在，存在则调用接口，不存在返回接口错误，一般通过拦截器或者过滤器来实现，Token分为两种：</p>
+<a id="more"></a>
+<ul>
+<li>API Token(接口令牌): 用于访问不需要用户登录的接口，如登录、注册、一些基本数据的获取等。获取接口令牌需要拿appId、timestamp和sign来换，sign=加密(timestamp+key)</li>
+<li>USER Token(用户令牌): 用于访问需要用户登录之后的接口，如：获取我的基本信息、保存、修改、删除等操作。获取用户令牌需要拿用户名和密码来换</li>
+</ul>
+<p>关于Token的时效性：token可以是一次性的、也可以在一段时间范围内是有效的，具体使用哪种看业务需要。</p>
+<p>一般情况下接口最好使用https协议，如果使用http协议，Token机制只是一种减少被黑的可能性，其实只能防君子不能防小人。</p>
+<p>一般token、timestamp和sign 三个参数会在接口中会同时作为参数传递，每个参数都有各自的用途。</p>
+<h1 id="二：timestamp-简介"><a href="#二：timestamp-简介" class="headerlink" title="二：timestamp 简介"></a>二：timestamp 简介</h1><p>timestamp: 时间戳，是客户端调用接口时对应的当前时间戳，时间戳用于防止DoS攻击。当黑客劫持了请求的url去DoS攻击，每次调用接口时接口都会判断服务器当前系统时间和接口中传的的timestamp的差值，如果这个差值超过某个设置的时间(假如5分钟)，那么这个请求将被拦截掉，如果在设置的超时时间范围内，是不能阻止DoS攻击的。timestamp机制只能减轻DoS攻击的时间，缩短攻击时间。如果黑客修改了时间戳的值可通过sign签名机制来处理。</p>
+<h3 id="DoS"><a href="#DoS" class="headerlink" title="DoS"></a>DoS</h3><p>DoS是Denial of Service的简称，即拒绝服务，造成DoS的攻击行为被称为DoS攻击，其目的是使计算机或网络无法提供正常的服务。最常见的DoS攻击有计算机网络带宽攻击和连通性攻击。</p>
+<p>DoS攻击是指故意的攻击网络协议实现的缺陷或直接通过野蛮手段残忍地耗尽被攻击对象的资源，目的是让目标计算机或网络无法提供正常的服务或资源访问，使目标系统服务系统停止响应甚至崩溃，而在此攻击中并不包括侵入目标服务器或目标网络设备。这些服务资源包括网络带宽，文件系统空间容量，开放的进程或者允许的连接。这种攻击会导致资源的匮乏，无论计算机的处理速度多快、内存容量多大、网络带宽的速度多快都无法避免这种攻击带来的后果。</p>
+<ul>
+<li>Pingflood: 该攻击在短时间内向目的主机发送大量ping包，造成网络堵塞或主机资源耗尽。</li>
+<li>Synflood: 该攻击以多个随机的源主机地址向目的主机发送SYN包，而在收到目的主机的SYN ACK后并不回应，这样，目的主机就为这些源主机建立了大量的连接队列，而且由于没有收到ACK一直维护着这</li>
+</ul>
+<p>些队列，造成了资源的大量消耗而不能向正常请求提供服务。</p>
+<ul>
+<li>Smurf：该攻击向一个子网的广播地址发一个带有特定请求（如ICMP回应请求）的包，并且将源地址伪装成想要攻击的主机地址。子网上所有主机都回应广播包请求而向被攻击主机发包，使该主机受到攻击。</li>
+<li>Land-based：攻击者将一个包的源地址和目的地址都设置为目标主机的地址，然后将该包通过IP欺骗的方式发送给被攻击主机，这种包可以造成被攻击主机因试图与自己建立连接而陷入死循环，从而很大程度地降低了系统性能。</li>
+<li>Ping of Death：根据TCP/IP的规范，一个包的长度最大为65536字节。尽管一个包的长度不能超过65536字节，但是一个包分成的多个片段的叠加却能做到。当一个主机收到了长度大于65536字节的包时，就是受到了Ping of Death攻击，该攻击会造成主机的宕机。</li>
+<li>Teardrop：IP数据包在网络传递时，数据包可以分成更小的片段。攻击者可以通过发送两段（或者更多）数据包来实现TearDrop攻击。第一个包的偏移量为0，长度为N，第二个包的偏移量小于N。为了合并这些数据段，TCP/IP堆栈会分配超乎寻常的巨大资源，从而造成系统资源的缺乏甚至机器的重新启动。</li>
+<li>PingSweep：使用ICMP Echo轮询多个主机。</li>
+</ul>
+<h1 id="三：sign-简介"><a href="#三：sign-简介" class="headerlink" title="三：sign 简介"></a>三：sign 简介</h1><p>nonce：随机值，是客户端随机生成的值，作为参数传递过来，随机值的目的是增加sign签名的多变性。随机值一般是数字和字母的组合，6位长度，随机值的组成和长度没有固定规则。</p>
+<p>sign: 一般用于参数签名，防止参数被非法篡改，最常见的是修改金额等重要敏感参数， sign的值一般是将所有非空参数按照升续排序然后+token+key+timestamp+nonce(随机数)拼接在一起，然后使用某种加密算法进行加密，作为接口中的一个参数sign来传递，也可以将sign放到请求头中。接口在网络传输过程中如果被黑客挟持，并修改其中的参数值，然后再继续调用接口，虽然参数的值被修改了，但是因为黑客不知道sign是如何计算出来的，不知道sign都有哪些值构成，不知道以怎样的顺序拼接在一起的，最重要的是不知道签名字符串中的key是什么，所以黑客可以篡改参数的值，但没法修改sign的值，当服务器调用接口前会按照sign的规则重新计算出sign的值然后和接口传递的sign参数的值做比较，如果相等表示参数值没有被篡改，如果不等，表示参数被非法篡改了，就不执行接口了。</p>
+<h1 id="四：防止重复提交"><a href="#四：防止重复提交" class="headerlink" title="四：防止重复提交"></a>四：防止重复提交</h1><p>对于一些重要的操作需要防止客户端重复提交的(如非幂等性重要操作)，具体办法是当请求第一次提交时将sign作为key保存到redis，并设置超时时间，超时时间和Timestamp中设置的差值相同。当同一个请求第二次访问时会先检测redis是否存在该sign，如果存在则证明重复提交了，接口就不再继续调用了。如果sign在缓存服务器中因过期时间到了，而被删除了，此时当这个url再次请求服务器时，因token的过期时间和sign的过期时间一直，sign过期也意味着token过期，那样同样的url再访问服务器会因token错误会被拦截掉，这就是为什么sign和token的过期时间要保持一致的原因。拒绝重复调用机制确保URL被别人截获了也无法使用（如抓取数据）。</p>
+<p>对于哪些接口需要防止重复提交可以自定义个注解来标记。</p>
+<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><p><strong>所有的安全措施都用上的话有时候难免太过复杂，在实际项目中需要根据自身情况作出裁剪，比如可以只使用签名机制就可以保证信息不会被篡改，或者定向提供服务的时候只用Token机制就可以了。如何裁剪，全看项目实际情况和对接口安全性的要求。</strong></p>
+<h1 id="五：使用流程"><a href="#五：使用流程" class="headerlink" title="五：使用流程"></a>五：使用流程</h1><ol>
+<li>接口调用方(客户端)向接口提供方(服务器)申请接口调用账号，申请成功后，接口提供方会给接口调用方一个appId和一个key参数</li>
+<li>客户端携带参数appId、timestamp、sign去调用服务器端的API token，其中sign=加密(appId + timestamp + key)</li>
+<li>客户端拿着api_token 去访问不需要登录就能访问的接口</li>
+<li>当访问用户需要登录的接口时，客户端跳转到登录页面，通过用户名和密码调用登录接口，登录接口会返回一个usertoken, 客户端拿着usertoken 去访问需要登录才能访问的接口</li>
+</ol>
+<p>sign的作用是防止参数被篡改，客户端调用服务端时需要传递sign参数，服务器响应客户端时也可以返回一个sign用于客户度校验返回的值是否被非法篡改了。客户端传的sign和服务器端响应的sign算法可能会不同。</p>
+<h1 id="六：示例代码"><a href="#六：示例代码" class="headerlink" title="六：示例代码"></a>六：示例代码</h1><h3 id="1-dependency"><a href="#1-dependency" class="headerlink" title="1. dependency"></a>1. dependency</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-RedisConfiguration"><a href="#2-RedisConfiguration" class="headerlink" title="2. RedisConfiguration"></a>2. RedisConfiguration</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfiguration</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> JedisConnectionFactory <span class="title">jedisConnectionFactory</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> JedisConnectionFactory();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 支持存储对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RedisTemplate&lt;String, String&gt; <span class="title">redisTemplate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        RedisTemplate&lt;String, String&gt; redisTemplate = <span class="keyword">new</span> StringRedisTemplate();</span><br><span class="line">        redisTemplate.setConnectionFactory(jedisConnectionFactory());</span><br><span class="line">        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = <span class="keyword">new</span> Jackson2JsonRedisSerializer(Object.class);</span><br><span class="line">        ObjectMapper objectMapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line">        objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</span><br><span class="line"></span><br><span class="line">        jackson2JsonRedisSerializer.setObjectMapper(objectMapper);</span><br><span class="line">        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);</span><br><span class="line">        redisTemplate.afterPropertiesSet();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-TokenController"><a href="#3-TokenController" class="headerlink" title="3. TokenController"></a>3. TokenController</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/api/token"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TokenController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * API Token</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sign</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/api_token"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ApiResponse&lt;AccessToken&gt; <span class="title">apiToken</span><span class="params">(String appId, @RequestHeader(<span class="string">"timestamp"</span>)</span> String timestamp, @<span class="title">RequestHeader</span><span class="params">(<span class="string">"sign"</span>)</span> String sign) </span>&#123;</span><br><span class="line">        Assert.isTrue(!StringUtils.isEmpty(appId) &amp;&amp; !StringUtils.isEmpty(timestamp) &amp;&amp; !StringUtils.isEmpty(sign), <span class="string">"参数错误"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> reqeustInterval = System.currentTimeMillis() - Long.valueOf(timestamp);</span><br><span class="line">        Assert.isTrue(reqeustInterval &lt; <span class="number">5</span> * <span class="number">60</span> * <span class="number">1000</span>, <span class="string">"请求过期，请重新请求"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 1. 根据appId查询数据库获取appSecret</span></span><br><span class="line">        AppInfo appInfo = <span class="keyword">new</span> AppInfo(<span class="string">"1"</span>, <span class="string">"12345678954556"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 校验签名</span></span><br><span class="line">        String signString = timestamp + appId + appInfo.getKey();</span><br><span class="line">        String signature = MD5Util.encode(signString);</span><br><span class="line">        log.info(signature);</span><br><span class="line">        Assert.isTrue(signature.equals(sign), <span class="string">"签名错误"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 如果正确生成一个token保存到redis中，如果错误返回错误信息</span></span><br><span class="line">        AccessToken accessToken = <span class="keyword">this</span>.saveToken(<span class="number">0</span>, appInfo, <span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ApiResponse.success(accessToken);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotRepeatSubmit</span>(<span class="number">5000</span>)</span><br><span class="line">    <span class="meta">@PostMapping</span>(<span class="string">"user_token"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ApiResponse&lt;UserInfo&gt; <span class="title">userToken</span><span class="params">(String username, String password)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 根据用户名查询密码, 并比较密码(密码可以RSA加密一下)</span></span><br><span class="line">        UserInfo userInfo = <span class="keyword">new</span> UserInfo(username, <span class="string">"81255cb0dca1a5f304328a70ac85dcbd"</span>, <span class="string">"111111"</span>);</span><br><span class="line">        String pwd = password + userInfo.getSalt();</span><br><span class="line">        String passwordMD5 = MD5Util.encode(pwd);</span><br><span class="line">        Assert.isTrue(passwordMD5.equals(userInfo.getPassword()), <span class="string">"密码错误"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 保存Token</span></span><br><span class="line">        AppInfo appInfo = <span class="keyword">new</span> AppInfo(<span class="string">"1"</span>, <span class="string">"12345678954556"</span>);</span><br><span class="line">        AccessToken accessToken = <span class="keyword">this</span>.saveToken(<span class="number">1</span>, appInfo, userInfo);</span><br><span class="line">        userInfo.setAccessToken(accessToken);</span><br><span class="line">        <span class="keyword">return</span> ApiResponse.success(userInfo);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> AccessToken <span class="title">saveToken</span><span class="params">(<span class="keyword">int</span> tokenType, AppInfo appInfo,  UserInfo userInfo)</span> </span>&#123;</span><br><span class="line">        String token = UUID.randomUUID().toString();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// token有效期为2小时</span></span><br><span class="line">        Calendar calendar = Calendar.getInstance();</span><br><span class="line">        calendar.setTime(<span class="keyword">new</span> Date());</span><br><span class="line">        calendar.add(Calendar.SECOND, <span class="number">7200</span>);</span><br><span class="line">        Date expireTime = calendar.getTime();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4. 保存token</span></span><br><span class="line">        ValueOperations&lt;String, TokenInfo&gt; operations = redisTemplate.opsForValue();</span><br><span class="line">        TokenInfo tokenInfo = <span class="keyword">new</span> TokenInfo();</span><br><span class="line">        tokenInfo.setTokenType(tokenType);</span><br><span class="line">        tokenInfo.setAppInfo(appInfo);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (tokenType == <span class="number">1</span>) &#123;</span><br><span class="line">            tokenInfo.setUserInfo(userInfo);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        operations.set(token, tokenInfo, <span class="number">7200</span>, TimeUnit.SECONDS);</span><br><span class="line"></span><br><span class="line">        AccessToken accessToken = <span class="keyword">new</span> AccessToken(token, expireTime);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> accessToken;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> timestamp = System.currentTimeMillis();</span><br><span class="line">        System.out.println(timestamp);</span><br><span class="line">        String signString = timestamp + <span class="string">"1"</span> + <span class="string">"12345678954556"</span>;</span><br><span class="line">        String sign = MD5Util.encode(signString);</span><br><span class="line">        System.out.println(sign);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"-------------------"</span>);</span><br><span class="line">        signString = <span class="string">"password=123456&amp;username=1&amp;12345678954556"</span> + <span class="string">"ff03e64b-427b-45a7-b78b-47d9e8597d3b1529815393153sdfsdfsfs"</span> + timestamp + <span class="string">"A1scr6"</span>;</span><br><span class="line">        sign = MD5Util.encode(signString);</span><br><span class="line">        System.out.println(sign);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-WebMvcConfiguration"><a href="#4-WebMvcConfiguration" class="headerlink" title="4. WebMvcConfiguration"></a>4. WebMvcConfiguration</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfiguration</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurationSupport</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] excludePathPatterns  = &#123;<span class="string">"/api/token/api_token"</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> TokenInterceptor tokenInterceptor;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.addInterceptors(registry);</span><br><span class="line">        registry.addInterceptor(tokenInterceptor)</span><br><span class="line">                .addPathPatterns(<span class="string">"/api/**"</span>)</span><br><span class="line">                .excludePathPatterns(excludePathPatterns);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="number">5</span>. TokenInterceptor</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TokenInterceptor</span> <span class="keyword">extends</span> <span class="title">HandlerInterceptorAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> handler 访问的目标方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        String token = request.getHeader(<span class="string">"token"</span>);</span><br><span class="line">        String timestamp = request.getHeader(<span class="string">"timestamp"</span>);</span><br><span class="line">        <span class="comment">// 随机字符串</span></span><br><span class="line">        String nonce = request.getHeader(<span class="string">"nonce"</span>);</span><br><span class="line">        String sign = request.getHeader(<span class="string">"sign"</span>);</span><br><span class="line">        Assert.isTrue(!StringUtils.isEmpty(token) &amp;&amp; !StringUtils.isEmpty(timestamp) &amp;&amp; !StringUtils.isEmpty(sign), <span class="string">"参数错误"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取超时时间</span></span><br><span class="line">        NotRepeatSubmit notRepeatSubmit = ApiUtil.getNotRepeatSubmit(handler);</span><br><span class="line">        <span class="keyword">long</span> expireTime = notRepeatSubmit == <span class="keyword">null</span> ? <span class="number">5</span> * <span class="number">60</span> * <span class="number">1000</span> : notRepeatSubmit.value();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 请求时间间隔</span></span><br><span class="line">        <span class="keyword">long</span> reqeustInterval = System.currentTimeMillis() - Long.valueOf(timestamp);</span><br><span class="line">        Assert.isTrue(reqeustInterval &lt; expireTime, <span class="string">"请求超时，请重新请求"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 校验Token是否存在</span></span><br><span class="line">        ValueOperations&lt;String, TokenInfo&gt; tokenRedis = redisTemplate.opsForValue();</span><br><span class="line">        TokenInfo tokenInfo = tokenRedis.get(token);</span><br><span class="line">        Assert.notNull(tokenInfo, <span class="string">"token错误"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4. 校验签名(将所有的参数加进来，防止别人篡改参数) 所有参数看参数名升续排序拼接成url</span></span><br><span class="line">        <span class="comment">// 请求参数 + token + timestamp + nonce</span></span><br><span class="line">        String signString = ApiUtil.concatSignString(request) + tokenInfo.getAppInfo().getKey() + token + timestamp + nonce;</span><br><span class="line">        String signature = MD5Util.encode(signString);</span><br><span class="line">        <span class="keyword">boolean</span> flag = signature.equals(sign);</span><br><span class="line">        Assert.isTrue(flag, <span class="string">"签名错误"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 5. 拒绝重复调用(第一次访问时存储，过期时间和请求超时时间保持一致), 只有标注不允许重复提交注解的才会校验</span></span><br><span class="line">        <span class="keyword">if</span> (notRepeatSubmit != <span class="keyword">null</span>) &#123;</span><br><span class="line">            ValueOperations&lt;String, Integer&gt; signRedis = redisTemplate.opsForValue();</span><br><span class="line">            <span class="keyword">boolean</span> exists = redisTemplate.hasKey(sign);</span><br><span class="line">            Assert.isTrue(!exists, <span class="string">"请勿重复提交"</span>);</span><br><span class="line">            signRedis.set(sign, <span class="number">0</span>, expireTime, TimeUnit.MILLISECONDS);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.preHandle(request, response, handler);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-MD5Util-—-MD5工具类，加密生成数字签名"><a href="#6-MD5Util-—-MD5工具类，加密生成数字签名" class="headerlink" title="6. MD5Util —-MD5工具类，加密生成数字签名"></a>6. MD5Util —-MD5工具类，加密生成数字签名</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MD5Util</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String hexDigits[] = &#123; <span class="string">"0"</span>, <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>,</span><br><span class="line">            <span class="string">"6"</span>, <span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span>, <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="string">"e"</span>, <span class="string">"f"</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">byteArrayToHexString</span><span class="params">(<span class="keyword">byte</span> b[])</span> </span>&#123;</span><br><span class="line">        StringBuffer resultSb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; b.length; i++)</span><br><span class="line">            resultSb.append(byteToHexString(b[i]));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> resultSb.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">byteToHexString</span><span class="params">(<span class="keyword">byte</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = b;</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">0</span>)</span><br><span class="line">            n += <span class="number">256</span>;</span><br><span class="line">        <span class="keyword">int</span> d1 = n / <span class="number">16</span>;</span><br><span class="line">        <span class="keyword">int</span> d2 = n % <span class="number">16</span>;</span><br><span class="line">        <span class="keyword">return</span> hexDigits[d1] + hexDigits[d2];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encode</span><span class="params">(String origin)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> encode(origin, <span class="string">"UTF-8"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encode</span><span class="params">(String origin, String charsetname)</span> </span>&#123;</span><br><span class="line">        String resultString = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            resultString = <span class="keyword">new</span> String(origin);</span><br><span class="line">            MessageDigest md = MessageDigest.getInstance(<span class="string">"MD5"</span>);</span><br><span class="line">            <span class="keyword">if</span> (charsetname == <span class="keyword">null</span> || <span class="string">""</span>.equals(charsetname))</span><br><span class="line">                resultString = byteArrayToHexString(md.digest(resultString</span><br><span class="line">                        .getBytes()));</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                resultString = byteArrayToHexString(md.digest(resultString</span><br><span class="line">                        .getBytes(charsetname)));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception exception) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> resultString;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="7-NotRepeatSubmit-—–自定义注解，防止重复提交。"><a href="#7-NotRepeatSubmit-—–自定义注解，防止重复提交。" class="headerlink" title="7. @NotRepeatSubmit  —–自定义注解，防止重复提交。"></a>7. @NotRepeatSubmit  —–自定义注解，防止重复提交。</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 禁止重复提交</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> NotRepeatSubmit &#123;</span><br><span class="line">    <span class="comment">/** 过期时间，单位毫秒 **/</span></span><br><span class="line">    <span class="function"><span class="keyword">long</span> <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> 5000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="8-AccessToken"><a href="#8-AccessToken" class="headerlink" title="8. AccessToken"></a>8. AccessToken</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccessToken</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** token */</span></span><br><span class="line">    <span class="keyword">private</span> String token;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 失效时间 */</span></span><br><span class="line">    <span class="keyword">private</span> Date expireTime;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="9-AppInfo"><a href="#9-AppInfo" class="headerlink" title="9. AppInfo"></a>9. AppInfo</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppInfo</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** App id */</span></span><br><span class="line">    <span class="keyword">private</span> String appId;</span><br><span class="line">    <span class="comment">/** API 秘钥 */</span></span><br><span class="line">    <span class="keyword">private</span> String key;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="10-TokenInfo"><a href="#10-TokenInfo" class="headerlink" title="10. TokenInfo"></a>10. TokenInfo</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TokenInfo</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** token类型: api:0 、user:1 */</span></span><br><span class="line">    <span class="keyword">private</span> Integer tokenType;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** App 信息 */</span></span><br><span class="line">    <span class="keyword">private</span> AppInfo appInfo;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 用户其他数据 */</span></span><br><span class="line">    <span class="keyword">private</span> UserInfo userInfo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="11-UserInfo"><a href="#11-UserInfo" class="headerlink" title="11. UserInfo"></a>11. UserInfo</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** 用户名 */</span></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="comment">/** 手机号 */</span></span><br><span class="line">    <span class="keyword">private</span> String mobile;</span><br><span class="line">    <span class="comment">/** 邮箱 */</span></span><br><span class="line">    <span class="keyword">private</span> String email;</span><br><span class="line">    <span class="comment">/** 密码 */</span></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="comment">/** 盐 */</span></span><br><span class="line">    <span class="keyword">private</span> String salt;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> AccessToken accessToken;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserInfo</span><span class="params">(String username, String password, String salt)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.username = username;</span><br><span class="line">        <span class="keyword">this</span>.password = password;</span><br><span class="line">        <span class="keyword">this</span>.salt = salt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="12-ApiCodeEnum"><a href="#12-ApiCodeEnum" class="headerlink" title="12. ApiCodeEnum"></a>12. ApiCodeEnum</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 错误码code可以使用纯数字,使用不同区间标识一类错误，也可以使用纯字符，也可以使用前缀+编号</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 错误码：ERR + 编号</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 可以使用日志级别的前缀作为错误类型区分 Info(I) Error(E) Warning(W)</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 或者以业务模块 + 错误号</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * TODO 错误码设计</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Alipay 用了两个code，两个msg(https://docs.open.alipay.com/api_1/alipay.trade.pay)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> ApiCodeEnum &#123;</span><br><span class="line">    SUCCESS(<span class="string">"10000"</span>, <span class="string">"success"</span>),</span><br><span class="line">    UNKNOW_ERROR(<span class="string">"ERR0001"</span>,<span class="string">"未知错误"</span>),</span><br><span class="line">    PARAMETER_ERROR(<span class="string">"ERR0002"</span>,<span class="string">"参数错误"</span>),</span><br><span class="line">    TOKEN_EXPIRE(<span class="string">"ERR0003"</span>,<span class="string">"认证过期"</span>),</span><br><span class="line">    REQUEST_TIMEOUT(<span class="string">"ERR0004"</span>,<span class="string">"请求超时"</span>),</span><br><span class="line">    SIGN_ERROR(<span class="string">"ERR0005"</span>,<span class="string">"签名错误"</span>),</span><br><span class="line">    REPEAT_SUBMIT(<span class="string">"ERR0006"</span>,<span class="string">"请不要频繁操作"</span>),</span><br><span class="line">    ;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 代码 */</span></span><br><span class="line">    <span class="keyword">private</span> String code;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 结果 */</span></span><br><span class="line">    <span class="keyword">private</span> String msg;</span><br><span class="line"></span><br><span class="line">    ApiCodeEnum(String code, String msg) &#123;</span><br><span class="line">        <span class="keyword">this</span>.code = code;</span><br><span class="line">        <span class="keyword">this</span>.msg = msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getMsg</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> msg;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="13-ApiResult"><a href="#13-ApiResult" class="headerlink" title="13. ApiResult"></a>13. ApiResult</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApiResult</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 代码 */</span></span><br><span class="line">    <span class="keyword">private</span> String code;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 结果 */</span></span><br><span class="line">    <span class="keyword">private</span> String msg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="14-ApiUtil-——-这个参考支付宝加密的算法写的-我直接Copy过来了。"><a href="#14-ApiUtil-——-这个参考支付宝加密的算法写的-我直接Copy过来了。" class="headerlink" title="14. ApiUtil ——-这个参考支付宝加密的算法写的.我直接Copy过来了。"></a>14. ApiUtil ——-这个参考支付宝加密的算法写的.我直接Copy过来了。</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApiUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 按参数名升续拼接参数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">concatSignString</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">        Map&lt;String, String&gt; paramterMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        request.getParameterMap().forEach((key, value) -&gt; paramterMap.put(key, value[<span class="number">0</span>]));</span><br><span class="line">        <span class="comment">// 按照key升续排序，然后拼接参数</span></span><br><span class="line">        Set&lt;String&gt; keySet = paramterMap.keySet();</span><br><span class="line">        String[] keyArray = keySet.toArray(<span class="keyword">new</span> String[keySet.size()]);</span><br><span class="line">        Arrays.sort(keyArray);</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (String k : keyArray) &#123;</span><br><span class="line">            <span class="comment">// 或略掉的字段</span></span><br><span class="line">            <span class="keyword">if</span> (k.equals(<span class="string">"sign"</span>)) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (paramterMap.get(k).trim().length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 参数值为空，则不参与签名</span></span><br><span class="line">                sb.append(k).append(<span class="string">"="</span>).append(paramterMap.get(k).trim()).append(<span class="string">"&amp;"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">concatSignString</span><span class="params">(Map&lt;String, String&gt; map)</span> </span>&#123;</span><br><span class="line">        Map&lt;String, String&gt; paramterMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.forEach((key, value) -&gt; paramterMap.put(key, value));</span><br><span class="line">        <span class="comment">// 按照key升续排序，然后拼接参数</span></span><br><span class="line">        Set&lt;String&gt; keySet = paramterMap.keySet();</span><br><span class="line">        String[] keyArray = keySet.toArray(<span class="keyword">new</span> String[keySet.size()]);</span><br><span class="line">        Arrays.sort(keyArray);</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (String k : keyArray) &#123;</span><br><span class="line">            <span class="keyword">if</span> (paramterMap.get(k).trim().length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 参数值为空，则不参与签名</span></span><br><span class="line">                sb.append(k).append(<span class="string">"="</span>).append(paramterMap.get(k).trim()).append(<span class="string">"&amp;"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取方法上的<span class="doctag">@NotRepeatSubmit</span>注解</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> handler</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> NotRepeatSubmit <span class="title">getNotRepeatSubmit</span><span class="params">(Object handler)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (handler <span class="keyword">instanceof</span> HandlerMethod) &#123;</span><br><span class="line">            HandlerMethod handlerMethod = (HandlerMethod) handler;</span><br><span class="line">            Method method = handlerMethod.getMethod();</span><br><span class="line">            NotRepeatSubmit annotation = method.getAnnotation(NotRepeatSubmit.class);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> annotation;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="15-ApiResponse"><a href="#15-ApiResponse" class="headerlink" title="15. ApiResponse"></a>15. ApiResponse</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApiResponse</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">/** 结果 */</span></span><br><span class="line">    <span class="keyword">private</span> ApiResult result;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 数据 */</span></span><br><span class="line">    <span class="keyword">private</span> T data;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 签名 */</span></span><br><span class="line">    <span class="keyword">private</span> String sign;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">ApiResponse <span class="title">success</span><span class="params">(T data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> response(ApiCodeEnum.SUCCESS.getCode(), ApiCodeEnum.SUCCESS.getMsg(), data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ApiResponse <span class="title">error</span><span class="params">(String code, String msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> response(code, msg, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">ApiResponse <span class="title">response</span><span class="params">(String code, String msg, T data)</span> </span>&#123;</span><br><span class="line">        ApiResult result = <span class="keyword">new</span> ApiResult(code, msg);</span><br><span class="line">        ApiResponse response = <span class="keyword">new</span> ApiResponse();</span><br><span class="line">        response.setResult(result);</span><br><span class="line">        response.setData(data);</span><br><span class="line"></span><br><span class="line">        String sign = signData(data);</span><br><span class="line">        response.setSign(sign);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> response;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">String <span class="title">signData</span><span class="params">(T data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO 查询key</span></span><br><span class="line">        String key = <span class="string">"12345678954556"</span>;</span><br><span class="line">        Map&lt;String, String&gt; responseMap = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            responseMap = getFields(data);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        String urlComponent = ApiUtil.concatSignString(responseMap);</span><br><span class="line">        String signature = urlComponent + <span class="string">"key="</span> + key;</span><br><span class="line">        String sign = MD5Util.encode(signature);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sign;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> data 反射的对象,获取对象的字段名和值</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalArgumentException</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalAccessException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Map&lt;String, String&gt; <span class="title">getFields</span><span class="params">(Object data)</span> <span class="keyword">throws</span> IllegalAccessException, IllegalArgumentException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (data == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        Field[] fields = data.getClass().getDeclaredFields();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; fields.length; i++) &#123;</span><br><span class="line">            Field field = fields[i];</span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">            String name = field.getName();</span><br><span class="line">            Object value = field.get(data);</span><br><span class="line">            <span class="keyword">if</span> (field.get(data) != <span class="keyword">null</span>) &#123;</span><br><span class="line">                map.put(name, value.toString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="七-ThreadLocal"><a href="#七-ThreadLocal" class="headerlink" title="七: ThreadLocal"></a>七: ThreadLocal</h1><p>ThreadLocal是线程内的全局上下文。就是在单个线程中，方法之间共享的内存，每个方法都可以从该上下文中获取值和修改值。</p>
+<h5 id="实际案例："><a href="#实际案例：" class="headerlink" title="实际案例："></a>实际案例：</h5><p>在调用api时都会传一个token参数，通常会写一个拦截器来校验token是否合法，我们可以通过token找到对应的用户信息(User)，如果token合法，然后将用户信息存储到ThreadLocal中，这样无论是在controller、service、dao的哪一层都能访问到该用户的信息。作用类似于Web中的request作用域。</p>
+<p>传统方式我们要在方法中访问某个变量，可以通过传参的形式往方法中传参，如果多个方法都要使用那么每个方法都要传参；如果使用ThreadLocal所有方法就不需要传该参数了，每个方法都可以通过ThreadLocal来访问该值。</p>
+<ul>
+<li>ThreadLocalUtil.set(“key”, value); 保存值</li>
+<li>T value = ThreadLocalUtil.get(“key”); 获取值</li>
+</ul>
+<p>ThreadLocalUtil</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalUtil</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal&lt;Map&lt;String, Object&gt;&gt; threadLocal = <span class="keyword">new</span> ThreadLocal() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> Map&lt;String, Object&gt; <span class="title">initialValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> HashMap&lt;&gt;(<span class="number">4</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Map&lt;String, Object&gt; <span class="title">getThreadLocal</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> threadLocal.get();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">get</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        Map map = (Map)threadLocal.get();</span><br><span class="line">        <span class="keyword">return</span> (T)map.get(key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">get</span><span class="params">(String key,T defaultValue)</span> </span>&#123;</span><br><span class="line">        Map map = (Map)threadLocal.get();</span><br><span class="line">        <span class="keyword">return</span> (T)map.get(key) == <span class="keyword">null</span> ? defaultValue : (T)map.get(key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(String key, Object value)</span> </span>&#123;</span><br><span class="line">        Map map = (Map)threadLocal.get();</span><br><span class="line">        map.put(key, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(Map&lt;String, Object&gt; keyValueMap)</span> </span>&#123;</span><br><span class="line">        Map map = (Map)threadLocal.get();</span><br><span class="line">        map.putAll(keyValueMap);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        threadLocal.remove();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">Map&lt;String,T&gt; <span class="title">fetchVarsByPrefix</span><span class="params">(String prefix)</span> </span>&#123;</span><br><span class="line">        Map&lt;String,T&gt; vars = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span>( prefix == <span class="keyword">null</span> )&#123;</span><br><span class="line">            <span class="keyword">return</span> vars;</span><br><span class="line">        &#125;</span><br><span class="line">        Map map = (Map)threadLocal.get();</span><br><span class="line">        Set&lt;Map.Entry&gt; set = map.entrySet();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>( Map.Entry entry : set)&#123;</span><br><span class="line">            Object key = entry.getKey();</span><br><span class="line">            <span class="keyword">if</span>( key <span class="keyword">instanceof</span> String )&#123;</span><br><span class="line">                <span class="keyword">if</span>( ((String) key).startsWith(prefix) )&#123;</span><br><span class="line">                    vars.put((String)key,(T)entry.getValue());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vars;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">remove</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        Map map = (Map)threadLocal.get();</span><br><span class="line">        <span class="keyword">return</span> (T)map.remove(key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">(String prefix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>( prefix == <span class="keyword">null</span> )&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Map map = (Map)threadLocal.get();</span><br><span class="line">        Set&lt;Map.Entry&gt; set = map.entrySet();</span><br><span class="line">        List&lt;String&gt; removeKeys = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>( Map.Entry entry : set )&#123;</span><br><span class="line">            Object key = entry.getKey();</span><br><span class="line">            <span class="keyword">if</span>( key <span class="keyword">instanceof</span> String )&#123;</span><br><span class="line">                <span class="keyword">if</span>( ((String) key).startsWith(prefix) )&#123;</span><br><span class="line">                    removeKeys.add((String)key);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>( String key : removeKeys )&#123;</span><br><span class="line">            map.remove(key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>总结: 这个是目前第三方数据接口交互过程中常用的一些参数与使用示例，希望对大家有点帮助。</strong></p>
+<p><strong>当然如果为了保证更加的安全，可以加上RSA,RSA2，AES等等加密方式，保证了数据的更加的安全，但是唯一的缺点是加密与解密比较耗费CPU的资源.</strong></p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-06-24T01:22:11.998Z" itemprop="dateUpdated">2020-06-24 09:22:11</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2020/06/24/java/API接口的安全设计/" target="_blank" rel="external">http://www.sjsmile.cn/2020/06/24/java/API接口的安全设计/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sjsmile.cn">
+            <img src="/img/avatar.jpg" alt="Smile">
+            Smile
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/API/">API</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2020/06/24/java/API接口的安全设计/&title=《API接口的安全设计》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2020/06/24/java/API接口的安全设计/&title=《API接口的安全设计》 — MY STUDY BLOG&source=
+转载，原文地址
+
+说明：在实际的业务中，难免会跟第三方系统进行数据的交互与传递，那么如何保证数据在传输过程中的安全呢（防窃取）？除了https的协议之外..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2020/07/07/java/跟上-Java-8-日期和时间实用技巧/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">跟上 Java 8 : 日期和时间实用技巧</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Streams：深入剖析Redis5.0全新数据结构</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一：token-简介"><span class="post-toc-text">一：token 简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二：timestamp-简介"><span class="post-toc-text">二：timestamp 简介</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DoS"><span class="post-toc-text">DoS</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三：sign-简介"><span class="post-toc-text">三：sign 简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#四：防止重复提交"><span class="post-toc-text">四：防止重复提交</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#注意："><span class="post-toc-text">注意：</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#五：使用流程"><span class="post-toc-text">五：使用流程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#六：示例代码"><span class="post-toc-text">六：示例代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-dependency"><span class="post-toc-text">1. dependency</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-RedisConfiguration"><span class="post-toc-text">2. RedisConfiguration</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-TokenController"><span class="post-toc-text">3. TokenController</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-WebMvcConfiguration"><span class="post-toc-text">4. WebMvcConfiguration</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-MD5Util-—-MD5工具类，加密生成数字签名"><span class="post-toc-text">6. MD5Util —-MD5工具类，加密生成数字签名</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-NotRepeatSubmit-—–自定义注解，防止重复提交。"><span class="post-toc-text">7. @NotRepeatSubmit  —–自定义注解，防止重复提交。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-AccessToken"><span class="post-toc-text">8. AccessToken</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-AppInfo"><span class="post-toc-text">9. AppInfo</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-TokenInfo"><span class="post-toc-text">10. TokenInfo</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#11-UserInfo"><span class="post-toc-text">11. UserInfo</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12-ApiCodeEnum"><span class="post-toc-text">12. ApiCodeEnum</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#13-ApiResult"><span class="post-toc-text">13. ApiResult</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#14-ApiUtil-——-这个参考支付宝加密的算法写的-我直接Copy过来了。"><span class="post-toc-text">14. ApiUtil ——-这个参考支付宝加密的算法写的.我直接Copy过来了。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#15-ApiResponse"><span class="post-toc-text">15. ApiResponse</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#七-ThreadLocal"><span class="post-toc-text">七: ThreadLocal</span></a></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2020/06/24/java/API接口的安全设计/&title=《API接口的安全设计》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2020/06/24/java/API接口的安全设计/&title=《API接口的安全设计》 — MY STUDY BLOG&source=
+转载，原文地址
+
+说明：在实际的业务中，难免会跟第三方系统进行数据的交互与传递，那么如何保证数据在传输过程中的安全呢（防窃取）？除了https的协议之外..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsklEQVR42u3aQW7jMBAEwPz/0wmwt0VgqXuoMRygdDJsWWbxQI57+PUVX9//rt/vvHq/vefVk6/vfOzCw8PDGw391XU96Pbnc8z1VCZjxsPDw9vmXQ8l4eXDStizqcTDw8P7NN5s4U62jeR+PDw8vL/Ia4vgZzcMPDw8vE/jJWHErIxOwog8g13MWvDw8PBiXtsA+4TXi/09PDw8vIOuerv45gt3Hlu0z/zvaXh4eHgLvKQIfjYgSA5vndxf1/h4eHh4Ja8NF55avtsG2/WTX04oHh4e3gIvj1bbkPfVz+cldYu5Sanx8PDw1njJUadkoZ99dxZb3GwqeHh4eAu8NpJIFv2kXJ7x8mfi4eHhbfDa4LUFtMV0ewzrZnLx8PDwlnntwp3HFm3hnk/xTYsODw8Pb4GXR7cnJfWsiXV+xAEPDw9vgzdr829MSpseROPEw8PDW+PNDlG17NkxhSSeqMMIPDw8vAPeedv+fGry0OHo0BUeHh7eAu8kwM2PQz0VB+cBMR4eHt42L2/bn4ew+aGrk+nAw8PD2+O1C/FsY8hji7xovjlYgIeHh7fGa9tXJ/fMDlrNXuPh4eE9y5st8e1GksNyfBSm4OHh4S3w2uCgbecnZXTbWktiCDw8PLx38pJb2zigHdasGYaHh4f3fl6iP4l0N7aN6+nDw8PD2+OdhAv5JnESBLeHCY76e3h4eHglLymdZyX1rIyexRx4eHh4e7zv8soPTrXhwvUU5O9HxTQeHh7eAe8kIJhtA+2iHxXNwad4eHh4z/Lav/qzQ1T5htFuNjfbGB4eHt4ab7YZ5M2wtkA/aZtFH+Dh4eF9DC955skmlEzB4saAh4eHV/Ly6KFtm80mJYo28PDw8NZ4bVMqGUqOeWqzwcPDw3sP7+Sv/mxxnzXVnm2t4eHh4Y14P5zO0HVVIEW5AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

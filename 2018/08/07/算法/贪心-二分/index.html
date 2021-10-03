@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        贪心+二分 |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="贪心+二分">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>贪心+二分</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">贪心+二分</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-08-07T08:04:23.000Z" itemprop="datePublished" class="page-time">
+  2018-08-07
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-算法/贪心-二分"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">贪心+二分</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-08-07 16:04:23" datetime="2018-08-07T08:04:23.000Z"  itemprop="datePublished">2018-08-07</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+            
+	<span id="/2018/08/07/算法/贪心-二分/" class="leancloud_visitors" data-flag-title="贪心+二分" title="贪心+二分">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/08/07/算法/贪心-二分/#comment">
+            <span class="valine-comment-count" data-xid="/2018/08/07/算法/贪心-二分/"></span>
+        </a>
+    </span>
+
+
+
+            
+            <span class="post-count">文章字数: 1,780</span>
+<span class="post-count">阅读时长 ≈ 9分钟</span>
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <p>在刷题时，总会遇到求最大值最小，最小值最大问题，也许它会暗喻是这样的一个问题。对于这样的一个问题，你会发现用dp和枚举都会超时超内存，或者说很麻烦，所以这是一个比较简单的解题方式。</p>
+<p>二分逼近思想<br>•对于难以直接确定解的问题,采取二分枚举+检验的思想.<br><a id="more"></a><br>•已知解为x,验证x是否满足要求.</p>
+<p>•如果答案具有特定的范围，并且验证答案是否成立的函数具有单调性。则可以在范围内对答案进行二分验证，从而快速确定答案。</p>
+<p> 对于答案判断：<br>在二分答案的时候需要判断，从而确定下一个范围。</p>
+<p>可以用一个bool Check(x)函数来判断，返回true表示满足,返回false表示不满足.</p>
+<p>可以类比数学函数f(x)&gt;=0和f(x)&lt;0来理解.</p>
+<p>根据具体问题写出相应的Check函数往往就是解决问题的关键点。</p>
+<p>下面举例一些问题：</p>
+<p><strong>poj2456</strong><br>Aggressive cows</p>
+<p>Time Limit: 1000MS         Memory Limit: 65536K<br>Total Submissions: 13139         Accepted: 6399</p>
+<p>Description</p>
+<p>Farmer John has built a new long barn, with N (2 &lt;= N &lt;= 100,000) stalls. The stalls are located along a straight line at positions x1,…,xN (0 &lt;= xi &lt;= 1,000,000,000). </p>
+<p>His C (2 &lt;= C &lt;= N) cows don’t like this barn layout and become aggressive towards each other once put into a stall. To prevent the cows from hurting each other, FJ want to assign the cows to the stalls, such that the minimum distance between any two of them is as large as possible. What is the largest minimum distance?</p>
+<p>Input</p>
+<ul>
+<li><p>Line 1: Two space-separated integers: N and C </p>
+</li>
+<li><p>Lines 2..N+1: Line i+1 contains an integer stall location, xi</p>
+</li>
+</ul>
+<p>Output</p>
+<ul>
+<li>Line 1: One integer: the largest minimum distance</li>
+</ul>
+<p>Sample Input</p>
+<p>5 3<br>1<br>2<br>8<br>4<br>9<br>Sample Output</p>
+<p>3<br>Hint</p>
+<p>OUTPUT DETAILS: </p>
+<p>FJ can put his 3 cows in the stalls at positions 1, 4 and 8, resulting in a minimum distance of 3. </p>
+<p>Huge input data,scanf is recommended.</p>
+<p>Source</p>
+<p>USACO 2005 February Gold</p>
+<p>2.题意概述：</p>
+<p>农夫有c头牛，n个隔间，c头牛很躁动，很容易相互打架，因此农夫想把它们分得越远越好，要你分配隔间使得相邻两头牛的距离越远越好，问你这c头牛分割的最小距离的最大值。</p>
+<p>3.解题思路： </p>
+<p>先对隔间的坐标排序，对于牛，最小距离是0，最大距离不会超过两端两头牛的距离值，因此二分地查找分割距离的最大值，每次mid都judge一次，judge的时候贪心地放置牛，保证前i头牛是符合这样分割标准的。</p>
+<p>AC代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">	<span class="keyword">int</span> n,k,t;</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">100000</span>];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> next,last=<span class="number">0</span>,k=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;t;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(a[i]-a[last]&gt;=d)&#123;</span><br><span class="line">			k++;</span><br><span class="line">			last=i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(k&gt;=n)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;t;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;t;i++)</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">	sort(a,a+t);</span><br><span class="line">	<span class="keyword">int</span> l=<span class="number">0</span>,r=a[t<span class="number">-1</span>],mid=(l+r)/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">while</span>(l&lt;=r)&#123;</span><br><span class="line">		<span class="keyword">if</span>(fun(mid))&#123;</span><br><span class="line">			l=mid+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			r=mid<span class="number">-1</span>;	</span><br><span class="line">		&#125;</span><br><span class="line">		mid=(l+r)/<span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;r&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        </p>
+<p><strong>poj1505 </strong><br>Copying Books</p>
+<p>Time Limit: 3000MS         Memory Limit: 10000K<br>Total Submissions: 9632         Accepted: 3013<br>Description</p>
+<p>Before the invention of book-printing, it was very hard to make a copy of a book. All the contents had to be re-written by hand by so called scribers. The scriber had been given a book and after several months he finished its copy. One of the most famous scribers lived in the 15th century and his name was Xaverius Endricus Remius Ontius Xendrianus (Xerox). Anyway, the work was very annoying and boring. And the only way to speed it up was to hire more scribers. </p>
+<p>Once upon a time, there was a theater ensemble that wanted to play famous Antique Tragedies. The scripts of these plays were divided into many books and actors needed more copies of them, of course. So they hired many scribers to make copies of these books. Imagine you have m books (numbered 1, 2 … m) that may have different number of pages (p1, p2 … pm) and you want to make one copy of each of them. Your task is to divide these books among k scribes, k &lt;= m. Each book can be assigned to a single scriber only, and every scriber must get a continuous sequence of books. That means, there exists an increasing succession of numbers 0 = b0 &lt; b1 &lt; b2, … &lt; bk-1 &lt;= bk = m such that i-th scriber gets a sequence of books with numbers between bi-1+1 and bi. The time needed to make a copy of all the books is determined by the scriber who was assigned the most work. Therefore, our goal is to minimize the maximum number of pages assigned to a single scriber. Your task is to find the optimal assignment. </p>
+<p>Input</p>
+<p>The input consists of N cases. The first line of the input contains only positive integer N. Then follow the cases. Each case consists of exactly two lines. At the first line, there are two integers m and k, 1 &lt;= k &lt;= m &lt;= 500. At the second line, there are integers p1, p2, … pm separated by spaces. All these values are positive and less than 10000000.</p>
+<p>Output</p>
+<p>For each case, print exactly one line. The line must contain the input succession p1, p2, … pm divided into exactly k parts such that the maximum sum of a single part should be as small as possible. Use the slash character (‘/‘) to separate the parts. There must be exactly one space character between any two successive numbers and between the number and the slash. </p>
+<p>If there is more than one solution, print the one that minimizes the work assigned to the first scriber, then to the second scriber etc. But each scriber must be assigned at least one book.</p>
+<p>Sample Input</p>
+<p>2<br>9 3<br>100 200 300 400 500 600 700 800 900<br>5 4<br>100 100 100 100 100<br>Sample Output</p>
+<p>100 200 300 400 500 / 600 700 / 800 900<br>100 / 100 / 100 / 100 100</p>
+<p>题意：按顺序给你N个数，将这N个数分成连续的M段，使得这M段每段的和中的最大值最小，输出最小值（1&lt;=N&lt;=100000,1&lt;=M&lt;=N,每个数在1到10000之间），如果有多种可能的话，尽量在前面进行划分。（其实第一次读题还不知道是什么意思，仔细琢磨才明白是这样的一个问题）</p>
+<p>首先以正常的思路去考虑优化这个最大值的最小化问题，好像会陷入到循环之中找不到解决的思路，但是我们如果采用猜测－判断－重来的方法不断的去尝试二分查找最大值的最小值，然后去判断这个值是否合法，进一步优化这个值，就可以解决。</p>
+<p>ac代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">501</span>];</span><br><span class="line"><span class="keyword">int</span> t,m,n;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">yes_no</span><span class="params">(<span class="keyword">int</span> dis,<span class="keyword">int</span> flag)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> last=<span class="number">0</span>,next=<span class="number">0</span>,tsum=a[last],cnt=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(next&lt;m)&#123;</span><br><span class="line">		<span class="keyword">if</span>(tsum&lt;=dis)&#123;</span><br><span class="line">			next++;</span><br><span class="line">			tsum=tsum+a[next];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(tsum&gt;dis)&#123;</span><br><span class="line">			cnt++;</span><br><span class="line">			last=next;</span><br><span class="line">			tsum=a[last];</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//	cout&lt;&lt;cnt&lt;&lt;endl;</span></span><br><span class="line">	<span class="keyword">if</span>(cnt&gt;flag)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(cnt==flag)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;t;</span><br><span class="line">	<span class="keyword">while</span>(t--)&#123;</span><br><span class="line">		<span class="keyword">int</span> sum=<span class="number">0</span>,ans;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;m&gt;&gt;n;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)&#123;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">			sum+=a[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//cout&lt;&lt;sum&lt;&lt;endl;</span></span><br><span class="line">		<span class="keyword">int</span> l=<span class="number">0</span>,r=sum,mid;</span><br><span class="line">		<span class="comment">//cout&lt;&lt;mid&lt;&lt;endl;	</span></span><br><span class="line">		<span class="keyword">while</span>(l&lt;=r)&#123;</span><br><span class="line">			mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(yes_no(mid,n)==<span class="number">2</span>)&#123;</span><br><span class="line">				l=mid+<span class="number">1</span>;</span><br><span class="line">				<span class="comment">//cout&lt;&lt;"1";</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(yes_no(mid,n)==<span class="number">1</span>)&#123;</span><br><span class="line">				ans=mid;</span><br><span class="line">				r=mid<span class="number">-1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				r=mid<span class="number">-1</span>;</span><br><span class="line">			<span class="comment">//	cout&lt;&lt;"2";</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//cout&lt;&lt;ans&lt;&lt;endl;</span></span><br><span class="line">		<span class="keyword">int</span> tsum=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> tn=n<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)&#123;</span><br><span class="line">			tsum+=a[i];</span><br><span class="line">			<span class="keyword">if</span>(tsum&gt;=ans&amp;&amp;tn)&#123;</span><br><span class="line">				tn--;</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="string">" /"</span>;</span><br><span class="line">				tsum=a[i];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(i==<span class="number">0</span>)&#123;</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;a[i];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="string">" "</span>&lt;&lt;a[i];				</span><br><span class="line">		&#125;	<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上就是这两题，是基本的贪心+二分的求法。 </p>
+<p><strong>注意：二分是在排序好的基础上进行的查找，所以，看清题目，尽量先排好序。。。</strong></p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-05-09T06:13:30.323Z" itemprop="dateUpdated">2020-05-09 14:13:30</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2018/08/07/算法/贪心-二分/" target="_blank" rel="external">http://www.sjsmile.cn/2018/08/07/算法/贪心-二分/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sjsmile.cn">
+            <img src="/img/avatar.jpg" alt="Smile">
+            Smile
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/贪心-二分/">贪心+二分</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2018/08/07/算法/贪心-二分/&title=《贪心+二分》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2018/08/07/算法/贪心-二分/&title=《贪心+二分》 — MY STUDY BLOG&source=在刷题时，总会遇到求最大值最小，最小值最大问题，也许它会暗喻是这样的一个问题。对于这样的一个问题，你会发现用dp和枚举都会超时超内存，或者说很麻烦，所以这..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2018/08/09/算法/分治与归并/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">分治与归并</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2018/08/06/算法/dfs与bfs/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">dfs&amp;dfs</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2018/08/07/算法/贪心-二分/&title=《贪心+二分》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2018/08/07/算法/贪心-二分/&title=《贪心+二分》 — MY STUDY BLOG&source=在刷题时，总会遇到求最大值最小，最小值最大问题，也许它会暗喻是这样的一个问题。对于这样的一个问题，你会发现用dp和枚举都会超时超内存，或者说很麻烦，所以这..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3aQW7EIAwF0N7/0um2Uif025BKgceqmmEoLwsHbH99xeO6GT+/TWb+npN8vmxgYGC8lnENR765u5V7DyLfGwYGxjmMZBN385NNjNdPVvvjtxgYGBjD8DoOoNUHhIGBgbEq4FYPeflGMTAwMGYusXfz82zYeIX88oyBgXEao7eJ//n7kfoGBgbGqxhXceRFzWq4vCYGBgbG3ow8wFWLjqtWy1fAwMDYm/HEhbaX4q82kDUPixgYGK9i9MJoflzrpdLKZVEMDIwDGEno7LV5JWs2D38YGBjHMHqJs1WfJKG2+fbAwMDYiJFMSloc8kBcPQ6WQy0GBsamjKklFjWN5Y/mw0PHwMA4gFFta8ivu6s61x7pGcHAwHgJI0mZ5Ye/vGBZCKbFQyoGBsaujGoZoFrmzBspqiUHDAyMExh511h+KZ0PteVHjIGBsTXjiSaJajtF+f1QXQ4DA+PljGqbVzUgjo+A89QPWUMMDIztGHnJMG8Xm/92zItKAhgYGNsx8vLkDLUQNHvpOQwMjCMZCbJ6BOwF36jNAgMD4wBG75/NBNNV7WIYGBh7M3oNrNUSYx7Em2UJDAyMrRnV0DbfEvFcsQEDA2NvRhJk81bU3qW3GnAxMDDOZOSBr5cgK6fPgtCPgYGBUU2c5XOSYmfz9IqBgYFRLHzm7RfVa+3i9wYGBsZLGDONFL3f9nKBGBgYZzJ6Ia83p/pQFrdoYGBgvI/xDYcfapglgYFGAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

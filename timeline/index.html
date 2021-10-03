@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('d79727595944c0b09592b8abab755aadf75182afc41a8c8e694c8494d2af3904') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == 'd79727595944c0b09592b8abab755aadf75182afc41a8c8e694c8494d2af3904') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        我是时间轴 |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class=" active">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>我是时间轴</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header page-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">我是时间轴</h1>
+        <h5 class="subtitle">
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap ">
+    <article class="page-article fade" itemprop="blogPage">
+        <div class="post-content page-content" id="page-content" itemprop="pageContent">
+            
+            <div class="timeline">
+<h5 id="2021"><a href="#2021" class="headerlink" title="2021"></a>2021</h5><div class="item">
+<h6 id="8月1日"><a href="#8月1日" class="headerlink" title="8月1日"></a>8月1日</h6><p>入职报道，有点曲折啊</p>
+</div>
+<div class="item">
+<h6 id="7月25日"><a href="#7月25日" class="headerlink" title="7月25日"></a>7月25日</h6><p>开启新生活，希望一切都好</p>
+</div>
+<div class="item">
+<h6 id="7月22日"><a href="#7月22日" class="headerlink" title="7月22日"></a>7月22日</h6><p>再见，陕科大，再见，sust</p>
+</div>
+<div class="item">
+<h6 id="7月20日"><a href="#7月20日" class="headerlink" title="7月20日"></a>7月20日</h6><p>毕业典礼，隆重，回忆，伤感</p>
+</div>
+<div class="item">
+<h6 id="7月3日"><a href="#7月3日" class="headerlink" title="7月3日"></a>7月3日</h6><p>开始毕设答辩，有点发挥不是那么好呢</p>
+</div>
+<div class="item">
+<h6 id="5月25日"><a href="#5月25日" class="headerlink" title="5月25日"></a>5月25日</h6><p>疫情减轻，再次回到了母校，见到了各位舍友，和lover</p>
+</div>
+<div class="item">
+<h6 id="2月20日"><a href="#2月20日" class="headerlink" title="2月20日"></a>2月20日</h6><p>在家线上学习</p>
+</div>
+<div class="item">
+<h6 id="1月20日"><a href="#1月20日" class="headerlink" title="1月20日"></a>1月20日</h6><p>过年了，但是爆发了疫情，希望能早日度过难关</p>
+</div>
+<div class="item">
+<h6 id="1月8日"><a href="#1月8日" class="headerlink" title="1月8日"></a>1月8日</h6><p>Go Home！！！</p>
+</div>
+<div class="item">
+<h6 id="1月2日到7日"><a href="#1月2日到7日" class="headerlink" title="1月2日到7日"></a>1月2日到7日</h6><p>周游云南</p>
+</div>
+<h5 id="2020"><a href="#2020" class="headerlink" title="2020"></a>2020</h5><div class="item">
+<h6 id="11月"><a href="#11月" class="headerlink" title="11月"></a>11月</h6><p>开始认认真真过好大四</p>
+</div>
+<div class="item">
+<h6 id="10月"><a href="#10月" class="headerlink" title="10月"></a>10月</h6><p>与她一起携手西安，拿到农行西研的offer</p>
+</div>
+<div class="item">
+<h6 id="9月"><a href="#9月" class="headerlink" title="9月"></a>9月</h6><p>开始跑招聘会</p>
+</div>
+<div class="item">
+<h6 id="8月"><a href="#8月" class="headerlink" title="8月"></a>8月</h6><p>继续开始我的海投模式，大量笔试面试挑战</p>
+</div>
+<div class="item">
+<h6 id="7月"><a href="#7月" class="headerlink" title="7月"></a>7月</h6><p>准备暑假在宿舍，突击，准备秋招</p>
+</div>
+<div class="item">
+<h6 id="6月10日"><a href="#6月10日" class="headerlink" title="6月10日"></a>6月10日</h6><p>meet my lover…</p>
+</div>
+<div class="item">
+<h6 id="5月"><a href="#5月" class="headerlink" title="5月"></a>5月</h6><p>陆陆续续参加笔试，面试，发现自己还有很多漏洞，还需要大范围的查漏补缺</p>
+</div>
+<div class="item">
+<h6 id="4月"><a href="#4月" class="headerlink" title="4月"></a>4月</h6><p>开始进入春招的行列，想找找实习</p>
+</div>
+<div class="item">
+<h6 id="3月"><a href="#3月" class="headerlink" title="3月"></a>3月</h6><p>开学了，学习该学习的，继续加油吧</p>
+</div>
+<div class="item">
+<h6 id="2月"><a href="#2月" class="headerlink" title="2月"></a>2月</h6><p>在学校突击java知识，并参加互联网+</p>
+</div>
+<h5 id="2019"><a href="#2019" class="headerlink" title="2019"></a>2019</h5><div class="item">
+<h6 id="12月"><a href="#12月" class="headerlink" title="12月"></a>12月</h6><p>觉得还是得学习什么，开始向Java web方向的出击</p>
+</div>
+<div class="item">
+<h6 id="9月-1"><a href="#9月-1" class="headerlink" title="9月"></a>9月</h6><p>大三了，有点迷茫，不知道干什么了，玩游戏吧</p>
+</div>
+<div class="item">
+<h6 id="8月-1"><a href="#8月-1" class="headerlink" title="8月"></a>8月</h6><p>大二即将结束，呆在学校参加acm培训，有点意思哦！</p>
+</div>
+<div class="item">
+<h6 id="5月-1"><a href="#5月-1" class="headerlink" title="5月"></a>5月</h6><p>参加了校内acm比赛，参加了蓝桥杯，参加了cccc，参加了红帽挑战赛。</p>
+</div>
+<div class="item">
+<h6 id="3月-1"><a href="#3月-1" class="headerlink" title="3月"></a>3月</h6><p>大二下学期开始了</p>
+</div>
+<div class="item">
+<h6 id="1月"><a href="#1月" class="headerlink" title="1月"></a>1月</h6><p>快放假了，我去找个兼职做做，最后找到了家政公司（力德家政），然后买一台新手机</p>
+</div>
+<h5 id="2018"><a href="#2018" class="headerlink" title="2018"></a>2018</h5><div class="item">
+<h6 id="10月-1"><a href="#10月-1" class="headerlink" title="10月"></a>10月</h6><p>参加了acm社团，可能会挺有意思</p>
+</div>
+<div class="item">
+<h6 id="9月1日"><a href="#9月1日" class="headerlink" title="9月1日"></a>9月1日</h6><p>大二开始，我们开始接触专业课了</p>
+</div>
+<div class="item">
+<h6 id="6月"><a href="#6月" class="headerlink" title="6月"></a>6月</h6><p>半个学期就这么快过去了，顺利从学生会毕业，得到了优秀学生会委员称号</p>
+</div>
+<div class="item">
+<h6 id="3月-2"><a href="#3月-2" class="headerlink" title="3月"></a>3月</h6><p>新学期新气象！可是，我买了电脑，可以和舍友在宿舍畅玩英雄联盟了。</p>
+</div>
+<h5 id="2017"><a href="#2017" class="headerlink" title="2017"></a>2017</h5><div class="item">
+<h6 id="11月22日"><a href="#11月22日" class="headerlink" title="11月22日"></a>11月22日</h6><p>第一次见到雪，有点小激动</p>
+</div>
+<div class="item">
+<h6 id="11月-1"><a href="#11月-1" class="headerlink" title="11月"></a>11月</h6><p>期中考高数，哟，第一名</p>
+</div>
+<div class="item">
+<h6 id="10月中旬"><a href="#10月中旬" class="headerlink" title="10月中旬"></a>10月中旬</h6><p>作为组长，第一次采访互联网+拿奖的学长学姐，好厉害啊</p>
+<p>社团组织寻宝活动，我什么也没找到</p>
+</div>
+<div class="item">
+<h6 id="9月中下旬"><a href="#9月中下旬" class="headerlink" title="9月中下旬"></a>9月中下旬</h6><p>参加了学生会创新创业部的面试，成为了学生会的一员<br>参加了悬疑社团。但是，这社团有什么好玩的呢？</p>
+</div>
+<div class="item">
+<h6 id="9月12日"><a href="#9月12日" class="headerlink" title="9月12日"></a>9月12日</h6><p>星期一，第一堂课起的很早，是工程制图课。早自习看了会英语</p>
+</div>
+<div class="item">
+<h6 id="9月10日"><a href="#9月10日" class="headerlink" title="9月10日"></a>9月10日</h6><p>军训结束了，烈烈夏日，两个星期，还好有帽子。我们团参加了军体拳比赛，但是好像没得奖呢，遗憾</p>
+</div>
+<div class="item">
+<h6 id="8月24日"><a href="#8月24日" class="headerlink" title="8月24日"></a>8月24日</h6><p>初中军训，高中军训，现在是大学军训</p>
+</div>
+<div class="item">
+<h6 id="8月-2"><a href="#8月-2" class="headerlink" title="8月"></a>8月</h6><p>决定了，就陕西科技大学吧，小211</p>
+</div>
+<div class="item">
+<h6 id="7月8日"><a href="#7月8日" class="headerlink" title="7月8日"></a>7月8日</h6><p>成绩出来了，一本线没过多少，唉～选什么学校呢？</p>
+</div>
+<div class="item">
+<h6 id="6月9日"><a href="#6月9日" class="headerlink" title="6月9日"></a>6月9日</h6><p>高考完了，我想去武汉大学，可是，感觉，又考差了</p>
+</div>
+<h5 id="2016"><a href="#2016" class="headerlink" title="2016"></a>2016</h5><div class="item">
+<h6 id="7月-1"><a href="#7月-1" class="headerlink" title="7月"></a>7月</h6><p>高二过去了，备战高三</p>
+</div>
+<div class="item">
+<h6 id="某月"><a href="#某月" class="headerlink" title="某月"></a>某月</h6><p>我和阿良一起，“召集”全班的人，开始了CS之旅</p>
+</div>
+<h5 id="2015"><a href="#2015" class="headerlink" title="2015"></a>2015</h5><div class="item">
+<h6 id="2月-1"><a href="#2月-1" class="headerlink" title="2月"></a>2月</h6><p>开学了，新游戏，象棋，三国杀</p>
+</div>
+<div class="item">
+<h6 id="9月-2"><a href="#9月-2" class="headerlink" title="9月"></a>9月</h6><p>经历一年，成功来到了实验班。一个同学，以前玩的好的，现在，感觉……希望能在高中好好学习，考上理想的大学吧</p>
+</div>
+<h5 id="2014"><a href="#2014" class="headerlink" title="2014"></a>2014</h5><div class="item">
+<h6 id="8月-3"><a href="#8月-3" class="headerlink" title="8月"></a>8月</h6><p>今天是高中报名，看了名单，果然在普通班。</p>
+</div>
+<div class="item">
+<h6 id="7月10日"><a href="#7月10日" class="headerlink" title="7月10日"></a>7月10日</h6><p>出成绩，果然，全是B，七个科目，全是B，唉，只能去平中了。不知道，能不能上实验班，应该不能吧，不能一定要奋起</p>
+</div>
+<div class="item">
+<h6 id="6月26日"><a href="#6月26日" class="headerlink" title="6月26日"></a>6月26日</h6><p>考完了中考，感觉，怎么越发糟糕，我的市高中泡汤了</p>
+</div>
+<h5 id="2013"><a href="#2013" class="headerlink" title="2013"></a>2013</h5><div class="item">
+<h6 id="9月1日-1"><a href="#9月1日-1" class="headerlink" title="9月1日"></a>9月1日</h6><p>初三了，不能再浪了，要好好学习了，家里人又把网给断了，让我专心学习。没有再去网吧，有个目标，桂林市的中学</p>
+</div>
+<div class="item">
+<h6 id="4月-1"><a href="#4月-1" class="headerlink" title="4月"></a>4月</h6><p>成绩有点下滑，难道是青春期到了？</p>
+</div>
+<div class="item">
+<h6 id="3月-3"><a href="#3月-3" class="headerlink" title="3月"></a>3月</h6><p>我和同学接触了英雄联盟，一发不可收拾呀</p>
+</div>
+<h5 id="2011"><a href="#2011" class="headerlink" title="2011"></a>2011</h5><div class="item">
+<h6 id="10月10日"><a href="#10月10日" class="headerlink" title="10月10日"></a>10月10日</h6><p>第一次月考开始了，我考了全年级前五十，有点小开心</p>
+</div>
+<div class="item">
+<h6 id="9月1日-2"><a href="#9月1日-2" class="headerlink" title="9月1日"></a>9月1日</h6><p>我被认命了历史课代表，这是什么，我不想当这个课代表呀🥺</p>
+</div>
+<div class="item">
+<h6 id="8月25日"><a href="#8月25日" class="headerlink" title="8月25日"></a>8月25日</h6><p>开学了，我们先要进行军训，呀，不熟悉的环境，不熟悉的作息，有点想回家玩我的电脑</p>
+</div>
+<div class="item">
+<h6 id="7月-2"><a href="#7月-2" class="headerlink" title="7月"></a>7月</h6><p>我家电脑的网回复了，可以尽情玩游戏了，耶</p>
+</div>
+<div class="item">
+<h6 id="7月-3"><a href="#7月-3" class="headerlink" title="7月"></a>7月</h6><p>成绩出来了，AAB，上了县里面最好的中学，但是，感觉还是考的不是很好，回到家，家里人也没有说我</p>
+</div>
+<div class="item">
+<h6 id="6月-1"><a href="#6月-1" class="headerlink" title="6月"></a>6月</h6><p>参加小考，有点小紧张哝。考后还和同学对答案，对的呀，头皮发麻(๑˃̥̩̥̥̥̥̆ಐ˂̩̩̥̥̩̥̆৭)</p>
+</div>
+<h5 id="2010"><a href="#2010" class="headerlink" title="2010"></a>2010</h5><div class="item">
+<h6 id="9月1日-3"><a href="#9月1日-3" class="headerlink" title="9月1日"></a>9月1日</h6><p>今年要努力学习了，不然考不上高中了怎么办，家里人还把网给停了</p>
+</div>
+<div class="item">
+<h6 id="某月-1"><a href="#某月-1" class="headerlink" title="某月"></a>某月</h6><p>我的成绩下滑了，我妈为了限制我玩电脑，在房门上了锁</p>
+</div>
+<div class="item">
+<h6 id="某月-2"><a href="#某月-2" class="headerlink" title="某月"></a>某月</h6><p>成绩继续下滑，是我攒着妈妈给我的零花钱去网吧玩的缘故？</p>
+</div>
+<h5 id="2009"><a href="#2009" class="headerlink" title="2009"></a>2009</h5><div class="item">
+<h6 id="某月-3"><a href="#某月-3" class="headerlink" title="某月"></a>某月</h6><p>发大水了，天哪，真壮观，还好我家地势高</p>
+</div>
+<div class="item">
+<h6 id="9月-3"><a href="#9月-3" class="headerlink" title="9月"></a>9月</h6><p>四年级了，班主任换了一个，特别好的，班主任。以前我语文一直不行，现在可以一看了。也换了数学老师，英语老师，她们都是骨灰级的。目的为了小考吧。</p>
+</div>
+<div class="item">
+<h6 id="某月-4"><a href="#某月-4" class="headerlink" title="某月"></a>某月</h6><p>我家有了电脑，可以尽情玩耍了，耶</p>
+</div>
+<div class="item">
+<h6 id="某月-5"><a href="#某月-5" class="headerlink" title="某月"></a>某月</h6><p>三年级，英语考试，得了全校唯一的一个一百分</p>
+</div>
+<h5 id="2007"><a href="#2007" class="headerlink" title="2007"></a>2007</h5><div class="item">
+<h6 id="8月1日-1"><a href="#8月1日-1" class="headerlink" title="8月1日"></a>8月1日</h6><p>三年级了，由于来我们学校人数急增，两个班的变成了三个班，我和我的老表在同一个班，90（2），新的老师，新的同学，新的教室，班主任竟然是电脑老师</p>
+</div>
+<div class="item">
+<h6 id="3月-4"><a href="#3月-4" class="headerlink" title="3月"></a>3月</h6><p>一年级到二年级，我们学校有了电脑课，每次都上这课特别兴奋，不知道是对游戏的兴奋，还是对电脑（新事物）的兴奋</p>
+</div>
+<div class="item">
+<h6 id="2月-2"><a href="#2月-2" class="headerlink" title="2月"></a>2月</h6><p>​    又开学了。。。</p>
+</div>
+<h5 id="2006"><a href="#2006" class="headerlink" title="2006"></a>2006</h5><div class="item">
+<h6 id="1月-1"><a href="#1月-1" class="headerlink" title="1月"></a>1月</h6><p>小学一年级第一学期，语文数学双百分，拿到了金牌（一种象征性的奖励），虽然考试的时候老师提醒了一下我</p>
+</div>
+<h5 id="2005"><a href="#2005" class="headerlink" title="2005"></a>2005</h5><div class="item">
+<h6 id="8月1日-2"><a href="#8月1日-2" class="headerlink" title="8月1日"></a>8月1日</h6><p>参加小学暑期班，成绩理想，但是被小学唯有的两个班“抛弃”，然后他们发现我是那么的“优秀”，于是两个班的班主任争相强我，最终，我来到了89班，开始小学生涯</p>
+</div>
+<h5 id="2003"><a href="#2003" class="headerlink" title="2003"></a>2003</h5><div class="item">
+<h6 id="某月-某月"><a href="#某月-某月" class="headerlink" title="某月~某月"></a>某月~某月</h6><p>发生非典，当时还小，感觉不到什么大动静</p>
+</div>
+<h5 id="2002"><a href="#2002" class="headerlink" title="2002"></a>2002</h5><div class="item">
+<h6 id="某月-6"><a href="#某月-6" class="headerlink" title="某月"></a>某月</h6><p>小学搬迁，原本在高中的幼儿园来到了小学这边</p>
+</div>
+<h5 id="2001"><a href="#2001" class="headerlink" title="2001"></a>2001</h5><div class="item">
+<h6 id="8月1日-3"><a href="#8月1日-3" class="headerlink" title="8月1日"></a>8月1日</h6><p>有点记事了，开始读幼儿园，持续了特别久的哭闹，养成期待放假的“好习惯”</p>
+</div>
+<h5 id="1998"><a href="#1998" class="headerlink" title="1998"></a>1998</h5><div class="item">
+<h6 id="6月26日-1"><a href="#6月26日-1" class="headerlink" title="6月26日"></a>6月26日</h6><p>农历5月22，我呱呱坠地</p>
+</div>
+<h5 id="1997"><a href="#1997" class="headerlink" title="1997"></a>1997</h5></div>
+
+        </div>
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+        
+        
+        <div class="card page-about-me flex-row">
+            <a href="/" class="avatar waves-effect waves-circle waves-light"><img src="/img/avatar.jpg"></a>
+            <div class="content flex-col">
+                <p><strong>Smile</strong></p>
+                <p><em>喜欢争取，得到珍惜</em></p>
+                <p></p>
+            </div>
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/timeline/&title=《我是时间轴》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/timeline/&title=《我是时间轴》 — MY STUDY BLOG&source=喜欢争取，得到珍惜" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+        
+        <div class="card">
+           
+    <div id="comment"></div>
+
+
+
+
+        </div>
+        
+    </article>
+    
+        <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/timeline/&title=《我是时间轴》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/timeline/&title=《我是时间轴》 — MY STUDY BLOG&source=喜欢争取，得到珍惜" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABw0lEQVR42u3aQY7DIBAEwPz/097rSiuz3WBIIhUnyyamnMNoZuD1isf1a4yf/p0zvv/aMXBxcZe513CMQeM5yTtzAy4u7nnuXcS4mzO+M/7t3BxcXNxP5o6TmCShGQc1XFzcb+cmRVFSSuHi4n4mty1U8gZHXkQ9XKvh4uIucPMu5b7rLf1dXFzcKe5VjiQFScLW5Oq4uLhHuHlAadOglZLpnw1aXFzczdy29ZkUOet5VhHCcHFxN3DzgqflzrU5lpojuLi4j3KvqdG2Ttpk6HY+Li7uEW6+XbqvCZKkXLi4uCe5ySvWU5b2cEZ9/AIXF3cbtz0mtdJsbZ/i4uKe4ebpRbtAnvTkK+Li4p7kRtEuCHlzm6x1IMPFxd3MzZds2yJPbdLcFj+4uLhHuG37sm2JthsqRcMUFxd3M3d926O9bhMpXFzcd3GfapQ8lQDV+724uLgL3Kscr3KsHNfAxcV9F7ddOCpOnjpmUYY/XFzcZ7ltqZMct2qLnOKPwMXFPcjNA81cy2MuguLi4n4LN2+atHOi0ggXF/eDuXOpz0qXAxcX9zw33whJPqP97Dx5wsXFPcNtQ8mzBy+SD8DFxT3I/QEa0in4r/udXgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

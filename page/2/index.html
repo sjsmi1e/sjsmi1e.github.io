@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    false,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>MY STUDY BLOG</span>
+            
+            <span> - </span>
+            <span class="header-description">喜欢争取，得到珍惜</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header index-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">MY STUDY BLOG</h1>
+        <h5 class="subtitle">
+            
+                喜欢争取，得到珍惜
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+    <div class="container body-wrap">
+        <ul class="post-list">
+        
+            <li class="post-list-item fade">
+                <article id="post-java/最简单的-6-种防止数据重复提交的方法！"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/08/02/java/最简单的-6-种防止数据重复提交的方法！/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/10.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/08/02/java/最简单的-6-种防止数据重复提交的方法！/">最简单的 6 种防止数据重复提交的方法！</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-08-02 14:30:10" datetime="2020-08-02T06:30:10.000Z"  itemprop="datePublished">2020-08-02</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+        
+	<span id="/2020/08/02/java/最简单的-6-种防止数据重复提交的方法！/" class="leancloud_visitors" data-flag-title="最简单的 6 种防止数据重复提交的方法！" title="最简单的 6 种防止数据重复提交的方法！">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/08/02/java/最简单的-6-种防止数据重复提交的方法！/#comment">
+            <span class="valine-comment-count" data-xid="/2020/08/02/java/最简单的-6-种防止数据重复提交的方法！/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 2,983</span>
+<span class="post-count">阅读时长 ≈ 13分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>转载:<a href="https://mp.weixin.qq.com/s/kOADZRd5hI1H-7_zuXJsAw" target="_blank" rel="noopener">点击查看原文</a></p>
+</blockquote>
+<h2 id="模拟用户场景"><a href="#模拟用户场景" class="headerlink" title="模拟用户场景"></a>模拟用户场景</h2><p>根据朋友的反馈，大致的场景是这样的，如下图所示：</p>
+<figure class="image-box">
+                <img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/微信图片_20200802143342.gif" alt="" title="" class="index-item-img">
+                <p></p>
+            </figure>
+    
+    <a href="/2020/08/02/java/最简单的-6-种防止数据重复提交的方法！/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-java/MyBatis动态SQL"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/08/02/java/MyBatis动态SQL/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/9.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/08/02/java/MyBatis动态SQL/">MyBatis动态SQL</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-08-02 14:21:53" datetime="2020-08-02T06:21:53.000Z"  itemprop="datePublished">2020-08-02</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+        
+	<span id="/2020/08/02/java/MyBatis动态SQL/" class="leancloud_visitors" data-flag-title="MyBatis动态SQL" title="MyBatis动态SQL">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/08/02/java/MyBatis动态SQL/#comment">
+            <span class="valine-comment-count" data-xid="/2020/08/02/java/MyBatis动态SQL/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 1,575</span>
+<span class="post-count">阅读时长 ≈ 8分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>转载：<strong><em>\</em><a href="http://mp.weixin.qq.com/s?__biz=MzI2OTQ4OTQ1NQ==&amp;mid=2247486978&amp;idx=3&amp;sn=f002b9b0e5e2d2b9a7d0a97da76c1dfb&amp;chksm=eadeca42dda94354026df14ce7e323e7f60b78ee973f1ef9cc7c4fcd13da03c1fbc0497130c9&amp;token=352160940&amp;lang=zh_CN&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">点击前往，查看更多</a>**</strong></p>
+</blockquote>
+<p>MyBatis 令人喜欢的一大特性就是动态 SQL。在使用 JDBC 的过程中， 根据条件进行 SQL 的拼接是很麻烦且很容易出错的。MyBatis 动态 SQL 的出现， 解决了这个麻烦。</p>
+<p>MyBatis通过 OGNL 来进行动态 SQL 的使用的。目前， 动态 SQL 支持以下几种标签：</p>
+<figure class="image-box">
+                <img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1596349406161.webp" alt="" title="" class="index-item-img">
+                <p></p>
+            </figure>
+    
+    <a href="/2020/08/02/java/MyBatis动态SQL/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/">sql</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-java/跟上-Java-8-日期和时间实用技巧"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/07/07/java/跟上-Java-8-日期和时间实用技巧/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/8.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/07/07/java/跟上-Java-8-日期和时间实用技巧/">跟上 Java 8 : 日期和时间实用技巧</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-07-07 17:08:02" datetime="2020-07-07T09:08:02.000Z"  itemprop="datePublished">2020-07-07</time>
+
+        
+
+
+        
+	<span id="/2020/07/07/java/跟上-Java-8-日期和时间实用技巧/" class="leancloud_visitors" data-flag-title="跟上 Java 8 : 日期和时间实用技巧" title="跟上 Java 8 : 日期和时间实用技巧">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/07/07/java/跟上-Java-8-日期和时间实用技巧/#comment">
+            <span class="valine-comment-count" data-xid="/2020/07/07/java/跟上-Java-8-日期和时间实用技巧/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 1,829</span>
+<span class="post-count">阅读时长 ≈ 8分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>来源：王爵nice，</p>
+<p>biezhi.me/2017/07/20/keep-up-with-java8-datetime.html</p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MjM5NzMyMjAwMA==&amp;mid=2651477193&amp;idx=3&amp;sn=db1c998f961b9d780c7d138f1dfc0ba4&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">如有好文章投稿，请点击 → 这里了解详情</a></p>
+</blockquote>
+<p>当你开始使用Java操作日期和时间的时候，会有一些棘手。你也许会通过System.currentTimeMillis() 来返回1970年1月1日到今天的毫秒数。或者使用Date类来操作日期；当遇到加减月份、天数的时候 你又需要用到Calendar类；当需要格式化日期的时候需要使用java.text.DateFormat类。 总而言之在Java中操作日期不是很方便，以至于很多开发者不得不使用第三方库，比如: joda-time。</p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1594112956906.webp" alt="java8-clock"></p  class="index-item-img">
+    
+    <a href="/2020/07/07/java/跟上-Java-8-日期和时间实用技巧/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java8/">java8</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/时间API/">时间API</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-java/API接口的安全设计"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/06/24/java/API接口的安全设计/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/7.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/06/24/java/API接口的安全设计/">API接口的安全设计</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-06-24 09:02:33" datetime="2020-06-24T01:02:33.000Z"  itemprop="datePublished">2020-06-24</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+        
+	<span id="/2020/06/24/java/API接口的安全设计/" class="leancloud_visitors" data-flag-title="API接口的安全设计" title="API接口的安全设计">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/06/24/java/API接口的安全设计/#comment">
+            <span class="valine-comment-count" data-xid="/2020/06/24/java/API接口的安全设计/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 5,583</span>
+<span class="post-count">阅读时长 ≈ 25分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>转载，<a href="https://mp.weixin.qq.com/s/G94Z3BC5pZxPdbFxEnCyrw" target="_blank" rel="noopener">原文地址</a></p>
+</blockquote>
+<p><strong>说明：在实际的业务中，难免会跟第三方系统进行数据的交互与传递，那么如何保证数据在传输过程中的安全呢（防窃取）？除了https的协议之外，能不能加上通用的一套算法以及规范来保证传输的安全性呢？</strong></p>
+<p><strong>下面我们就来讨论下常用的一些API设计的安全方法，可能不一定是最好的，有更牛逼的实现方式，但是这篇是我自己的经验分享.</strong></p>
+<h1 id="一：token-简介"><a href="#一：token-简介" class="headerlink" title="一：token 简介"></a>一：token 简介</h1><p>Token：访问令牌access token, 用于接口中, 用于标识接口调用者的身份、凭证，减少用户名和密码的传输次数。一般情况下客户端(接口调用方)需要先向服务器端申请一个接口调用的账号，服务器会给出一个appId和一个key, key用于参数签名使用，注意key保存到客户端，需要做一些安全处理，防止泄露。</p>
+<p>Token的值一般是UUID，服务端生成Token后需要将token做为key，将一些和token关联的信息作为value保存到缓存服务器中(redis)，当一个请求过来后，服务器就去缓存服务器中查询这个Token是否存在，存在则调用接口，不存在返回接口错误，一般通过拦截器或者过滤器来实现，Token分为两种：</p>
+    
+    <a href="/2020/06/24/java/API接口的安全设计/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/API/">API</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-redis/Streams：深入剖析Redis5-0全新数据结构"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/6.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/">Streams：深入剖析Redis5.0全新数据结构</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-17 12:17:11" datetime="2020-05-17T04:17:11.000Z"  itemprop="datePublished">2020-05-17</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+
+
+        
+	<span id="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/" class="leancloud_visitors" data-flag-title="Streams：深入剖析Redis5.0全新数据结构" title="Streams：深入剖析Redis5.0全新数据结构">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 4,422</span>
+<span class="post-count">阅读时长 ≈ 19分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>转载：<a href="https://mp.weixin.qq.com/s/GpG3t_O_SxLGNklVnoOiYQ" target="_blank" rel="noopener">原文地址</a></p>
+</blockquote>
+<p>Redis 5.0 全新的数据类型：streams，官方把它定义为：<strong>以更抽象的方式建模日志的数据结构</strong>。Redis的streams主要是一个append only的数据结构，至少在概念上它是一种在内存中表示的抽象数据类型，只不过它们实现了更强大的操作，以克服日志文件本身的限制。</p>
+<p>如果你了解MQ，那么可以把streams当做MQ。如果你还了解kafka，那么甚至可以把streams当做kafka。</p>
+<p>另外，这个功能有点类似于redis以前的<strong>Pub/Sub</strong>，但是也有基本的不同：</p>
+<ul>
+<li><p>streams支持多个客户端（消费者）等待数据（Linux环境开多个窗口执行XREAD即可模拟），并且每个客户端得到的是完全相同的数据。</p>
+</li>
+<li><p>Pub/Sub是发送忘记的方式，并且不存储任何数据；而streams模式下，所有消息被无限期追加在streams中，除非用于显示执行删除（XDEL）。</p>
+</li>
+<li><p>streams的Consumer Groups也是Pub/Sub无法实现的控制方式。</p>
+    
+    <a href="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis5-0/">redis5.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/streams/">streams</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-redis/Redis高级玩法：如何利用SortedSet实现多维度排序"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/5.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/">Redis高级玩法：如何利用SortedSet实现多维度排序</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-17 12:13:19" datetime="2020-05-17T04:13:19.000Z"  itemprop="datePublished">2020-05-17</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+
+
+        
+	<span id="/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/" class="leancloud_visitors" data-flag-title="Redis高级玩法：如何利用SortedSet实现多维度排序" title="Redis高级玩法：如何利用SortedSet实现多维度排序">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 1,061</span>
+<span class="post-count">阅读时长 ≈ 4分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>转载：<a href="https://mp.weixin.qq.com/s/LpHLnmtHi35SEGiArd0Mag" target="_blank" rel="noopener">原文地址</a></p>
+</blockquote>
+<h1 id="一、关于SortedSet"><a href="#一、关于SortedSet" class="headerlink" title="一、关于SortedSet"></a>一、关于SortedSet</h1><p>首先，我们都知道Redis的SortedSet是可以根据score进行排序的，以手机应用商店的热门榜单排序为例，根据下载量倒序排列，其简单用法如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; zadd TopApp 12000000 wechat</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd TopApp 8000000 taobao 10000000 alipay</span><br><span class="line">(integer) 2</span><br><span class="line">127.0.0.1:6379&gt; ZREVRANGE TopApp 0 -1</span><br><span class="line">1) "wechat"</span><br><span class="line">2) "alipay"</span><br><span class="line">3) "taobao"</span><br></pre></td></tr></table></figure>
+<p>对SortedSet做一下简单总结：</p>
+<ol>
+<li>默认升序排列，即通过命令<strong>ZRANGE</strong>实现；如果要按照降序排列，需要通过命令<strong>ZREVRANGE</strong>实现；</li>
+<li>当score即得分一样时，按照<strong>字典顺序</strong>对member进行排序，字典排序用的是二进制，它比较的是字符串的字节数组，所以实际上是比较ASCII码。</li>
+</ol>
+<p>简单用法介绍完后，接下来给出几种方案，介绍<strong>如何利用Redis实现多维度排序</strong>。同样的，还是以手机应用商店的热门榜单排序为例：首先按照APP的下载量倒序排序，如果下载量一样，则按照最后更新时间倒序排列。</p>
+    
+    <a href="/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多维排序/">多维排序</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-redis/Redis-9种数据结构以及它们的内部编码实现"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/4.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/">Redis 9种数据结构以及它们的内部编码实现</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-17 12:02:30" datetime="2020-05-17T04:02:30.000Z"  itemprop="datePublished">2020-05-17</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+
+
+        
+	<span id="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/" class="leancloud_visitors" data-flag-title="Redis 9种数据结构以及它们的内部编码实现" title="Redis 9种数据结构以及它们的内部编码实现">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 3,892</span>
+<span class="post-count">阅读时长 ≈ 16分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>转载：<a href="https://mp.weixin.qq.com/s/oPDm0Jud1AuTDjtOT7BbNw" target="_blank" rel="noopener">原文地址</a></p>
+</blockquote>
+<p>90%的人知道Redis 5种最基本的数据结构，只有不到10%的人知道8种基本数据结构（5种基本+bitmap+GeoHash+HyperLogLog），只有不到5%的人知道9种基本数据结构（5.0最新版本数据结构Streams），只有不到1%的人掌握了所有9种基本数据结构以及8种内部编码，掌握这篇文章的知识点，让你<strong>成为面试官眼中Redis方面最靓的仔</strong>！</p>
+<blockquote>
+<p>说明：本文基于<strong>Redis-3.2.11</strong>版本源码进行分析。</p>
+</blockquote>
+    
+    <a href="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-java/SpringBoot-集成邮件服务以及邮件发送的几种方式"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/17/java/SpringBoot-集成邮件服务以及邮件发送的几种方式/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/3.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/java/SpringBoot-集成邮件服务以及邮件发送的几种方式/">SpringBoot 集成邮件服务以及邮件发送的几种方式</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-17 11:53:58" datetime="2020-05-17T03:53:58.000Z"  itemprop="datePublished">2020-05-17</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+        
+	<span id="/2020/05/17/java/SpringBoot-集成邮件服务以及邮件发送的几种方式/" class="leancloud_visitors" data-flag-title="SpringBoot 集成邮件服务以及邮件发送的几种方式" title="SpringBoot 集成邮件服务以及邮件发送的几种方式">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/17/java/SpringBoot-集成邮件服务以及邮件发送的几种方式/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/17/java/SpringBoot-集成邮件服务以及邮件发送的几种方式/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 1,790</span>
+<span class="post-count">阅读时长 ≈ 7分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>转载：<a href="https://mp.weixin.qq.com/s/SxdiqaFqHyK5hNcJz1uoAQ" target="_blank" rel="noopener">原文地址</a></p>
+</blockquote>
+<h1 id="一、SMTP协议简介"><a href="#一、SMTP协议简介" class="headerlink" title="一、SMTP协议简介"></a>一、SMTP协议简介</h1><p>  SMTP是一种提供可靠且有效的<strong>电子邮件传输</strong>的协议。SMTP是建立在<strong>FTP</strong>文件传输服务上的一种邮件服务，主要用于系统之间的邮件信息传递，并提供有关来信的通知。SMTP独立于特定的传输子系统，且只需要可靠有序的数据流信道支持，SMTP的重要特性之一是其能<strong>跨越网络传输邮件</strong>，即“SMTP邮件中继”。使用SMTP，可实现相同网络处理进程之间的邮件传输，也可通过中继器或网关实现某处理进程与其他网络之间的邮件传输。</p>
+<p> 简单来说：我们使用的这些邮件发送功能，他们之间都有一个专门的电子邮件的服务器，类似于邮局，你将邮件发给邮局，邮局又会根据你的邮寄地址发送给相应的邮局，然后接收方去邮局取邮件。而邮件服务器呢，就是互联网之间的一个邮局，不同的网络之间也能实现电子邮件的发送。</p>
+<p> Spring框架在java邮件服务的基础上进行了封装，SpringBoot在Spring的基础上对邮件服务进一步的封装，让SpringBoot发送邮件更为便利，灵活。</p>
+    
+    <a href="/2020/05/17/java/SpringBoot-集成邮件服务以及邮件发送的几种方式/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/">springboot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/邮件/">邮件</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-java/30-分钟学会如何使用-Shiro"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/17/java/30-分钟学会如何使用-Shiro/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/2.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/java/30-分钟学会如何使用-Shiro/">30 分钟学会如何使用 Shiro</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-17 11:17:54" datetime="2020-05-17T03:17:54.000Z"  itemprop="datePublished">2020-05-17</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+        
+	<span id="/2020/05/17/java/30-分钟学会如何使用-Shiro/" class="leancloud_visitors" data-flag-title="30 分钟学会如何使用 Shiro" title="30 分钟学会如何使用 Shiro">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/17/java/30-分钟学会如何使用-Shiro/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/17/java/30-分钟学会如何使用-Shiro/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 4,107</span>
+<span class="post-count">阅读时长 ≈ 17分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>原文作者：冷豪；<a href="www.cnblogs.com/learnhow/p/5694876.html">原文地址</a></p>
+</blockquote>
+<h1 id="一、架构"><a href="#一、架构" class="headerlink" title="一、架构"></a><strong>一、架构</strong></h1><p>要学习如何使用Shiro必须先从它的架构谈起，作为一款安全框架Shiro的设计相当精妙。Shiro的应用不依赖任何容器，它也可以在JavaSE下使用。但是最常用的环境还是JavaEE。下面以用户登录为例：</p>
+<p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640.webp" alt="img"></p  class="index-item-img">
+    
+    <a href="/2020/05/17/java/30-分钟学会如何使用-Shiro/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shiro/">shiro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安全/">安全</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-深入浅出-Kafka-和-ZooKeeper-的分布式消息队列"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/16/深入浅出-Kafka-和-ZooKeeper-的分布式消息队列/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/1.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/16/深入浅出-Kafka-和-ZooKeeper-的分布式消息队列/">深入浅出 Kafka 和 ZooKeeper 的分布式消息队列</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-16 19:35:10" datetime="2020-05-16T11:35:10.000Z"  itemprop="datePublished">2020-05-16</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/消息队列/">消息队列</a></li></ul>
+
+
+
+        
+	<span id="/2020/05/16/深入浅出-Kafka-和-ZooKeeper-的分布式消息队列/" class="leancloud_visitors" data-flag-title="深入浅出 Kafka 和 ZooKeeper 的分布式消息队列" title="深入浅出 Kafka 和 ZooKeeper 的分布式消息队列">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/16/深入浅出-Kafka-和-ZooKeeper-的分布式消息队列/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/16/深入浅出-Kafka-和-ZooKeeper-的分布式消息队列/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 9,159</span>
+<span class="post-count">阅读时长 ≈ 35分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>原文地址：<a href="https://mp.weixin.qq.com/s?__biz=MzIyMjYyMzg3MA==&amp;mid=2247491550&amp;idx=3&amp;sn=0d6aa438a6cc4ea208c84f1f0379b3b2&amp;chksm=e82bfecfdf5c77d9620dc76961be083c59d78ed95f95161f9ccc68e60340576776fc4f1295bb&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1589620106744&amp;sharer_shareid=40612a9bc90b8d55689c1d82b8ad1cd7&amp;key=4c5479cb7e07b2ac11eb878bf4bbe77475b5ddbee6605609ce3b505a9e2e871c999eebda374f3a655a6b5e103c88704ae7d5cc939580c8cad9181cbbbd53b95978296a1f1b100deda5c4487082d627b8&amp;ascene=1&amp;uin=MTc0MjQ2ODA2OQ%3D%3D&amp;devicetype=Windows+10+x64&amp;version=6209007b&amp;lang=zh_CN&amp;exportkey=ATBs42KokFLoegR4uWL%2BLkk%3D&amp;pass_ticket=2jrmEmmI%2FRKlJnUXJvlSHbMpD7YmNlp77%2FbnqdknS92wQ%2FpqE2jV1X8ub0m%2Bygwf" target="_blank" rel="noopener">原文地址</a></p>
+</blockquote>
+<h3 id="1-Kafka-总体架构"><a href="#1-Kafka-总体架构" class="headerlink" title="1. Kafka 总体架构"></a>1. Kafka 总体架构</h3><p>基于 Kafka-ZooKeeper 的分布式消息队列系统总体架构如下：</p>
+<figure class="image-box">
+                <img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589628937051.png" alt="img" title="" class="index-item-img">
+                <p>img</p>
+            </figure>
+    
+    <a href="/2020/05/16/深入浅出-Kafka-和-ZooKeeper-的分布式消息队列/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/">Kafka</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ZooKeeper/">ZooKeeper</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分布式消息队列/">分布式消息队列</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+        </ul>
+        
+<nav id="page-nav">
+    <div class="inner">
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+    </div>
+</nav>
+
+    </div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/page/2/&title=MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/page/2/&title=MY STUDY BLOG&source=喜欢争取，得到珍惜" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABz0lEQVR42u3aQW7DMAwEwPz/0+61QBJ3SUpKCoxOQeHKIx8Ie8nHI17Xr3V/zfP1z/+b7DZauLi4Y+51u+4pCfT5mvx4L46Ei4t7kLuqMCUFKznM27/j4uJ+PTch9socLi7uf+Emny49Ci4u7ndye0HGHx8qQVnc+K2Gi4s74OYp5b7fW/JdXFzcFvdqrbzdMglJX9wXFxf3CLdadPKw4x5ajVlxcXE/xc2LV16q8gGOwogGLi7uZu6kHRKFm4vCF1xc3JPc3vBljuuVs3KAgouLu4Gbl5j8MNXWbOGJ4uLibuZWw4vqDXrBylsPLi7ucW5y4/zVp1ccozkRXFzczdxJk6P3gVR9QIXqi4uLu5Sbb1eNROczV6N5MVxc3Ba3Gmfkrz69J1cYvMDFxd3G7fVbev2ZXhT7mN8eFxe3uFsvBp00WfMC9+I3Li7uEe4EV26ELDoGLi7ubu5VXL1ZiMlLT2FOBBcXdxF3EmhW2zCT0Q1cXNzz3HxUIolN82ZMdYADFxf3PHdeaPJmSV46o2kRXFzcj3LnTdY8Kl1QyHBxcY9we9dURzruHxAuLu5Jbl5c8s+hauwSFUdcXNwj3Op21U17Se2CfBcXF7dzxx8R/r5VU6GmdwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        Guava - 拯救垃圾代码，写出优雅高效，效率提升N倍 |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="java">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>Guava - 拯救垃圾代码，写出优雅高效，效率提升N倍</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">Guava - 拯救垃圾代码，写出优雅高效，效率提升N倍</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-01-24T07:22:01.000Z" itemprop="datePublished" class="page-time">
+  2021-01-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-java/Guava-拯救垃圾代码，写出优雅高效，效率提升N倍"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">Guava - 拯救垃圾代码，写出优雅高效，效率提升N倍</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-01-24 15:22:01" datetime="2021-01-24T07:22:01.000Z"  itemprop="datePublished">2021-01-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+            
+	<span id="/2021/01/24/java/Guava-拯救垃圾代码，写出优雅高效，效率提升N倍/" class="leancloud_visitors" data-flag-title="Guava - 拯救垃圾代码，写出优雅高效，效率提升N倍" title="Guava - 拯救垃圾代码，写出优雅高效，效率提升N倍">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2021/01/24/java/Guava-拯救垃圾代码，写出优雅高效，效率提升N倍/#comment">
+            <span class="valine-comment-count" data-xid="/2021/01/24/java/Guava-拯救垃圾代码，写出优雅高效，效率提升N倍/"></span>
+        </a>
+    </span>
+
+
+
+            
+            <span class="post-count">文章字数: 3,580</span>
+<span class="post-count">阅读时长 ≈ 15分钟</span>
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <p><strong>Guava</strong> 项目是 Google 公司开源的 Java 核心库，它主要是包含一些在 Java 开发中经常使用到的功能，如<strong>数据校验</strong>、<strong>不可变集合</strong>、计数集合，集合增强操作、I/O、缓存、字符串操作等。并且 <strong>Guava</strong> 广泛用于 Google 内部的 Java 项目中，也被其他公司广泛使用，甚至在新版 JDK 中直接引入了 <strong>Guava</strong> 中的优秀类库，所以质量毋庸置疑。</p>
+<p>使用方式直接 mavan 依赖引入。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/com.google.guava/guava --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.guava<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>guava<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>30.0-jre<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="数据校验"><a href="#数据校验" class="headerlink" title="数据校验"></a>数据校验</h2><p>数据校验说来十分简单，一是<strong>非空判断</strong>，二是<strong>预期值判断</strong>。非空判断我想每一个 Java 开发者都很熟悉，一开始都经常和 <code>NullPointException</code> 打交道。处理的方式我们自然是一个 <code>if( xx == null)</code> 就能轻松解决。预期值判断也是类似，检查数据值是不是自己想要的结果即可。</p>
+<p>即使这么简单的操作，我们是不是还经常出错呢？而且写起来的代码总是一行判断一行异常抛出，怎么看都觉得那么优雅。还好，现在就来尝试第一次使用 Guava 吧。</p>
+<a id="more"></a>
+<h3 id="非空判断"><a href="#非空判断" class="headerlink" title="非空判断"></a>非空判断</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String param = <span class="string">"未读代码"</span>;</span><br><span class="line">String name = Preconditions.checkNotNull(param);</span><br><span class="line">System.out.println(name); <span class="comment">// 未读代码</span></span><br><span class="line">String param2 = <span class="keyword">null</span>;</span><br><span class="line">String name2 = Preconditions.checkNotNull(param2); <span class="comment">// NullPointerException</span></span><br><span class="line">System.out.println(name2);</span><br></pre></td></tr></table></figure>
+<p>引入了 Guava 后可以直接使用 <code>Preconditions.checkNotNull</code> 进行非空判断，好处为觉得有两个，一是语义清晰代码优雅；二是你也可以自定义报错信息，这样如果参数为空，报错的信息清晰，可以直接定位到具体参数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String param2 = <span class="keyword">null</span>;</span><br><span class="line">String name2 = Preconditions.checkNotNull(param2,<span class="string">"param2 is null"</span>);</span><br><span class="line"><span class="comment">// java.lang.NullPointerException: param2 is null</span></span><br></pre></td></tr></table></figure>
+<h3 id="预期值判断"><a href="#预期值判断" class="headerlink" title="预期值判断"></a>预期值判断</h3><p>和非空判断类似，可以比较当前值和预期值，如果不相等可以自定义报错信息抛出。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String param = <span class="string">"www.wdbyte.com2"</span>;</span><br><span class="line">String wdbyte = <span class="string">"www.wdbyte.com"</span>;</span><br><span class="line">Preconditions.checkArgument(wdbyte.equals(param), <span class="string">"[%s] 404 NOT FOUND"</span>, param);</span><br><span class="line"><span class="comment">// java.lang.IllegalArgumentException: [www.wdbyte.com2] 404 NOT FOUND</span></span><br></pre></td></tr></table></figure>
+<h3 id="是否越界"><a href="#是否越界" class="headerlink" title="是否越界"></a>是否越界</h3><p><code>Preconditions</code> 类还可以用来检查数组和集合的元素获取是否越界。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Guava 中快速创建ArrayList</span></span><br><span class="line">List&lt;String&gt; list = Lists.newArrayList(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>);</span><br><span class="line"><span class="comment">// 开始校验</span></span><br><span class="line"><span class="keyword">int</span> index = Preconditions.checkElementIndex(<span class="number">5</span>, list.size());</span><br><span class="line"><span class="comment">// java.lang.IndexOutOfBoundsException: index (5) must be less than size (4)</span></span><br></pre></td></tr></table></figure>
+<p>代码中快速创建 List 的方式也是 Guava 提供的，后面会详细介绍 Guava 中集合创建的超多姿势。</p>
+<h2 id="不可变的集合"><a href="#不可变的集合" class="headerlink" title="不可变的集合"></a>不可变的集合</h2><p>创建不可变集合是我个人最喜欢 Guava 的一个原因，因为创建一个<strong>不能删除、不能修改、不能增加元素</strong>的集合实在是太实用了。这样的集合你完全不用担心发生什么问题，总的来说有下面几个优点：</p>
+<ol>
+<li>线程安全，因为不能修改任何元素，可以随意多线程使用且没有并发问题。</li>
+<li>可以无忧的提供给第三方使用，反正修改不了。</li>
+<li>减少内存占用，因为不能改变，所以内部实现可以最大程度节约内存占用。</li>
+<li>可以用作常量集合。</li>
+</ol>
+<h3 id="创建方式"><a href="#创建方式" class="headerlink" title="创建方式"></a>创建方式</h3><p>说了那么多，那么到底怎么使用呢？赶紧撸起代码来。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建方式1：of</span></span><br><span class="line">ImmutableSet&lt;String&gt; immutableSet = ImmutableSet.of(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>);</span><br><span class="line">immutableSet.forEach(System.out::println);</span><br><span class="line"><span class="comment">// a</span></span><br><span class="line"><span class="comment">// b</span></span><br><span class="line"><span class="comment">// c</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建方式2：builder</span></span><br><span class="line">ImmutableSet&lt;String&gt; immutableSet2 = ImmutableSet.&lt;String&gt;builder()</span><br><span class="line">    .add(<span class="string">"hello"</span>)</span><br><span class="line">    .add(<span class="keyword">new</span> String(<span class="string">"未读代码"</span>))</span><br><span class="line">    .build();</span><br><span class="line">immutableSet2.forEach(System.out::println);</span><br><span class="line"><span class="comment">// hello</span></span><br><span class="line"><span class="comment">// 未读代码</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建方式3：从其他集合中拷贝创建</span></span><br><span class="line">ArrayList&lt;String&gt; arrayList = <span class="keyword">new</span> ArrayList();</span><br><span class="line">arrayList.add(<span class="string">"www.wdbyte.com"</span>);</span><br><span class="line">arrayList.add(<span class="string">"https"</span>);</span><br><span class="line">ImmutableSet&lt;String&gt; immutableSet3 = ImmutableSet.copyOf(arrayList);</span><br><span class="line">immutableSet3.forEach(System.out::println);</span><br><span class="line"><span class="comment">// www.wdbyte.com</span></span><br><span class="line"><span class="comment">// https</span></span><br></pre></td></tr></table></figure>
+<p>都可以正常打印遍历结果，但是如果进行增删改，会直接报 <code>UnsupportedOperationException</code>.</p>
+<p>其实 JDK 中也提供了一个不可变集合，可以像下面这样创建。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; arrayList = <span class="keyword">new</span> ArrayList();</span><br><span class="line">arrayList.add(<span class="string">"www.wdbyte.com"</span>);</span><br><span class="line">arrayList.add(<span class="string">"https"</span>);</span><br><span class="line"><span class="comment">// JDK Collections 创建不可变 List</span></span><br><span class="line">List&lt;String&gt; list = Collections.unmodifiableList(arrayList);</span><br><span class="line">list.forEach(System.out::println);<span class="comment">// www.wdbyte.com https</span></span><br><span class="line">list.add(<span class="string">"未读代码"</span>); <span class="comment">// java.lang.UnsupportedOperationException</span></span><br></pre></td></tr></table></figure>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
+<li>使用 Guava 创建的不可变集合是拒绝 <code>null</code> 值的，因为在 Google 内部调查中，95% 的情况下都不需要放入 <code>null</code> 值。</li>
+<li>使用 JDK 提供的不可变集合创建成功后，原集合添加元素会体现在不可变集合中，而 Guava 的不可变集合不会有这个问题。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">arrayList.add(<span class="string">"a"</span>);</span><br><span class="line">arrayList.add(<span class="string">"b"</span>);</span><br><span class="line">List&lt;String&gt; jdkList = Collections.unmodifiableList(arrayList);</span><br><span class="line">ImmutableList&lt;String&gt; immutableList = ImmutableList.copyOf(arrayList);</span><br><span class="line">arrayList.add(<span class="string">"ccc"</span>);</span><br><span class="line">jdkList.forEach(System.out::println);<span class="comment">// result: a b ccc</span></span><br><span class="line">System.out.println(<span class="string">"-------"</span>);</span><br><span class="line">immutableList.forEach(System.out::println);<span class="comment">// result: a b</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>如果不可变集合的元素是引用对象，那么引用对象的属性是可以更改的。</li>
+</ol>
+<p><strong>其他不可变集合</strong></p>
+<p>不可变集合除了上面演示的 <code>set</code> 之外，还有很多不可变集合，下面是 Guava 中不可变集合和其他集合的对应关系。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>可变集合接口</strong></th>
+<th style="text-align:left">属于JDK还是Guava</th>
+<th style="text-align:left"><strong>不可变版本</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Collection</td>
+<td style="text-align:left">JDK</td>
+<td style="text-align:left"><code>ImmutableCollection</code></td>
+</tr>
+<tr>
+<td style="text-align:left">List</td>
+<td style="text-align:left">JDK</td>
+<td style="text-align:left"><code>ImmutableList</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Set</td>
+<td style="text-align:left">JDK</td>
+<td style="text-align:left"><code>ImmutableSet</code></td>
+</tr>
+<tr>
+<td style="text-align:left">SortedSet/NavigableSet</td>
+<td style="text-align:left">JDK</td>
+<td style="text-align:left"><code>ImmutableSortedSet</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Map</td>
+<td style="text-align:left">JDK</td>
+<td style="text-align:left"><code>ImmutableMap</code></td>
+</tr>
+<tr>
+<td style="text-align:left">SortedMap</td>
+<td style="text-align:left">JDK</td>
+<td style="text-align:left"><code>ImmutableSortedMap</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Multiset</td>
+<td style="text-align:left">Guava</td>
+<td style="text-align:left"><code>ImmutableMultiset</code></td>
+</tr>
+<tr>
+<td style="text-align:left">SortedMultiset</td>
+<td style="text-align:left">Guava</td>
+<td style="text-align:left"><code>ImmutableSortedMultiset</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Multimap</td>
+<td style="text-align:left">Guava</td>
+<td style="text-align:left"><code>ImmutableMultimap</code></td>
+</tr>
+<tr>
+<td style="text-align:left">ListMultimap</td>
+<td style="text-align:left">Guava</td>
+<td style="text-align:left"><code>ImmutableListMultimap</code></td>
+</tr>
+<tr>
+<td style="text-align:left">SetMultimap</td>
+<td style="text-align:left">Guava</td>
+<td style="text-align:left"><code>ImmutableSetMultimap</code></td>
+</tr>
+<tr>
+<td style="text-align:left">BiMap</td>
+<td style="text-align:left">Guava</td>
+<td style="text-align:left"><code>ImmutableBiMap</code></td>
+</tr>
+<tr>
+<td style="text-align:left">ClassToInstanceMap</td>
+<td style="text-align:left">Guava</td>
+<td style="text-align:left"><code>ImmutableClassToInstanceMap</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Table</td>
+<td style="text-align:left">Guava</td>
+<td style="text-align:left"><code>ImmutableTable</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="集合操作工厂"><a href="#集合操作工厂" class="headerlink" title="集合操作工厂"></a>集合操作工厂</h2><p>其实这里只会介绍一个创建方法，但是为什么还是单独拿出来介绍了呢？看下去你就会<strong>大呼好用</strong>。虽然 JDK 中已经提供了大量的集合相关的操作方法，用起来也是非常的方便，但是 Guava 还是增加了一些十分好用的方法，保证让你用上一次就爱不释手，</p>
+<h3 id="创建集合。"><a href="#创建集合。" class="headerlink" title="创建集合。"></a>创建集合。</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个 ArrayList 集合</span></span><br><span class="line">List&lt;String&gt; list1 = Lists.newArrayList();</span><br><span class="line"><span class="comment">// 创建一个 ArrayList 集合，同时塞入3个数据</span></span><br><span class="line">List&lt;String&gt; list2 = Lists.newArrayList(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>);</span><br><span class="line"><span class="comment">// 创建一个 ArrayList 集合，容量初始化为10</span></span><br><span class="line">List&lt;String&gt; list3 = Lists.newArrayListWithCapacity(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">LinkedList&lt;String&gt; linkedList1 = Lists.newLinkedList();</span><br><span class="line">CopyOnWriteArrayList&lt;String&gt; cowArrayList = Lists.newCopyOnWriteArrayList();</span><br><span class="line"></span><br><span class="line">HashMap&lt;Object, Object&gt; hashMap = Maps.newHashMap();</span><br><span class="line">ConcurrentMap&lt;Object, Object&gt; concurrentMap = Maps.newConcurrentMap();</span><br><span class="line">TreeMap&lt;Comparable, Object&gt; treeMap = Maps.newTreeMap();</span><br><span class="line"></span><br><span class="line">HashSet&lt;Object&gt; hashSet = Sets.newHashSet();</span><br><span class="line">HashSet&lt;String&gt; newHashSet = Sets.newHashSet(<span class="string">"a"</span>, <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>);</span><br></pre></td></tr></table></figure>
+<p>Guava 为每一个集合都添加了工厂方法创建方式，上面已经展示了部分集合的工厂方法创建方式。是不是十分的好用呢。而且可以在创建时直接扔进去几个元素，这个简直太赞了，再也不用一个个 <code>add</code> 了。</p>
+<h3 id="集合交集并集差集"><a href="#集合交集并集差集" class="headerlink" title="集合交集并集差集"></a>集合交集并集差集</h3><p>过于简单，直接看代码和输出结果吧。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; newHashSet1 = Sets.newHashSet(<span class="string">"a"</span>, <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>);</span><br><span class="line">Set&lt;String&gt; newHashSet2 = Sets.newHashSet(<span class="string">"b"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 交集</span></span><br><span class="line">SetView&lt;String&gt; intersectionSet = Sets.intersection(newHashSet1, newHashSet2);</span><br><span class="line">System.out.println(intersectionSet); <span class="comment">// [b, c]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 并集</span></span><br><span class="line">SetView&lt;String&gt; unionSet = Sets.union(newHashSet1, newHashSet2);</span><br><span class="line">System.out.println(unionSet); <span class="comment">// [a, b, c, d]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// newHashSet1 中存在，newHashSet2 中不存在</span></span><br><span class="line">SetView&lt;String&gt; setView = Sets.difference(newHashSet1, newHashSet2);</span><br><span class="line">System.out.println(setView); <span class="comment">// [a]</span></span><br></pre></td></tr></table></figure>
+<h2 id="有数量的集合"><a href="#有数量的集合" class="headerlink" title="有数量的集合"></a>有数量的集合</h2><p>这个真的太有用了，因为我们经常会需要设计可以计数的集合，或者 value 是 <code>List</code> 的 <code>Map</code>集合，如果说你不太明白，看下面这段代码，是否某天夜里你也这样写过。</p>
+<ol>
+<li><p>统计相同元素出现的次数（下面的代码我已经尽可能精简写法了）。</p>
+<p>JDK 原生写法：</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java 统计相同元素出现的次数。</span></span><br><span class="line">List&lt;String&gt; words = Lists.newArrayList(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="string">"a"</span>, <span class="string">"c"</span>);</span><br><span class="line">Map&lt;String, Integer&gt; countMap = <span class="keyword">new</span> HashMap&lt;String, Integer&gt;();</span><br><span class="line"><span class="keyword">for</span> (String word : words) &#123;</span><br><span class="line">    Integer count = countMap.get(word);</span><br><span class="line">    count = (count == <span class="keyword">null</span>) ? <span class="number">1</span> : ++count;</span><br><span class="line">    countMap.put(word, count);</span><br><span class="line">&#125;</span><br><span class="line">countMap.forEach((k, v) -&gt; System.out.println(k + <span class="string">":"</span> + v));</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * result:</span></span><br><span class="line"><span class="comment"> * a:2</span></span><br><span class="line"><span class="comment"> * b:1</span></span><br><span class="line"><span class="comment"> * c:2</span></span><br><span class="line"><span class="comment"> * d:1</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<p>尽管已经尽量优化代码，代码量还是不少的，那么在 Guava 中有什么不一样呢？在 Guava. 中主要是使用 <code>HashMultiset</code> 类，看下面。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; arrayList = Lists.newArrayList(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="string">"a"</span>, <span class="string">"c"</span>);</span><br><span class="line">HashMultiset&lt;String&gt; multiset = HashMultiset.create(arrayList);</span><br><span class="line">multiset.elementSet().forEach(s -&gt; System.out.println(s + <span class="string">":"</span> + multiset.count(s)));</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * result:</span></span><br><span class="line"><span class="comment"> * a:2</span></span><br><span class="line"><span class="comment"> * b:1</span></span><br><span class="line"><span class="comment"> * c:2</span></span><br><span class="line"><span class="comment"> * d:1</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<p>是的，只要把元素添加进去就行了，不用在乎是否重复，最后都可以使用 <code>count</code> 方法统计重复元素数量。看着舒服，写着优雅，<code>HashMultiset</code> 是 Guava 中实现的 <code>Collection</code> 类，可以轻松统计元素数量。</p>
+<ol>
+<li><p>一对多，value 是 <code>List</code> 的 <code>Map</code> 集合。</p>
+<p>假设一个场景，需要把很多动物按照种类进行分类，我相信最后你会写出类似的代码。</p>
+<p>JDK 原生写法：</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String, Set&lt;String&gt;&gt; animalMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">HashSet&lt;String&gt; dogSet = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">dogSet.add(<span class="string">"旺财"</span>);</span><br><span class="line">dogSet.add(<span class="string">"大黄"</span>);</span><br><span class="line">animalMap.put(<span class="string">"狗"</span>, dogSet);</span><br><span class="line">HashSet&lt;String&gt; catSet = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">catSet.add(<span class="string">"加菲"</span>);</span><br><span class="line">catSet.add(<span class="string">"汤姆"</span>);</span><br><span class="line">animalMap.put(<span class="string">"猫"</span>, catSet);</span><br><span class="line">System.out.println(animalMap.get(<span class="string">"猫"</span>)); <span class="comment">// [加菲, 汤姆]</span></span><br></pre></td></tr></table></figure>
+<p>最后一行查询猫得到了猫类的 “加菲” 和 ”汤姆“。这个代码简直太烦做了，如果使用 Guava 呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// use guava</span></span><br><span class="line">HashMultimap&lt;String, String&gt; multimap = HashMultimap.create();</span><br><span class="line">multimap.put(<span class="string">"狗"</span>, <span class="string">"大黄"</span>);</span><br><span class="line">multimap.put(<span class="string">"狗"</span>, <span class="string">"旺财"</span>);</span><br><span class="line">multimap.put(<span class="string">"猫"</span>, <span class="string">"加菲"</span>);</span><br><span class="line">multimap.put(<span class="string">"猫"</span>, <span class="string">"汤姆"</span>);</span><br><span class="line">System.out.println(multimap.get(<span class="string">"猫"</span>)); <span class="comment">// [加菲, 汤姆]</span></span><br></pre></td></tr></table></figure>
+<p>HashMultimap 可以扔进去重复的 key 值，最后获取时可以得到所有的 value 值，可以看到输出结果和 JDK 写法上是一样的，但是代码已经无比清爽。</p>
+<h2 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h2><p>作为开发中最长使用的数据类型，字符串操作的增强可以让开发更加高效。</p>
+<h3 id="字符拼接"><a href="#字符拼接" class="headerlink" title="字符拼接"></a>字符拼接</h3><p>JDK 8 中其实已经内置了字符串拼接方法，但是它只是简单的拼接，没有额外操作，比如过滤掉 null 元素，去除前后空格等。先看一下 JDK 8 中字符串拼接的几种方式。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JDK 方式一</span></span><br><span class="line">ArrayList&lt;String&gt; list = Lists.newArrayList(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="keyword">null</span>);</span><br><span class="line">String join = String.join(<span class="string">","</span>, list);</span><br><span class="line">System.out.println(join); <span class="comment">// a,b,c,null</span></span><br><span class="line"><span class="comment">// JDK 方式二</span></span><br><span class="line">String result = list.stream().collect(Collectors.joining(<span class="string">","</span>));</span><br><span class="line">System.out.println(result); <span class="comment">// a,b,c,null</span></span><br><span class="line"><span class="comment">// JDK 方式三</span></span><br><span class="line">StringJoiner stringJoiner = <span class="keyword">new</span> StringJoiner(<span class="string">","</span>);</span><br><span class="line">list.forEach(stringJoiner::add);</span><br><span class="line">System.out.println(stringJoiner.toString()); <span class="comment">// a,b,c,null</span></span><br></pre></td></tr></table></figure>
+<p>可以看到 null 值也被拼接到了字符串里，这有时候不是我们想要的，那么使用 Guava 有什么不一样呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; list = Lists.newArrayList(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="keyword">null</span>);</span><br><span class="line">String join = Joiner.on(<span class="string">","</span>).skipNulls().join(list);</span><br><span class="line">System.out.println(join); <span class="comment">// a,b,c</span></span><br><span class="line"></span><br><span class="line">String join1 = Joiner.on(<span class="string">","</span>).useForNull(<span class="string">"空值"</span>).join(<span class="string">"旺财"</span>, <span class="string">"汤姆"</span>, <span class="string">"杰瑞"</span>, <span class="keyword">null</span>);</span><br><span class="line">System.out.println(join1); <span class="comment">// 旺财,汤姆,杰瑞,空值</span></span><br></pre></td></tr></table></figure>
+<p>可以看到使用 <code>skipNulls()</code> 可以跳过空值，使用 <code>useFornull(String)</code> 可以为空值自定义显示文本。</p>
+<h3 id="字符串分割"><a href="#字符串分割" class="headerlink" title="字符串分割"></a>字符串分割</h3><p>JDK 中是自带字符串分割的，我想你也一定用过，那就是 String 的 split 方法，但是这个方法有一个问题，就是如果最后一个元素为空，那么就会丢弃，奇怪的是第一个元素为空却不会丢弃，这就十分迷惑，下面通过一个例子演示这个问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">",a,,b,"</span>;</span><br><span class="line">String[] splitArr = str.split(<span class="string">","</span>);</span><br><span class="line">Arrays.stream(splitArr).forEach(System.out::println);</span><br><span class="line">System.out.println(<span class="string">"------"</span>);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * a</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * b</span></span><br><span class="line"><span class="comment"> * ------</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<p>你也可以自己测试下，最后一个元素不是空，直接消失了。</p>
+<p>如果使用 Guava 是怎样的操作方式呢？Guava 提供了 Splitter 类，并且有一系列的操作方式可以直观的控制分割逻辑。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">",a ,,b ,"</span>;</span><br><span class="line">Iterable&lt;String&gt; split = Splitter.on(<span class="string">","</span>)</span><br><span class="line">    .omitEmptyStrings() <span class="comment">// 忽略空值</span></span><br><span class="line">    .trimResults() <span class="comment">// 过滤结果中的空白</span></span><br><span class="line">    .split(str);</span><br><span class="line">split.forEach(System.out::println);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * a</span></span><br><span class="line"><span class="comment"> * b</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>在开发中我们可能需要使用小规模的缓存，来提高访问速度。这时引入专业的缓存中间件可能又觉得浪费。现在可以了， Guava 中提供了简单的缓存类，且可以根据预计容量、过期时间等自动过期已经添加的元素。即使这样我们也要预估好可能占用的内存空间，以防内存占用过多。</p>
+<p>现在看一下在 Guava 中缓存该怎么用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCache</span><span class="params">()</span> <span class="keyword">throws</span> ExecutionException, InterruptedException </span>&#123;</span><br><span class="line"></span><br><span class="line">    CacheLoader cacheLoader = <span class="keyword">new</span> CacheLoader&lt;String, Animal&gt;() &#123;</span><br><span class="line">        <span class="comment">// 如果找不到元素，会调用这里</span></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Animal <span class="title">load</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    LoadingCache&lt;String, Animal&gt; loadingCache = CacheBuilder.newBuilder()</span><br><span class="line">        .maximumSize(<span class="number">1000</span>) <span class="comment">// 容量</span></span><br><span class="line">        .expireAfterWrite(<span class="number">3</span>, TimeUnit.SECONDS) <span class="comment">// 过期时间</span></span><br><span class="line">        .removalListener(<span class="keyword">new</span> MyRemovalListener()) <span class="comment">// 失效监听器</span></span><br><span class="line">        .build(cacheLoader); <span class="comment">//</span></span><br><span class="line">    loadingCache.put(<span class="string">"狗"</span>, <span class="keyword">new</span> Animal(<span class="string">"旺财"</span>, <span class="number">1</span>));</span><br><span class="line">    loadingCache.put(<span class="string">"猫"</span>, <span class="keyword">new</span> Animal(<span class="string">"汤姆"</span>, <span class="number">3</span>));</span><br><span class="line">    loadingCache.put(<span class="string">"狼"</span>, <span class="keyword">new</span> Animal(<span class="string">"灰太狼"</span>, <span class="number">4</span>));</span><br><span class="line"></span><br><span class="line">    loadingCache.invalidate(<span class="string">"猫"</span>); <span class="comment">// 手动失效</span></span><br><span class="line"></span><br><span class="line">    Animal animal = loadingCache.get(<span class="string">"狼"</span>);</span><br><span class="line">    System.out.println(animal);</span><br><span class="line">    Thread.sleep(<span class="number">4</span> * <span class="number">1000</span>);</span><br><span class="line">    <span class="comment">// 狼已经自动过去，获取为 null 值报错</span></span><br><span class="line">    System.out.println(loadingCache.get(<span class="string">"狼"</span>));</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * key=猫,value=Animal&#123;name='汤姆', age=3&#125;,reason=EXPLICIT</span></span><br><span class="line"><span class="comment">     * Animal&#123;name='灰太狼', age=4&#125;</span></span><br><span class="line"><span class="comment">     * key=狗,value=Animal&#123;name='旺财', age=1&#125;,reason=EXPIRED</span></span><br><span class="line"><span class="comment">     * key=狼,value=Animal&#123;name='灰太狼', age=4&#125;,reason=EXPIRED</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * com.google.common.cache.CacheLoader$InvalidCacheLoadException: CacheLoader returned null for key 狼.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 缓存移除监听器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyRemovalListener</span> <span class="keyword">implements</span> <span class="title">RemovalListener</span>&lt;<span class="title">String</span>, <span class="title">Animal</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onRemoval</span><span class="params">(RemovalNotification&lt;String, Animal&gt; notification)</span> </span>&#123;</span><br><span class="line">        String reason = String.format(<span class="string">"key=%s,value=%s,reason=%s"</span>, notification.getKey(), notification.getValue(), notification.getCause());</span><br><span class="line">        System.out.println(reason);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Animal&#123;"</span> +</span><br><span class="line">            <span class="string">"name='"</span> + name + <span class="string">'\''</span> +</span><br><span class="line">            <span class="string">", age="</span> + age +</span><br><span class="line">            <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Animal</span><span class="params">(String name, Integer age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个例子中主要分为 CacheLoader、MyRemovalListener、LoadingCache。</p>
+<p>CacheLoader 中重写了 <code>load</code> 方法，这个方法会在查询缓存没有命中时被调用，我这里直接返回了 <code>null</code>，其实这样会在没有命中时抛出 <code>CacheLoader returned null for key</code> 异常信息。</p>
+<p>MyRemovalListener 作为缓存元素失效时的监听类，在有元素缓存失效时会自动调用 <code>onRemoval</code> 方法，这里需要注意的是这个方法是同步方法，如果这里耗时较长，会阻塞直到处理完成。</p>
+<p>LoadingCache 就是缓存的主要操作对象了，常用的就是其中的 <code>put</code> 和 <code>get</code> 方法了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>上面介绍了我认为最常用的 Guava 功能，Guava 作为 Google 公司开源的 Java 开发核心库，个人觉得实用性还是很高的。引入后不仅能快速的实现一些开发中常用的功能，而且还可以让代码更加的优雅简洁。我觉得适用于每一个 Java 项目。Guava 的其他的功能你也可以自己去发现。它的 Github 地址是：<a href="https://github.com/google/guava" target="_blank" rel="noopener">https://github.com/google/guava</a>.</p>
+<p><strong>参考</strong></p>
+<ol>
+<li><a href="https://github.com/google/guava/wiki" target="_blank" rel="noopener">https://github.com/google/guava/wiki</a></li>
+</ol>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-01-24T08:33:38.988Z" itemprop="dateUpdated">2021-01-24 16:33:38</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2021/01/24/java/Guava-拯救垃圾代码，写出优雅高效，效率提升N倍/" target="_blank" rel="external">http://www.sjsmile.cn/2021/01/24/java/Guava-拯救垃圾代码，写出优雅高效，效率提升N倍/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sjsmile.cn">
+            <img src="/img/avatar.jpg" alt="Smile">
+            Smile
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2021/01/24/java/Guava-拯救垃圾代码，写出优雅高效，效率提升N倍/&title=《Guava - 拯救垃圾代码，写出优雅高效，效率提升N倍》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2021/01/24/java/Guava-拯救垃圾代码，写出优雅高效，效率提升N倍/&title=《Guava - 拯救垃圾代码，写出优雅高效，效率提升N倍》 — MY STUDY BLOG&source=Guava 项目是 Google 公司开源的 Java 核心库，它主要是包含一些在 Java 开发中经常使用到的功能，如数据校验、不可变集合、计数集合，集..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2021/01/24/java/盘点：35-个-Java-代码优化魔鬼细节/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">盘点：35 个 Java 代码优化魔鬼细节</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2021/01/24/java/String长度有限制吗？是多少？/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">String长度有限制吗？是多少？</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据校验"><span class="post-toc-text">数据校验</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#非空判断"><span class="post-toc-text">非空判断</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#预期值判断"><span class="post-toc-text">预期值判断</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#是否越界"><span class="post-toc-text">是否越界</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#不可变的集合"><span class="post-toc-text">不可变的集合</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建方式"><span class="post-toc-text">创建方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注意事项"><span class="post-toc-text">注意事项</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#集合操作工厂"><span class="post-toc-text">集合操作工厂</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建集合。"><span class="post-toc-text">创建集合。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#集合交集并集差集"><span class="post-toc-text">集合交集并集差集</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#有数量的集合"><span class="post-toc-text">有数量的集合</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#字符串操作"><span class="post-toc-text">字符串操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字符拼接"><span class="post-toc-text">字符拼接</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字符串分割"><span class="post-toc-text">字符串分割</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#缓存"><span class="post-toc-text">缓存</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2021/01/24/java/Guava-拯救垃圾代码，写出优雅高效，效率提升N倍/&title=《Guava - 拯救垃圾代码，写出优雅高效，效率提升N倍》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2021/01/24/java/Guava-拯救垃圾代码，写出优雅高效，效率提升N倍/&title=《Guava - 拯救垃圾代码，写出优雅高效，效率提升N倍》 — MY STUDY BLOG&source=Guava 项目是 Google 公司开源的 Java 核心库，它主要是包含一些在 Java 开发中经常使用到的功能，如数据校验、不可变集合、计数集合，集..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADMUlEQVR42u3awU7jQBAEUP7/p7PXldiEqh6zijvPJwTBnjdItLt6vr7i6/Ht+vv7ySef3TN/+vl96gsbGxv7JuzHy+v1Z77/9PV2tMtNNjFZ5z9+FxsbG3sdO7ld/pmTJeZrS7b76fexsbGxP57dFrOkBCblMPkpNjY2NnZenPLWZVaEToooNjY29qex8wLTlrFiKWUT8p+yNGxsbOy3Z7ej1nf++lfm29jY2NhvzH6U12y8ehIYnaz26UqwsbGxF7FnR2dO2onzIpS3ST+sHxsbG3sdux0GzN72k8gpL36zkAsbGxt7EzsvA8ni8s+0bUPezETDCWxsbOx17LyA5U1IWwhPBsa5BRsbG3sr+zw8moHzYz3nh4GetiLY2NjYq9knD5gNg4eMeIOwsbGxt7JnUc6sOJ0cx8nDrzpUwsbGxr45+6oH58WsDfqTZikXYWNjY29in7/o5+xkcbMx82yLsbGxsTex29u15S1H5uPedozxw3gDGxsb+7bsZDyQl5ki1invMGs2nv5JsLGxsRex28e0Q4W8sckr7QwZzUawsbGxb8huC1jewJzz2iiqCLywsbGxF7GTApMUktlxnNfLbbe+/i1sbGzspew8ymmD+3a728gpXyE2Njb2bnZ+XGbGmEVF7TZFz8XGxsZexL7qsE4eP53ESfkfJiqr2NjY2EvZ9Wv9KDxKwqxfDJWwsbGxl7KTV/xrG4mW1H79Q1CFjY2NvYKdBzd58DRrS/Jrtoan55WwsbGxb8tuX/2T9iMpTvkw+CRUKroubGxs7Nuyr4py8mYmf2J+h9kasLGxsXezT0htc9IGT234VY94sbGxsW/Lbv/Dt81GO9adjQ3yO2NjY2PvY7dNSBvuz5abFLZh2ISNjY29gj0br87i/tnd2tboaDCAjY2NfUN2fl18SqgMlfLxczuoxsbGxt7BnhWt2Xb89lC5WCc2Njb2OnZbftpjN/mC2nDqKEvDxsbG/nh22xKcDA9mJa3YFWxsbOyPYZ8EPW3RmgVV0T2xsbGx17Hz1uJ1kZgd/cmLXzsSuGA8gI2Njf327FlA05aNaw9otsOJ4YEebGxs7Hdn/wEHtZunCEvEBAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

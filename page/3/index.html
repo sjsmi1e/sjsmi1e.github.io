@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    false,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>MY STUDY BLOG</span>
+            
+            <span> - </span>
+            <span class="header-description">喜欢争取，得到珍惜</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header index-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">MY STUDY BLOG</h1>
+        <h5 class="subtitle">
+            
+                喜欢争取，得到珍惜
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+    <div class="container body-wrap">
+        <ul class="post-list">
+        
+            <li class="post-list-item fade">
+                <article id="post-java/synchronized-and-volatile"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/10/java/synchronized-and-volatile/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/10.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/10/java/synchronized-and-volatile/">synchronized and volatile</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-10 10:01:51" datetime="2020-05-10T02:01:51.000Z"  itemprop="datePublished">2020-05-10</time>
+
+        
+
+
+        
+	<span id="/2020/05/10/java/synchronized-and-volatile/" class="leancloud_visitors" data-flag-title="synchronized and volatile" title="synchronized and volatile">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/10/java/synchronized-and-volatile/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/10/java/synchronized-and-volatile/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 5,134</span>
+<span class="post-count">阅读时长 ≈ 24分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>用户态与内核态</p>
+<p>JDK早期，synchronized 叫做重量级锁， 因为申请锁资源必须通过kernel, 系统调用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">;hello.asm</span><br><span class="line">;write(int fd, const void *buffer, size_t nbytes)</span><br><span class="line"></span><br><span class="line">section data</span><br><span class="line">    msg db &quot;Hello&quot;, 0xA</span><br><span class="line">    len equ $ - msg</span><br><span class="line"></span><br><span class="line">section .text</span><br><span class="line">global _start</span><br><span class="line">_start:</span><br><span class="line"></span><br><span class="line">    mov edx, len</span><br><span class="line">    mov ecx, msg</span><br><span class="line">    mov ebx, 1 ;文件描述符1 std_out</span><br><span class="line">    mov eax, 4 ;write函数系统调用号 4</span><br><span class="line">    int 0x80</span><br><span class="line"></span><br><span class="line">    mov ebx, 0</span><br><span class="line">    mov eax, 1 ;exit函数系统调用号</span><br><span class="line">    int 0x80</span><br></pre></td></tr></table></figure>
+    
+    <a href="/2020/05/10/java/synchronized-and-volatile/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-Nginx-从入门到实践，万字详解！"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/07/Nginx-从入门到实践，万字详解！/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/9.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/07/Nginx-从入门到实践，万字详解！/">Nginx 从入门到实践，万字详解！</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-07 20:54:46" datetime="2020-05-07T12:54:46.000Z"  itemprop="datePublished">2020-05-07</time>
+
+        
+
+
+        
+	<span id="/2020/05/07/Nginx-从入门到实践，万字详解！/" class="leancloud_visitors" data-flag-title="Nginx 从入门到实践，万字详解！" title="Nginx 从入门到实践，万字详解！">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/07/Nginx-从入门到实践，万字详解！/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/07/Nginx-从入门到实践，万字详解！/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 11,551</span>
+<span class="post-count">阅读时长 ≈ 46分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>最近越来越频繁地遇到需要配置反向代理的场景，在自己搭建博客的时候，也不可避免要用到 Nginx，所以这段时间集中学习了一下 Nginx，同时做了一些笔记，希望也可以帮助到大家～ 😜</p>
+<p>这篇文章会在 CentOS 环境下安装和使用 Nginx，如果对 CentOS 基本操作还不太清楚的，可以先看看 &lt;半小时搞会 CentOS 入门必备基础知识&gt; 一文先做了解。</p>
+<p>相信作为开发者，大家都知道 Nginx 的重要，废话不多说，一起来学习吧。</p>
+<p>CentOS 版本：<code>7.6</code></p>
+<p>Nginx 版本：<code>1.16.1</code></p>
+<h2 id="1-Nginx-介绍"><a href="#1-Nginx-介绍" class="headerlink" title="1. Nginx 介绍"></a><strong>1. Nginx 介绍</strong></h2><p>传统的 Web 服务器，每个客户端连接作为一个单独的进程或线程处理，需在切换任务时将 CPU 切换到新的任务并创建一个新的运行时上下文，消耗额外的内存和 CPU 时间，当并发请求增加时，服务器响应变慢，从而对性能产生负面影响。</p>
+<figure class="image-box">
+                <img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_56_26_1.jpg" alt="img" title="" class="index-item-img">
+                <p>img</p>
+            </figure>Nginx<br><br>Nginx 是开源、高性能、高可靠的 Web 和反向代理服务器，而且支持热部署，几乎可以做到 7 * 24 小时不间断运行，即使运行几个月也不需要重新启动，还能在不间断服务的情况下对软件版本进行热更新。性能是 Nginx 最重要的考量，其占用内存少、并发能力强、能支持高达 5w 个并发连接数，最重要的是，Nginx 是免费的并可以商业化，配置使用也比较简单。<br><br>Nginx 的最重要的几个使用场景：<br><br>1. 静态资源服务，通过本地文件系统提供服务；<br>2. 反向代理服务，延伸出包括缓存、负载均衡等；<br>3. API 服务，OpenResty ；<br><br>对于前端来说 Node.js 不陌生了，Nginx 和 Node.js 的很多理念类似，HTTP 服务器、事件驱动、异步非阻塞等，且 Nginx 的大部分功能使用 Node.js 也可以实现，但 Nginx 和 Node.js 并不冲突，都有自己擅长的领域。Nginx 擅长于底层服务器端资源的处理（静态资源处理转发、反向代理，负载均衡等），Node.js 更擅长上层具体业务逻辑的处理，两者可以完美组合，共同助力前端开发。<br><br>下面我们着重学习一下 Nginx 的使用。<br><br>
+    
+    <a href="/2020/05/07/Nginx-从入门到实践，万字详解！/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-java/Java8-14的有哪些重要的新特性"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/07/java/Java8-14的有哪些重要的新特性/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/8.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/07/java/Java8-14的有哪些重要的新特性/">Java8~14的有哪些重要的新特性</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-07 20:51:01" datetime="2020-05-07T12:51:01.000Z"  itemprop="datePublished">2020-05-07</time>
+
+        
+
+
+        
+	<span id="/2020/05/07/java/Java8-14的有哪些重要的新特性/" class="leancloud_visitors" data-flag-title="Java8~14的有哪些重要的新特性" title="Java8~14的有哪些重要的新特性">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/07/java/Java8-14的有哪些重要的新特性/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/07/java/Java8-14的有哪些重要的新特性/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 5,249</span>
+<span class="post-count">阅读时长 ≈ 21分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="Java9"><a href="#Java9" class="headerlink" title="Java9"></a>Java9</h2><p>发布于 2017 年 9 月 21 日 。作为 Java8 之后 3 年半才发布的新版本，Java 9 带 来了很多重大的变化其中最重要的改动是 Java 平台模块系统的引入,其他还有诸如集合、Stream 流</p>
+<h3 id="Java-平台模块系统"><a href="#Java-平台模块系统" class="headerlink" title="Java 平台模块系统"></a>Java 平台模块系统</h3><p>Java 平台模块系统，也就是 Project Jigsaw，把模块化开发实践引入到了 Java 平台中。在引入了模块系统之后，JDK 被重新组织成 94 个模块。Java 应用可以通过新增的 jlink 工具，创建出只包含所依赖的 JDK 模块的自定义运行时镜像。这样可以极大的减少 Java 运行时环境的大小。</p>
+<p>Java 9 模块的重要特征是在其工件（artifact）的根目录中包含了一个描述模块的 module-info.class 文 件。 工件的格式可以是传统的 JAR 文件或是 Java 9 新增的 JMOD 文件。</p>
+<h3 id="Jshell"><a href="#Jshell" class="headerlink" title="Jshell"></a>Jshell</h3><p>jshell 是 Java 9 新增的一个实用工具。为 Java 提供了类似于 Python 的实时命令行交互工具。</p>
+<p>在 Jshell 中可以直接输入表达式并查看其执行结果</p>
+<h3 id="集合、Stream-和-Optional"><a href="#集合、Stream-和-Optional" class="headerlink" title="集合、Stream 和 Optional"></a>集合、Stream 和 Optional</h3><ul>
+<li>增加 了 <code>List.of()</code>、<code>Set.of()</code>、<code>Map.of()</code> 和 <code>Map.ofEntries()</code>等工厂方法来创建不可变集合，比如<code>List.of(&quot;Java&quot;, &quot;C++&quot;);</code>、<code>Map.of(&quot;Java&quot;, 1, &quot;C++&quot;, 2)</code>;（这部分内容有点参考 Guava 的味道）</li>
+<li><code>Stream</code> 中增加了新的方法 <code>ofNullable</code>、<code>dropWhile</code>、<code>takeWhile</code> 和 <code>iterate</code> 方法。<code>Collectors</code> 中增加了新的方法 <code>filtering</code> 和 <code>flatMapping</code></li>
+<li><code>Optional</code> 类中新增了 <code>ifPresentOrElse</code>、<code>or</code> 和 <code>stream</code> 等方法</li>
+</ul>
+<h3 id="进程-API"><a href="#进程-API" class="headerlink" title="进程 API"></a>进程 API</h3><p>Java 9 增加了 <code>ProcessHandle</code> 接口，可以对原生进程进行管理，尤其适合于管理长时间运行的进程</p>
+    
+    <a href="/2020/05/07/java/Java8-14的有哪些重要的新特性/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-java/JVM-完整深入解析"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/07/java/JVM-完整深入解析/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/7.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/07/java/JVM-完整深入解析/">JVM 完整深入解析</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-07 20:46:51" datetime="2020-05-07T12:46:51.000Z"  itemprop="datePublished">2020-05-07</time>
+
+        
+
+
+        
+	<span id="/2020/05/07/java/JVM-完整深入解析/" class="leancloud_visitors" data-flag-title="JVM 完整深入解析" title="JVM 完整深入解析">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/07/java/JVM-完整深入解析/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/07/java/JVM-完整深入解析/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 8,632</span>
+<span class="post-count">阅读时长 ≈ 31分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <ul>
+<li>Java运行时数据区：</li>
+<li>JMM Java内存模型：</li>
+<li>堆的内存划分：</li>
+<li>GC垃圾回收：</li>
+<li>HotSpot 虚拟机详解：</li>
+<li>JVM优化：</li>
+<li>类加载机制：</li>
+</ul>
+<hr>
+    
+    <a href="/2020/05/07/java/JVM-完整深入解析/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-java/Sprinig-Boot-Redis-实现接口幂等性"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/07/java/Sprinig-Boot-Redis-实现接口幂等性/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/6.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/07/java/Sprinig-Boot-Redis-实现接口幂等性/">Sprinig Boot + Redis 实现接口幂等性</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-07 20:42:12" datetime="2020-05-07T12:42:12.000Z"  itemprop="datePublished">2020-05-07</time>
+
+        
+
+
+        
+	<span id="/2020/05/07/java/Sprinig-Boot-Redis-实现接口幂等性/" class="leancloud_visitors" data-flag-title="Sprinig Boot + Redis 实现接口幂等性" title="Sprinig Boot + Redis 实现接口幂等性">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/07/java/Sprinig-Boot-Redis-实现接口幂等性/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/07/java/Sprinig-Boot-Redis-实现接口幂等性/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 2,446</span>
+<span class="post-count">阅读时长 ≈ 12分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h3 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h3><p>幂等性, 通俗的说就是一个接口, 多次发起同一个请求, 必须保证操作只能执行一次 比如:</p>
+<ul>
+<li>订单接口, 不能多次创建订单</li>
+<li>支付接口, 重复支付同一笔订单只能扣一次钱</li>
+<li>支付宝回调接口, 可能会多次回调, 必须处理重复回调</li>
+<li>普通表单提交接口, 因为网络超时等原因多次点击提交, 只能成功一次 等等</li>
+</ul>
+<h3 id="二、常见解决方案"><a href="#二、常见解决方案" class="headerlink" title="二、常见解决方案"></a>二、常见解决方案</h3><ol>
+<li>唯一索引 – 防止新增脏数据</li>
+<li>token机制 – 防止页面重复提交</li>
+<li>悲观锁 – 获取数据的时候加锁(锁表或锁行)</li>
+<li>乐观锁 – 基于版本号version实现, 在更新数据那一刻校验数据</li>
+<li>分布式锁 – redis(jedis、redisson)或zookeeper实现</li>
+<li>状态机 – 状态变更, 更新数据时判断状态</li>
+</ol>
+<h3 id="三、本文实现"><a href="#三、本文实现" class="headerlink" title="三、本文实现"></a>三、本文实现</h3><p>本文采用第2种方式实现, 即通过redis + token机制实现接口幂等性校验</p>
+<h3 id="四、实现思路"><a href="#四、实现思路" class="headerlink" title="四、实现思路"></a>四、实现思路</h3><p>为需要保证幂等性的每一次请求创建一个唯一标识<code>token</code>, 先获取<code>token</code>, 并将此<code>token</code>存入redis, 请求接口时, 将此<code>token</code>放到header或者作为请求参数请求接口, 后端接口判断redis中是否存在此<code>token</code>:</p>
+<ul>
+<li>如果存在, 正常处理业务逻辑, 并从redis中删除此<code>token</code>, 那么, 如果是重复请求, 由于<code>token</code>已被删除, 则不能通过校验, 返回<code>请勿重复操作</code>提示</li>
+<li>如果不存在, 说明参数不合法或者是重复请求, 返回提示即可</li>
+</ul>
+<h3 id="五、项目简介"><a href="#五、项目简介" class="headerlink" title="五、项目简介"></a>五、项目简介</h3>
+    
+    <a href="/2020/05/07/java/Sprinig-Boot-Redis-实现接口幂等性/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-java/关于Spring中的参数校验的一点思考"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/07/java/关于Spring中的参数校验的一点思考/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/5.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/07/java/关于Spring中的参数校验的一点思考/">关于Spring中的参数校验的一点思考</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-07 20:21:00" datetime="2020-05-07T12:21:00.000Z"  itemprop="datePublished">2020-05-07</time>
+
+        
+
+
+        
+	<span id="/2020/05/07/java/关于Spring中的参数校验的一点思考/" class="leancloud_visitors" data-flag-title="关于Spring中的参数校验的一点思考" title="关于Spring中的参数校验的一点思考">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/07/java/关于Spring中的参数校验的一点思考/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/07/java/关于Spring中的参数校验的一点思考/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 2,553</span>
+<span class="post-count">阅读时长 ≈ 12分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>数据的校验的重要性就不用说了，即使在前端对数据进行校验的情况下，我们还是要对传入后端的数据再进行一遍校验，避免用户绕过浏览器直接通过一些 HTTP 工具直接向后端请求一些违法数据。</p>
+<p>最近工作中很多地方需要对参数做一些校验，刚开始的时候除了Controller层接受的对象我是直接通过一些 Spring 提供好的注解来实现校验比如<code>@Valid</code>、<code>@NotNull</code> 等等，在一些需要对参数做校验的其他地方我都是通过手动编程if else判断的方式来实现。后面重构代码发现有更好的方式来满足我的需求，然后花了半天时间对这部分内容做了一个简单的总结，希望可以对不了解这部分知识的朋友有帮助。</p>
+<p>下面我会通过实例程序演示如何在 Java 程序中尤其是 Spring 程序中优雅地的进行参数验证。</p>
+    
+    <a href="/2020/05/07/java/关于Spring中的参数校验的一点思考/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-后端开发必备的-RestFul-API-知识"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2020/05/07/后端开发必备的-RestFul-API-知识/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/4.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/07/后端开发必备的-RestFul-API-知识/">后端开发必备的 RestFul API 知识</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-07 20:13:40" datetime="2020-05-07T12:13:40.000Z"  itemprop="datePublished">2020-05-07</time>
+
+        
+
+
+        
+	<span id="/2020/05/07/后端开发必备的-RestFul-API-知识/" class="leancloud_visitors" data-flag-title="后端开发必备的 RestFul API 知识" title="后端开发必备的 RestFul API 知识">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/07/后端开发必备的-RestFul-API-知识/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/07/后端开发必备的-RestFul-API-知识/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 2,494</span>
+<span class="post-count">阅读时长 ≈ 9分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_16_06_1.png" alt="image-20200507201600488"></p  class="index-item-img">
+<p>RestFul API 是每个程序员都应该了解并掌握的基本知识，我们在开发过程中设计API的时候也应该至少要满足RestFul API的最基本的要求（比如接口中尽量使用名词，使用POST 请求创建资源，DELETE请求删除资源等等，示例：GET   /notes/id：获取某个指定id的笔记的信息）。最近学习过程中接触到这些东西，自己没有时间总结，所以分享一些不错的文章给大家。</p>
+<p>相关阅读：</p>
+    
+    <a href="/2020/05/07/后端开发必备的-RestFul-API-知识/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-心得/我的秋招"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2019/09/21/心得/我的秋招/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/3.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2019/09/21/心得/我的秋招/">我的秋招</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-09-21 19:43:31" datetime="2019-09-21T11:43:31.000Z"  itemprop="datePublished">2019-09-21</time>
+
+        
+
+
+        
+	<span id="/2019/09/21/心得/我的秋招/" class="leancloud_visitors" data-flag-title="我的秋招" title="我的秋招">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2019/09/21/心得/我的秋招/#comment">
+            <span class="valine-comment-count" data-xid="/2019/09/21/心得/我的秋招/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 2,868</span>
+<span class="post-count">阅读时长 ≈ 10分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h1 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h1><p>经过一年的努力吧（感觉自己说努力有点不好意思O(∩_∩)O），从大三一直到这周，成功签约西安农行软开（还差学校签字返还）。特此作此总结，记录下自己的汗水。</p>
+<h1 id="春招"><a href="#春招" class="headerlink" title="春招"></a>春招</h1><p>从大三下学期一开始，我就开始了校园招聘的路程，虽然那时候是春招，我大三也只能找一些实习，但是有实习岂不是很好，简历不就更好看了吗？但是啊，最后也只有以失败告终，0offer。但是也收获到了许多，比如经过的几次面试。</p>
+<p>记得那是大三刚开始，因为整个宿舍（六个人）只有我和我的下铺有就业的意向，其他人都是考研。所以，我们就计划着一起开始筹备春招。当时觉得自己知识体系应该已经差不多了，所以信心满满，然而，当头棒喝。我专攻的是Java后台开发，但当有笔试传来的时候，发现出的题目竟然像是在看天书，天书，什么概念，就是有头无尾，几乎不懂的。本以为以前写过算法，参加过ACM，算法题应该不成什么大问题，然而，算法题就是最大的问题。当时就觉得自己得复习甚至是学习一波。因为当时有一些知识点是学校一起老师讲过的，因为没怎么看，也没怎么常用，所以就忘记了。</p>
+    
+    <a href="/2019/09/21/心得/我的秋招/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-心得/我的one-year"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2019/02/19/心得/我的one-year/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/2.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2019/02/19/心得/我的one-year/">我的one_year</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-02-19 19:58:31" datetime="2019-02-19T11:58:31.000Z"  itemprop="datePublished">2019-02-19</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/进阶之路/">进阶之路</a></li></ul>
+
+
+
+        
+	<span id="/2019/02/19/心得/我的one-year/" class="leancloud_visitors" data-flag-title="我的one_year" title="我的one_year">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2019/02/19/心得/我的one-year/#comment">
+            <span class="valine-comment-count" data-xid="/2019/02/19/心得/我的one-year/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 1,975</span>
+<span class="post-count">阅读时长 ≈ 9分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>年已经过了，今天是元宵节，南方人生活在北方，虽然没有什么元宵啊，汤圆啊，或者大鱼大肉，来到学校也是冷冷清清的。有闲情，来回顾一下去年一整年所做和所得。</p>
+<p>首先，从懵懂少年，有着雄心却有些迷茫的少年开始了实际行动。思想不在是以前那么幼稚，开始了真正的思考。</p>
+<p>自己找所需去学习，开始为自己以后的路所打算。点点滴滴，慢慢在积累，但总觉得还是有些晚了的感觉。下面，开始我的数落数落。。。</p>
+    
+    <a href="/2019/02/19/心得/我的one-year/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-算法/周末之ACM之旅：焦作网络赛与青岛网络赛"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/1.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/">周末之ACM之旅：焦作网络赛与青岛网络赛</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-09-16 20:24:50" datetime="2018-09-16T12:24:50.000Z"  itemprop="datePublished">2018-09-16</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+        
+	<span id="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/" class="leancloud_visitors" data-flag-title="周末之ACM之旅：焦作网络赛与青岛网络赛" title="周末之ACM之旅：焦作网络赛与青岛网络赛">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/#comment">
+            <span class="valine-comment-count" data-xid="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 3,854</span>
+<span class="post-count">阅读时长 ≈ 22分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h1 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h1><p>  这两天呢，几乎赖床般的，十点半左右起床，然后做好准备，拿好电脑，走向创客，和伙伴讨论，解题。也不知是没睡好还是怎么的，五点做完题后是特别的困，打英雄联盟都能连跪的（也不排除楼下的奥斯卡影帝的给与吧），脑力消耗，几万亿个脑细胞就这样莫得了。。。天是阴沉，也是凉爽，“空山新雨后，天气晚来秋！”啊。<br>
+    
+    <a href="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+        </ul>
+        
+<nav id="page-nav">
+    <div class="inner">
+    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
+    </div>
+</nav>
+
+    </div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/page/3/&title=MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/page/3/&title=MY STUDY BLOG&source=喜欢争取，得到珍惜" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABxElEQVR42u3aS27DMAwFwNz/0um2QBP1UTQVtxivDMeJRlkQ/OjxiK/n8vr+zvr9n58+Ji5cXNw2N6esl1m/s7e9F2vh4uIe5L5bfk15d7/+5eS7b5/j4uL+Ke5ewMLFxf0f3Dw9ygMfLi7uPbn5Mkm/In8+WKvh4uI2uHmXcu5+pL+Li4u7xX1uXVchyuvi4uIe4SaNjH7zdO9NXFzcT3HzxkS1YZqXRustvfhfcXFxj3DzoxX5ALUa2qK2KS4u7hHuRMZUPaKRhzlcXNwz3KsKmGrJtHlUCxcX9wi3MyLtpDudsIiLizvN3ZvK5kEtSY8Kfw0uLu4RbpWy1/SsHuMopDu4uLgD3DxwJAnK+vne7+Di4t6HWz2AlW+4Osr9pbOLi4s7wO20PpOwtRmwkiwMFxd3jFsdkfbLpOr4FhcX9zw3D0Z5e3Rv84XRLC4u7jD3Wbz2zkJ0kp5ChYSLi3sRd26wWg2I/fCHi4t7LTc/IFWtRPICqVBE4eLiHuRWa6Z+IKuWQLi4uPfk5uPSvLhKNh/tGBcX90PcfDSSN03KgQ8XF/cgNwk0VzVYW+kULi7uEW6rFAmOcyWpTPVbuLi4Y9wvvLpN1Lx77+AAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

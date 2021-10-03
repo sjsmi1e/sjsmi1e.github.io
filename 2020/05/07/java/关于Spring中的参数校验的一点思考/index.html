@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        关于Spring中的参数校验的一点思考 |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="java">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>关于Spring中的参数校验的一点思考</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">关于Spring中的参数校验的一点思考</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-05-07T12:21:00.000Z" itemprop="datePublished" class="page-time">
+  2020-05-07
+</time>
+
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-java/关于Spring中的参数校验的一点思考"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">关于Spring中的参数校验的一点思考</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-05-07 20:21:00" datetime="2020-05-07T12:21:00.000Z"  itemprop="datePublished">2020-05-07</time>
+
+            
+
+
+            
+	<span id="/2020/05/07/java/关于Spring中的参数校验的一点思考/" class="leancloud_visitors" data-flag-title="关于Spring中的参数校验的一点思考" title="关于Spring中的参数校验的一点思考">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/07/java/关于Spring中的参数校验的一点思考/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/07/java/关于Spring中的参数校验的一点思考/"></span>
+        </a>
+    </span>
+
+
+
+            
+            <span class="post-count">文章字数: 2,553</span>
+<span class="post-count">阅读时长 ≈ 12分钟</span>
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <p>数据的校验的重要性就不用说了，即使在前端对数据进行校验的情况下，我们还是要对传入后端的数据再进行一遍校验，避免用户绕过浏览器直接通过一些 HTTP 工具直接向后端请求一些违法数据。</p>
+<p>最近工作中很多地方需要对参数做一些校验，刚开始的时候除了Controller层接受的对象我是直接通过一些 Spring 提供好的注解来实现校验比如<code>@Valid</code>、<code>@NotNull</code> 等等，在一些需要对参数做校验的其他地方我都是通过手动编程if else判断的方式来实现。后面重构代码发现有更好的方式来满足我的需求，然后花了半天时间对这部分内容做了一个简单的总结，希望可以对不了解这部分知识的朋友有帮助。</p>
+<p>下面我会通过实例程序演示如何在 Java 程序中尤其是 Spring 程序中优雅地的进行参数验证。</p>
+<a id="more"></a>
+<h2 id="基础知识和依赖"><a href="#基础知识和依赖" class="headerlink" title="基础知识和依赖"></a>基础知识和依赖</h2><h3 id="相关依赖"><a href="#相关依赖" class="headerlink" title="相关依赖"></a>相关依赖</h3><p>如果开发普通 Java 程序的的话，你需要可能需要像下面这样依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>            </span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate.validator<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>            </span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-validator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>            </span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>6.0.9.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span>   </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>   </span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>             </span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.el<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>             </span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.el-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>             </span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span>     </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>     </span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>            </span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.glassfish.web<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>            </span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.el<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>            </span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span>     </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>使用 Spring Boot 程序的话只需要<code>spring-boot-starter-web</code> 就够了，它的子依赖包含了我们所需要的东西。除了这个依赖，下面的演示还用到了 lombok ，所以不要忘记添加上相关依赖。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span>        </span><br><span class="line">   	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span>            </span><br><span class="line">   		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>            </span><br><span class="line">   		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>        </span><br><span class="line">     <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>        </span><br><span class="line">     <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>            </span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>            </span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>            </span><br><span class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span>        </span><br><span class="line">     <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>        </span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>           </span><br><span class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>            </span><br><span class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>            </span><br><span class="line">       <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span>        </span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>    </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h3><p>下面这个是示例用到的实体类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span><span class="meta">@AllArgsConstructor</span><span class="meta">@NoArgsConstructorpublic</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="meta">@NotNull</span>(message = <span class="string">"classId 不能为空"</span>)    </span><br><span class="line">    <span class="keyword">private</span> String classId;</span><br><span class="line">    <span class="meta">@Size</span>(max = <span class="number">33</span>)    </span><br><span class="line">    <span class="meta">@NotNull</span>(message = <span class="string">"name 不能为空"</span>)    </span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="meta">@Pattern</span>(regexp = <span class="string">"((^Man$|^Woman$|^UGM$))"</span>, message = <span class="string">"sex 值不在可选范围"</span>)    </span><br><span class="line">    <span class="meta">@NotNull</span>(message = <span class="string">"sex 不能为空"</span>)    </span><br><span class="line">    <span class="keyword">private</span> String sex;</span><br><span class="line">    <span class="meta">@Email</span>(message = <span class="string">"email 格式不正确"</span>)    </span><br><span class="line">    <span class="meta">@NotNull</span>(message = <span class="string">"email 不能为空"</span>)    </span><br><span class="line">    <span class="keyword">private</span> String email;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>正则表达式说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; - ^string : 匹配以 string 开头的字符串</span><br><span class="line">&gt; - string$ ：匹配以 string 结尾的字符串</span><br><span class="line">&gt; - ^string$ ：精确匹配 string 字符串</span><br><span class="line">&gt; - ((^Man$|^Woman$|^UGM$)) : 值只能在 Man,Woman,UGM 这三个值中选择</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>下面这部分校验注解说明内容参考自：<a href="https://www.cnkirito.moe/spring-validation/[1]" target="_blank" rel="noopener">https://www.cnkirito.moe/spring-validation/[1]</a> ，感谢@徐靖峰[2]。</p>
+<p><strong>JSR提供的校验注解</strong>:</p>
+<p>•<code>@Null</code> 被注释的元素必须为 null•<code>@NotNull</code> 被注释的元素必须不为 null•<code>@AssertTrue</code> 被注释的元素必须为 true •<code>@AssertFalse</code> 被注释的元素必须为 false•<code>@Min(value)</code> 被注释的元素必须是一个数字，其值必须大于等于指定的最小值•<code>@Max(value)</code> 被注释的元素必须是一个数字，其值必须小于等于指定的最大值•<code>@DecimalMin(value)</code> 被注释的元素必须是一个数字，其值必须大于等于指定的最小值•<code>@DecimalMax(value)</code> 被注释的元素必须是一个数字，其值必须小于等于指定的最大值•<code>@Size(max=, min=)</code> 被注释的元素的大小必须在指定的范围内•<code>@Digits (integer, fraction)</code> 被注释的元素必须是一个数字，其值必须在可接受的范围内•<code>@Past</code> 被注释的元素必须是一个过去的日期•<code>@Future</code> 被注释的元素必须是一个将来的日期•<code>@Pattern(regex=,flag=)</code> 被注释的元素必须符合指定的正则表达式</p>
+<p><strong>Hibernate Validator提供的校验注解</strong>：</p>
+<p>•<code>@NotBlank(message =)</code> 验证字符串非null，且长度必须大于0•<code>@Email</code> 被注释的元素必须是电子邮箱地址•<code>@Length(min=,max=)</code> 被注释的字符串的大小必须在指定的范围内•<code>@NotEmpty</code> 被注释的字符串的必须非空 •<code>@Range(min=,max=,message=)</code> 被注释的元素必须在合适的范围内</p>
+<h2 id="验证Controller的输入"><a href="#验证Controller的输入" class="headerlink" title="验证Controller的输入"></a>验证Controller的输入</h2><h3 id="验证请求体-RequestBody"><a href="#验证请求体-RequestBody" class="headerlink" title="验证请求体(RequestBody)"></a>验证请求体(RequestBody)</h3><p><strong>Controller：</strong></p>
+<p>我们在需要验证的参数上加上了<code>@Valid</code>注解，如果验证失败，它将抛出<code>MethodArgumentNotValidException</code>。默认情况下，Spring会将此异常转换为HTTP Status 400（错误请求）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span><span class="meta">@RequestMapping</span>(<span class="string">"/api"</span>)<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/person"</span>)    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseEntity&lt;Person&gt; <span class="title">getPerson</span><span class="params">(@RequestBody @Valid Person person)</span> </span>&#123;        </span><br><span class="line">    	<span class="keyword">return</span> ResponseEntity.ok().body(person);    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>ExceptionHandler：</strong></p>
+<p>自定义异常处理器可以帮助我们捕获异常，并进行一些简单的处理。如果对于下面的处理异常的代码不太理解的话，可以查看这篇文章 <a href="https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&amp;mid=2247485568&amp;idx=2&amp;sn=c5ba880fd0c5d82e39531fa42cb036ac&amp;chksm=cea2474bf9d5ce5dcbc6a5f6580198fdce4bc92ef577579183a729cb5d1430e4994720d59b34&amp;token=1924773784&amp;lang=zh_CN&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">《SpringBoot 处理异常的几种常见姿势》</a>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span>(assignableTypes = &#123;PersonController.class&#125;)<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalExceptionHandler</span> </span>&#123;   <span class="meta">@ExceptionHandler</span>(MethodArgumentNotValidException.class)    </span><br><span class="line"><span class="keyword">public</span> ResponseEntity&lt;Map&lt;String, String&gt;&gt; handleValidationExceptions(            </span><br><span class="line">    MethodArgumentNotValidException ex) &#123;        </span><br><span class="line">    	Map&lt;String, String&gt; errors = <span class="keyword">new</span> HashMap&lt;&gt;();        </span><br><span class="line">    	ex.getBindingResult().getAllErrors().forEach((error) -&gt; &#123;            </span><br><span class="line">            String fieldName = ((FieldError) error).getField();            </span><br><span class="line">            String errorMessage = error.getDefaultMessage();            </span><br><span class="line">            errors.put(fieldName, errorMessage);        </span><br><span class="line">       &#125;);        </span><br><span class="line">    	<span class="keyword">return</span> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);    </span><br><span class="line">	  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>通过测试验证：</strong></p>
+<p>下面我通过 MockMvc 模拟请求 Controller 的方式来验证是否生效，当然你也可以通过 Postman 这种工具来验证。</p>
+<p>我们试一下所有参数输入正确的情况。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span><span class="meta">@AutoConfigureMockMvcpublic</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonControllerTest</span> </span>&#123;    </span><br><span class="line">    <span class="meta">@Autowired</span>    </span><br><span class="line">    <span class="keyword">private</span> MockMvc mockMvc;</span><br><span class="line">    <span class="meta">@Autowired</span>    </span><br><span class="line">    <span class="keyword">private</span> ObjectMapper objectMapper;</span><br><span class="line">    <span class="meta">@Test</span>    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">should_get_person_correctly</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;        </span><br><span class="line">    	Person person = <span class="keyword">new</span> Person();        </span><br><span class="line">    	person.setName(<span class="string">"SnailClimb"</span>);        </span><br><span class="line">    	person.setSex(<span class="string">"Man"</span>);        </span><br><span class="line">    	person.setClassId(<span class="string">"82938390"</span>);        </span><br><span class="line">    	person.setEmail(<span class="string">"Snailclimb@qq.com"</span>);</span><br><span class="line">      mockMvc.perform(post(<span class="string">"/api/person"</span>)</span><br><span class="line">           .contentType(MediaType.APPLICATION_JSON_UTF8)                </span><br><span class="line">           .content(objectMapper.writeValueAsString(person)))</span><br><span class="line">           .andExpect(MockMvcResultMatchers.jsonPath(<span class="string">"name"</span>).value(<span class="string">"SnailClimb"</span>))</span><br><span class="line">           .andExpect(MockMvcResultMatchers.jsonPath(<span class="string">"classId"</span>).value(<span class="string">"82938390"</span>))</span><br><span class="line">           .andExpect(MockMvcResultMatchers.jsonPath(<span class="string">"sex"</span>).value(<span class="string">"Man"</span>))</span><br><span class="line">           .andExpect(MockMvcResultMatchers.jsonPath(<span class="string">"email"</span>).value(<span class="string">"Snailclimb@qq.com"</span>));    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>验证出现参数不合法的情况抛出异常并且可以正确被捕获。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span>    </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">should_check_person_value</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;        </span><br><span class="line">    Person person = <span class="keyword">new</span> Person();        </span><br><span class="line">    person.setSex(<span class="string">"Man22"</span>);        </span><br><span class="line">    person.setClassId(<span class="string">"82938390"</span>);        </span><br><span class="line">    person.setEmail(<span class="string">"SnailClimb"</span>);</span><br><span class="line">    mockMvc.perform(post(<span class="string">"/api/person"</span>)                </span><br><span class="line">         .contentType(MediaType.APPLICATION_JSON_UTF8)                </span><br><span class="line">         .content(objectMapper.writeValueAsString(person)))</span><br><span class="line">         .andExpect(MockMvcResultMatchers.jsonPath(<span class="string">"sex"</span>).value(<span class="string">"sex 值不在可选范围"</span>))</span><br><span class="line">         .andExpect(MockMvcResultMatchers.jsonPath(<span class="string">"name"</span>).value(<span class="string">"name 不能为空"</span>))</span><br><span class="line">         .andExpect(MockMvcResultMatchers.jsonPath(<span class="string">"email"</span>).value(<span class="string">"email 格式不正确"</span>));    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用 Postman 验证结果如下：</p>
+<figure class="image-box">
+                <a rel=关于Spring中的参数校验的一点思考 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_31_18_1.jpg" title="null" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_31_18_1.jpg" alt="null" title="" class=""></a>
+                <p>null</p>
+            </figure>
+<h3 id="验证请求参数-Path-Variables-和-Request-Parameters"><a href="#验证请求参数-Path-Variables-和-Request-Parameters" class="headerlink" title="验证请求参数(Path Variables 和 Request Parameters)"></a>验证请求参数(Path Variables 和 Request Parameters)</h3><p><strong>Controller：</strong></p>
+<p><strong>一定一定不要忘记在类上加上 <code>Validated</code> 注解了，这个参数可以告诉 Spring 去校验方法参数。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span><span class="meta">@RequestMapping</span>(<span class="string">"/api"</span>)</span><br><span class="line"><span class="meta">@Validated</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/person/&#123;id&#125;"</span>)    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseEntity&lt;Integer&gt; <span class="title">getPersonByID</span><span class="params">(@Valid @PathVariable(<span class="string">"id"</span>)</span> @<span class="title">Max</span><span class="params">(value = <span class="number">5</span>,message = <span class="string">"超过 id 的范围了"</span>)</span> Integer id) </span>&#123;        <span class="keyword">return</span> ResponseEntity.ok().body(id);    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@PutMapping</span>(<span class="string">"/person"</span>)    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseEntity&lt;String&gt; <span class="title">getPersonByName</span><span class="params">(@Valid @RequestParam(<span class="string">"name"</span>)</span> @<span class="title">Size</span><span class="params">(max = <span class="number">6</span>,message = <span class="string">"超过 name 的范围了"</span>)</span> String name)</span>&#123;         <span class="keyword">return</span> ResponseEntity.ok().body(name);    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>ExceptionHandler：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ExceptionHandler</span>(ConstraintViolationException.class)    </span><br><span class="line"><span class="function">ResponseEntity&lt;String&gt; <span class="title">handleConstraintViolationException</span><span class="params">(ConstraintViolationException e)</span> </span>&#123;        </span><br><span class="line">	<span class="keyword">return</span> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());    </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>通过测试验证：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span>    </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">should_check_param_value</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">      mockMvc.perform(get(<span class="string">"/api/person/6"</span>)</span><br><span class="line">          .contentType(MediaType.APPLICATION_JSON_UTF8))                </span><br><span class="line">          .andExpect(status().isBadRequest())                </span><br><span class="line">          .andExpect(content().string(<span class="string">"getPersonByID.id: 超过 id 的范围了"</span>));    </span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Test</span>    </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">should_check_param_value2</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    mockMvc.perform(put(<span class="string">"/api/person"</span>)                </span><br><span class="line">    .param(<span class="string">"name"</span>,<span class="string">"snailclimbsnailclimb"</span>)                </span><br><span class="line">    .contentType(MediaType.APPLICATION_JSON_UTF8))                </span><br><span class="line">    .andExpect(status().isBadRequest())                </span><br><span class="line">    .andExpect(content().string(<span class="string">"getPersonByName.name: 超过 name 的范围了"</span>));    </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="验证-Service-中的方法"><a href="#验证-Service-中的方法" class="headerlink" title="验证 Service 中的方法"></a>验证 Service 中的方法</h2><p>我们还可以验证任何Spring组件的输入，而不是验证控制器级别的输入，我们可以使用<code>@Validated</code>和<code>@Valid</code>注释的组合来实现这一需求。</p>
+<p><strong>一定一定不要忘记在类上加上 <code>Validated</code> 注解了，这个参数可以告诉 Spring 去校验方法参数。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Validated</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonService</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">validatePerson</span><span class="params">(@Valid Person person)</span></span>&#123;        <span class="comment">// do something    &#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<p><strong>通过测试验证：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="meta">@AutoConfigureMockMvc</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonServiceTest</span> </span>&#123;   </span><br><span class="line">	<span class="meta">@Autowired</span>    </span><br><span class="line">	<span class="keyword">private</span> PersonService service;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span>(expected = ConstraintViolationException.class)    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">should_throw_exception_when_person_is_not_valid</span><span class="params">()</span> </span>&#123;        </span><br><span class="line">    	Person person = <span class="keyword">new</span> Person();        </span><br><span class="line">    	person.setSex(<span class="string">"Man22"</span>);        </span><br><span class="line">    	person.setClassId(<span class="string">"82938390"</span>);        </span><br><span class="line">    	person.setEmail(<span class="string">"SnailClimb"</span>);        </span><br><span class="line">    	service.validatePerson(person);    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Validator-编程方式手动进行参数验证"><a href="#Validator-编程方式手动进行参数验证" class="headerlink" title="Validator 编程方式手动进行参数验证"></a>Validator 编程方式手动进行参数验证</h2><p>某些场景下可能会需要我们手动校验并获得校验结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Test    public void check_person_manually() &#123;        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();        Validator validator = factory.getValidator();        Person person = new Person();        person.setSex(&quot;Man22&quot;);        person.setClassId(&quot;82938390&quot;);        person.setEmail(&quot;SnailClimb&quot;);        Set&lt;ConstraintViolation&lt;Person&gt;&gt; violations = validator.validate(person);        //output:        //email 格式不正确        //name 不能为空        //sex 值不在可选范围        for (ConstraintViolation&lt;Person&gt; constraintViolation : violations) &#123;            System.out.println(constraintViolation.getMessage());        &#125;    &#125;</span><br></pre></td></tr></table></figure>
+<p>上面我们是通过 <code>Validator</code> 工厂类获得的 <code>Validator</code> 示例，当然你也可以通过 <code>@Autowired</code> 直接注入的方式。但是在非 Spring Component 类中使用这种方式的话，只能通过工厂类来获得 <code>Validator</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">Validator validate</span><br></pre></td></tr></table></figure>
+<h2 id="自定以-Validator"><a href="#自定以-Validator" class="headerlink" title="自定以 Validator"></a>自定以 Validator</h2><p>如果自带的校验注解无法满足你的需求的话，你还可以自定义实现注解。比如我们的Person类多了一个 region 字段，region 字段只能是<code>China</code>、<code>China-Taiwan</code>、<code>China-HongKong</code>这三个中的一个。</p>
+<p>第一步你需要创建一个注解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;FIELD&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RUNTIME)</span><br><span class="line"><span class="meta">@Constraint</span>(validatedBy = RegionValidator.class)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Region &#123;</span><br><span class="line">    <span class="function">String <span class="title">message</span><span class="params">()</span> <span class="keyword">default</span> "Region 值不在可选范围内"</span>;</span><br><span class="line">    Class&lt;?&gt;[] groups() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">    Class&lt;? extends Payload&gt;[] payload() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二步你需要实现 <code>ConstraintValidator</code>接口，并重写<code>isValid</code> 方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.validation.ConstraintValidator;</span><br><span class="line"><span class="keyword">import</span> javax.validation.ConstraintValidatorContext;</span><br><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RegionValidator</span> <span class="keyword">implements</span> <span class="title">ConstraintValidator</span>&lt;<span class="title">Region</span>, <span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span>    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValid</span><span class="params">(String value, ConstraintValidatorContext context)</span> </span>&#123;        </span><br><span class="line">    	HashSet&lt;Object&gt; regions = <span class="keyword">new</span> HashSet&lt;&gt;();        </span><br><span class="line">    	regions.add(<span class="string">"China"</span>);        </span><br><span class="line">    	regions.add(<span class="string">"China-Taiwan"</span>);        </span><br><span class="line">    	regions.add(<span class="string">"China-HongKong"</span>);        </span><br><span class="line">    	<span class="keyword">return</span> regions.contains(value);    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在你就可以使用这个注解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Region</span>    </span><br><span class="line"><span class="keyword">private</span> String region;</span><br></pre></td></tr></table></figure>
+<h2 id="使用验证组"><a href="#使用验证组" class="headerlink" title="使用验证组"></a>使用验证组</h2><p>很多时候我们需要使用到验证组，这样说可能不太清楚，说简单点就是对对象操作的不同方法有不同的验证规则，示例如下。</p>
+<p>先创建两个接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AddPersonGroup</span> </span>&#123;&#125;<span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DeletePersonGroup</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以这样去使用验证组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NotNull</span>(groups = DeletePersonGroup.class)</span><br><span class="line"><span class="meta">@Null</span>(groups = AddPersonGroup.class)</span><br><span class="line"><span class="keyword">private</span> String group;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Validated</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonService</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">validatePerson</span><span class="params">(@Valid Person person)</span> </span>&#123;        <span class="comment">// do something    &#125;</span></span><br><span class="line">    <span class="meta">@Validated</span>(AddPersonGroup.class)    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">validatePersonGroupForAdd</span><span class="params">(@Valid Person person)</span> </span>&#123;        <span class="comment">// do something    &#125;</span></span><br><span class="line">    <span class="meta">@Validated</span>(DeletePersonGroup.class)    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">validatePersonGroupForDelete</span><span class="params">(@Valid Person person)</span> </span>&#123;        <span class="comment">// do something    &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过测试验证：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span>(expected = ConstraintViolationException.class)    </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">should_check_person_with_groups</span><span class="params">()</span> </span>&#123;        </span><br><span class="line">    Person person = <span class="keyword">new</span> Person();        </span><br><span class="line">    person.setSex(<span class="string">"Man22"</span>);        </span><br><span class="line">    person.setClassId(<span class="string">"82938390"</span>);        </span><br><span class="line">    person.setEmail(<span class="string">"SnailClimb"</span>);        </span><br><span class="line">    person.setGroup(<span class="string">"group1"</span>);        </span><br><span class="line">    service.validatePersonGroupForAdd(person);    </span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Test</span>(expected = ConstraintViolationException.class)    </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">should_check_person_with_groups2</span><span class="params">()</span> </span>&#123;        </span><br><span class="line">  Person person = <span class="keyword">new</span> Person();        </span><br><span class="line">  person.setSex(<span class="string">"Man22"</span>);        </span><br><span class="line">  person.setClassId(<span class="string">"82938390"</span>);        </span><br><span class="line">  person.setEmail(<span class="string">"SnailClimb"</span>);        </span><br><span class="line">  service.validatePersonGroupForDelete(person);    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用验证组这种方式的时候一定要小心，这是一种反模式，还会造成代码逻辑性变差。</p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-05-09T06:07:40.403Z" itemprop="dateUpdated">2020-05-09 14:07:40</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2020/05/07/java/关于Spring中的参数校验的一点思考/" target="_blank" rel="external">http://www.sjsmile.cn/2020/05/07/java/关于Spring中的参数校验的一点思考/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sjsmile.cn">
+            <img src="/img/avatar.jpg" alt="Smile">
+            Smile
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2020/05/07/java/关于Spring中的参数校验的一点思考/&title=《关于Spring中的参数校验的一点思考》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2020/05/07/java/关于Spring中的参数校验的一点思考/&title=《关于Spring中的参数校验的一点思考》 — MY STUDY BLOG&source=数据的校验的重要性就不用说了，即使在前端对数据进行校验的情况下，我们还是要对传入后端的数据再进行一遍校验，避免用户绕过浏览器直接通过一些 HTTP 工具直..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2020/05/07/java/Sprinig-Boot-Redis-实现接口幂等性/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Sprinig Boot + Redis 实现接口幂等性</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2020/05/07/后端开发必备的-RestFul-API-知识/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">后端开发必备的 RestFul API 知识</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基础知识和依赖"><span class="post-toc-text">基础知识和依赖</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#相关依赖"><span class="post-toc-text">相关依赖</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实体类"><span class="post-toc-text">实体类</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#验证Controller的输入"><span class="post-toc-text">验证Controller的输入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#验证请求体-RequestBody"><span class="post-toc-text">验证请求体(RequestBody)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#验证请求参数-Path-Variables-和-Request-Parameters"><span class="post-toc-text">验证请求参数(Path Variables 和 Request Parameters)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#验证-Service-中的方法"><span class="post-toc-text">验证 Service 中的方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Validator-编程方式手动进行参数验证"><span class="post-toc-text">Validator 编程方式手动进行参数验证</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自定以-Validator"><span class="post-toc-text">自定以 Validator</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用验证组"><span class="post-toc-text">使用验证组</span></a></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2020/05/07/java/关于Spring中的参数校验的一点思考/&title=《关于Spring中的参数校验的一点思考》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2020/05/07/java/关于Spring中的参数校验的一点思考/&title=《关于Spring中的参数校验的一点思考》 — MY STUDY BLOG&source=数据的校验的重要性就不用说了，即使在前端对数据进行校验的情况下，我们还是要对传入后端的数据再进行一遍校验，避免用户绕过浏览器直接通过一些 HTTP 工具直..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuElEQVR42u3awXKjMBAE0Pz/TyfXTSXgbo1EvFWPk8vBoMcBTXrm4yM+Pv85rr7/eU7++erK9+dsO/Dw8PAGS79faAu4WtDV1dp73a8ZDw8P7zTvahFX57y4aPnST/56/6vL7/Hw8PDehre2uLwEzzcJPDw8vP+F1xbc0VKWync8PDy8v+JNXtl5/Lq2wTyUteDh4eHFvLyL9D6fj/T38PDw8MZd9TyoXdsSkjbYaLV4eHh4B3j5C7ctW/PG/1owUQyH4eHh4W29bxKztsMBCaONJ5Jxrl/Ox8PDwzvMW2t3tb9NGNs2DDw8PLzDvHxoYC3qbbeWfG11DIGHh4c34E3+7c9vORlQaLeWbWkKHh4e3u1q11pfbdzQluDtUFexJeDh4eGNeS/6Y0tt+/srrBXueamNh4eH9wyvDUzzR7BWCreP7MV98fDw8Lby1i60d3Qg/yZ/0Hh4eHgneO3ru40G2iK4fVjR0BUeHh7eVl7bdlq7cX5+O0YQFeh4eHh4x3h5+78tnXNYOyhQpCx4eHh4m3ht+2otrj2SoCRbDh4eHt4BXtvomgQT7RDAPDLGw8PDO8fLl7WrEE+OtuB+UVjj4eHhbeIlRW0breYPJS+j25IdDw8P7295eRyQF8GTfaworPHw8PAe+Z+9LZHzUYD8apOgBA8PD+8ZXt5Yatv/uwYFijR6baYMDw8Pb4nXRhKT6CEvu/OQtxgawMPDw9vEW4tN22+KZcUFd7Hv4eHh4Y15n+UxGcNaY7eP49v18fDw8A7w9r5j2zi4DTLathkeHh7eOd5kM8ifXNI2mzymOmvBw8PDG/MmDbC1RteGHOWZ/h4eHh7emNc+iPbKm+NdPDw8vDfgTSKJfHGTu+Ph4eE9w9s1etUOuSbxxGgEAQ8PD+8Ar61L14ZH2yHUbWMBeHh4eDt5X7v7K/DAhDKCAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

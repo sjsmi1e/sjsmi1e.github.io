@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        String长度有限制吗？是多少？ |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="java">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>String长度有限制吗？是多少？</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">String长度有限制吗？是多少？</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-01-24T07:10:30.000Z" itemprop="datePublished" class="page-time">
+  2021-01-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-java/String长度有限制吗？是多少？"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">String长度有限制吗？是多少？</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-01-24 15:10:30" datetime="2021-01-24T07:10:30.000Z"  itemprop="datePublished">2021-01-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+            
+	<span id="/2021/01/24/java/String长度有限制吗？是多少？/" class="leancloud_visitors" data-flag-title="String长度有限制吗？是多少？" title="String长度有限制吗？是多少？">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2021/01/24/java/String长度有限制吗？是多少？/#comment">
+            <span class="valine-comment-count" data-xid="/2021/01/24/java/String长度有限制吗？是多少？/"></span>
+        </a>
+    </span>
+
+
+
+            
+            <span class="post-count">文章字数: 1,881</span>
+<span class="post-count">阅读时长 ≈ 7分钟</span>
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>话说Java中String是有长度限制的，听到这里很多人不禁要问，String还有长度限制？是的有，而且在JVM编译中还有规范，而且有的家人们在面试的时候也遇到了。</p>
+<p>本人就遇到过面试的时候问这个的，而且在之前开发的中也真实地遇到过这个String长度限制的场景（将某固定文件转码成Base64的形式用字符串存储，在运行时需要的时候在转回来，当时文件比较大），那这个规范限制到底是怎么样的，咱们话不多说先䁖䁖去。</p>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><p>首先要知道String的长度限制我们就需要知道String是怎么存储字符串的，String其实是使用的一个char类型的数组来存储字符串中的字符的。</p>
+<figure class="image-box">
+                <a rel=String长度有限制吗？是多少？ href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124151612.jpg" title="存储String的容器原来是它" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124151612.jpg" alt="存储String的容器原来是它" title="" class=""></a>
+                <p>存储String的容器原来是它</p>
+            </figure>
+<a id="more"></a>
+<p>那么String既然是数组存储那数组会有长度的限制吗？是的有限制，但是是在有先提条件下的，我们看看String中返回length的方法。</p>
+<figure class="image-box">
+                <a rel=String长度有限制吗？是多少？ href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124151630.jpg" title="String类中的length方法" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124151630.jpg" alt="String类中的length方法" title="" class=""></a>
+                <p>String类中的length方法</p>
+            </figure>
+<p>由此我们看到返回值类型是int类型，Java中定义数组是可以给数组指定长度的，当然不指定的话默认会根据数组元素来指定：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int[] arr1 = new int[10]; // 定义一个长度为10的数组</span><br><span class="line">int[] arr2 = &#123;1,2,3,4,5&#125;; // 那么此时数组的长度为5</span><br></pre></td></tr></table></figure>
+<p>整数在java中是有限制的，我们通过源码来看看int类型对应的包装类Integer可以看到，其长度最大限制为2^31 -1，那么说明了数组的长度是0~2^31-1，那么计算一下就是（2^31-1 = 2147483647 = 4GB）</p>
+<figure class="image-box">
+                <a rel=String长度有限制吗？是多少？ href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124151731.jpg" title="Integer的取值范围" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124151731.jpg" alt="Integer的取值范围" title="" class=""></a>
+                <p>Integer的取值范围</p>
+            </figure>
+<p>看到这我们尝试通过编码来验证一下上述观点。</p>
+<figure class="image-box">
+                <a rel=String长度有限制吗？是多少？ href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124151745.jpg" title="以字面量形式定义字符串" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124151745.jpg" alt="以字面量形式定义字符串" title="" class=""></a>
+                <p>以字面量形式定义字符串</p>
+            </figure>
+<p>以上是我通过定义字面量的形式构造的10万个字符的字符串，编译之后虚拟机提示报错，说我们的字符串长度过长，不是说好了可以存21亿个吗？为什么才10万个就报错了呢？</p>
+<p>其实这里涉及到了JVM编译规范的限制了，其实JVM在编译时，如果我们将字符串定义成了字面量的形式，编译时JVM是会将其存放在常量池中，这时候JVM对这个常量池存储String类型做出了限制，接下来我们先看下手册是如何说的。</p>
+<figure class="image-box">
+                <a rel=String长度有限制吗？是多少？ href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124151858.jpg" title="java虚拟机规范截图" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124151858.jpg" alt="java虚拟机规范截图" title="" class=""></a>
+                <p>java虚拟机规范截图</p>
+            </figure>
+<p>常量池中，每个 cp_info 项的格式必须相同，它们都以一个表示 cp_info 类型的单字节 “tag”项开头。后面 info[]项的内容 由tag 的类型所决定。</p>
+<figure class="image-box">
+                <a rel=String长度有限制吗？是多少？ href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124151917.jpg" title="java虚拟机规范手册常量类型表" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124151917.jpg" alt="java虚拟机规范手册常量类型表" title="" class=""></a>
+                <p>java虚拟机规范手册常量类型表</p>
+            </figure>
+<p>我们可以看到 String类型的表示是 CONSTANT_String ，我们来看下CONSTANT_String具体是如何定义的。</p>
+<figure class="image-box">
+                <a rel=String长度有限制吗？是多少？ href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124151932.jpg" title="图片" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124151932.jpg" alt="图片" title="" class=""></a>
+                <p>图片</p>
+            </figure>
+<p>这里定义的 u2 string_index 表示的是常量池的有效索引，其类型是CONSTANT_Utf8_info 结构体表示的，这里我们需要注意的是其中定义的length我们看下面这张图。</p>
+<figure class="image-box">
+                <a rel=String长度有限制吗？是多少？ href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124151941.jpg" title="图片" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124151941.jpg" alt="图片" title="" class=""></a>
+                <p>图片</p>
+            </figure>
+<p>在class文件中u2表示的是无符号数占2个字节单位，我们知道1个字节占8位，2个字节就是16位 ，那么2个字节能表示的范围就是2^16- 1 = 65535 。范中class文件格式对u1、u2的定义的解释做了一下摘要：</p>
+<p>这里对java虚拟机规摘要部分</p>
+<h4 id="1、class文件中文件内容类型解释"><a href="#1、class文件中文件内容类型解释" class="headerlink" title="1、class文件中文件内容类型解释"></a>1、class文件中文件内容类型解释</h4><p>定义一组私有数据类型来表示 Class 文件的内容，它们包括 u1，u2 和 u4，分别代 表了 1、2 和 4 个字节的无符号数。</p>
+<p>每个 Class 文件都是由 8 字节为单位的字节流组成，所有的 16 位、32 位和 64 位长度的数 据将被构造成 2 个、4 个和 8 个 8 字节单位来表示。</p>
+<h4 id="2、程序异常处理的有效范围解释"><a href="#2、程序异常处理的有效范围解释" class="headerlink" title="2、程序异常处理的有效范围解释"></a>2、程序异常处理的有效范围解释</h4><p>start_pc 和 end_pc 两项的值表明了异常处理器在 code[]数组中的有效范围。</p>
+<p>start_pc 必须是对当前 code[]数组中某一指令的操作码的有效索引，end_pc 要 么是对当前 code[]数组中某一指令的操作码的有效索引，要么等于 code_length 的值，即当前 code[]数组的长度。start_pc 的值必须比 end_pc 小。</p>
+<p>当程序计数器在范围<code>[start_pc, end_pc)</code>内时，异常处理器就将生效。即设 x 为 异常句柄的有效范围内的值，x 满足：<code>start_pc ≤ x &lt; end_pc</code>。</p>
+<p>实际上，end_pc 值本身不属于异常处理器的有效范围这点属于 Java 虚拟机历史上 的一个设计缺陷：如果 Java 虚拟机中的一个方法的 code 属性的长度刚好是 65535 个字节，并且以一个 1 个字节长度的指令结束，那么这条指令将不能被异常处理器 所处理。</p>
+<p>不过编译器可以通过限制任何方法、实例初始化方法或类初始化方法的<code>code[]</code>数组最大长度为 65534，这样可以间接弥补这个 BUG。</p>
+<blockquote>
+<p>注意：这里对个人认为比较重要的点做了标记，首先第一个加粗说白了就是说数组有效范围就是【0-65565】但是第二个加粗的地方又解释了，因为虚拟机还需要1个字节的指令作为结束，所以其实真正的有效范围是【0-65564】，这里要注意这里的范围仅限编译时期，如果你是运行时拼接的字符串是可以超出这个范围的。</p>
+</blockquote>
+<p>接下来我们通过一个小实验来测试一下我们构建一个长度为65534的字符串，看看是否就能编译通过。0期阶段汇总</p>
+<p>首先通过一个for循环构建65534长度的字符串，在控制台打印后，我们通过自己度娘的一个在线字符统计工具计算了一下确实是65534个字符，如下：</p>
+<figure class="image-box">
+                <a rel=String长度有限制吗？是多少？ href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124152003.jpg" title="图片" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124152003.jpg" alt="图片" title="" class=""></a>
+                <p>图片</p>
+            </figure>
+<figure class="image-box">
+                <a rel=String长度有限制吗？是多少？ href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124152013.jpg" title="图片" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124152013.jpg" alt="图片" title="" class=""></a>
+                <p>图片</p>
+            </figure>
+<p>然后我们将字符复制后以定义字面量的形式赋值给字符串，可以看到我们选择这些字符右下角显示的确实是65534，于是乎运行了一波，果然成功了。</p>
+<figure class="image-box">
+                <a rel=String长度有限制吗？是多少？ href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124152035.jpg" title="图片" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124152035.jpg" alt="图片" title="" class=""></a>
+                <p>图片</p>
+            </figure>
+<figure class="image-box">
+                <a rel=String长度有限制吗？是多少？ href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124152046.jpg" title="图片" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/20210124152046.jpg" alt="图片" title="" class=""></a>
+                <p>图片</p>
+            </figure>
+<p>看到这里我们来总结一下：</p>
+<p><strong>问：字符串有长度限制吗？是多少？</strong></p>
+<p>答：首先字符串的内容是由一个字符数组 char[] 来存储的，由于数组的长度及索引是整数，且String类中返回字符串长度的方法length() 的返回值也是int ，所以通过查看java源码中的类Integer我们可以看到Integer的最大范围是2^31 -1,由于数组是从0开始的，所以数组的最大长度可以使【0~2^31】通过计算是大概4GB。</p>
+<p>但是通过翻阅java虚拟机手册对class文件格式的定义以及常量池中对String类型的结构体定义我们可以知道对于索引定义了u2，就是无符号占2个字节，2个字节可以表示的最大范围是2^16 -1 = 65535。</p>
+<p>其实是65535，但是由于JVM需要1个字节表示结束指令，所以这个范围就为65534了。超出这个范围在编译时期是会报错的，但是运行时拼接或者赋值的话范围是在整形的最大范围。</p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-01-24T08:33:56.032Z" itemprop="dateUpdated">2021-01-24 16:33:56</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2021/01/24/java/String长度有限制吗？是多少？/" target="_blank" rel="external">http://www.sjsmile.cn/2021/01/24/java/String长度有限制吗？是多少？/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sjsmile.cn">
+            <img src="/img/avatar.jpg" alt="Smile">
+            Smile
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2021/01/24/java/String长度有限制吗？是多少？/&title=《String长度有限制吗？是多少？》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2021/01/24/java/String长度有限制吗？是多少？/&title=《String长度有限制吗？是多少？》 — MY STUDY BLOG&source=前言话说Java中String是有长度限制的，听到这里很多人不禁要问，String还有长度限制？是的有，而且在JVM编译中还有规范，而且有的家人们在面试的..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2021/01/24/java/Guava-拯救垃圾代码，写出优雅高效，效率提升N倍/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Guava - 拯救垃圾代码，写出优雅高效，效率提升N倍</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2021/01/24/websocket-用途，例子，场景，什么时候用websocket/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">websocket 用途，例子，场景，什么时候用websocket</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#String"><span class="post-toc-text">String</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、class文件中文件内容类型解释"><span class="post-toc-text">1、class文件中文件内容类型解释</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、程序异常处理的有效范围解释"><span class="post-toc-text">2、程序异常处理的有效范围解释</span></a></li></ol></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2021/01/24/java/String长度有限制吗？是多少？/&title=《String长度有限制吗？是多少？》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2021/01/24/java/String长度有限制吗？是多少？/&title=《String长度有限制吗？是多少？》 — MY STUDY BLOG&source=前言话说Java中String是有长度限制的，听到这里很多人不禁要问，String还有长度限制？是的有，而且在JVM编译中还有规范，而且有的家人们在面试的..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrUlEQVR42u3cwYobMRAE0P3/n3Yg5BBIbKq6pZ0E3pyWsT2jp4Mkqpv9+oqv18/rz7/ffSf59PXb9fn+u28eu/Dw8PBGQ393Ja9M7n9G5iPMx4yHh4d3m5dsBp8X6HeDyBf35Pn15oSHh4f3KC85r24OzfkY8PDw8P5HXvJpfv9iIIKHh4d3jZeEEe2vNpOVH9CPZS14eHh43duHi/JTf39TfQ8PDw+vrKq3QUO7QCdL/2ycv36Lh4eHd4GXH2FvxL7JGr5pL8DDw8O7x8uj2M0ivg8d2snCw8PDu8HL9W2w20YJn6mzKcPDw8P7ft6moWqWteZ3oo0KDw8P7wIvP8K2m0c7xFMhclS7w8PDw1vzhsFozG6X+9mo6tYrPDw8vBEvP6Tm7OSZbWjbtiMUQ8HDw8Mb8doIdbOdtM/fTBYeHh7eDd4sjMhjgvxQnmxCwwACDw8P7xpv9oI8dGjbC/ZHczw8PLyneO3L8uU7b6Jqv4+Hh4d3j7cp9udtBMng8ulIQmc8PDy8e7z90j8rTZ06cBelMjw8PLxDvFnBadPJVYew8RG8brrCw8PDG/HyIeawfbE/n6yo2oWHh4d3lLcJW9tGhD2yZuPh4eFd4LWtV5+3inYzmDVRzQJfPDw8vNu8tgCWRL1tsJs87UBKjYeHh1fyZoDZ/dmst41WeHh4eE/x2ni3jSqS4/jmyB49CA8PD28bW9b/qn7TFnC2ABZtbHh4eHiHeK/ympWm9o1Ws+M1Hh4e3g3e7DVtsb9tF9jHGXh4eHi3ee1m0A7rVBNAG47g4eHh3eZtylft8bdtPpgdu/Hw8PD+Bd4+Wj0QHMyqfHh4eHiP8pINo41uZ8FENGV4eHh413izolcbGczC39kmgYeHh3ePt/9xHa3G4NkzD5zN8fDw8P5+/QBbvvfdOYYvWQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

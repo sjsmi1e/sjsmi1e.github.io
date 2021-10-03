@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    false,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>MY STUDY BLOG</span>
+            
+            <span> - </span>
+            <span class="header-description">喜欢争取，得到珍惜</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header index-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">MY STUDY BLOG</h1>
+        <h5 class="subtitle">
+            
+                喜欢争取，得到珍惜
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+    <div class="container body-wrap">
+        <ul class="post-list">
+        
+            <li class="post-list-item fade">
+                <article id="post-算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/7.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/">链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-08-29 13:44:19" datetime="2018-08-29T05:44:19.000Z"  itemprop="datePublished">2018-08-29</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+        
+	<span id="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/" class="leancloud_visitors" data-flag-title="链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）" title="链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/#comment">
+            <span class="valine-comment-count" data-xid="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 1,827</span>
+<span class="post-count">阅读时长 ≈ 9分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        链式前向星，也叫静态邻接表，今天我讲的是关于图的东西，所以都以图的角度去看待这个较优化的存储结构。
+存图优缺点存图的时候，链式前向星是一种介于邻接矩阵和和邻接表的一种存储结构。
+邻接矩阵存图一般都用这个呀！不过啊，当遇到稀疏图的时候，顶点特别多，而边就那么几条，空间浪费必然很大，所以我们又想到了邻接表
+邻接表邻接表（未优化过的链式前向星）是最常用存储结构之一。 但是 vector(动态数组)...
+    
+    <a href="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/最短路/">最短路</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-算法/2018暑期ccpc网络赛总结"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2018/08/25/算法/2018暑期ccpc网络赛总结/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/6.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2018/08/25/算法/2018暑期ccpc网络赛总结/">2018暑期ccpc网络赛总结</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-08-25 18:29:22" datetime="2018-08-25T10:29:22.000Z"  itemprop="datePublished">2018-08-25</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+        
+	<span id="/2018/08/25/算法/2018暑期ccpc网络赛总结/" class="leancloud_visitors" data-flag-title="2018暑期ccpc网络赛总结" title="2018暑期ccpc网络赛总结">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/08/25/算法/2018暑期ccpc网络赛总结/#comment">
+            <span class="valine-comment-count" data-xid="/2018/08/25/算法/2018暑期ccpc网络赛总结/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 1,052</span>
+<span class="post-count">阅读时长 ≈ 5分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>从12：00到17:00，是这次网络赛的时间。我与小伙伴们约好在食堂来一场惊心动魄的脑脑裂比赛。从11:00开始准备，吃饭，预热，开始答题。</p>
+<p>由于以前了解过ACM，也参加过4C，所以也有一些经验吧。只是第一次，本以为是ccpc，中国的，可以有点中文题目，没想到全是英文题，让我这样的英文渣额。。。不过还好，能读懂一些的！</p>
+<p>煎熬中度过，漫度中煎熬。一些题似懂非懂，有思路，但数据范围的卡壳，导致更换思路。。。最后，受大佬启发，完成了一道</p>
+<p>a^n+b^n=c^n的题目：<br>
+    
+    <a href="/2018/08/25/算法/2018暑期ccpc网络赛总结/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-算法/判断素数与欧拉筛"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2018/08/18/算法/判断素数与欧拉筛/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/5.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2018/08/18/算法/判断素数与欧拉筛/">判断素数与欧拉筛</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-08-18 18:02:24" datetime="2018-08-18T10:02:24.000Z"  itemprop="datePublished">2018-08-18</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+        
+	<span id="/2018/08/18/算法/判断素数与欧拉筛/" class="leancloud_visitors" data-flag-title="判断素数与欧拉筛" title="判断素数与欧拉筛">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/08/18/算法/判断素数与欧拉筛/#comment">
+            <span class="valine-comment-count" data-xid="/2018/08/18/算法/判断素数与欧拉筛/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 1,285</span>
+<span class="post-count">阅读时长 ≈ 6分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>对于一个数，判断是否为素数，按照性质暴力枚举每一个，时间复杂度就是O（n），今天，不讨论这个，讨论一下更高效的方法。</p>
+<p><strong>## 一、 ##</strong><br>这是我在一篇博客看到的方法，时间复杂度为O（sqr（n）/3）：</p>
+<p><a href="https://blog.csdn.net/huang_miao_xin/article/details/51331710（方法3）" target="_blank" rel="noopener">https://blog.csdn.net/huang_miao_xin/article/details/51331710（方法3）</a></p>
+<p>首先看一个关于质数分布的规律：大于等于5的质数一定和6的倍数相邻。例如5和7，11和13,17和19等等；</p>
+<p>证明：令x≥1，将大于等于5的自然数表示如下：</p>
+<p>······ 6x-1，6x，6x+1，6x+2，6x+3，6x+4，6x+5，6(x+1），6(x+1)+1 ······<br>
+    
+    <a href="/2018/08/18/算法/判断素数与欧拉筛/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/判断素数/">判断素数</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-算法/KMP"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2018/08/18/算法/KMP/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/4.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2018/08/18/算法/KMP/">KMP</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-08-18 17:57:03" datetime="2018-08-18T09:57:03.000Z"  itemprop="datePublished">2018-08-18</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+        
+	<span id="/2018/08/18/算法/KMP/" class="leancloud_visitors" data-flag-title="KMP" title="KMP">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/08/18/算法/KMP/#comment">
+            <span class="valine-comment-count" data-xid="/2018/08/18/算法/KMP/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 1,003</span>
+<span class="post-count">阅读时长 ≈ 5分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p><strong>kmp即字符串匹配，时间复杂度O(M+N)。</strong></p>
+<p>核心为求匹配的字符串的next[]数组（以当前位置结束的最长前缀的位置），代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getnext</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">0</span>,j=<span class="number">-1</span>,len=<span class="built_in">strlen</span>(str2);</span><br><span class="line">		a[<span class="number">0</span>]=<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">while</span>(i&lt;len)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(j==<span class="number">-1</span>||str2[i]==str2[j])</span><br><span class="line">				a[++i]=++j;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				j=a[j];</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+    <a href="/2018/08/18/算法/KMP/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字符串匹配/">字符串匹配</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-算法/分治与归并"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2018/08/09/算法/分治与归并/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/3.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2018/08/09/算法/分治与归并/">分治与归并</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-08-09 10:16:05" datetime="2018-08-09T02:16:05.000Z"  itemprop="datePublished">2018-08-09</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+        
+	<span id="/2018/08/09/算法/分治与归并/" class="leancloud_visitors" data-flag-title="分治与归并" title="分治与归并">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/08/09/算法/分治与归并/#comment">
+            <span class="valine-comment-count" data-xid="/2018/08/09/算法/分治与归并/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 2,137</span>
+<span class="post-count">阅读时长 ≈ 11分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>分治算法的基本思想是将一个规模为N的问题分解为K个规模较小的子问题，这些子问题相互独立且与原问题性质相同。</p>
+<p>求出子问题的解，就可得到原问题的解。就像前面的我说过的二分查找，也有类似的思想。</p>
+<p>其实，学习中也有许多类似的问题可以用到分治与归并，快排与归并排序就是这样。<br>
+    
+    <a href="/2018/08/09/算法/分治与归并/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分治/">分治</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-算法/贪心-二分"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2018/08/07/算法/贪心-二分/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/2.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2018/08/07/算法/贪心-二分/">贪心+二分</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-08-07 16:04:23" datetime="2018-08-07T08:04:23.000Z"  itemprop="datePublished">2018-08-07</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+        
+	<span id="/2018/08/07/算法/贪心-二分/" class="leancloud_visitors" data-flag-title="贪心+二分" title="贪心+二分">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/08/07/算法/贪心-二分/#comment">
+            <span class="valine-comment-count" data-xid="/2018/08/07/算法/贪心-二分/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 1,780</span>
+<span class="post-count">阅读时长 ≈ 9分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>在刷题时，总会遇到求最大值最小，最小值最大问题，也许它会暗喻是这样的一个问题。对于这样的一个问题，你会发现用dp和枚举都会超时超内存，或者说很麻烦，所以这是一个比较简单的解题方式。</p>
+<p>二分逼近思想<br>•对于难以直接确定解的问题,采取二分枚举+检验的思想.<br>
+    
+    <a href="/2018/08/07/算法/贪心-二分/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/贪心-二分/">贪心+二分</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-算法/dfs与bfs"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+        
+<div class="item-thumb">
+    <a class="thumb-link" href="/2018/08/06/算法/dfs与bfs/"></a>
+    <div class="thumb-hover">
+        <span class="icon icon-eye"></span>
+    </div>
+    <img src="/img/thumb/1.jpg" alt="图片路径不正确">
+    
+
+
+  
+    <h3 class="post-title ab-title" itemprop="name">
+      <a class="post-title-link" href="/2018/08/06/算法/dfs与bfs/">dfs&amp;dfs</a>
+    </h3>
+  
+
+
+
+</div>
+
+        
+    
+    
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-08-06 15:22:09" datetime="2018-08-06T07:22:09.000Z"  itemprop="datePublished">2018-08-06</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+        
+	<span id="/2018/08/06/算法/dfs与bfs/" class="leancloud_visitors" data-flag-title="dfs&dfs" title="dfs&dfs">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/08/06/算法/dfs与bfs/#comment">
+            <span class="valine-comment-count" data-xid="/2018/08/06/算法/dfs与bfs/"></span>
+        </a>
+    </span>
+
+
+
+        
+        
+        <span class="post-count">文章字数: 1,923</span>
+<span class="post-count">阅读时长 ≈ 8分钟</span>
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>dfs（深度优先搜索）</p>
+<p>bfs（广度优先搜索）</p>
+<p><strong>前言</strong><br>作为初学者，可能会想，搜索吗，就是作用在图上啊，树上什么的算法。其实，搜索（这里主要说dfs和bfs），就是以一种特定方式，在大多数场景寻找真正想要结果的方式。而dfs就是以一种现已一种单一方式走到黑，然后通过回溯等得到答案的过程。而bfs则是先看有多少种方式可以走，然后先记录每一种方式，在一一按这种方式一层一层遍历，直到得到最后结果。这两种搜索大体上没什么差别，都是搜索出所有可能满足自己的答案而已。有的人可能会说，bfs适合求最短路径，dfs适合求所有答案，其实，两个都可以相互转化（这里不多说，其实我也不怎么懂，哈哈~），只不过方便与否的问题罢了。</p>
+<p>下面就对这两种经典搜索进行简单探讨。<br>
+    
+    <a href="/2018/08/06/算法/dfs与bfs/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搜索/">搜索</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+        </ul>
+        
+<nav id="page-nav">
+    <div class="inner">
+    <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    </div>
+</nav>
+
+    </div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/page/4/&title=MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/page/4/&title=MY STUDY BLOG&source=喜欢争取，得到珍惜" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABxElEQVR42u3aQW7DMAwEQP//0ynQa2B7Kdq0A4xOQdEoowshLrVt8fr8r73P3+v7u3t/3+5YuLi4be7ncOVbH4OS/ZPD4+LiTnKT4pUXqZyYG3Bxcd/JXbtvJIfHxcX9Xe7J5WPnP/MLEC4u7tu4eXPSaWaqu+Hi4j7F7Qem/c+j+S4uLm5jKlG90PTjkpNfx8XFHeEmbUkegK7tUA1KcHFxJ7nVLe57ZlHu1XBxcW/g5iHm8ZeTA6wNXKMajIuLeyl3DVEtSXnbc9I+4eLijnM7jyeS5xf5U61dDy4u7s3cTsCR/MBa41Tu0nBxcS/lro1GqsUub4oWZ7+4uLg3c6sD0SRYyYPU/OqDi4s7w61eQdYeVXRiVlxc3BluNUHJG5u1qPSk5OHi4o5wq88dqtDq06tCvouLi3sbNw9Bkgi1c+DokLi4uIPcZEyyFnb0I1FcXNynuNWGpBp55Pu0sltcXNyLuNWCUr2y5HvmBREXF3eGmxevakGsRqjRgXFxcQe5/YcUeQDaKqC4uLgv41ZHIJ2jngxZcXFxX8atPthKjpEPYnFxcSe5/XBzbfRSLp24uLgj3LUmJNm6UwpxcXEf4v4BU2SVjGIlj/UAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

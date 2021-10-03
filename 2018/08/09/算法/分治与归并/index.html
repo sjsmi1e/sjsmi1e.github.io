@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        分治与归并 |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="分治">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>分治与归并</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">分治与归并</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-08-09T02:16:05.000Z" itemprop="datePublished" class="page-time">
+  2018-08-09
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-算法/分治与归并"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">分治与归并</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-08-09 10:16:05" datetime="2018-08-09T02:16:05.000Z"  itemprop="datePublished">2018-08-09</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+            
+	<span id="/2018/08/09/算法/分治与归并/" class="leancloud_visitors" data-flag-title="分治与归并" title="分治与归并">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/08/09/算法/分治与归并/#comment">
+            <span class="valine-comment-count" data-xid="/2018/08/09/算法/分治与归并/"></span>
+        </a>
+    </span>
+
+
+
+            
+            <span class="post-count">文章字数: 2,137</span>
+<span class="post-count">阅读时长 ≈ 11分钟</span>
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <p>分治算法的基本思想是将一个规模为N的问题分解为K个规模较小的子问题，这些子问题相互独立且与原问题性质相同。</p>
+<p>求出子问题的解，就可得到原问题的解。就像前面的我说过的二分查找，也有类似的思想。</p>
+<p>其实，学习中也有许多类似的问题可以用到分治与归并，快排与归并排序就是这样。<br><a id="more"></a><br>下里面容我记录一下我昨天下午敲的快排与归并的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//快排 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">1000</span>;</span><br><span class="line"><span class="keyword">int</span> arr[maxn];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quickshort</span><span class="params">(<span class="keyword">int</span> arr[],<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123; </span><br><span class="line">	<span class="keyword">int</span> st=l,ed=r;</span><br><span class="line">	<span class="keyword">if</span>(st&gt;=ed)</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	<span class="keyword">int</span> temp=arr[l];</span><br><span class="line">	<span class="keyword">while</span>(st&lt;ed)&#123;</span><br><span class="line">		<span class="keyword">while</span>(st&lt;ed&amp;&amp;arr[ed]&gt;=temp)&#123;</span><br><span class="line">			ed--;</span><br><span class="line">		&#125;</span><br><span class="line">		arr[st]=arr[ed];</span><br><span class="line">		<span class="keyword">while</span>(st&lt;ed&amp;&amp;arr[st]&lt;=temp)&#123;</span><br><span class="line">			st++;</span><br><span class="line">		&#125;</span><br><span class="line">		arr[ed]=arr[st];</span><br><span class="line">	&#125;</span><br><span class="line">	arr[st]=temp;</span><br><span class="line">	quickshort(arr,l,st<span class="number">-1</span>);</span><br><span class="line">	quickshort(arr,st+<span class="number">1</span>,r);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"请输入要排序数的个数：(不大于1000)"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"请输入要排序的数："</span>&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;arr[i];</span><br><span class="line">	quickshort(arr,<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"排序后的数："</span>; </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">9</span>;i++)</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;arr[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt; </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">1000</span>;</span><br><span class="line"><span class="keyword">int</span> arr[maxn];</span><br><span class="line"><span class="comment">//归并 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> beg,<span class="keyword">int</span> mid,<span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(end&lt;=beg)</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	<span class="keyword">int</span> beg1=beg,beg2=mid,a[end-beg];</span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(beg1&lt;mid&amp;&amp;beg2&lt;end)&#123;</span><br><span class="line">		<span class="keyword">if</span>(arr[beg1]&lt;=arr[beg2])</span><br><span class="line">			a[i++]=arr[beg1++];</span><br><span class="line">		<span class="keyword">if</span>(arr[beg1]&gt;arr[beg2])</span><br><span class="line">			a[i++]=arr[beg2++];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(beg1&lt;mid)&#123;</span><br><span class="line">		a[i++]=arr[beg1++];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(beg2&lt;end)&#123;</span><br><span class="line">		a[i++]=arr[beg2++];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">memcpy</span>(arr+beg,a,<span class="keyword">sizeof</span>(a));</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//排序 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">order</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> length=<span class="number">1</span>;length&lt;=n;length*=<span class="number">2</span>)&#123;</span><br><span class="line">		<span class="keyword">int</span> beg=<span class="number">0</span>,mid=beg+length,end=mid+length;</span><br><span class="line">		<span class="keyword">for</span>(;beg&lt;n;beg+=end,mid=beg+length,end=mid+length)&#123;</span><br><span class="line">			<span class="keyword">if</span>(mid&gt;n)</span><br><span class="line">				mid=n;</span><br><span class="line">			<span class="keyword">if</span>(end&gt;n)</span><br><span class="line">				end=n;</span><br><span class="line">			merge(beg,mid,end);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"请输入要排序数的个数：(不大于1000)"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"请输入要排序的数："</span>&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;arr[i];</span><br><span class="line">	order(n);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"排序后的数："</span>; </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;arr[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下里接入正题，分治与归并能解决的问题。</p>
+<p>**逆序对<br>定义：</p>
+<p>设 A 为一个有 n 个数字的有序集 (n&gt;1)，其中所有数字各不相同。</p>
+<p>如果存在正整数 i, j 使得 1 ≤ i &lt; j ≤ n 而且 A[i] &gt; A[j]，则 &lt;A[i], A[j]&gt; 这个有序对称为 A 的一个逆序对，也称作逆序数。**</p>
+<p>求的时候呢，具体思路是</p>
+<p>在归并的过程中计算每个小区间的逆序对数，进而计算出大区间的逆序对数</p>
+<p>代码入下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">10000</span>],l[<span class="number">10000</span>],r[<span class="number">10000</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> t;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> ll,<span class="keyword">int</span> mid,<span class="keyword">int</span> rr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m=<span class="number">0</span>,n=<span class="number">0</span>,i,j,k;</span><br><span class="line">    <span class="keyword">for</span>(i=ll;i&lt;=mid;i++)</span><br><span class="line">        l[m++]=a[i];</span><br><span class="line">    <span class="keyword">for</span>(i=mid+<span class="number">1</span>;i&lt;=rr;i++)</span><br><span class="line">        r[n++]=a[i];</span><br><span class="line">    i=j=<span class="number">0</span>;</span><br><span class="line">    k=ll;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;m&amp;&amp;j&lt;n)&#123;</span><br><span class="line">        <span class="keyword">if</span>(l[i]&lt;=r[j])</span><br><span class="line">            a[k++]=l[i++];</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            a[k++]=r[j++];</span><br><span class="line">            t+=m-i;<span class="comment">//小区间逆序个数 </span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;m)</span><br><span class="line">        a[k++]=l[i++];</span><br><span class="line">    <span class="keyword">while</span>(j&lt;n)</span><br><span class="line">        a[k++]=r[j++];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mid;</span><br><span class="line">    <span class="keyword">if</span>(l&lt;r)&#123;</span><br><span class="line">        mid=(l+r)/<span class="number">2</span>;</span><br><span class="line">        mergesort(l,mid);</span><br><span class="line">        mergesort(mid+<span class="number">1</span>,r);</span><br><span class="line">        cmp(l,mid,r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,i;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)&#123;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">        t=<span class="number">0</span>;</span><br><span class="line">        mergesort(<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;t&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong> HUD1394</strong><br>Minimum Inversion Number<br>Time Limit: 2000/1000 MS (Java/Others)    Memory Limit: 65536/32768 K (Java/Others)<br>Total Submission(s): 6743    Accepted Submission(s): 4112</p>
+<p>Problem Description</p>
+<p>The inversion number of a given number sequence a1, a2, …, an is the number of pairs (ai, aj) that satisfy i &lt; j and ai &gt; aj.</p>
+<p>For a given sequence of numbers a1, a2, …, an, if we move the first m &gt;= 0 numbers to the end of the seqence, we will obtain another sequence. There are totally n such sequences as the following:</p>
+<p>a1, a2, …, an-1, an (where m = 0 - the initial seqence)<br>a2, a3, …, an, a1 (where m = 1)<br>a3, a4, …, an, a1, a2 (where m = 2)<br>…<br>an, a1, a2, …, an-1 (where m = n-1)</p>
+<p>You are asked to write a program to find the minimum inversion number out of the above sequences.</p>
+<p>Input</p>
+<p>The input consists of a number of test cases. Each case consists of two lines: the first line contains a positive integer n (n &lt;= 5000); the next line contains a permutation of the n integers from 0 to n-1.</p>
+<p>Output</p>
+<p>For each case, output the minimum inversion number on a single line.</p>
+<p>Sample Input</p>
+<p>10 1 3 6 9 0 8 5 7 4 2</p>
+<p>Sample Output</p>
+<p>16</p>
+<p>题意：</p>
+<p>一个由0..n-1组成的序列，每次可以把队首的元素移到队尾，<br>          求形成的n个序列中最小逆序对数目</p>
+<p>超时思路：刚开始我以为会挺简单，就直接枚举每一次移动新序列的逆序对数取最小就行，可是这样做肯定会超时，我提交的时候就想到了（哈哈哈，勇于尝试）。</p>
+<p>AC思路：如果求出第一种情况的逆序列，其他的可以通过递推来搞出来，一开始是t[1],t[2],t[3]….t[N]</p>
+<p>它的逆序列个数是N个，如果把t[1]放到t[N]后面，逆序列个数会减少t[1]个，相应会增加N-(t[1]+1)个  </p>
+<p>例如：0123 逆序对数：0</p>
+<pre><code>1230 逆序对数：0-0+4-（0+1）=3
+
+2301逆序对数：3-1+4-（1+1）=4
+
+......
+</code></pre><p>注意，这道题是从0~n的序列才有这种推论。</p>
+<p>AC代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">5000</span>;</span><br><span class="line"><span class="keyword">int</span> cnt=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> a[maxn],b[maxn],temp[maxn];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> beg,<span class="keyword">int</span> mid,<span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(end&lt;=beg)</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	<span class="keyword">int</span> beg1=beg,beg2=mid,i=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(beg1&lt;mid&amp;&amp;beg2&lt;end)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b[beg1]&lt;=b[beg2])&#123;</span><br><span class="line">			temp[i++]=b[beg1++];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			temp[i++]=b[beg2++];</span><br><span class="line">			cnt+=mid-beg1;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">		<span class="keyword">while</span>(beg1&lt;mid)</span><br><span class="line">			temp[i++]=b[beg1++];</span><br><span class="line">		<span class="keyword">while</span>(beg2&lt;end)</span><br><span class="line">			temp[i++]=b[beg2++];</span><br><span class="line">	<span class="built_in">memcpy</span>(b+beg,temp,<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * (end-beg));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">order</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> length=<span class="number">1</span>;length&lt;=n;length*=<span class="number">2</span>)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> beg=<span class="number">0</span>,mid=beg+length,end=mid+length;beg&lt;n;beg=end,mid=beg+length,end=mid+length)&#123;</span><br><span class="line">			<span class="keyword">if</span>(mid&gt;n)</span><br><span class="line">				mid=n;</span><br><span class="line">			<span class="keyword">if</span>(end&gt;n)</span><br><span class="line">				end=n;</span><br><span class="line">			merge(beg,mid,end);	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">		b[i]=a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	cnt=<span class="number">0</span>; </span><br><span class="line">	<span class="keyword">int</span> tcnt=<span class="number">999999999</span>;<span class="comment">//这个9必须多，第一次我提交9写少了，WA了。所以，以后用0x3f3f3f吧 </span></span><br><span class="line">	order(n);</span><br><span class="line">	tcnt=min(tcnt,cnt);	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt = cnt - a[i] + n - <span class="number">1</span> - a[i];</span><br><span class="line">            tcnt=min(tcnt,cnt);</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;tcnt&lt;&lt;<span class="built_in">endl</span>;	</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>最大和连续子序列问题：</strong><br>给定K个整数的序列{ N1, N2, …, NK }，其任意连续子序列可表示为{ Ni, Ni+1, …, Nj }，其中 1 &lt;= i &lt;= j &lt;= K。最大连续子序列是所有连续子序列中元素和最大的一个， </p>
+<p>例如给定序列{ -2, 11, -4, 13, -5, -2 }，其最大连续子序列为{ 11, -4, 13 }，最大和 为20。<br>要求编写程序得到最大和。</p>
+<p>这种题解法很多，这里主要说一下分治解法：</p>
+<p>直接看代码：</p>
+<p>​    </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">   <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line">	<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">MaximumSubarray</span>&#123;</span></span><br><span class="line">	    <span class="keyword">int</span> low;</span><br><span class="line">	    <span class="keyword">int</span> high;</span><br><span class="line">	    <span class="keyword">int</span> sum;</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="function">MaximumSubarray <span class="title">findMaxCrossingSubarr</span><span class="params">(<span class="keyword">int</span> A[],<span class="keyword">int</span> low,<span class="keyword">int</span> mid,<span class="keyword">int</span> high)</span></span>&#123;</span><br><span class="line">	    <span class="keyword">int</span> left_sum=<span class="number">0x80000000</span>;<span class="comment">//最小负数</span></span><br><span class="line">	    <span class="keyword">int</span> right_sum=<span class="number">0x80000000</span>;<span class="comment">//最小负数</span></span><br><span class="line">	    <span class="keyword">int</span> max_left=<span class="number">0</span>;</span><br><span class="line">	    <span class="keyword">int</span> max_right=<span class="number">0</span>;</span><br><span class="line">	    <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">	    MaximumSubarray maxSubarr=&#123;<span class="number">0</span>&#125;;</span><br><span class="line">	    <span class="keyword">for</span>(<span class="keyword">int</span> i=mid;i&gt;=low;--i)&#123;</span><br><span class="line">        sum+=A[i];</span><br><span class="line">        <span class="keyword">if</span>(sum&gt;left_sum)&#123;</span><br><span class="line">            left_sum=sum;</span><br><span class="line">            max_left=i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=mid+<span class="number">1</span>;i&lt;=high;++i)&#123;</span><br><span class="line">        sum+=A[i];</span><br><span class="line">        <span class="keyword">if</span>(sum&gt;right_sum)&#123;</span><br><span class="line">            right_sum=sum;</span><br><span class="line">            max_right=i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    maxSubarr.low=max_left;</span><br><span class="line">    maxSubarr.high=max_right;</span><br><span class="line">    maxSubarr.sum=left_sum+right_sum;</span><br><span class="line">    <span class="keyword">return</span> maxSubarr;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/***********************************</span></span><br><span class="line"><span class="comment">func:求给定数组的最大子数组</span></span><br><span class="line"><span class="comment">para:A:数组;low:左下标;high:右下标</span></span><br><span class="line"><span class="comment">***********************************/</span></span><br><span class="line"><span class="function">MaximumSubarray <span class="title">findMaxSubarr</span><span class="params">(<span class="keyword">int</span> A[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span>&#123;</span><br><span class="line">    MaximumSubarray maxSubarrLeft=&#123;<span class="number">0</span>&#125;;</span><br><span class="line">    MaximumSubarray maxSubarrRight=&#123;<span class="number">0</span>&#125;;</span><br><span class="line">    MaximumSubarray maxSubarrCross=&#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">if</span>(high==low)&#123;          <span class="comment">//特殊情况：只有一个元素</span></span><br><span class="line">        maxSubarrLeft.low=low;</span><br><span class="line">        maxSubarrLeft.high=high;</span><br><span class="line">        maxSubarrLeft.sum=A[low];</span><br><span class="line">        <span class="keyword">return</span> maxSubarrLeft;  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid=(low+high)/<span class="number">2</span>;</span><br><span class="line">    maxSubarrLeft=findMaxSubarr(A,low,mid);</span><br><span class="line">    maxSubarrRight=findMaxSubarr(A,mid+<span class="number">1</span>,high);</span><br><span class="line">    maxSubarrCross=findMaxCrossingSubarr(A,low,mid,high);</span><br><span class="line">    <span class="keyword">if</span>(maxSubarrLeft.sum&gt;maxSubarrRight.sum&amp;&amp;maxSubarrLeft.sum&gt;maxSubarrCross.sum)</span><br><span class="line">        <span class="keyword">return</span> maxSubarrLeft;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(maxSubarrRight.sum&gt;maxSubarrLeft.sum&amp;&amp; maxSubarrRight.sum&gt;maxSubarrCross.sum)</span><br><span class="line">        <span class="keyword">return</span> maxSubarrRight;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> maxSubarrCross;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>* argv[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,arr[<span class="number">100000</span>];</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,j=<span class="number">-1</span>;i&lt;n;j++,i++)&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;arr[i];</span><br><span class="line">		<span class="keyword">if</span>(i!=<span class="number">0</span>)&#123;</span><br><span class="line">			arr[j]=arr[i]-arr[i<span class="number">-1</span>];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//	for(int i=0;i&lt;n;i++)</span></span><br><span class="line"><span class="comment">//		cout&lt;&lt;arr[i]&lt;&lt;" ";</span></span><br><span class="line">	MaximumSubarray resMaxSubarr=findMaxSubarr(arr,<span class="number">0</span>,n<span class="number">-2</span>);</span><br><span class="line"> <span class="comment">//   cout&lt;&lt;"maximum subarray is:"&lt;&lt;endl;</span></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;resMaxSubarr.low&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;resMaxSubarr.high&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;resMaxSubarr.sum&lt;&lt;<span class="built_in">endl</span>;	</span><br><span class="line">&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 以上是我关于分治与归并的总结！！！</p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-05-09T06:07:00.057Z" itemprop="dateUpdated">2020-05-09 14:07:00</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2018/08/09/算法/分治与归并/" target="_blank" rel="external">http://www.sjsmile.cn/2018/08/09/算法/分治与归并/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sjsmile.cn">
+            <img src="/img/avatar.jpg" alt="Smile">
+            Smile
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分治/">分治</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2018/08/09/算法/分治与归并/&title=《分治与归并》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2018/08/09/算法/分治与归并/&title=《分治与归并》 — MY STUDY BLOG&source=分治算法的基本思想是将一个规模为N的问题分解为K个规模较小的子问题，这些子问题相互独立且与原问题性质相同。
+求出子问题的解，就可得到原问题的解。就像前面的..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2018/08/18/算法/KMP/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">KMP</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2018/08/07/算法/贪心-二分/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">贪心+二分</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2018/08/09/算法/分治与归并/&title=《分治与归并》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2018/08/09/算法/分治与归并/&title=《分治与归并》 — MY STUDY BLOG&source=分治算法的基本思想是将一个规模为N的问题分解为K个规模较小的子问题，这些子问题相互独立且与原问题性质相同。
+求出子问题的解，就可得到原问题的解。就像前面的..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACOElEQVR42u3aS27DMAxFUe9/0y6QUYFWzn2kEsD01ahwmkrHA5YfHQde52v9ffJ7rZ6vvrvaZfXphiVDhozbMs7LRTYmvOvfXzHI2WTIkPEcxvURCezNNpd78V2Wz2XIkCEDA9Ljpi9LhgwZMnjA5eUoZ8uQIUPGNYMUsbWmG2+ofakWlyFDxg0Z6WDgmz9/cL4hQ4aMmzDOcNWCY+3VBKeSIUPGaAYZK3YiGw+v/QacDBkypjJqhWt6SaIzTkBtPhkyZIxmfLpw7bT+01PJkCFjNoME3DTkpa1/Tg3mGzJkyBjB4Ee8fsKD6a6y9qjljzJkyLgho1aa8tYbb+3xlxJ3EGXIkHFzBm+u8XQwTQo7gVuGDBlPYKQJXFr6pn2+2uhUhgwZsxnpNYugh4cDMa9G0f8NGTJkjGP0Q+euFhsP92/qbxkyZAxl8BI0LT7Jy9oc6GXIkDGOcTZWmiam30ItNj6jkCFDxiBGWlLWUsk0rwvSQRkyZIxj7L1gkR6rMzxYhl0ZMmSMY5AW264rF7XXEYRaGTJkjGbwJlpnAHAddnn4/ueJDBkyRjN4U762PTn6UVpvMlwZMmQMYnSGAbVhJw+jPMWUIUPGbEYrToMQXPubPMWUIUPGcxidSxX9Mjh9jsYDMmTIGMqoJXk87asNIYKkUIYMGTI+1pJLE010Z0SGDBmPZ/CRQOsKBb6oIUOGjOcwagVnbTC56wJHHONlyJBxW0angKyNM2tNuk4BLEOGjNsyfgADiomHVgOrogAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

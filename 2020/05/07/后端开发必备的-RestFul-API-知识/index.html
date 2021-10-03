@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        后端开发必备的 RestFul API 知识 |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="java">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>后端开发必备的 RestFul API 知识</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">后端开发必备的 RestFul API 知识</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-05-07T12:13:40.000Z" itemprop="datePublished" class="page-time">
+  2020-05-07
+</time>
+
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-后端开发必备的-RestFul-API-知识"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">后端开发必备的 RestFul API 知识</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-05-07 20:13:40" datetime="2020-05-07T12:13:40.000Z"  itemprop="datePublished">2020-05-07</time>
+
+            
+
+
+            
+	<span id="/2020/05/07/后端开发必备的-RestFul-API-知识/" class="leancloud_visitors" data-flag-title="后端开发必备的 RestFul API 知识" title="后端开发必备的 RestFul API 知识">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/07/后端开发必备的-RestFul-API-知识/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/07/后端开发必备的-RestFul-API-知识/"></span>
+        </a>
+    </span>
+
+
+
+            
+            <span class="post-count">文章字数: 2,494</span>
+<span class="post-count">阅读时长 ≈ 9分钟</span>
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <p><a rel=后端开发必备的 RestFul API 知识 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_16_06_1.png" title="image-20200507201600488" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/2020_05_07_20_16_06_1.png" alt="image-20200507201600488"></a></p>
+<p>RestFul API 是每个程序员都应该了解并掌握的基本知识，我们在开发过程中设计API的时候也应该至少要满足RestFul API的最基本的要求（比如接口中尽量使用名词，使用POST 请求创建资源，DELETE请求删除资源等等，示例：GET   /notes/id：获取某个指定id的笔记的信息）。最近学习过程中接触到这些东西，自己没有时间总结，所以分享一些不错的文章给大家。</p>
+<p>相关阅读：</p>
+<a id="more"></a>
+<p>•<a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html（阮一峰，这篇文章大部分内容来源）" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2014/05/restful_api.html（阮一峰，这篇文章大部分内容来源）</a></p>
+<p>•<a href="https://www.baeldung.com/spring-hateoas-tutorial" target="_blank" rel="noopener">https://www.baeldung.com/spring-hateoas-tutorial</a>(RestFul API Tutorial)</p>
+<p>•<a href="https://aisensiy.github.io/2017/06/04/spring-boot-and-hateoas/(Spring中使用HATEOAS)" target="_blank" rel="noopener">https://aisensiy.github.io/2017/06/04/spring-boot-and-hateoas/(Spring中使用HATEOAS)</a></p>
+<p>•<a href="https://spring.io/guides/tutorials/bookmarks/" target="_blank" rel="noopener">https://spring.io/guides/tutorials/bookmarks/</a> (Building REST services with Spring)</p>
+<p>•<a href="https://www.baeldung.com/spring-hateoas-tutorial(https://www.baeldung.com/spring-hateoas-tutorial)" target="_blank" rel="noopener">https://www.baeldung.com/spring-hateoas-tutorial(https://www.baeldung.com/spring-hateoas-tutorial)</a></p>
+<h3 id="备注：HATEOAS这个大家可能之前并没有怎么接触过，我看了很多项目的源码也并没有满足HATEOAS设计的要求，实际上RestFul-API-最好满足HATEOAS设计，也就是在返回结果中提供链接，连向其他API方法，使得用户不查文档，也知道下一步应该做什么。"><a href="#备注：HATEOAS这个大家可能之前并没有怎么接触过，我看了很多项目的源码也并没有满足HATEOAS设计的要求，实际上RestFul-API-最好满足HATEOAS设计，也就是在返回结果中提供链接，连向其他API方法，使得用户不查文档，也知道下一步应该做什么。" class="headerlink" title="备注：HATEOAS这个大家可能之前并没有怎么接触过，我看了很多项目的源码也并没有满足HATEOAS设计的要求，实际上RestFul API 最好满足HATEOAS设计，也就是在返回结果中提供链接，连向其他API方法，使得用户不查文档，也知道下一步应该做什么。"></a>备注：HATEOAS这个大家可能之前并没有怎么接触过，我看了很多项目的源码也并没有满足HATEOAS设计的要求，实际上RestFul API 最好满足HATEOAS设计，也就是在返回结果中提供链接，连向其他API方法，使得用户不查文档，也知道下一步应该做什么。</h3><h3 id="一、重要概念："><a href="#一、重要概念：" class="headerlink" title="一、重要概念："></a>一、重要概念：</h3><p>REST,即Representational State Transfer的缩写，翻译过来就是”表现层状态转化”。</p>
+<ul>
+<li><strong>Resource</strong>（资源） ：对象的单个实例。例如，一只动物。它可以是一段文本、一张图片、一首歌曲、一种服务，总之就是一个具体的实在。你可以用一个URI（统一资源定位符）指向它，每种资源对应一个特定的URI。要获取这个资源，访问它的URI就可以，因此URI就成了每一个资源的地址或独一无二的识别符。</li>
+<li><strong>集合</strong>：对象的集合。例如，动物。</li>
+<li><strong>第三方</strong>：使用我们接口的开发者</li>
+<li><strong>表现层（Representation）</strong>：”资源”是一种信息实体，它可以有多种外在表现形式。我们把”资源”具体呈现出来的形式，叫做它的”表现层”（Representation）。</li>
+<li><strong>状态转化（State Transfer）</strong> 访问一个网站，就代表了客户端和服务器的一个互动过程。在这个过程中，势必涉及到数据和状态的变化。互联网通信协议HTTP协议，是一个无状态协议。这意味着，所有的状态都保存在服务器端。因此，如果客户端想要操作服务器，必须通过某种手段，让服务器端发生”状态转化”（State Transfer）。而这种转化是建立在表现层之上的，所以就是”表现层状态转化”。</li>
+</ul>
+<p>综合上面的解释，我们总结一下什么是RESTful架构：</p>
+<p>　（1）每一个URI代表一种资源；</p>
+<p>　（2）客户端和服务器之间，传递这种资源的某种表现层；</p>
+<p>　（3）客户端通过HTTP动词(GET,POST等等)，对服务器端资源进行操作，实现”表现层状态转化”。</p>
+<h3 id="二、REST接口规范"><a href="#二、REST接口规范" class="headerlink" title="二、REST接口规范"></a>二、REST接口规范</h3><h4 id="1、动作"><a href="#1、动作" class="headerlink" title="1、动作"></a>1、动作</h4><ul>
+<li>GET （SELECT）：从服务器检索特定资源，或资源列表。</li>
+<li>POST （CREATE）：在服务器上创建一个新的资源。</li>
+<li>PUT （UPDATE）：更新服务器上的资源（客户端提供更新后的整个资源）。</li>
+<li>PATCH （UPDATE）：更新服务器上的资源（客户端提供更改的属性，可以看做作是部分更新）。</li>
+<li>DELETE （DELETE）：从服务器删除资源。</li>
+</ul>
+<h4 id="2、路径（接口命名）"><a href="#2、路径（接口命名）" class="headerlink" title="2、路径（接口命名）"></a>2、路径（接口命名）</h4><p>路径又称”终点”（endpoint），表示API的具体网址。</p>
+<p>在RESTful架构中，每个网址代表一种资源（resource），所以网址中不能有动词，只能有名词，而且所用的名词往往与数据库的表格名对应。一般来说，数据库中的表都是同种记录的”集合”（collection），所以API中的名词也应该使用复数。</p>
+<p>举例来说，有一个API提供动物园（zoo）的信息，还包括各种动物和雇员的信息，则它的路径应该设计成下面这样。</p>
+<p>接口尽量使用名词，禁止使用动词，下面是一些例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET         /zoos：列出所有动物园</span><br><span class="line">POST        /zoos：新建一个动物园</span><br><span class="line">GET         /zoos/ID：获取某个指定动物园的信息</span><br><span class="line">PUT         /zoos/ID：更新某个指定动物园的信息（提供该动物园的全部信息）</span><br><span class="line">PATCH       /zoos/ID：更新某个指定动物园的信息（提供该动物园的部分信息）</span><br><span class="line">DELETE      /zoos/ID：删除某个动物园</span><br><span class="line">GET         /zoos/ID/animals：列出某个指定动物园的所有动物</span><br><span class="line">DELETE      /zoos/ID/animals/ID：删除某个指定动物园的指定动物复制代码</span><br></pre></td></tr></table></figure>
+<p>反例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/getAllCars</span><br><span class="line">/createNewCar</span><br><span class="line">/deleteAllRedCars复制代码</span><br></pre></td></tr></table></figure>
+<p>再比如，某个URI是/posts/show/1，其中show是动词，这个URI就设计错了，正确的写法应该是/posts/1，然后用GET方法表示show。</p>
+<p>如果某些动作是HTTP动词表示不了的，你就应该把动作做成一种资源。比如网上汇款，从账户1向账户2汇款500元，错误的URI是：</p>
+<blockquote>
+<p>　　POST /accounts/1/transfer/500/to/2</p>
+</blockquote>
+<p>正确的写法是把动词transfer改成名词transaction，资源不能是动词，但是可以是一种服务：</p>
+<blockquote>
+<p>　　POST /transaction HTTP/1.1</p>
+<p>　　Host: 127.0.0.1</p>
+<p>　　from=1&amp;to=2&amp;amount=500.00</p>
+</blockquote>
+<p>理清资源的层次结构，比如业务针对的范围是学校，那么学校会是一级资源(/school)，老师(/school/teachers)，学生(/school/students)就是二级资源。</p>
+<h4 id="3、版本（Versioning）"><a href="#3、版本（Versioning）" class="headerlink" title="3、版本（Versioning）"></a>3、版本（Versioning）</h4><p>应该将API的版本号放入URL。如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://api.example.com/v1/复制代码</span><br></pre></td></tr></table></figure>
+<p>另一种做法是，将版本号放在HTTP头信息中，但不如放入URL方便和直观。Github采用这种做法。</p>
+<h4 id="4、过滤信息（Filtering）"><a href="#4、过滤信息（Filtering）" class="headerlink" title="4、过滤信息（Filtering）"></a>4、过滤信息（Filtering）</h4><p>如果记录数量很多，服务器不可能都将它们返回给用户。API应该提供参数，过滤返回结果。下面是一些常见的参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">?limit=10：指定返回记录的数量</span><br><span class="line">?offset=10：指定返回记录的开始位置。</span><br><span class="line">?page_number=2&amp;page_size=100：指定第几页，以及每页的记录数。</span><br><span class="line">?sortby=name&amp;order=asc：指定返回结果按照哪个属性排序，以及排序顺序。</span><br><span class="line">?animal_type_id=1：指定筛选条件</span><br><span class="line">参数的设计允许存在冗余，即允许API路径和URL参数偶尔有重复。比如，</span><br><span class="line">GET /zoo/ID/animals 与 GET /animals?zoo_id=ID 的含义是相同的。复制代码</span><br></pre></td></tr></table></figure>
+<h4 id="5、状态码（Status-Codes）"><a href="#5、状态码（Status-Codes）" class="headerlink" title="5、状态码（Status Codes）"></a>5、状态码（Status Codes）</h4><p>状态码范围</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1xx 信息，请求收到，继续处理。范围保留用于底层HTTP的东西，你很可能永远也用不到。</span><br><span class="line">2xx 成功，行为被成功地接受、理解和采纳</span><br><span class="line">3xx 重定向，为了完成请求，必须进一步执行的动作</span><br><span class="line">4xx 客户端错误，请求包含语法错误或者请求无法实现。范围保留用于响应客户端做出的错误，例如。他们提供不良数据或要求不存在的东西。这些请求应该是幂等的，而不是更改服务器的状态。</span><br><span class="line">5xx 范围的状态码是保留给服务器端错误用的。这些错误常常是从底层的函数抛出来的，甚至</span><br><span class="line">开发人员也通常没法处理，发送这类状态码的目的以确保客户端获得某种响应。</span><br><span class="line">当收到5xx响应时，客户端不可能知道服务器的状态，所以这类状态码是要尽可能的避免。复制代码</span><br></pre></td></tr></table></figure>
+<p>服务器向用户返回的状态码和提示信息，常见的有以下一些（方括号中是该状态码对应的HTTP动词）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">200 OK - [GET]：服务器成功返回用户请求的数据，该操作是幂等的（Idempotent）。</span><br><span class="line">201 CREATED - [POST/PUT/PATCH]：用户新建或修改数据成功。</span><br><span class="line">202 Accepted - [*]：表示一个请求已经进入后台排队（异步任务）</span><br><span class="line">204 NO CONTENT - [DELETE]：用户删除数据成功。</span><br><span class="line">400 INVALID REQUEST - [POST/PUT/PATCH]：用户发出的请求有错误，服务器没有进行新建或修改数据的操作，该操作是幂等的。</span><br><span class="line">401 Unauthorized - [*]：表示用户没有权限（令牌、用户名、密码错误）。</span><br><span class="line">403 Forbidden - [*] 表示用户得到授权（与401错误相对），但是访问是被禁止的。</span><br><span class="line">404 NOT FOUND - [*]：用户发出的请求针对的是不存在的记录，服务器没有进行操作，该操作是幂等的。</span><br><span class="line">406 Not Acceptable - [GET]：用户请求的格式不可得（比如用户请求JSON格式，但是只有XML格式）。</span><br><span class="line">410 Gone -[GET]：用户请求的资源被永久删除，且不会再得到的。</span><br><span class="line">422 Unprocesable entity - [POST/PUT/PATCH] 当创建一个对象时，发生一个验证错误。</span><br><span class="line">500 INTERNAL SERVER ERROR - [*]：服务器发生错误，用户将无法判断发出的请求是否成功。</span><br><span class="line">502 网关错误</span><br><span class="line">503 Service Unavailable</span><br><span class="line">504 网关超时</span><br></pre></td></tr></table></figure>
+<h3 id="三-HATEOAS"><a href="#三-HATEOAS" class="headerlink" title="三 HATEOAS"></a>三 HATEOAS</h3><p>上面是RESTful API最基本的东西，也是我们平时开发过程中最容易实践到的。实际上，RESTful API最好做到Hypermedia，即返回结果中提供链接，连向其他API方法，使得用户不查文档，也知道下一步应该做什么。</p>
+<p>比如，当用户向api.example.com的根目录发出请求，会得到这样一个文档。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;link&quot;: &#123;</span><br><span class="line">  &quot;rel&quot;:   &quot;collection https://www.example.com/zoos&quot;,</span><br><span class="line">  &quot;href&quot;:  &quot;https://api.example.com/zoos&quot;,</span><br><span class="line">  &quot;title&quot;: &quot;List of zoos&quot;,</span><br><span class="line">  &quot;type&quot;:  &quot;application/vnd.yourformat+json&quot;</span><br><span class="line">&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码表示，文档中有一个link属性，用户读取这个属性就知道下一步该调用什么API了。rel表示这个API与当前网址的关系（collection关系，并给出该collection的网址），href表示API的路径，title表示API的标题，type表示返回类型Hypermedia API的设计被称为HATEOAS。</p>
+<p>在Spring 中有一个叫做HATEOAS的API 库，通过它我们可以更轻松的创建除符合 HATEOAS 设计的API。</p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-05-09T06:08:03.946Z" itemprop="dateUpdated">2020-05-09 14:08:03</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2020/05/07/后端开发必备的-RestFul-API-知识/" target="_blank" rel="external">http://www.sjsmile.cn/2020/05/07/后端开发必备的-RestFul-API-知识/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sjsmile.cn">
+            <img src="/img/avatar.jpg" alt="Smile">
+            Smile
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2020/05/07/后端开发必备的-RestFul-API-知识/&title=《后端开发必备的 RestFul API 知识》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2020/05/07/后端开发必备的-RestFul-API-知识/&title=《后端开发必备的 RestFul API 知识》 — MY STUDY BLOG&source=
+RestFul API 是每个程序员都应该了解并掌握的基本知识，我们在开发过程中设计API的时候也应该至少要满足RestFul API的最基本的要求（比..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2020/05/07/java/关于Spring中的参数校验的一点思考/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">关于Spring中的参数校验的一点思考</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2019/09/21/心得/我的秋招/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">我的秋招</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#备注：HATEOAS这个大家可能之前并没有怎么接触过，我看了很多项目的源码也并没有满足HATEOAS设计的要求，实际上RestFul-API-最好满足HATEOAS设计，也就是在返回结果中提供链接，连向其他API方法，使得用户不查文档，也知道下一步应该做什么。"><span class="post-toc-text">备注：HATEOAS这个大家可能之前并没有怎么接触过，我看了很多项目的源码也并没有满足HATEOAS设计的要求，实际上RestFul API 最好满足HATEOAS设计，也就是在返回结果中提供链接，连向其他API方法，使得用户不查文档，也知道下一步应该做什么。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、重要概念："><span class="post-toc-text">一、重要概念：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、REST接口规范"><span class="post-toc-text">二、REST接口规范</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、动作"><span class="post-toc-text">1、动作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、路径（接口命名）"><span class="post-toc-text">2、路径（接口命名）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3、版本（Versioning）"><span class="post-toc-text">3、版本（Versioning）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4、过滤信息（Filtering）"><span class="post-toc-text">4、过滤信息（Filtering）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5、状态码（Status-Codes）"><span class="post-toc-text">5、状态码（Status Codes）</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三-HATEOAS"><span class="post-toc-text">三 HATEOAS</span></a></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2020/05/07/后端开发必备的-RestFul-API-知识/&title=《后端开发必备的 RestFul API 知识》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2020/05/07/后端开发必备的-RestFul-API-知识/&title=《后端开发必备的 RestFul API 知识》 — MY STUDY BLOG&source=
+RestFul API 是每个程序员都应该了解并掌握的基本知识，我们在开发过程中设计API的时候也应该至少要满足RestFul API的最基本的要求（比..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtUlEQVR42u3a0WrrMBAE0P7/T/e+FnqdzOxKpYXjpxA7to4DWjGrj4/4+PxyPH3//ezTNV+vfPqcnD124OHh4S2G/noQp3hP93x9t9dXPo4BDw8P7xrvaVivb70vIflrTYoEHh4e3l/nzTDJK8PDw8P7W7zoposoYRZb4OHh4f08bz9lJwUjLzzJyzqcteDh4eHFvHyy/j2fr/T38PDw8NZd9X2Emi/EZ822N6PFw8PDu8DLJ9w8kH09rASzKQx4eHh4P88rJtyy3bUJc/PG23+egoeHh3eNN5u+TwW4myj2za/w8PDwrvH2oe2sDOwLwJsn4uHh4R3lJUPMt1htAtl6K9Wsa4eHh4e35rUTdBLRJmfbgGP/l+Dh4eHd4N3YxXS2udWODQ8PD+8ebxPdbmLWpJzk4XIRSeDh4eEd4g0b86PBtU2v2YYGPDw8vBu8PHLNqe10n5eBug2Gh4eHd5nXBqxn+03tK4tKCx4eHt4F3mx7wWy7wOwp+UsZxsF4eHh4h3j5MjoPedvJvV2sFy8XDw8Pb8HLtz3lEUPyFtvQNi8Sj/k0Hh4e3iFe+8jhtqfLZ6Nr8PDw8I7y8gb/PoBoY+K2RNWJMh4eHl7J2yyF898O94LFYcfwf8PDw8Mb8fIbzQpD+9s8xq0jCTw8PLyjvM2mpXzbUxLO5ovyupuHh4eHd4HXtvPza5LG/6zMRKUIDw8P70d47ezaPr5ta61KFB4eHt5R3md5tK2sYvoOYO0GAjw8PLwbvFnosAlk24Vyu0BvywkeHh7ejJcUg3ZDwCZcmAW+bzp7eHh4eBd4SQAxW/huFsezhhweHh7eb+NtwoW8GOT4N9fj4eHh/RpeHkzMwo58y8KbZ+Hh4eFd47WBwgZf7Gsol9GrrAUPDw+vSxXqW2xa+C1muCEADw8P7zzvH27GxTqu1CzJAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

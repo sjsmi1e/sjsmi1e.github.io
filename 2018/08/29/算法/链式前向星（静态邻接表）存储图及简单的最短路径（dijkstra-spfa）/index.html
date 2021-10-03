@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa） |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="最短路">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-08-29T05:44:19.000Z" itemprop="datePublished" class="page-time">
+  2018-08-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-08-29 13:44:19" datetime="2018-08-29T05:44:19.000Z"  itemprop="datePublished">2018-08-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+            
+	<span id="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/" class="leancloud_visitors" data-flag-title="链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）" title="链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/#comment">
+            <span class="valine-comment-count" data-xid="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/"></span>
+        </a>
+    </span>
+
+
+
+            
+            <span class="post-count">文章字数: 1,827</span>
+<span class="post-count">阅读时长 ≈ 9分钟</span>
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <p>链式前向星，也叫静态邻接表，今天我讲的是关于图的东西，所以都以图的角度去看待这个较优化的存储结构。</p>
+<h1 id="存图优缺点"><a href="#存图优缺点" class="headerlink" title="存图优缺点"></a>存图优缺点</h1><p>存图的时候，链式前向星是一种介于邻接矩阵和和邻接表的一种存储结构。</p>
+<h2 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h2><p>存图一般都用这个呀！不过啊，当遇到稀疏图的时候，顶点特别多，而边就那么几条，空间浪费必然很大，所以我们又想到了邻接表</p>
+<h2 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h2><p>邻接表（未优化过的链式前向星）是最常用存储结构之一。 但是 vector(动态数组) 的时间效率较低 (较普通数组而言)。</p>
+<p>所以，链式前向星也就因运而生。链式前向星是介于 邻接矩阵 和 邻接表 之间比较均衡的一种数据结构。</p>
+<h2 id="链式前向星"><a href="#链式前向星" class="headerlink" title="链式前向星"></a>链式前向星</h2><p>先来看一下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//链式前向星的存储结构</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> to;<span class="comment">//边指向的终点</span></span><br><span class="line">    <span class="keyword">int</span> next;<span class="comment">//下一条边的存储下标</span></span><br><span class="line">    <span class="keyword">int</span> w;<span class="comment">//权值</span></span><br><span class="line">&#125;edge[maxn];</span><br><span class="line"><span class="keyword">int</span> head[maxn];</span><br><span class="line"><span class="keyword">int</span> cnt;</span><br><span class="line"><span class="comment">//增边</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add_edge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    edge[cnt].w=w;</span><br><span class="line">    edge[cnt].to=v;</span><br><span class="line">    edge[cnt].next=head[u];</span><br><span class="line">    head[u]=cnt++;<span class="comment">//需初始化cnt=0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>举个列子：</p>
+<figure class="image-box">
+                <a rel=链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa） href="https://img-blog.csdn.net/20131123160056593" title="" data-fancybox="images"><img src="https://img-blog.csdn.net/20131123160056593" alt="" title="" class=""></a>
+                <p></p>
+            </figure>
+<p>这是我拿别人家博客的图片的哦，希望不要介意呀！</p>
+<p>对于这样一个图，我们进行增边操作；</p>
+<p>1.首先，cnt初始化，可以是0，也可以是一，看你个人喜好。head[]数组初始化，可以是0也可以是1.</p>
+<p>2.调用函数增边：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)<span class="comment">//n代表边数</span></span><br><span class="line">  &#123;</span><br><span class="line">      <span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v&gt;&gt;w;<span class="comment">//u是起始点，v是这条边的终点，w是权值</span></span><br><span class="line">      add_edge(u,v,w);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>例如上图，就是输入（我这里没权值，直接忽略吧）：</p>
+<p>1 2 </p>
+<p>2 3</p>
+<p>3 4</p>
+<p>1 3</p>
+<p>4 1</p>
+<p>1 5</p>
+<p>4 5</p>
+<p>这样就建成了一张链式前向星的图。</p>
+<p>其他相信大家都好理解，就是 edge[].next=head[]  这个比较模糊，其实就是存的是以 i 为起点，连接着 i 的顶点编号的最大编号所在的边数，就如上图（按输入顺序编号），1-&gt;2（第0条边）,1-&gt;3（第3条边）,1-&gt;5（第5条边）,而edge[5].next=3;edge[3].next=0;所以在遍历的时候，就相当于倒着遍历，就有这样的语句</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=head[u];i!=<span class="number">-1</span>;i=edge[i].next)&#123;</span><br><span class="line">       ...</span><br><span class="line">&#125;<span class="comment">//u是起点（当前节点）</span></span><br></pre></td></tr></table></figure>
+<p>有了这样一个邻接表的基础，那么对于图的最大经典问题，最短路，在这样的存储结构下又有什么不一样呢。看下面代码：</p>
+<h2 id="dijsktra"><a href="#dijsktra" class="headerlink" title="dijsktra"></a>dijsktra</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//堆优化的最短路</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span> ,<span class="keyword">int</span> &gt; P;<span class="comment">//存编号与距离</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span><span class="comment">//s为起点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    priority_queue&lt; P,<span class="built_in">vector</span>&lt;P&gt;,greater&lt;P&gt; &gt; q;</span><br><span class="line">    <span class="built_in">memset</span>(d,inf,<span class="keyword">sizeof</span>(d));</span><br><span class="line">    <span class="comment">//memset(vis,0,sizeof(vis));</span></span><br><span class="line">    d[s]=<span class="number">0</span>;</span><br><span class="line">    q.push(P(<span class="number">0</span>,s));</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        P p=q.top();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">int</span> u=p.second;</span><br><span class="line">        <span class="keyword">if</span>(d[u]&lt;p.first)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=head[u];i!=<span class="number">-1</span>;i=edge[i].next)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> v=edge[i].to;</span><br><span class="line">            <span class="keyword">if</span>(d[v]&gt;d[u]+edge[i].w)&#123;</span><br><span class="line">                d[v]=d[u]+edge[i].w;</span><br><span class="line">                q.push(P(d[v],v));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面是用了堆优化（priority_queue）后的dijkstra模板，最主要的思想就是松弛到不能再松弛位置， 然后遍历的过程就是松弛过程。可能对于一些题目， priority_queue&lt; P,vector</p><p>,greater</p><p> &gt; q;中的 greater 会有一些超时，重载运算符也是一种解决办法。复杂度：</p>
+<p>O((V+E)lgV)</p>
+<h2 id="SPFA"><a href="#SPFA" class="headerlink" title="SPFA"></a>SPFA</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> d[maxn];<span class="comment">//记录最短距离</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> vis[maxn];<span class="comment">//判断是否在队列中</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SPFA</span><span class="params">(<span class="keyword">int</span> s)</span><span class="comment">//可以计算含负权的图</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(d,inf,<span class="keyword">sizeof</span>(d));</span><br><span class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span> &gt; q;</span><br><span class="line">    q.push(s);</span><br><span class="line">    vis[s]=<span class="number">1</span>;</span><br><span class="line">    d[s]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u=q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        vis[u]=<span class="number">0</span>;</span><br><span class="line">        <span class="comment">//开始遍历松弛</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=head[u];i!=<span class="number">-1</span>;i=edge[i].next)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> v=edge[i].to;</span><br><span class="line">            <span class="keyword">if</span>(d[v]&gt;d[u]+edge[i].w)</span><br><span class="line">            &#123;</span><br><span class="line">                d[v]=d[u]+edge[i].w;</span><br><span class="line">                <span class="keyword">if</span>(!vis[v])</span><br><span class="line">                &#123;</span><br><span class="line">                    q.push(v);</span><br><span class="line">                    vis[v]=<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有没有觉得这个非常像，就是相差了vis[]这样一个数组判断，而这也就是差别，vis[]在SPFA就是判断当前点是否在队列中，从而进行松弛操作，还有就是vis[]还能判断图中是否有“负权环”（当vis[]&gt;n， 就表示有环）。</p>
+<p>复杂度：O(kE)O(kE)。</p>
+<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>如果是稠密图，Dijkstra+heap比SPFA快。稀疏图则SPFA更快。SPFA可以有SLF和LLL两种优化，SLF就是d比队头小就插入队头，否则插入队尾。</p>
+<p> 全部代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="comment">//链式前向星的存储结构</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> to;<span class="comment">//边指向的终点</span></span><br><span class="line">    <span class="keyword">int</span> next;<span class="comment">//下一条边的存储下标</span></span><br><span class="line">    <span class="keyword">int</span> w;<span class="comment">//权值</span></span><br><span class="line">&#125;edge[maxn];</span><br><span class="line"><span class="keyword">int</span> head[maxn];</span><br><span class="line"><span class="keyword">int</span> cnt;</span><br><span class="line"><span class="comment">//增边</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add_edge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    edge[cnt].w=w;</span><br><span class="line">    edge[cnt].to=v;</span><br><span class="line">    edge[cnt].next=head[u];</span><br><span class="line">    head[u]=cnt++;<span class="comment">//需初始化cnt=0</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> d[maxn];<span class="comment">//记录最短距离</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> vis[maxn];<span class="comment">//判断是否在队列中</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">void SPFA(int s)//可以计算含负权的图</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    memset(d,inf,sizeof(d));</span></span><br><span class="line"><span class="comment">    memset(vis,0,sizeof(vis));</span></span><br><span class="line"><span class="comment">    queue&lt;int &gt; q;</span></span><br><span class="line"><span class="comment">    q.push(s);</span></span><br><span class="line"><span class="comment">    vis[s]=1;</span></span><br><span class="line"><span class="comment">    d[s]=0;</span></span><br><span class="line"><span class="comment">    while(!q.empty())</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        int u=q.front();</span></span><br><span class="line"><span class="comment">        q.pop();</span></span><br><span class="line"><span class="comment">        vis[u]=0;</span></span><br><span class="line"><span class="comment">        //开始遍历松弛</span></span><br><span class="line"><span class="comment">        for(int i=head[u];i!=-1;i=edge[i].next)</span></span><br><span class="line"><span class="comment">        &#123;</span></span><br><span class="line"><span class="comment">            int v=edge[i].to;</span></span><br><span class="line"><span class="comment">            if(d[v]&gt;d[u]+edge[i].w)</span></span><br><span class="line"><span class="comment">            &#123;</span></span><br><span class="line"><span class="comment">                d[v]=d[u]+edge[i].w;</span></span><br><span class="line"><span class="comment">                if(!vis[v])</span></span><br><span class="line"><span class="comment">                &#123;</span></span><br><span class="line"><span class="comment">                    q.push(v);</span></span><br><span class="line"><span class="comment">                    vis[v]=1;</span></span><br><span class="line"><span class="comment">                &#125;</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//堆优化的最短路</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span> ,<span class="keyword">int</span> &gt; P;<span class="comment">//存编号与距离</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span><span class="comment">//s为起点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    priority_queue&lt; P,<span class="built_in">vector</span>&lt;P&gt;,greater&lt;P&gt; &gt; q;</span><br><span class="line">    <span class="built_in">memset</span>(d,inf,<span class="keyword">sizeof</span>(d));</span><br><span class="line">    <span class="comment">//memset(vis,0,sizeof(vis));</span></span><br><span class="line">    d[s]=<span class="number">0</span>;</span><br><span class="line">    q.push(P(<span class="number">0</span>,s));</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        P p=q.top();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">int</span> u=p.second;</span><br><span class="line">        <span class="keyword">if</span>(d[u]&lt;p.first)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=head[u];i!=<span class="number">-1</span>;i=edge[i].next)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> v=edge[i].to;</span><br><span class="line">            <span class="keyword">if</span>(d[v]&gt;d[u]+edge[i].w)&#123;</span><br><span class="line">                d[v]=d[u]+edge[i].w;</span><br><span class="line">                q.push(P(d[v],v));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m;<span class="comment">//顶点数</span></span><br><span class="line">    <span class="keyword">int</span> n;<span class="comment">//边数</span></span><br><span class="line">    <span class="keyword">int</span> u,v,w;</span><br><span class="line">    cnt=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;m&gt;&gt;n;</span><br><span class="line">    <span class="built_in">memset</span>(head,<span class="number">-1</span>,<span class="keyword">sizeof</span>(head));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v&gt;&gt;w;</span><br><span class="line">        add_edge(u,v,w);</span><br><span class="line">    &#125;</span><br><span class="line">    dijkstra(<span class="number">1</span>);</span><br><span class="line">    <span class="comment">//SPFA(1);</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;d[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><p>对于inf这个定义，0x7fffffff和0x3f3f3f3f这两个也是一个大坑，</p>
+<p>很多人可能设为0x7fffffff,这个数的确是32-bit int的最大值，符号位为0，其他的都是1</p>
+<p>但在很多情况下，0x7fffffff会出现错误，比如溢出，这样两个无穷大数相加会变成负数，还有如在做dijkstra求最短路时，当做松弛操作，判断if (d[u]+w[u][v]&lt;d[v]) d[v]=d[u]+w[u][v]时，若u到v没有路劲，w[u][v]=0x7fffffff，这样d[u]+w[u][v]会变成负数，这就产生了错误。</p>
+<p>所以，memset(d,0x3f,sizeof(d));</p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-05-09T06:10:36.480Z" itemprop="dateUpdated">2020-05-09 14:10:36</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/" target="_blank" rel="external">http://www.sjsmile.cn/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sjsmile.cn">
+            <img src="/img/avatar.jpg" alt="Smile">
+            Smile
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/最短路/">最短路</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/&title=《链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/&title=《链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）》 — MY STUDY BLOG&source=喜欢争取，得到珍惜" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">周末之ACM之旅：焦作网络赛与青岛网络赛</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2018/08/25/算法/2018暑期ccpc网络赛总结/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">2018暑期ccpc网络赛总结</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#存图优缺点"><span class="post-toc-text">存图优缺点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#邻接矩阵"><span class="post-toc-text">邻接矩阵</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#邻接表"><span class="post-toc-text">邻接表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#链式前向星"><span class="post-toc-text">链式前向星</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#dijsktra"><span class="post-toc-text">dijsktra</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SPFA"><span class="post-toc-text">SPFA</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#适用场景"><span class="post-toc-text">适用场景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注意："><span class="post-toc-text">注意：</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/&title=《链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/&title=《链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）》 — MY STUDY BLOG&source=喜欢争取，得到珍惜" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEg0lEQVR42u3aQW4jMQwEwPz/09nzIvC4m5wA1qR8MpyxLJUCiKT49RW/vn+8rp+8/iT/6/VMfo7w6q+vnr/5hQkTJkyYPpLp+/KVPHP93QQ6n0PC3T6ZzB8TJkyYMJ3OlP/w9VLzqSdbkgQECXcLigkTJkyYMOVBwz7sSDajnSEmTJgwYcJ0zZQHAfmC8+LyJuXGhAkTJkx/k6kdbvN8G2S06fQ+iMGECRMmTE9iyrtWnvf+V/qbMGHChAnTxzBtGnHa4OCuJPk3GnTerBoTJkyYMB3LNCu2zoBWKWVQhJ0lz8V6MWHChAnTgUybC8tZy047wr70nAccb+ImTJgwYcJ0OFNbJM0P+DwsyMOFPLVuUaKICRMmTJgwHcWUF3BbvpZjNkKbfudrx4QJEyZMT2JKUtPkMM5T5Zxmc+GabAkmTJgwYXoq06YRJ09EZ6x3pdx3tf5gwoQJE6YTmdpDcXO0zxa8L/vWl5f72AETJkyYMH0kU95Gs0kpN00/s0BkUyzGhAkTJkzPYErSxd9Yal603Rzqs3rAf6NhwoQJE6ZjmWbLmCXJLfQsIMg56vViwoQJE6YDmZJSbFs2vWbKl339eR6C5NeoLz/HhAkTJkzHMrUpaHuFmW/JpqTbpuu3xU2YMGHChOkQpvbInB3VeYF1g5jwtSk3JkyYMGE6nSk/yFuCNrm9a6kzCEyYMGHC9FSmqMQ5SmVnI+dhwSa8WH0LEyZMmDAdyzRrcNmjtGXi9iDfFIgxYcKECdO5TPmxmqSa+RRn72cHeZ5Cvww7MGHChAnTsUzJIdoewO1F5qwU247frivK9TFhwoQJ0+FMszS1vcKc/WIy5p6vuPXFhAkTJkwfyZT/2KZhdDN+e426KfK+nCcmTJgwYTqWaZbfzS4yN5ObbVW7PcVomDBhwoTpWKYk1UwuMn+7sJuP3Cbhw/8pTJgwYcL0kUx5C05eYJ2lrO0i2znnIULxX4MJEyZMmA5hymOHWUk3SWivp5s37uQzTKAxYcKECdPzmGbpaHvRmAccmwO+3aSXW4UJEyZMmI5lurf8mifVbTK8SaFn2zyshWPChAkTpo9k2nC0JdqkEFwXYYPx89+NKuKYMGHChOkopjYg2By6m2O7DTuS784agzBhwoQJ0ylM1+XUTaNPXvZNNqC9fG1He7NhmDBhwoTpQUxtNDEjyK8q29Q3DzKK609MmDBhwvQ4pna6eUm3TVNni2zh3gQWmDBhwoTpEUyzq8FZc8wmKW2r1wn0m1/EhAkTJkzHMrVAs6M3adC565I12ZgZKCZMmDBhOpFp1vjSXnwmQJsGnVnRuWgqwoQJEyZMxzLtD+OkdWbz/hp99t38eUyYMGHC9Ayme4OA/HBNDun2gG8Lu0XxFxMmTJgwHc40a3zZt9HMyq9ts9ENL0yYMGHC9GeYNovPk9j9Yd+SvakNYMKECROmP8OUPz9rr7mrITXniy47MWHChAnT4UxJkTeZ7qwZaAaUQCSpe7Q6TJgwYcJ0LNOswnlDMlke5/vNuLmbCRMmTJgwfTrTPxge1GW1KNQtAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

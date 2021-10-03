@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        我的one_year |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="总结">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>我的one_year</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">我的one_year</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-02-19T11:58:31.000Z" itemprop="datePublished" class="page-time">
+  2019-02-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/进阶之路/">进阶之路</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-心得/我的one-year"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">我的one_year</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-02-19 19:58:31" datetime="2019-02-19T11:58:31.000Z"  itemprop="datePublished">2019-02-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/进阶之路/">进阶之路</a></li></ul>
+
+
+
+            
+	<span id="/2019/02/19/心得/我的one-year/" class="leancloud_visitors" data-flag-title="我的one_year" title="我的one_year">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2019/02/19/心得/我的one-year/#comment">
+            <span class="valine-comment-count" data-xid="/2019/02/19/心得/我的one-year/"></span>
+        </a>
+    </span>
+
+
+
+            
+            <span class="post-count">文章字数: 1,975</span>
+<span class="post-count">阅读时长 ≈ 9分钟</span>
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>年已经过了，今天是元宵节，南方人生活在北方，虽然没有什么元宵啊，汤圆啊，或者大鱼大肉，来到学校也是冷冷清清的。有闲情，来回顾一下去年一整年所做和所得。</p>
+<p>首先，从懵懂少年，有着雄心却有些迷茫的少年开始了实际行动。思想不在是以前那么幼稚，开始了真正的思考。</p>
+<p>自己找所需去学习，开始为自己以后的路所打算。点点滴滴，慢慢在积累，但总觉得还是有些晚了的感觉。下面，开始我的数落数落。。。</p>
+<a id="more"></a>
+<h1 id="进阶之路"><a href="#进阶之路" class="headerlink" title="进阶之路"></a>进阶之路</h1><h2 id="python以及它的爬虫"><a href="#python以及它的爬虫" class="headerlink" title="python以及它的爬虫"></a>python以及它的爬虫</h2><p>大一下学期那个暑假，我就开始接触python以及怎么爬虫。当时还仅仅是一个懵懂状态，网上教学参差不齐，五花八门，根本不知道那个是真正有用或者值得信赖！所以，学的是那么的杂乱无章，加上没有把电脑带回家，实践也就无从谈起。所以，好后悔浪费了那时的一个暑假。只能所学到了一些皮毛！</p>
+<p>后来，我才发现，必须得真正系统的学习才行。所以，大二下学期，我就开始跟着我从淘宝上买来的课程，一步一步去系统学习。可能也是年龄的增长，或者说是更系统化了，所以，更清楚的明白一门语言该怎么学习。有大相径庭。但是，真正的精髓就在那个不同。python语法简单，但是没有像c 那样更接近底层，所以，速度上会慢，这就是那个不同。</p>
+<p>学着学着，慢慢把python基础给学习完了。那时候，听说大多数人把python基础学完之后就开始学习爬虫，我暑假也尝试过，但是没有那么的要紧，所以就缓了下来（因为我开始弄算法，去参加一些算法的竞赛，开始了java的学习）。直到这个寒假，我才重拾旧本，开始继续的“有趣”玩耍。</p>
+<p><strong>下面是我的一些python的简单小案例：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Author: smile丶</span></span><br><span class="line"><span class="comment"># @Date:   2019-02-11 14:08:51</span></span><br><span class="line"><span class="comment"># @Last Modified by:   smile丶</span></span><br><span class="line"><span class="comment"># @Last Modified time: 2019-02-19 15:57:16</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">#cdsn新闻首页所有链接爬取</span></span><br><span class="line"><span class="string">url="http://www.csdn.net/"</span></span><br><span class="line"><span class="string">data=urllib.request.urlopen(url).read()</span></span><br><span class="line"><span class="string">data2=data.decode("utf-8","ignore")</span></span><br><span class="line"><span class="string">pat='href="(https://blog.csdn.net/.*?)"'</span></span><br><span class="line"><span class="string">allurl=re.compile(pat).findall(data2)</span></span><br><span class="line"><span class="string">index=1;</span></span><br><span class="line"><span class="string">for i in allurl:</span></span><br><span class="line"><span class="string">	file="C:/Users/Administrator/Desktop/爬虫/csdnnews/"+str(index)+".html";</span></span><br><span class="line"><span class="string">	urllib.request.urlretrieve(i,file)</span></span><br><span class="line"><span class="string">	print(str(index)+"success")</span></span><br><span class="line"><span class="string">	index=index+1</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">#sinanews新浪新闻首页所有链接爬取</span></span><br><span class="line"><span class="string">url="https://news.sina.com.cn/"</span></span><br><span class="line"><span class="string">data=urllib.request.urlopen(url).read()</span></span><br><span class="line"><span class="string">data2=data.decode("utf-8","ignore")</span></span><br><span class="line"><span class="string">pat='href="(https://news.sina.com.cn/.*?)"'</span></span><br><span class="line"><span class="string">allurl=re.compile(pat).findall(data2)</span></span><br><span class="line"><span class="string">index=1;</span></span><br><span class="line"><span class="string">for i in allurl:</span></span><br><span class="line"><span class="string">	file="C:/Users/Administrator/Desktop/爬虫/sinanews/"+str(index)+".html";</span></span><br><span class="line"><span class="string">	urllib.request.urlretrieve(i,file)</span></span><br><span class="line"><span class="string">	print(str(index)+"success")</span></span><br><span class="line"><span class="string">	index=index+1</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""JD商品图片爬取简单版"""</span></span><br><span class="line">keyword=<span class="string">"连衣裙"</span></span><br><span class="line"><span class="comment">#编码</span></span><br><span class="line">keyword=urllib.request.quote(keyword)</span><br><span class="line"><span class="comment">#仿浏览器访问</span></span><br><span class="line">headers=(<span class="string">"User-Agent"</span>,<span class="string">"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.81 Safari/537.36"</span>)</span><br><span class="line">opener=urllib.request.build_opener()</span><br><span class="line">opener.addheaders=[headers]</span><br><span class="line">urllib.request.install_opener(opener)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">	url=<span class="string">'https://search.jd.com/Search?keyword='</span>+keyword+<span class="string">'&amp;enc=utf-8&amp;page='</span>+str((i+<span class="number">1</span>)*<span class="number">2</span><span class="number">-1</span>)</span><br><span class="line">	<span class="comment">#print(url)</span></span><br><span class="line">	data=urllib.request.urlopen(url).read().decode(<span class="string">"utf-8"</span>,<span class="string">"ignore"</span>)</span><br><span class="line">	<span class="comment">#正则</span></span><br><span class="line">	pat=<span class="string">' source-data-lazy-img="//(.*?)" '</span></span><br><span class="line">	images=re.compile(pat).findall(data)</span><br><span class="line">	index=<span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> images:</span><br><span class="line">		file=<span class="string">"C:/Users/Administrator/Desktop/爬虫/JDIMG/连衣裙/"</span>+str(i)+str(index)+<span class="string">".jpg"</span></span><br><span class="line">		index=index+<span class="number">1</span></span><br><span class="line">		urllib.request.urlretrieve(<span class="string">"http://"</span>+j,filename=file)</span><br><span class="line">		print(<span class="string">"第"</span>+str(i)+<span class="string">"页"</span>+<span class="string">"第"</span>+str(index)+<span class="string">"张图成功！"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env python</span></span><br><span class="line"><span class="comment"># !-*-coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># ! @Time     : 16:27</span></span><br><span class="line"><span class="comment"># ! @Author   :smile丶</span></span><br><span class="line"><span class="comment"># ! @File     :糗事百科爬取.py,糗事百科爬取热门段子爬取（re与requests）</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> fake_useragent <span class="keyword">import</span> UserAgent</span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">"user-agent"</span> : UserAgent().chrome</span><br><span class="line">&#125;</span><br><span class="line">url = <span class="string">"https://www.qiushibaike.com/hot/"</span></span><br><span class="line">resp = requests.get(url,headers=headers)</span><br><span class="line">resp.encoding=<span class="string">"utf-8"</span></span><br><span class="line">info = resp.text</span><br><span class="line">infos=re.findall(<span class="string">r'&lt;div class="content"&gt;\W+&lt;span&gt;\W+(.+)'</span>,info)</span><br><span class="line"><span class="comment"># 写入到文件</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"段子.txt"</span>,<span class="string">"a"</span>,encoding=<span class="string">"utf-8"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    index=<span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> infos:</span><br><span class="line">        result=re.sub(<span class="string">r'&lt;br/&gt;'</span>,<span class="string">"\n"</span>,i)</span><br><span class="line">        <span class="comment"># print(result)</span></span><br><span class="line">        f.write(<span class="string">"第"</span>+str(index)+<span class="string">"个段子：\n\n"</span>+result+<span class="string">"\n\n\n"</span>)</span><br><span class="line">        index+=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env python</span></span><br><span class="line"><span class="comment"># !-*-coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># !@Time     : 17:18</span></span><br><span class="line"><span class="comment"># !@Author   :smile丶</span></span><br><span class="line"><span class="comment"># !@File     :JD商品图片爬取（selenium+xpath+多线程）</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"><span class="keyword">from</span> fake_useragent <span class="keyword">import</span> UserAgent</span><br><span class="line"><span class="keyword">from</span> queue <span class="keyword">import</span> Queue</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"><span class="comment">#无头打开</span></span><br><span class="line">options = webdriver.ChromeOptions()</span><br><span class="line">options.add_argument(<span class="string">"--headless"</span>)</span><br><span class="line">chrome = webdriver.Chrome(chrome_options=options)</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">"user-agent"</span> : UserAgent().chrome</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#请求</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_html</span><span class="params">(url)</span>:</span></span><br><span class="line">    chrome.get(url)</span><br><span class="line">    js = <span class="string">'document.documentElement.scrollTop=100000'</span></span><br><span class="line">    chrome.execute_script(js)</span><br><span class="line">    sleep(<span class="number">10</span>)</span><br><span class="line">    html = chrome.page_source</span><br><span class="line">    <span class="comment"># 解析</span></span><br><span class="line">    e = etree.HTML(html)</span><br><span class="line">    info = etree.tostring(e)</span><br><span class="line">    info.decode(<span class="string">"utf-8"</span>)</span><br><span class="line">    <span class="keyword">return</span> e</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_url</span><span class="params">(keyword,pages)</span>:</span></span><br><span class="line">    urls=Queue()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,pages):</span><br><span class="line">        res = <span class="string">"https://search.jd.com/Search?keyword="</span>+keyword+<span class="string">"&amp;enc=utf-8&amp;page="</span>+str(<span class="number">2</span>*(i+<span class="number">1</span>)<span class="number">-1</span>)+<span class="string">"&amp;wq="</span>+keyword</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">        urls.put(res)</span><br><span class="line">    <span class="keyword">return</span> urls</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_imgs</span><span class="params">(imgs,keyword)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> imgs:</span><br><span class="line">        <span class="keyword">if</span> i != <span class="string">"done"</span>:</span><br><span class="line">            url=<span class="string">"http:"</span>+i</span><br><span class="line">            resp = requests.get(url, headers=headers)</span><br><span class="line">            result = resp.content</span><br><span class="line">            <span class="keyword">with</span> open(<span class="string">"./imgs/"</span>+keyword+<span class="string">"/"</span>+str(uuid.uuid1())+<span class="string">".jpg"</span>,<span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">                f.write(result)</span><br><span class="line">                f.close()</span><br><span class="line"><span class="comment"># 多线程</span></span><br><span class="line"><span class="class"><span class="keyword">class</span>  <span class="title">begin_go</span><span class="params">( Thread )</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,urls,keyword)</span>:</span></span><br><span class="line">        Thread.__init__(self)</span><br><span class="line">        self.urls=urls</span><br><span class="line">        self.keyword=keyword</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">while</span> self.urls.empty() == <span class="keyword">False</span>:</span><br><span class="line">            e = get_html(urls.get())</span><br><span class="line">            imgs1 = e.xpath(<span class="string">'//li[@class="gl-item"]/div/div[@class="p-img"]/a/img/@src'</span>)</span><br><span class="line">            imgs2 = e.xpath(<span class="string">'//li[@class="gl-item"]/div/div[@class="p-img"]/a/img/@data-lazy-img'</span>)</span><br><span class="line">            imgs = imgs1 + imgs2</span><br><span class="line">            save_imgs(imgs,keyword)</span><br><span class="line">            print(<span class="string">"爬取完成"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    keyword = input(<span class="string">"请输入搜索的商品名："</span>)</span><br><span class="line">    <span class="keyword">if</span> os.path.exists(<span class="string">"./imgs/"</span>+keyword):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        os.mkdir(<span class="string">"./imgs/"</span>+keyword)</span><br><span class="line">    urls = get_url(keyword, <span class="number">10</span>)</span><br><span class="line">    crawl_list = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">10</span>):</span><br><span class="line">        crawl1 = begin_go(urls,keyword)</span><br><span class="line">        crawl_list.append(crawl1)</span><br><span class="line">        crawl1.start()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> crawl <span class="keyword">in</span> crawl_list:</span><br><span class="line">        crawl.join()</span><br><span class="line"></span><br><span class="line">    print(<span class="string">"按爬取完成，进入imgs查看结果，按CTRL+C退出吧。。。"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="linux（redhat和centos）以及它的进阶之路"><a href="#linux（redhat和centos）以及它的进阶之路" class="headerlink" title="linux（redhat和centos）以及它的进阶之路"></a>linux（redhat和centos）以及它的进阶之路</h2><p>大三上学期，我们学习了操作系统，我也从红帽竞赛的学习中对linux有了些许兴趣。后来，通过对linux的学习，我才发现linux是如此的简洁与清晰，不像windows那样，没有卸载不干净的东西，没有那么高的配置要求，简简单单，足矣！</p>
+<p>下面是我简单配置的linux（基于centos）记录</p>
+<p>还有一个关于linux的比赛和recha什么的证书我就不列出来了，感觉比较low。希望以后能即将linux作为我的PC的OS吧！</p>
+<h2 id="java以及java进阶"><a href="#java以及java进阶" class="headerlink" title="java以及java进阶"></a>java以及java进阶</h2><p>我想我应该把大部分时间都花在了java上吧！一个学期有些水课我都在课上看java的教学视频。从java基础，到java web，再到mybatis，再到现在的maven+ssm框架以及redis的缓存技术，从sublime text3到my eclipse，再到现在的IDEA。一路走来，发现一入java深似海。</p>
+<p>深入理解jvm，泛型，网络编程等等。。。仔细一看，后面还有很多的不可预知，例如nginx什么的。。。现在学无止境，就应该择优学习！</p>
+<p>下面是我上传到github的简单学习的小项目</p>
+<p><a href="https://github.com/sjsmi1e/springmybatis" target="_blank" rel="noopener">https://github.com/sjsmi1e/springmybatis</a></p>
+<p>算法什么的我就不说了，前面有写了挺多这方面的知识，现在人工智能算法特别火，希望能在以后的学习中继续探讨更深奥的算法。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>一年过去了，有收获也有遗憾，希望在新的一年，我能找到一个心仪的工作，去到我心之所向的那个地方，然后能见到那个谁谁谁，有机会的话~~~</p>
+<p>书山有路勤为径，学海无涯苦作舟！新的一年，新的征程，加油吧，少年！</p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-06-24T02:48:13.725Z" itemprop="dateUpdated">2020-06-24 10:48:13</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2019/02/19/心得/我的one-year/" target="_blank" rel="external">http://www.sjsmile.cn/2019/02/19/心得/我的one-year/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sjsmile.cn">
+            <img src="/img/avatar.jpg" alt="Smile">
+            Smile
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2019/02/19/心得/我的one-year/&title=《我的one_year》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2019/02/19/心得/我的one-year/&title=《我的one_year》 — MY STUDY BLOG&source=前言年已经过了，今天是元宵节，南方人生活在北方，虽然没有什么元宵啊，汤圆啊，或者大鱼大肉，来到学校也是冷冷清清的。有闲情，来回顾一下去年一整年所做和所得。..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2019/09/21/心得/我的秋招/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">我的秋招</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">周末之ACM之旅：焦作网络赛与青岛网络赛</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#进阶之路"><span class="post-toc-text">进阶之路</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#python以及它的爬虫"><span class="post-toc-text">python以及它的爬虫</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#linux（redhat和centos）以及它的进阶之路"><span class="post-toc-text">linux（redhat和centos）以及它的进阶之路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#java以及java进阶"><span class="post-toc-text">java以及java进阶</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2019/02/19/心得/我的one-year/&title=《我的one_year》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2019/02/19/心得/我的one-year/&title=《我的one_year》 — MY STUDY BLOG&source=前言年已经过了，今天是元宵节，南方人生活在北方，虽然没有什么元宵啊，汤圆啊，或者大鱼大肉，来到学校也是冷冷清清的。有闲情，来回顾一下去年一整年所做和所得。..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACHUlEQVR42u3aW27DMAwEwNz/0u4B8lqSTgFJo6+icGKPC2xJUY9HvK6PK7/m+crk97ctDAyMZRnVR3z+7LtretTeq8HAwDiB8S7BetfMYze/LwYGBkb1q5NPJXgMDAyMOaPaas7xGBgYGHljmWCqDe2k6cXAwDiBUY3L//z5J/MNDAyMpRhXcU2oyfdcrYWBgbE3Iw+4fLSZl4yTwMXAwDiHkY8YJwe8Eli1VX7xd8DAwNiUUUjlwTWT8cBtzS0GBsayjOqmfF785XFZfREYGBgnM/JArMJ6TWw+TMXAwNibkTei1cMQdx3IuKGexcDAWJyRRF6vlOyVer3xAAYGxjmM6nGHuyI7KUm/hDsGBsYBjMkRrvLW2HgM8Pa0CAYGxqaMalzm1OSxqo/+5ZVhYGBsyqiOLSdHNHrb/VGbjYGBcQyjt33/+Ta9AWd5ew4DA2NrRvVL58Fafei8YMXAwDiBcQ3WZNO/WoZiYGCcyaiGWn6bfNOth3yx6YaBgbE1I2lB86iNbtzCRP8xMDAwNmVUG9fqeHLUT+eDTAwMjO0YvWY1Kd16Id5sbjEwMLZmVMMuv2U1svMDFpPIxsDAWJeRt6l52zkZSTafAQMD4wBGL/h6pd6k7Hsb8RgYGBhxUCbbauXxZELFwMDAiIu83mwxHwn8JHAxMDAWYVSPU/RuWQ3lcmmIgYGxKWNy0KF3YKI3YLhhqImBgbEe4w9deEupNJ5LYwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

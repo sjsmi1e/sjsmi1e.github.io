@@ -1,0 +1,2449 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        文章标签 |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    false,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class=" active">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>文章标签</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header tags-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">文章标签</h1>
+        <h5 class="subtitle">
+            
+        </h5>
+        
+    </div>
+    
+<div class="tabs-bar container">
+    <nav class="tags-list">
+        <a href="/tags" style="-webkit-order:-1;order:-1" class="tags-list-item waves-effect waves-button waves-light
+             active">全部</a>
+        
+            <a href="/tags/nginx/" backup-style="-webkit-order:0;order:0" class="tags-list-item waves-effect waves-button waves-light">nginx</a>
+            
+        
+            <a href="/tags/websocket/" backup-style="-webkit-order:1;order:1" class="tags-list-item waves-effect waves-button waves-light">websocket</a>
+            
+        
+            <a href="/tags/网络/" backup-style="-webkit-order:2;order:2" class="tags-list-item waves-effect waves-button waves-light">网络</a>
+            
+        
+            <a href="/tags/java/" backup-style="-webkit-order:3;order:3" class="tags-list-item waves-effect waves-button waves-light">java</a>
+            
+        
+            <a href="/tags/http/" backup-style="-webkit-order:4;order:4" class="tags-list-item waves-effect waves-button waves-light">http</a>
+            
+        
+            <a href="/tags/Kafka/" backup-style="-webkit-order:5;order:5" class="tags-list-item waves-effect waves-button waves-light">Kafka</a>
+            
+        
+            <a href="/tags/ZooKeeper/" backup-style="-webkit-order:6;order:6" class="tags-list-item waves-effect waves-button waves-light">ZooKeeper</a>
+            
+        
+            <a href="/tags/分布式消息队列/" backup-style="-webkit-order:7;order:7" class="tags-list-item waves-effect waves-button waves-light">分布式消息队列</a>
+            
+        
+            <a href="/tags/WebSocket/" backup-style="-webkit-order:8;order:8" class="tags-list-item waves-effect waves-button waves-light">WebSocket</a>
+            
+        
+            <a href="/tags/shiro/" backup-style="-webkit-order:9;order:9" class="tags-list-item waves-effect waves-button waves-light">shiro</a>
+            
+        
+            <a href="/tags/安全/" backup-style="-webkit-order:10;order:10" class="tags-list-item waves-effect waves-button waves-light">安全</a>
+            
+        
+            <a href="/tags/HashMap/" backup-style="-webkit-order:11;order:11" class="tags-list-item waves-effect waves-button waves-light">HashMap</a>
+            
+        
+            <a href="/tags/mybatis/" backup-style="-webkit-order:12;order:12" class="tags-list-item waves-effect waves-button waves-light">mybatis</a>
+            
+        
+            <a href="/tags/sql/" backup-style="-webkit-order:13;order:13" class="tags-list-item waves-effect waves-button waves-light">sql</a>
+            
+        
+            <a href="/tags/springboot/" backup-style="-webkit-order:14;order:14" class="tags-list-item waves-effect waves-button waves-light">springboot</a>
+            
+        
+            <a href="/tags/邮件/" backup-style="-webkit-order:15;order:15" class="tags-list-item waves-effect waves-button waves-light">邮件</a>
+            
+        
+            <a href="/tags/spring/" backup-style="-webkit-order:16;order:16" class="tags-list-item waves-effect waves-button waves-light">spring</a>
+            
+        
+            <a href="/tags/集合/" backup-style="-webkit-order:17;order:17" class="tags-list-item waves-effect waves-button waves-light">集合</a>
+            
+        
+            <a href="/tags/java8/" backup-style="-webkit-order:18;order:18" class="tags-list-item waves-effect waves-button waves-light">java8</a>
+            
+        
+            <a href="/tags/时间API/" backup-style="-webkit-order:19;order:19" class="tags-list-item waves-effect waves-button waves-light">时间API</a>
+            
+        
+            <a href="/tags/redis/" backup-style="-webkit-order:20;order:20" class="tags-list-item waves-effect waves-button waves-light">redis</a>
+            
+        
+            <a href="/tags/缓存/" backup-style="-webkit-order:21;order:21" class="tags-list-item waves-effect waves-button waves-light">缓存</a>
+            
+        
+            <a href="/tags/多维排序/" backup-style="-webkit-order:22;order:22" class="tags-list-item waves-effect waves-button waves-light">多维排序</a>
+            
+        
+            <a href="/tags/streams/" backup-style="-webkit-order:23;order:23" class="tags-list-item waves-effect waves-button waves-light">streams</a>
+            
+        
+            <a href="/tags/redis5-0/" backup-style="-webkit-order:24;order:24" class="tags-list-item waves-effect waves-button waves-light">redis5.0</a>
+            
+        
+            <a href="/tags/总结/" backup-style="-webkit-order:25;order:25" class="tags-list-item waves-effect waves-button waves-light">总结</a>
+            
+        
+            <a href="/tags/字符串匹配/" backup-style="-webkit-order:26;order:26" class="tags-list-item waves-effect waves-button waves-light">字符串匹配</a>
+            
+        
+            <a href="/tags/搜索/" backup-style="-webkit-order:27;order:27" class="tags-list-item waves-effect waves-button waves-light">搜索</a>
+            
+        
+            <a href="/tags/分治/" backup-style="-webkit-order:28;order:28" class="tags-list-item waves-effect waves-button waves-light">分治</a>
+            
+        
+            <a href="/tags/判断素数/" backup-style="-webkit-order:29;order:29" class="tags-list-item waves-effect waves-button waves-light">判断素数</a>
+            
+        
+            <a href="/tags/贪心-二分/" backup-style="-webkit-order:30;order:30" class="tags-list-item waves-effect waves-button waves-light">贪心+二分</a>
+            
+        
+            <a href="/tags/最短路/" backup-style="-webkit-order:31;order:31" class="tags-list-item waves-effect waves-button waves-light">最短路</a>
+            
+        
+            <a href="/tags/Spring/" backup-style="-webkit-order:32;order:32" class="tags-list-item waves-effect waves-button waves-light">Spring</a>
+            
+        
+            <a href="/tags/API/" backup-style="-webkit-order:33;order:33" class="tags-list-item waves-effect waves-button waves-light">API</a>
+            
+        
+    </nav>
+    <!-- PC show more-->
+    <div class="tags-list-more">
+        <a href="javascript:;" class="action tags-list-item waves-effect waves-circle waves-light"><i class="icon icon-ellipsis-h"></i></a>
+    </div>
+</div>
+
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+<div class="container body-wrap fade">
+    
+                    <h3 class="archive-separator" id="tag-nginx">nginx</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-07 20:54:46" datetime="2020-05-07T12:54:46.000Z"  itemprop="datePublished">2020-05-07</time>
+
+      
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/07/Nginx-从入门到实践，万字详解！/">Nginx 从入门到实践，万字详解！</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-websocket">websocket</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2021-01-24 15:06:13" datetime="2021-01-24T07:06:13.000Z"  itemprop="datePublished">2021-01-24</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/websocket/">websocket</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/websocket/网络/">网络</a></li></ul></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2021/01/24/websocket-用途，例子，场景，什么时候用websocket/">websocket 用途，例子，场景，什么时候用websocket</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/websocket/">websocket</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络/">网络</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-网络">网络</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2021-01-24 15:06:13" datetime="2021-01-24T07:06:13.000Z"  itemprop="datePublished">2021-01-24</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/websocket/">websocket</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/websocket/网络/">网络</a></li></ul></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2021/01/24/websocket-用途，例子，场景，什么时候用websocket/">websocket 用途，例子，场景，什么时候用websocket</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/websocket/">websocket</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络/">网络</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-java">java</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2021-01-24 15:25:01" datetime="2021-01-24T07:25:01.000Z"  itemprop="datePublished">2021-01-24</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2021/01/24/java/盘点：35-个-Java-代码优化魔鬼细节/">盘点：35 个 Java 代码优化魔鬼细节</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2021-01-24 15:22:01" datetime="2021-01-24T07:22:01.000Z"  itemprop="datePublished">2021-01-24</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2021/01/24/java/Guava-拯救垃圾代码，写出优雅高效，效率提升N倍/">Guava - 拯救垃圾代码，写出优雅高效，效率提升N倍</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2021-01-24 15:10:30" datetime="2021-01-24T07:10:30.000Z"  itemprop="datePublished">2021-01-24</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2021/01/24/java/String长度有限制吗？是多少？/">String长度有限制吗？是多少？</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-09-26 21:20:10" datetime="2020-09-26T13:20:10.000Z"  itemprop="datePublished">2020-09-26</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/09/26/java/java常用集合源码分析/">java常用集合源码分析</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/集合/">集合</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-09-24 22:13:34" datetime="2020-09-24T14:13:34.000Z"  itemprop="datePublished">2020-09-24</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/09/24/java/spring的一些问题/">spring的一些问题</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-09-24 20:59:56" datetime="2020-09-24T12:59:56.000Z"  itemprop="datePublished">2020-09-24</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/09/24/java/HashMap详解/">HashMap详解</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HashMap/">HashMap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-09-06 19:34:47" datetime="2020-09-06T11:34:47.000Z"  itemprop="datePublished">2020-09-06</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/09/06/java/为什么String的hashCode选择31作为乘子/">为什么String的hashCode选择31作为乘子?</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-08-02 14:30:10" datetime="2020-08-02T06:30:10.000Z"  itemprop="datePublished">2020-08-02</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/08/02/java/最简单的-6-种防止数据重复提交的方法！/">最简单的 6 种防止数据重复提交的方法！</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-08-02 14:21:53" datetime="2020-08-02T06:21:53.000Z"  itemprop="datePublished">2020-08-02</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/08/02/java/MyBatis动态SQL/">MyBatis动态SQL</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/">sql</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-17 11:17:54" datetime="2020-05-17T03:17:54.000Z"  itemprop="datePublished">2020-05-17</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/java/30-分钟学会如何使用-Shiro/">30 分钟学会如何使用 Shiro</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shiro/">shiro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安全/">安全</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-10 10:01:51" datetime="2020-05-10T02:01:51.000Z"  itemprop="datePublished">2020-05-10</time>
+
+      
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/10/java/synchronized-and-volatile/">synchronized and volatile</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-07 20:51:01" datetime="2020-05-07T12:51:01.000Z"  itemprop="datePublished">2020-05-07</time>
+
+      
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/07/java/Java8-14的有哪些重要的新特性/">Java8~14的有哪些重要的新特性</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-07 20:46:51" datetime="2020-05-07T12:46:51.000Z"  itemprop="datePublished">2020-05-07</time>
+
+      
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/07/java/JVM-完整深入解析/">JVM 完整深入解析</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-07 20:42:12" datetime="2020-05-07T12:42:12.000Z"  itemprop="datePublished">2020-05-07</time>
+
+      
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/07/java/Sprinig-Boot-Redis-实现接口幂等性/">Sprinig Boot + Redis 实现接口幂等性</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-07 20:21:00" datetime="2020-05-07T12:21:00.000Z"  itemprop="datePublished">2020-05-07</time>
+
+      
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/07/java/关于Spring中的参数校验的一点思考/">关于Spring中的参数校验的一点思考</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-07 20:13:40" datetime="2020-05-07T12:13:40.000Z"  itemprop="datePublished">2020-05-07</time>
+
+      
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/07/后端开发必备的-RestFul-API-知识/">后端开发必备的 RestFul API 知识</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-http">http</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-09-06 19:50:19" datetime="2020-09-06T11:50:19.000Z"  itemprop="datePublished">2020-09-06</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/网络/">网络</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/网络/http/">http</a></li></ul></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/09/06/每个程序员都应该懂点cURL/">每个程序员都应该懂点cURL</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-Kafka">Kafka</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-16 19:35:10" datetime="2020-05-16T11:35:10.000Z"  itemprop="datePublished">2020-05-16</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/消息队列/">消息队列</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/16/深入浅出-Kafka-和-ZooKeeper-的分布式消息队列/">深入浅出 Kafka 和 ZooKeeper 的分布式消息队列</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/">Kafka</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ZooKeeper/">ZooKeeper</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分布式消息队列/">分布式消息队列</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-ZooKeeper">ZooKeeper</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-16 19:35:10" datetime="2020-05-16T11:35:10.000Z"  itemprop="datePublished">2020-05-16</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/消息队列/">消息队列</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/16/深入浅出-Kafka-和-ZooKeeper-的分布式消息队列/">深入浅出 Kafka 和 ZooKeeper 的分布式消息队列</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/">Kafka</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ZooKeeper/">ZooKeeper</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分布式消息队列/">分布式消息队列</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-分布式消息队列">分布式消息队列</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-16 19:35:10" datetime="2020-05-16T11:35:10.000Z"  itemprop="datePublished">2020-05-16</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/消息队列/">消息队列</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/16/深入浅出-Kafka-和-ZooKeeper-的分布式消息队列/">深入浅出 Kafka 和 ZooKeeper 的分布式消息队列</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/">Kafka</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ZooKeeper/">ZooKeeper</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分布式消息队列/">分布式消息队列</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-WebSocket">WebSocket</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-08-02 14:40:00" datetime="2020-08-02T06:40:00.000Z"  itemprop="datePublished">2020-08-02</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/网络/">网络</a></li></ul></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/08/02/看完让你彻底理解-WebSocket-原理/">看完让你彻底理解 WebSocket 原理</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebSocket/">WebSocket</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-shiro">shiro</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-17 11:17:54" datetime="2020-05-17T03:17:54.000Z"  itemprop="datePublished">2020-05-17</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/java/30-分钟学会如何使用-Shiro/">30 分钟学会如何使用 Shiro</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shiro/">shiro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安全/">安全</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-安全">安全</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-17 11:17:54" datetime="2020-05-17T03:17:54.000Z"  itemprop="datePublished">2020-05-17</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/java/30-分钟学会如何使用-Shiro/">30 分钟学会如何使用 Shiro</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shiro/">shiro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安全/">安全</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-HashMap">HashMap</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-09-24 20:59:56" datetime="2020-09-24T12:59:56.000Z"  itemprop="datePublished">2020-09-24</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/09/24/java/HashMap详解/">HashMap详解</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HashMap/">HashMap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-mybatis">mybatis</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-08-02 14:21:53" datetime="2020-08-02T06:21:53.000Z"  itemprop="datePublished">2020-08-02</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/08/02/java/MyBatis动态SQL/">MyBatis动态SQL</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/">sql</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-sql">sql</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-08-02 14:21:53" datetime="2020-08-02T06:21:53.000Z"  itemprop="datePublished">2020-08-02</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/08/02/java/MyBatis动态SQL/">MyBatis动态SQL</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/">sql</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-springboot">springboot</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-17 11:53:58" datetime="2020-05-17T03:53:58.000Z"  itemprop="datePublished">2020-05-17</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/java/SpringBoot-集成邮件服务以及邮件发送的几种方式/">SpringBoot 集成邮件服务以及邮件发送的几种方式</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/">springboot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/邮件/">邮件</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-邮件">邮件</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-17 11:53:58" datetime="2020-05-17T03:53:58.000Z"  itemprop="datePublished">2020-05-17</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/java/SpringBoot-集成邮件服务以及邮件发送的几种方式/">SpringBoot 集成邮件服务以及邮件发送的几种方式</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/">springboot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/邮件/">邮件</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-spring">spring</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-09-24 22:13:34" datetime="2020-09-24T14:13:34.000Z"  itemprop="datePublished">2020-09-24</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/09/24/java/spring的一些问题/">spring的一些问题</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-集合">集合</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-09-26 21:20:10" datetime="2020-09-26T13:20:10.000Z"  itemprop="datePublished">2020-09-26</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/09/26/java/java常用集合源码分析/">java常用集合源码分析</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/集合/">集合</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-java8">java8</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-07-07 17:08:02" datetime="2020-07-07T09:08:02.000Z"  itemprop="datePublished">2020-07-07</time>
+
+      
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/07/07/java/跟上-Java-8-日期和时间实用技巧/">跟上 Java 8 : 日期和时间实用技巧</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java8/">java8</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/时间API/">时间API</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-时间API">时间API</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-07-07 17:08:02" datetime="2020-07-07T09:08:02.000Z"  itemprop="datePublished">2020-07-07</time>
+
+      
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/07/07/java/跟上-Java-8-日期和时间实用技巧/">跟上 Java 8 : 日期和时间实用技巧</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java8/">java8</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/时间API/">时间API</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-redis">redis</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-17 12:17:11" datetime="2020-05-17T04:17:11.000Z"  itemprop="datePublished">2020-05-17</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/">Streams：深入剖析Redis5.0全新数据结构</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis5-0/">redis5.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/streams/">streams</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-17 12:13:19" datetime="2020-05-17T04:13:19.000Z"  itemprop="datePublished">2020-05-17</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/">Redis高级玩法：如何利用SortedSet实现多维度排序</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多维排序/">多维排序</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-17 12:02:30" datetime="2020-05-17T04:02:30.000Z"  itemprop="datePublished">2020-05-17</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/">Redis 9种数据结构以及它们的内部编码实现</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-缓存">缓存</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-17 12:02:30" datetime="2020-05-17T04:02:30.000Z"  itemprop="datePublished">2020-05-17</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/">Redis 9种数据结构以及它们的内部编码实现</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-多维排序">多维排序</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-17 12:13:19" datetime="2020-05-17T04:13:19.000Z"  itemprop="datePublished">2020-05-17</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/">Redis高级玩法：如何利用SortedSet实现多维度排序</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多维排序/">多维排序</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-streams">streams</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-17 12:17:11" datetime="2020-05-17T04:17:11.000Z"  itemprop="datePublished">2020-05-17</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/">Streams：深入剖析Redis5.0全新数据结构</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis5-0/">redis5.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/streams/">streams</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-redis5.0">redis5.0</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-05-17 12:17:11" datetime="2020-05-17T04:17:11.000Z"  itemprop="datePublished">2020-05-17</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/">Streams：深入剖析Redis5.0全新数据结构</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis5-0/">redis5.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/streams/">streams</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-总结">总结</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2019-09-21 19:43:31" datetime="2019-09-21T11:43:31.000Z"  itemprop="datePublished">2019-09-21</time>
+
+      
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2019/09/21/心得/我的秋招/">我的秋招</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2019-02-19 19:58:31" datetime="2019-02-19T11:58:31.000Z"  itemprop="datePublished">2019-02-19</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/进阶之路/">进阶之路</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2019/02/19/心得/我的one-year/">我的one_year</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2018-09-16 20:24:50" datetime="2018-09-16T12:24:50.000Z"  itemprop="datePublished">2018-09-16</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2018/09/16/算法/周末之ACM之旅：焦作网络赛与青岛网络赛/">周末之ACM之旅：焦作网络赛与青岛网络赛</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2018-08-25 18:29:22" datetime="2018-08-25T10:29:22.000Z"  itemprop="datePublished">2018-08-25</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2018/08/25/算法/2018暑期ccpc网络赛总结/">2018暑期ccpc网络赛总结</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-字符串匹配">字符串匹配</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2018-08-18 17:57:03" datetime="2018-08-18T09:57:03.000Z"  itemprop="datePublished">2018-08-18</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2018/08/18/算法/KMP/">KMP</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字符串匹配/">字符串匹配</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-搜索">搜索</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2018-08-06 15:22:09" datetime="2018-08-06T07:22:09.000Z"  itemprop="datePublished">2018-08-06</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2018/08/06/算法/dfs与bfs/">dfs&amp;dfs</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搜索/">搜索</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-分治">分治</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2018-08-09 10:16:05" datetime="2018-08-09T02:16:05.000Z"  itemprop="datePublished">2018-08-09</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2018/08/09/算法/分治与归并/">分治与归并</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分治/">分治</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-判断素数">判断素数</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2018-08-18 18:02:24" datetime="2018-08-18T10:02:24.000Z"  itemprop="datePublished">2018-08-18</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2018/08/18/算法/判断素数与欧拉筛/">判断素数与欧拉筛</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/判断素数/">判断素数</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-贪心+二分">贪心+二分</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2018-08-07 16:04:23" datetime="2018-08-07T08:04:23.000Z"  itemprop="datePublished">2018-08-07</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2018/08/07/算法/贪心-二分/">贪心+二分</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/贪心-二分/">贪心+二分</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-最短路">最短路</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2018-08-29 13:44:19" datetime="2018-08-29T05:44:19.000Z"  itemprop="datePublished">2018-08-29</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2018/08/29/算法/链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra-spfa）/">链式前向星（静态邻接表）存储图及简单的最短路径（dijkstra+spfa）</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/最短路/">最短路</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-Spring">Spring</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-06-24 09:02:33" datetime="2020-06-24T01:02:33.000Z"  itemprop="datePublished">2020-06-24</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/06/24/java/API接口的安全设计/">API接口的安全设计</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/API/">API</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+                    <h3 class="archive-separator" id="tag-API">API</h3>
+                    <div class="waterfall">
+                        
+                            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-06-24 09:02:33" datetime="2020-06-24T01:02:33.000Z"  itemprop="datePublished">2020-06-24</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2020/06/24/java/API接口的安全设计/">API接口的安全设计</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/API/">API</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+                        
+                    </div>
+                
+    
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/tags/&title=《文章标签》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/tags/&title=《文章标签》 — MY STUDY BLOG&source=喜欢争取，得到珍惜" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAByElEQVR42u3aS44DIQwFwNz/0j3bSD1Nns1HiVSsohaBYmOB7dcrHtfbeP9yn3Of//Tf+wrLBi4u7jT3Go4ZyhiUrPnPCri4uAe51eXGc8YBKwmLj99xcXF/hJt8yY+Ni4v7W9wqqLc+Li7u93CriYxxWiQPixvfari4uBPcPEu57/eW/C4uLm6Le02MfeWWxx1xcXGPcKtBJy+fJBeg5nUKFxf3ILeX1syfQL0g+OGthouLu42bt01UQ9V88qXwEMLFxV3Kzbc5E84+JFBwcXE3c/M/5+XVvHxSLrvi4uIe4fbKn3l4Sg5QXQEXF3c3d6aJarxBsn015YqLi3uem5c01hZZCzNxcXGPcFddR/IWjWo6tZA2xcXFXcRNFl2VHFnQ2oWLi3uEmyc+eteUZJfyari4uJu5eZtF9RKTH7twDFxc3CPc3tMlT5fkCdnClQgXF3cz9yqOJMxVyyqFI+Hi4h7h9hKaeVCbKZZMoXFxcae5veA1X2KpfsfFxT3PzROj1YatXvH1w1sNFxf3a7hJCOsdrNDMgYuL+2Xc8UOo18CRt2Lg4uKe5+bBpZfmqLZ0lIusuLi4S7m9YDSTZt23Iy4u7vSOf3grlYx8fux8AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

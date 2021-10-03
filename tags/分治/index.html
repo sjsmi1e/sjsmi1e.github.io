@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        文章标签: 分治 |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    false,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class=" active">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>文章标签: 分治</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header tags-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">文章标签: 分治</h1>
+        <h5 class="subtitle">
+            
+        </h5>
+        
+    </div>
+    
+<div class="tabs-bar container">
+    <nav class="tags-list">
+        <a href="/tags" style="-webkit-order:-1;order:-1" class="tags-list-item waves-effect waves-button waves-light
+            ">全部</a>
+        
+            <a href="/tags/nginx/" backup-style="-webkit-order:7;order:7" class="tags-list-item waves-effect waves-button waves-light">nginx</a>
+            
+        
+            <a href="/tags/websocket/" backup-style="-webkit-order:8;order:8" class="tags-list-item waves-effect waves-button waves-light">websocket</a>
+            
+        
+            <a href="/tags/网络/" backup-style="-webkit-order:9;order:9" class="tags-list-item waves-effect waves-button waves-light">网络</a>
+            
+        
+            <a href="/tags/java/" backup-style="-webkit-order:10;order:10" class="tags-list-item waves-effect waves-button waves-light">java</a>
+            
+        
+            <a href="/tags/http/" backup-style="-webkit-order:11;order:11" class="tags-list-item waves-effect waves-button waves-light">http</a>
+            
+        
+            <a href="/tags/Kafka/" backup-style="-webkit-order:12;order:12" class="tags-list-item waves-effect waves-button waves-light">Kafka</a>
+            
+        
+            <a href="/tags/ZooKeeper/" backup-style="-webkit-order:13;order:13" class="tags-list-item waves-effect waves-button waves-light">ZooKeeper</a>
+            
+        
+            <a href="/tags/分布式消息队列/" backup-style="-webkit-order:14;order:14" class="tags-list-item waves-effect waves-button waves-light">分布式消息队列</a>
+            
+        
+            <a href="/tags/WebSocket/" backup-style="-webkit-order:15;order:15" class="tags-list-item waves-effect waves-button waves-light">WebSocket</a>
+            
+        
+            <a href="/tags/shiro/" backup-style="-webkit-order:16;order:16" class="tags-list-item waves-effect waves-button waves-light">shiro</a>
+            
+        
+            <a href="/tags/安全/" backup-style="-webkit-order:17;order:17" class="tags-list-item waves-effect waves-button waves-light">安全</a>
+            
+        
+            <a href="/tags/HashMap/" backup-style="-webkit-order:18;order:18" class="tags-list-item waves-effect waves-button waves-light">HashMap</a>
+            
+        
+            <a href="/tags/mybatis/" backup-style="-webkit-order:19;order:19" class="tags-list-item waves-effect waves-button waves-light">mybatis</a>
+            
+        
+            <a href="/tags/sql/" backup-style="-webkit-order:20;order:20" class="tags-list-item waves-effect waves-button waves-light">sql</a>
+            
+        
+            <a href="/tags/springboot/" backup-style="-webkit-order:21;order:21" class="tags-list-item waves-effect waves-button waves-light">springboot</a>
+            
+        
+            <a href="/tags/邮件/" backup-style="-webkit-order:22;order:22" class="tags-list-item waves-effect waves-button waves-light">邮件</a>
+            
+        
+            <a href="/tags/spring/" backup-style="-webkit-order:23;order:23" class="tags-list-item waves-effect waves-button waves-light">spring</a>
+            
+        
+            <a href="/tags/集合/" backup-style="-webkit-order:24;order:24" class="tags-list-item waves-effect waves-button waves-light">集合</a>
+            
+        
+            <a href="/tags/java8/" backup-style="-webkit-order:25;order:25" class="tags-list-item waves-effect waves-button waves-light">java8</a>
+            
+        
+            <a href="/tags/时间API/" backup-style="-webkit-order:26;order:26" class="tags-list-item waves-effect waves-button waves-light">时间API</a>
+            
+        
+            <a href="/tags/redis/" backup-style="-webkit-order:27;order:27" class="tags-list-item waves-effect waves-button waves-light">redis</a>
+            
+        
+            <a href="/tags/缓存/" backup-style="-webkit-order:28;order:28" class="tags-list-item waves-effect waves-button waves-light">缓存</a>
+            
+        
+            <a href="/tags/多维排序/" backup-style="-webkit-order:29;order:29" class="tags-list-item waves-effect waves-button waves-light">多维排序</a>
+            
+        
+            <a href="/tags/streams/" backup-style="-webkit-order:30;order:30" class="tags-list-item waves-effect waves-button waves-light">streams</a>
+            
+        
+            <a href="/tags/redis5-0/" backup-style="-webkit-order:31;order:31" class="tags-list-item waves-effect waves-button waves-light">redis5.0</a>
+            
+        
+            <a href="/tags/总结/" backup-style="-webkit-order:32;order:32" class="tags-list-item waves-effect waves-button waves-light">总结</a>
+            
+        
+            <a href="/tags/字符串匹配/" backup-style="-webkit-order:33;order:33" class="tags-list-item waves-effect waves-button waves-light">字符串匹配</a>
+            
+        
+            <a href="/tags/搜索/" backup-style="-webkit-order:0;order:0" class="tags-list-item waves-effect waves-button waves-light">搜索</a>
+            
+        
+            <a href="/tags/分治/" backup-style="-webkit-order:1;order:1" class="tags-list-item waves-effect waves-button waves-light active">分治</a>
+            
+        
+            <a href="/tags/判断素数/" backup-style="-webkit-order:2;order:2" class="tags-list-item waves-effect waves-button waves-light">判断素数</a>
+            
+        
+            <a href="/tags/贪心-二分/" backup-style="-webkit-order:3;order:3" class="tags-list-item waves-effect waves-button waves-light">贪心+二分</a>
+            
+        
+            <a href="/tags/最短路/" backup-style="-webkit-order:4;order:4" class="tags-list-item waves-effect waves-button waves-light">最短路</a>
+            
+        
+            <a href="/tags/Spring/" backup-style="-webkit-order:5;order:5" class="tags-list-item waves-effect waves-button waves-light">Spring</a>
+            
+        
+            <a href="/tags/API/" backup-style="-webkit-order:6;order:6" class="tags-list-item waves-effect waves-button waves-light">API</a>
+            
+        
+    </nav>
+    <!-- PC show more-->
+    <div class="tags-list-more">
+        <a href="javascript:;" class="action tags-list-item waves-effect waves-circle waves-light"><i class="icon icon-ellipsis-h"></i></a>
+    </div>
+</div>
+
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+<div class="container body-wrap fade">
+    
+            <div class="waterfall">
+                
+                <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2018-08-09 10:16:05" datetime="2018-08-09T02:16:05.000Z"  itemprop="datePublished">2018-08-09</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title " itemprop="name">
+      <a class="post-title-link" href="/2018/08/09/算法/分治与归并/">分治与归并</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分治/">分治</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+        
+            </div>
+        
+    
+</div>
+
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/tags/分治/&title=MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/tags/分治/&title=MY STUDY BLOG&source=喜欢争取，得到珍惜" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABz0lEQVR42u3aQW7DMAwEwPz/0ymQU4FW6lKUZRcYnYwgtic5ENKSr1e83p/18zq56/saPXPzwsXFbXPf0zXnjhAjyvz5cwMuLu55blK85rickhdHXFzc53NH9GQTkzwBFxf3P3I7r89/DC4u7nO41W1KsnHJC98lZzVcXNwGtxOY7ro+lO/i4uK2uxJJQVkrPe+lhYuLe4abH1SqEWq17ZoHJbi4uCe5eQmrxp3VrUzrrIaLi7uJ2ylACbHfcC2kvLi4uJu4nbgzj1n79+Li4p7h5luTaht1rVnyx5+Fi4t7K3dtSGItXikEr7i4uEe41QhjbROzNshVyE5wcXEv4ObbjiRIzQtTUs6GsQguLu5l3OpRJC9neYkstGpwcXEPcqtjFnk7tjOM9YsHFxf3CHcefFS3LHsj16ihgouLewG3GnN05qOqZREXF/debjlH2RS/lp+Di4t7kFs9kMyPKLvi123nJ1xc3CK3WlCqZSu5Kx/zwsXFPcldK0CdAaxkOzUsc7i4uAe5eUMlecG2ebF5KwUXF/cB3Op4Vv79QiCLi4v7SG7naFRt2+Di4t7LrYak1YLVCUoWz2q4uLgNbicwnX+evHItiMHFxb2M+wVk3t1EButm7gAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        Redis 9种数据结构以及它们的内部编码实现 |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="redis,缓存">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>Redis 9种数据结构以及它们的内部编码实现</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">Redis 9种数据结构以及它们的内部编码实现</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-05-17T04:02:30.000Z" itemprop="datePublished" class="page-time">
+  2020-05-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-redis/Redis-9种数据结构以及它们的内部编码实现"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">Redis 9种数据结构以及它们的内部编码实现</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-05-17 12:02:30" datetime="2020-05-17T04:02:30.000Z"  itemprop="datePublished">2020-05-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+
+
+            
+	<span id="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/" class="leancloud_visitors" data-flag-title="Redis 9种数据结构以及它们的内部编码实现" title="Redis 9种数据结构以及它们的内部编码实现">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/"></span>
+        </a>
+    </span>
+
+
+
+            
+            <span class="post-count">文章字数: 3,892</span>
+<span class="post-count">阅读时长 ≈ 16分钟</span>
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <blockquote>
+<p>转载：<a href="https://mp.weixin.qq.com/s/oPDm0Jud1AuTDjtOT7BbNw" target="_blank" rel="noopener">原文地址</a></p>
+</blockquote>
+<p>90%的人知道Redis 5种最基本的数据结构，只有不到10%的人知道8种基本数据结构（5种基本+bitmap+GeoHash+HyperLogLog），只有不到5%的人知道9种基本数据结构（5.0最新版本数据结构Streams），只有不到1%的人掌握了所有9种基本数据结构以及8种内部编码，掌握这篇文章的知识点，让你<strong>成为面试官眼中Redis方面最靓的仔</strong>！</p>
+<blockquote>
+<p>说明：本文基于<strong>Redis-3.2.11</strong>版本源码进行分析。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="一、5种普通数据结构"><a href="#一、5种普通数据结构" class="headerlink" title="一、5种普通数据结构"></a><strong>一、5种普通数据结构</strong></h1><p>这个没什么好说的，对Redis稍微有点了解的都知道5种最基本的数据结构：String，List，Hash，Set，Sorted Set。不过，需要注意的是，这里依然有几个高频面试题。</p>
+<ul>
+<li>Set和Hash的关系</li>
+</ul>
+<p>答案就是Set是一个特殊的value为空的Hash。Set类型操作的源码在t_set.c中。以新增一个元素为例（<code>int setTypeAdd(robj *subject, sds value)</code>），如果编码类型是<strong>OBJ_ENCODING_HT</strong>，那么新增源码的源码如下，事实上就是对dict即Hash数据结构进行操作，并且dictSetVal时value是NULL：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dictEntry *de = dictAddRaw(ht,value,<span class="literal">NULL</span>);</span><br><span class="line"><span class="keyword">if</span> (de) &#123;</span><br><span class="line">    dictSetKey(ht,de,sdsdup(value));</span><br><span class="line">    dictSetVal(ht,de,<span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同样的，我们在t_hash.c中看到Hash类型新增元素时，当判断编码类型是<strong>OBJ_ENCODING_HT</strong>时，也是调用dict的方法：dictAdd(o-&gt;ptr,f,v)，dictAdd最终也是调用dictSetVal()方法，只不过v即value不为NULL：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Add an element to the target hash table */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dictAdd</span><span class="params">(dict *d, <span class="keyword">void</span> *key, <span class="keyword">void</span> *val)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    dictEntry *entry = dictAddRaw(d,key,<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!entry) <span class="keyword">return</span> DICT_ERR;</span><br><span class="line">    dictSetVal(d, entry, val);</span><br><span class="line">    <span class="keyword">return</span> DICT_OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以，Redis中Set和Hash的关系就很清楚了，当编码是OBJ_ENCODING_HT时，两者都是dict数据类型，只不过Set是value为NULL的特殊的dict。</p>
+<ul>
+<li>谈谈你对Sorted Set的理解</li>
+</ul>
+<p>Sorted Set的数据结构是一种跳表，即SkipList，如下图所示，红线是查找10的过程：</p>
+<figure class="image-box">
+                <a rel=Redis 9种数据结构以及它们的内部编码实现 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248131.webp" title="SkipList" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248131.webp" alt="SkipList" title="" class=""></a>
+                <p>SkipList</p>
+            </figure>
+<ul>
+<li>如何借助Sorted set实现多维排序</li>
+</ul>
+<p>Sorted Set默认情况下只能根据一个因子score进行排序。如此一来，局限性就很大，举个栗子：热门排行榜需要按照下载量&amp;最近更新时间排序，即类似数据库中的ORDER BY download_count, update_time DESC。那这样的需求如果用Redis的Sorted Set实现呢？</p>
+<p>事实上很简单，思路就是将涉及排序的多个维度的列通过一定的方式转换成一个特殊的列，即result = function(x, y, z)，即x，y，z是三个排序因子，例如下载量、时间等，通过自定义函数function()计算得到result，将result作为Sorted Set中的score的值，就能实现任意维度的排序需求了。</p>
+<h1 id="二、Redis内部编码"><a href="#二、Redis内部编码" class="headerlink" title="二、Redis内部编码"></a><strong>二、Redis内部编码</strong></h1><p>我们常说的String，List，Hash，Set，Sorted Set只是对外的编码，实际上每种数据结构都有自己底层的内部编码实现，而且是多种实现，这样Redis可以在合适的场景选择更合适的内部编码。</p>
+<p>如下图所示（图片纠正：<strong>intset</strong>编码，而不是inset编码），可以看到每种数据结构都有2种以上的内部编码实现，例如String数据结构就包含了raw、int和embstr三种内部编码。同时，有些内部编码可以作为多种外部数据结构的内部实现，例如ziplist就是hash、list和zset共有的内部编码，而set的内部编码可能是hashtable或者intset：</p>
+<figure class="image-box">
+                <a rel=Redis 9种数据结构以及它们的内部编码实现 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248139.webp" title="Redis内部编码" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248139.webp" alt="Redis内部编码" title="" class=""></a>
+                <p>Redis内部编码</p>
+            </figure>Redis内部编码<br><br>Redis这样设计有两个好处：<br><br>1. 可以偷偷的改进内部编码，而对外的数据结构和命令没有影响，这样一旦开发出更优秀的内部编码，无需改动对外数据结构和命令。<br>2. 多种内部编码实现可以在不同场景下发挥各自的优势。例如ziplist比较节省内存，但是在列表元素比较多的情况下，性能会有所下降。这时候Redis会根据配置选项将列表类型的内部实现转换为linkedlist。<br><br>### 1. String的3种内部编码<br><br>由上图可知，String的3种内部编码分别是：int、embstr、raw。int类型很好理解，当一个key的value是整型时，Redis就将其编码为int类型（另外还有一个条件：把这个value当作字符串来看，它的长度不能超过20）。如下所示。这种编码类型为了节省内存。Redis默认会缓存10000个整型值（#define OBJ_SHARED_INTEGERS 10000），这就意味着，如果有10个不同的KEY，其value都是10000以内的值，事实上全部都是共享同一个对象：<br><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set number "7890"</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; object encoding number</span><br><span class="line">"int"</span><br></pre></td></tr></table></figure>
+<p>接下来就是ebmstr和raw两种内部编码的长度界限，请看下面的源码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_ENCODING_EMBSTR_SIZE_LIMIT 44</span></span><br><span class="line"><span class="function">robj *<span class="title">createStringObject</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *ptr, <span class="keyword">size_t</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (len &lt;= OBJ_ENCODING_EMBSTR_SIZE_LIMIT)</span><br><span class="line">        <span class="keyword">return</span> createEmbeddedStringObject(ptr,len);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> createRawStringObject(ptr,len);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也就是说，embstr和raw编码的长度界限是44，我们可以做如下验证。长度超过44以后，就是raw编码类型，不会有任何优化，是多长，就要消耗多少内存：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set name "a1234567890123456789012345678901234567890123"</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; object encoding name</span><br><span class="line">"embstr"</span><br><span class="line">127.0.0.1:6379&gt; set name "a12345678901234567890123456789012345678901234"</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; object encoding name</span><br><span class="line">"raw"</span><br></pre></td></tr></table></figure>
+<p>那么为什么有embstr编码呢？它相比raw的优势在哪里？embstr编码将创建字符串对象所需的空间分配的次数从raw编码的两次降低为一次。因为embstr编码的字符串对象的所有数据都保存在一块连续的内存里面，所以这种编码的字符串对象比起raw编码的字符串对象能更好地利用缓存带来的优势。并且释放embstr编码的字符串对象只需要调用一次内存释放函数，而释放raw编码对象的字符串对象需要调用两次内存释放函数。如下图所示，左边是embstr编码，右边是raw编码：</p>
+<figure class="image-box">
+                <a rel=Redis 9种数据结构以及它们的内部编码实现 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248148.webp" title="embstr V.S. raw" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248148.webp" alt="embstr V.S. raw" title="" class=""></a>
+                <p>embstr V.S. raw</p>
+            </figure>
+<h3 id="2-ziplist"><a href="#2-ziplist" class="headerlink" title="2. ziplist"></a>2. ziplist</h3><p>由前面的图可知，List，Hash，Sorted Set三种对外结构，在特殊情况下的内部编码都是ziplist，那么这个ziplist有什么神奇之处呢？</p>
+<p>以Hash为例，我们首先看一下什么条件下它的内部编码是ziplist：</p>
+<ol>
+<li>当哈希类型元素个数小于hash-max-ziplist-entries配置（默认512个）；</li>
+<li>所有值都小于hash-max-ziplist-value配置（默认64个字节）；</li>
+</ol>
+<p>如果是sorted set的话，同样需要满足两个条件：</p>
+<ol>
+<li>元素个数小于zset-max-ziplist-entries配置，默认128；</li>
+<li>所有值都小于zset-max-ziplist-value配置，默认64。</li>
+</ol>
+<p>实际上，ziplist充分体现了Redis对于存储效率的追求。一个普通的双向链表，链表中每一项都占用独立的一块内存，各项之间用地址指针（或引用）连接起来。这种方式会带来大量的内存碎片，而且地址指针也会占用额外的内存。而ziplist却是将表中<strong>每一项存放在前后连续的地址空间内</strong>，一个ziplist整体占用一大块内存。它是一个表（list），但其实不是一个链表（linked list）。</p>
+<p>ziplist的源码在ziplist.c这个文件中，其中有一段这样的描述 – The general layout of the ziplist is as follows:：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;zlbytes&gt; &lt;zltail&gt; &lt;zllen&gt; &lt;entry&gt; &lt;entry&gt; ... &lt;entry&gt; &lt;zlend&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>zlbytes</strong>：表示这个ziplist占用了多少空间，或者说占了多少字节，这其中包括了zlbytes本身占用的4个字节；</li>
+<li><strong>zltail</strong>：表示到ziplist中最后一个元素的偏移量，有了这个值，pop操作的时间复杂度就是O(1)了，即不需要遍历整个ziplist；</li>
+<li><strong>zllen</strong>：表示ziplist中有多少个entry，即保存了多少个元素。由于这个字段占用16个字节，所以最大值是2^16-1，也就意味着，如果entry的数量超过2^16-1时，需要遍历整个ziplist才知道entry的数量；</li>
+<li><strong>entry</strong>：真正保存的数据，有它自己的编码；</li>
+<li><strong>zlend</strong>：专门用来表示ziplist尾部的特殊字符，占用8个字节，值固定为255，即8个字节每一位都是1。</li>
+</ul>
+<p>如下就是一个真实的ziplist编码，包含了2和5两个元素：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[0f 00 00 00] [0c 00 00 00] [02 00] [00 f3] [02 f6] [ff]</span><br><span class="line">      |             |          |       |       |     |</span><br><span class="line">   zlbytes        zltail    entries   &quot;2&quot;     &quot;5&quot;   end</span><br></pre></td></tr></table></figure>
+<h3 id="3-linkedlist"><a href="#3-linkedlist" class="headerlink" title="3. linkedlist"></a>3. linkedlist</h3><p>这是List的一种编码数据结构非常简单，就是我们非常熟悉的双向链表，对应Java中的LinkedList。</p>
+<h3 id="4-skiplist"><a href="#4-skiplist" class="headerlink" title="4. skiplist"></a>4. skiplist</h3><p>这个前面也已经提及，就是经典的跳表数据结构。</p>
+<h3 id="5-hashtable"><a href="#5-hashtable" class="headerlink" title="5. hashtable"></a>5. hashtable</h3><p>这个也很容易，对应Java中的HashMap。</p>
+<h3 id="6-intset"><a href="#6-intset" class="headerlink" title="6. intset"></a>6. intset</h3><p>Set特殊内部编码，当满足下面的条件时Set的内部编码就是intset而不是hashtable：</p>
+<ol>
+<li>Set集合中必须是64位有符号的十进制整型；</li>
+<li>元素个数不能超过set-max-intset-entries配置，默认512；</li>
+</ol>
+<p>验证如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd scores 135</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; sadd scores 128</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; object encoding scores</span><br><span class="line">"intset"</span><br></pre></td></tr></table></figure>
+<p>那么intset编码到底是个什么东西呢？看它的源码定义如下，很明显，就是整型数组，并且是一个<strong>有序的整型数组</strong>。它在内存分配上与ziplist有些类似，是连续的一整块内存空间，而且对于大整数和小整数采取了不同的编码，尽量对内存的使用进行了优化。这样的数据结构，如果执行SISMEMBER命令，即查看某个元素是否在集合中时，事实上使用的是二分查找法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">intset</span> &#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span> encoding;</span><br><span class="line">    <span class="keyword">uint32_t</span> length;</span><br><span class="line">    <span class="keyword">int8_t</span> contents[];</span><br><span class="line">&#125; intset;</span><br><span class="line"></span><br><span class="line"><span class="comment">// intset编码查找方法源码（人为简化），标准的二分查找法：</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> uint8_t <span class="title">intsetSearch</span><span class="params">(intset *is, <span class="keyword">int64_t</span> value, <span class="keyword">uint32_t</span> *pos)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> min = <span class="number">0</span>, max = intrev32ifbe(is-&gt;length)<span class="number">-1</span>, mid = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int64_t</span> cur = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(max &gt;= min) &#123;</span><br><span class="line">        mid = ((<span class="keyword">unsigned</span> <span class="keyword">int</span>)min + (<span class="keyword">unsigned</span> <span class="keyword">int</span>)max) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        cur = _intsetGet(is,mid);</span><br><span class="line">        <span class="keyword">if</span> (value &gt; cur) &#123;</span><br><span class="line">            min = mid+<span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value &lt; cur) &#123;</span><br><span class="line">            max = mid<span class="number">-1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (value == cur) &#123;</span><br><span class="line">        <span class="keyword">if</span> (pos) *pos = mid;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (pos) *pos = min;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INTSET_ENC_INT16 (sizeof(int16_t))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INTSET_ENC_INT32 (sizeof(int32_t))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INTSET_ENC_INT64 (sizeof(int64_t))</span></span><br></pre></td></tr></table></figure>
+<h1 id="三、3种高级数据结构"><a href="#三、3种高级数据结构" class="headerlink" title="三、3种高级数据结构"></a><strong>三、3种高级数据结构</strong></h1><p>Redis中3种高级数据结构分别是bitmap、GEO、HyperLogLog，针对这3种数据结构，笔者之前也有文章介绍过。其中，最重要的就是<strong>bitmap</strong>。</p>
+<h3 id="1-bitmap"><a href="#1-bitmap" class="headerlink" title="1. bitmap"></a>1. bitmap</h3><p>这个就是Redis实现的BloomFilter，BloomFilter非常简单，如下图所示，假设已经有3个元素a、b和c，分别通过3个hash算法h1()、h2()和h2()计算然后对一个bit进行赋值，接下来假设需要判断d是否已经存在，那么也需要使用3个hash算法h1()、h2()和h2()对d进行计算，然后得到3个bit的值，恰好这3个bit的值为1，这就能够说明：<strong>d可能存在集合中</strong>。再判断e，由于h1(e)算出来的bit之前的值是0，那么说明：<strong>e一定不存在集合中</strong>：</p>
+<figure class="image-box">
+                <a rel=Redis 9种数据结构以及它们的内部编码实现 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248166.webp" title="BloomFilter" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248166.webp" alt="BloomFilter" title="" class=""></a>
+                <p>BloomFilter</p>
+            </figure>BloomFilter<br><br>需要说明的是，bitmap并不是一种真实的数据结构，它本质上是String数据结构，只不过操作的粒度变成了位，即bit。因为String类型最大长度为512MB，所以bitmap最多可以存储2^32个bit。<br><br>### 2. GEO<br><br>GEO数据结构可以在Redis中存储地理坐标，并且坐标有限制，由EPSG:900913 / EPSG:3785 / OSGEO:41001 规定如下：<br><br>1. 有效的经度从-180度到180度。<br>2. 有效的纬度从-85.05112878度到85.05112878度。<br><br>当坐标位置超出上述指定范围时，该命令将会返回一个错误。添加地理位置命令如下：<br><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">redis&gt;</span> GEOADD city 114.031040 22.324386 "shenzhen" 112.572154 22.267832 "guangzhou"</span><br><span class="line">(integer) 2</span><br><span class="line"><span class="meta">redis&gt;</span> GEODIST city shenzhen guangzhou</span><br><span class="line">"150265.8106"</span><br></pre></td></tr></table></figure>
+<p>但是，需要说明的是，Geo本身不是一种数据结构，它<strong>本质上还是借助于Sorted Set（ZSET）</strong>，并且使用<strong>GeoHash</strong>技术进行填充。Redis中将经纬度使用52位的整数进行编码，放进zset中，score就是GeoHash的52位整数值。在使用Redis进行Geo查询时，其内部对应的操作其实就是zset(skiplist)的操作。通过zset的score进行排序就可以得到坐标附近的其它元素，通过将score还原成坐标值就可以得到元素的原始坐标。</p>
+<p>总之，Redis中处理这些地理位置坐标点的思想是：二维平面坐标点 –&gt; 一维整数编码值 –&gt; zset(score为编码值) –&gt; zrangebyrank(获取score相近的元素)、zrangebyscore –&gt; 通过score(整数编码值)反解坐标点 –&gt; 附近点的地理位置坐标。</p>
+<ul>
+<li>GEOHASH原理</li>
+</ul>
+<p>使用wiki上的例子，纬度为42.6，经度为-5.6的点，转化为base32的话要如何转呢？<br>首先拿纬度来进行说明，纬度的范围为-90到90，将这个范围划为两段，则为[-90,0]、[0,90]，然后看给定的纬度在哪个范围，在前面的范围的话，就设当前位为0，后面的话值便为1.然后继续将确定的范围1分为2，继续以确定值在前段还是后段来确定bit的值。就这样慢慢的缩小范围，一般最多缩小13次就可以了(经纬度的二进制位相加最多25位，经度13位，纬度12位)。这时的中间值，将跟给定的值最相近。如下图所示：</p>
+<figure class="image-box">
+                <a rel=Redis 9种数据结构以及它们的内部编码实现 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248175.webp" title="Geohash" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248175.webp" alt="Geohash" title="" class=""></a>
+                <p>Geohash</p>
+            </figure>
+<p>第1行，纬度42.6位于[0, 90]之间，所以bit=1；第2行，纬度42.6位于[0, 45]之间，所以bit=0；第3行，纬度42.6位于[22.5, 45]之间，所以bit=1，以此类推。这样，取出图中的bit位：1011 1100 1001，同样的方法，将经度(范围-180到180)算出来为 ：0111 1100 0000 0。结果对其如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 经度</span><br><span class="line">0111 1100 0000 0</span><br><span class="line"><span class="meta">#</span> 纬度</span><br><span class="line">1011 1100 1001</span><br></pre></td></tr></table></figure>
+<p>得到了经纬度的二进制位后，下面需要将两者进行结合：从经度、纬度的循环，每次取其二进制的一位(不足位取0)，合并为新的二进制数：01101111 11110000 01000001 0。每5位为一个十进制数，结合base32对应表映射为base32值为：ezs42。这样就完成了encode的过程。</p>
+<h3 id="3-Streams"><a href="#3-Streams" class="headerlink" title="3. Streams"></a>3. Streams</h3><p>这是Redis5.0引入的全新数据结构，用一句话概括Streams就是Redis实现的内存版kafka。而且，Streams也有<strong>Consumer Groups</strong>的概念。通过Redis源码中对stream的定义我们可知，streams底层的数据结构是<strong>radix tree</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">stream</span> &#123;</span></span><br><span class="line">    rax *rax;               <span class="comment">/* The radix tree holding the stream. */</span></span><br><span class="line">    <span class="keyword">uint64_t</span> length;        <span class="comment">/* Number of elements inside this stream. */</span></span><br><span class="line">    streamID last_id;       <span class="comment">/* Zero if there are yet no items. */</span></span><br><span class="line">    rax *cgroups;           <span class="comment">/* Consumer groups dictionary: name -&gt; streamCG */</span></span><br><span class="line">&#125; stream;</span><br></pre></td></tr></table></figure>
+<p>那么这个radix tree长啥样呢？在Redis源码的rax.h文件中有一段这样的描述，这样看起来是不是就比较直观了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">*                    (f) &quot;&quot;</span><br><span class="line">*                    /</span><br><span class="line">*                 (i o) &quot;f&quot;</span><br><span class="line">*                 /   \</span><br><span class="line">*    &quot;firs&quot;  (&quot;rst&quot;)  (o) &quot;fo&quot;</span><br><span class="line">*              /        \</span><br><span class="line">*    &quot;first&quot; []       [t   b] &quot;foo&quot;</span><br><span class="line">*                     /     \</span><br><span class="line">*           &quot;foot&quot; (&quot;er&quot;)    (&quot;ar&quot;) &quot;foob&quot;</span><br><span class="line">*                    /          \</span><br><span class="line">*          &quot;footer&quot; []          [] &quot;foobar&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>Radix Tree(基数树) 事实上就几乎相同是传统的二叉树</strong>。仅仅是在寻找方式上，以一个unsigned int类型数为例，利用这个数的每个比特位作为树节点的推断。能够这样说，比方一个数10001010101010110101010，那么依照Radix 树的插入就是在根节点，假设遇到0，就指向左节点，假设遇到1就指向右节点，在插入过程中构造树节点，在删除过程中删除树节点。如下是一个保存了7个单词的Radix Tree：</p>
+<figure class="image-box">
+                <a rel=Redis 9种数据结构以及它们的内部编码实现 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248187.webp" title="radix tree" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589688248187.webp" alt="radix tree" title="" class=""></a>
+                <p>radix tree</p>
+            </figure>
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-05-17T04:26:57.470Z" itemprop="dateUpdated">2020-05-17 12:26:57</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/" target="_blank" rel="external">http://www.sjsmile.cn/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sjsmile.cn">
+            <img src="/img/avatar.jpg" alt="Smile">
+            Smile
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/&title=《Redis 9种数据结构以及它们的内部编码实现》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/&title=《Redis 9种数据结构以及它们的内部编码实现》 — MY STUDY BLOG&source=
+转载：原文地址
+
+90%的人知道Redis 5种最基本的数据结构，只有不到10%的人知道8种基本数据结构（5种基本+bitmap+GeoHash+Hyp..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Redis高级玩法：如何利用SortedSet实现多维度排序</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2020/05/17/java/SpringBoot-集成邮件服务以及邮件发送的几种方式/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">SpringBoot 集成邮件服务以及邮件发送的几种方式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、5种普通数据结构"><span class="post-toc-text">一、5种普通数据结构</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二、Redis内部编码"><span class="post-toc-text">二、Redis内部编码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-ziplist"><span class="post-toc-text">2. ziplist</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-linkedlist"><span class="post-toc-text">3. linkedlist</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-skiplist"><span class="post-toc-text">4. skiplist</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-hashtable"><span class="post-toc-text">5. hashtable</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-intset"><span class="post-toc-text">6. intset</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三、3种高级数据结构"><span class="post-toc-text">三、3种高级数据结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-bitmap"><span class="post-toc-text">1. bitmap</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-Streams"><span class="post-toc-text">3. Streams</span></a></li></ol></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/&title=《Redis 9种数据结构以及它们的内部编码实现》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2020/05/17/redis/Redis-9种数据结构以及它们的内部编码实现/&title=《Redis 9种数据结构以及它们的内部编码实现》 — MY STUDY BLOG&source=
+转载：原文地址
+
+90%的人知道Redis 5种最基本的数据结构，只有不到10%的人知道8种基本数据结构（5种基本+bitmap+GeoHash+Hyp..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADJUlEQVR42u3aQVLDQAwEQP7/6fAASJiRTFW8aZ8osOPtzUFIs19f8fX4cT275+fPzz7n2Z3P3pX85uILGxsb+ybsx8vr9QuSp5KNSFbSbsQfXxU2Njb2cex9QcqL06yyJCUwsWBjY2Njvy5mSVm66qlko7GxsbGx28KTD4byonhVocXGxsY+m92Oh2bNST7oz9/+77M0bGxs7Ldn56no+//8L/k2NjY29huzH+U1azNeL6t9V3vPL09hY2NjH8Teh6/7wdPmzORs/djY2NgnsffjmKtKTh4PDL/bPMfAxsbGviF7E8S2x27ybZq1K5ECGxsb+2PYbcOQLL1daBvWJqEyNjY29knsWYMxW9AsrG2LWX0EExsbG/sI9iayTe58XHTNtvWC0RI2Njb227NnxaYtIbN2Yrh0bGxs7A9jJ0P5zVGedtDftiJtdI2NjY19EjuPcvMR/yZInh3rSUZUv3zP2NjY2Eew88VtXt9ubh4e5LkHNjY29iew2wIzA2wGTG2PVVRvbGxs7CPYyb/1SWFrY+N26Vcd/cHGxsY+g90GqBvebFyVf07ymdjY2NjnsWclqg1u20Zl08Akb8TGxsY+jz0byudNyFXHfZKnipNK2NjY2Eew2yYhKRV1S1AOjGaTsygPwcbGxr45e3/IZtY2zCLkzfZhY2Njn8TejJby+/dBcr7F+buwsbGxT2LPYoAWkB+1mR3TaWMJbGxs7JPY+bg/aWDaQX9bAvPjPtEWYGNjY9+c3Q7uZ0dtZuUtL135GoZ5BTY2NvYbs9sodzNgagOJdshVx8zY2NjYx7FnR21mbcms7dk8VWTR2NjY2Ldl5+Vn30Lkf823tQ08sLGxsc9jX/ZxJTIvb6+3I/86sbGxsU9ib+LV/dGfTQyQJ9h/ZNrY2NjYN2e3sW5bbFpSezyojavrLcDGxsa+CXsT5c5ahbaRuOoAEDY2NvbZ7Ha4v2kS8kCiLVHFVmJjY2N/PHtzxGd24HIfP2BjY2Njz8rSrJ3IS2Y7FMPGxsY+lb05dtkO8dtx/3/Ew9jY2NgnsdtxTE5NtrVdyuYgJjY2NvZx7G/fhwJdcA0ZwAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        Streams：深入剖析Redis5.0全新数据结构 |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="redis,streams,redis5.0">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>Streams：深入剖析Redis5.0全新数据结构</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">Streams：深入剖析Redis5.0全新数据结构</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-05-17T04:17:11.000Z" itemprop="datePublished" class="page-time">
+  2020-05-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-redis/Streams：深入剖析Redis5-0全新数据结构"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">Streams：深入剖析Redis5.0全新数据结构</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-05-17 12:17:11" datetime="2020-05-17T04:17:11.000Z"  itemprop="datePublished">2020-05-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/redis/">redis</a></li></ul>
+
+
+
+            
+	<span id="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/" class="leancloud_visitors" data-flag-title="Streams：深入剖析Redis5.0全新数据结构" title="Streams：深入剖析Redis5.0全新数据结构">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/#comment">
+            <span class="valine-comment-count" data-xid="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/"></span>
+        </a>
+    </span>
+
+
+
+            
+            <span class="post-count">文章字数: 4,422</span>
+<span class="post-count">阅读时长 ≈ 19分钟</span>
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <blockquote>
+<p>转载：<a href="https://mp.weixin.qq.com/s/GpG3t_O_SxLGNklVnoOiYQ" target="_blank" rel="noopener">原文地址</a></p>
+</blockquote>
+<p>Redis 5.0 全新的数据类型：streams，官方把它定义为：<strong>以更抽象的方式建模日志的数据结构</strong>。Redis的streams主要是一个append only的数据结构，至少在概念上它是一种在内存中表示的抽象数据类型，只不过它们实现了更强大的操作，以克服日志文件本身的限制。</p>
+<p>如果你了解MQ，那么可以把streams当做MQ。如果你还了解kafka，那么甚至可以把streams当做kafka。</p>
+<p>另外，这个功能有点类似于redis以前的<strong>Pub/Sub</strong>，但是也有基本的不同：</p>
+<ul>
+<li><p>streams支持多个客户端（消费者）等待数据（Linux环境开多个窗口执行XREAD即可模拟），并且每个客户端得到的是完全相同的数据。</p>
+</li>
+<li><p>Pub/Sub是发送忘记的方式，并且不存储任何数据；而streams模式下，所有消息被无限期追加在streams中，除非用于显示执行删除（XDEL）。</p>
+</li>
+<li><p>streams的Consumer Groups也是Pub/Sub无法实现的控制方式。</p>
+<a id="more"></a>
+</li>
+</ul>
+<h3 id="1-streams数据结构"><a href="#1-streams数据结构" class="headerlink" title="1. streams数据结构"></a>1. streams数据结构</h3><p>streams数据结构本身非常简单，但是streams依然是Redis到目前为止最复杂的类型，其原因是实现的一些额外的功能：一系列的阻塞操作允许消费者等待生产者加入到streams的新数据。另外还有一个称为<strong>Consumer Groups</strong>的概念，这个概念最先由kafka提出，Redis有一个类似实现，和kafka的Consumer Groups的目的是一样的：允许一组客户端协调消费相同的信息流！</p>
+<p>redis源码中定义streams结构的源码如下，由源码可知，stream的核心数据结构是radix tree：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">stream</span> &#123;</span></span><br><span class="line">    rax *rax;               <span class="comment">/* The radix tree holding the stream. */</span></span><br><span class="line">    <span class="keyword">uint64_t</span> length;        <span class="comment">/* Number of elements inside this stream. */</span></span><br><span class="line">    streamID last_id;       <span class="comment">/* Zero if there are yet no items. */</span></span><br><span class="line">    rax *cgroups;           <span class="comment">/* Consumer groups dictionary: name -&gt; streamCG */</span></span><br><span class="line">&#125; stream;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>源码参考：<a href="https://github.com/antirez/redis/blob/5.0.0/src/stream.h；" target="_blank" rel="noopener">https://github.com/antirez/redis/blob/5.0.0/src/stream.h；</a></p>
+</blockquote>
+<p>至于redis对radix tree的实现，参考源码：<a href="https://github.com/antirez/redis/blob/5.0.0/src/rax.c" target="_blank" rel="noopener">https://github.com/antirez/redis/blob/5.0.0/src/rax.c</a> 和 <a href="https://github.com/antirez/redis/blob/5.0.0/src/rax.h" target="_blank" rel="noopener">https://github.com/antirez/redis/blob/5.0.0/src/rax.h</a> 。网上也有很多radix tree的文章，本篇文章就不做过多的介绍了。下面给出一张从官方源码中的部分截图：</p>
+<figure class="image-box">
+                <a rel=Streams：深入剖析Redis5.0全新数据结构 href="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589689130577.webp" title="radix tree" data-fancybox="images"><img src="https://gitee.com/sjsmi1e/image-bed/raw/master/markdown_images/640-1589689130577.webp" alt="radix tree" title="" class=""></a>
+                <p>radix tree</p>
+            </figure>
+<h3 id="2-streams基础"><a href="#2-streams基础" class="headerlink" title="2. streams基础"></a>2. streams基础</h3><p>为了理解streams的目的，以及如何使用它，我们先忽略掉所有高级特性，只把注意力放在数据结构本身，以及那些操作和访问streams的命令。这基本上也是大多数其他Redis数据类型共有的部分，例如Lists，Sets，Sorted Sets等。然而需要注意的是，Lists也有一个更复杂的阻塞式的API，例如BLPOP，BRPOP等。streams这方便的API也没什么不同，只是更复杂，更强大（更牛逼，哈）！</p>
+<h3 id="3-streams命令"><a href="#3-streams命令" class="headerlink" title="3. streams命令"></a>3. streams命令</h3><p>废话不多说，先上手玩玩这个全新的数据类型。streams这个数据类型对应有如下13个操作命令，所有命令都以”<strong>X</strong>“开头：</p>
+<h4 id="1-XADD"><a href="#1-XADD" class="headerlink" title="1. XADD"></a>1. XADD</h4><p><strong>用法</strong>：XADD key ID field string [field string …]<br>正如其名，这个命令就是用来添加的，给streams追加（append，前面提到过：streams主要是一个append only的数据结构）一个新的entry（和Java里的Map类似，Redis里的streams中的数据也称为entry）。</p>
+<p><strong>key</strong>：的含义就是同一类型streams的名称；<br><strong>ID</strong>: streams中entry的唯一标识符，如果执行XADD命令时，传入星号（*），那么，ID会自动生成，且自动生成的ID会在执行XADD后返回，默认生成的ID格式为millisecondsTime+sequenceNumber，即当前毫秒级别的时间戳加上一个自增序号值，例如<code>&quot;1540013735401-0&quot;</code>。并且执行XADD时，不接受少于或等于上一次执行XADD的ID，否则会报错：<code>ERR The ID specified in XADD is equal or smaller than the target stream top item</code>；<br><strong>field&amp;string</strong>：接下来就是若干组field string。可以把它理解为表示属性的json中的key-value。例如，某一streams的key命名为userInfo，且某个用户信息为{“username”:”afei”, “password”:”123456”}，那么执行XADD命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; xadd userInfo * username afei password 123456</span><br><span class="line">"1540014082060-0"</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>由于命令中ID字段的值是星号，所以自定生成ID，<code>1540014082060-0</code>就是自动生成的ID。 XADD命令也支持显示指定ID，例如：<code>XADD streamname 0-2 foo bar</code>。</p>
+</blockquote>
+<ul>
+<li>时钟回拨</li>
+</ul>
+<p>需要注意的是，ID的时间戳部分是部署Redis服务器的本地时间，如果发生时钟回拨会怎么样？如果发生始终回拨，生成的ID的时间戳部分就是回拨后的时间，然后加上这个时间的递增序列号。例如当前时间戳1540014082060，然后这时候发生了时钟回拨，且回拨5ms，那么时间戳就是1540014082055。假设以前已经生成了1540014082055-0，1540014082055-1，那么这次由于时钟回拨，生成的ID就是1540014082055-2。所以允许自动生成的ID在发生时钟回拨时少于上次的ID，但是不允许显示指定一个少于上次的ID。</p>
+<h4 id="2-XDEL"><a href="#2-XDEL" class="headerlink" title="2. XDEL"></a>2. XDEL</h4><p><strong>用法</strong>：XDEL key ID [ID …]<br>和XADD相反，这是命令用来从streams中删除若干个entry，并且会返回<strong>实际</strong>删除数，这个删除数可能和参数ID个数不等，因为某些ID表示的消息可能不存在。执行命令如下，第二个参数ID是不存在的，所以XDEL的返回结果是1：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XDEL userInfo "1540014379642-0" "1540014379642-1"</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+<h4 id="3-XLEN"><a href="#3-XLEN" class="headerlink" title="3. XLEN"></a>3. XLEN</h4><p><strong>用法</strong>：XLEN key<br>很好理解，这个命令就是用来返回streams中有多少个entry。执行如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XLEN userInfo</span><br><span class="line">(integer) 2</span><br></pre></td></tr></table></figure>
+<h4 id="4-streams三种查询模式"><a href="#4-streams三种查询模式" class="headerlink" title="4. streams三种查询模式"></a>4. streams三种查询模式</h4><p>redis提供了三种查询streams数据的模式：</p>
+<ol>
+<li><strong>范围查询</strong>：因为streams的每个entry，其默认生成的ID是基于时间且递增的；</li>
+<li><strong>监听模式</strong>：类比linux中的tailf命令，实时接收新增加到streams中的entry（也有点像一个消息系统，事实上笔者认为它就是借鉴了kafka）；</li>
+<li><strong>消费者组</strong>：即Consumer Groups，特殊的监听模式。从一个消费者的角度来看streams，一个streams能被分区到多个处理消息的消费者，对于任意一条消息，同一个消费者组中只有一个消费者可以处理（和kafka的消费者组完全一样）。这样还能够横向扩容消费者，从而提升处理消息的能力，而不需要只让把让一个消费者处理所有消息。</li>
+</ol>
+<p>接下里分别介绍这三种模式。</p>
+<h4 id="5-XRANGE"><a href="#5-XRANGE" class="headerlink" title="5. XRANGE"></a>5. XRANGE</h4><p><strong>用法</strong>：XRANGE key start end [COUNT count]<br>这个命令属于第1种模式，即基于范围查询。这个命令用来返回streams某个顺序范围下的元素，start参数是更小的ID，end参数是更大的ID。有两个特殊的ID用符号”-“和”+”表示，符号”-“表示最小的ID，符号”+”表示最大的ID：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XRANGE userInfo "1540014096298-0" "1540014477236-0"</span><br><span class="line">1) 1) "1540014096298-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "root"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "666666"</span><br><span class="line">2) 1) "1540014477236-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "test"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "111111"</span><br><span class="line">127.0.0.1:6379&gt; </span><br><span class="line">127.0.0.1:6379&gt; XRANGE userInfo - +</span><br><span class="line">1) 1) "1540014082060-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "afei"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "123456"</span><br><span class="line">2) 1) "1540014096298-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "root"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "666666"</span><br><span class="line">3) 1) "1540014477236-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "test"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "111111"</span><br><span class="line">4) 1) "1540014493402-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "u1"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "111111"</span><br></pre></td></tr></table></figure>
+<p>XRANGE还能实现遍历某个范围区间的功能，例如我想遍历2018-10-20号新增的用户信息。首先得到2018-10-20 00:00:00对应的时间戳为1539964800000，再得到2018-10-20 23:59:59对应的时间戳为1540051199000，然后执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XRANGE userInfo 1539964800000-0  1540051199000-0 COUNT 5</span><br><span class="line">1) 1) "1540014082060-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "afei"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "123456"</span><br><span class="line">... ...</span><br><span class="line">5) 1) "1540014496505-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "u2"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "111111"</span><br><span class="line">127.0.0.1:6379&gt; </span><br><span class="line"><span class="meta">#</span> 需要注意的是，接下来再遍历的start参数是上一次遍历结果最大的ID加1，即"1540014496505-0"加1就是"1540014496505-1"。</span><br><span class="line">127.0.0.1:6379&gt; XRANGE userInfo 1540014496505-1  1540051199000-0 COUNT 5</span><br><span class="line">1) 1) "1540014499863-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "u3"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "111111"</span><br></pre></td></tr></table></figure>
+<h4 id="6-XREVRANGE"><a href="#6-XREVRANGE" class="headerlink" title="6. XREVRANGE"></a>6. XREVRANGE</h4><p><strong>用法</strong>：XREVRANGE key end start [COUNT count]<br>这个命令也属于第1种模式，且和XRANGE相反，返回一个逆序范围。end参数是更大的ID，start参数是更小的ID。执行示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XREVRANGE userInfo "1540014477236-0" "1540014096298-0"</span><br></pre></td></tr></table></figure>
+<h4 id="7-XREAD"><a href="#7-XREAD" class="headerlink" title="7. XREAD"></a>7. XREAD</h4><p><strong>用法</strong>：XREAD [COUNT count] [BLOCK milliseconds] STREAMS key [key …] ID [ID …]<br>很明显，这个命令就是用来实现第2个模式，即监听模式。其作用是返回streams中从来没有读取的，且比参数ID更大的元素。</p>
+<p>这个命令的使用方式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XREAD COUNT 10 BLOCK 60000 STREAMS userInfo "1540041139268-0"</span><br><span class="line">1) 1) "userInfo"</span><br><span class="line">   2) 1) 1) "1540041264182-0"</span><br><span class="line">         2) 1) "u2"</span><br><span class="line">            2) "p2"</span><br><span class="line">(9.26s)</span><br><span class="line"><span class="meta">#</span> "1540041264182-0"这条消息时通过XADD添加的然后被XREAD监听到的消息。</span><br><span class="line">127.0.0.1:6379&gt; XREAD COUNT 2 STREAMS userInfo 0</span><br><span class="line">1) 1) "userInfo"</span><br><span class="line">   2) 1) 1) "1540014082060-0"</span><br><span class="line">         2) 1) "username"</span><br><span class="line">            2) "afei"</span><br><span class="line">            3) "password"</span><br><span class="line">            4) "123456"</span><br><span class="line">      2) 1) "1540014096298-0"</span><br><span class="line">         2) 1) "username"</span><br><span class="line">            2) "root"</span><br><span class="line">            3) "password"</span><br><span class="line">            4) "666666"</span><br><span class="line"><span class="meta">#</span> 这条命令实现类似XRANGE的功能。</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; XREAD BLOCK 0 STREAMS userInfo $</span><br><span class="line">1) 1) "userInfo"</span><br><span class="line">   2) 1) 1) "1540042613437-0"</span><br><span class="line">         2) 1) "u7"</span><br><span class="line">            2) "p7"</span><br><span class="line"><span class="meta">#</span> 说明BLOCK为0表示一致等待知道有新的数据，否则永远不会超时。并且ID的值我们用特殊字符`$`表示，这个特殊字符表示我们只获取最新添加的消息。</span><br></pre></td></tr></table></figure>
+<p>此外，XREAD还支持同时监听多个streams，用法如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XREAD BLOCK 0 STREAMS userInfo_01 userInfo_02 userInfo_03 userInfo_04  $ $ $ $</span><br><span class="line">1) 1) "userInfo_03"</span><br><span class="line">   2) 1) 1) "1540043348287-0"</span><br><span class="line">         2) 1) "u1"</span><br><span class="line">            2) "p1"</span><br><span class="line">(3.49s)</span><br><span class="line"><span class="meta">#</span> 监听userInfo_01~userInfo_04这4个streams的新的消息。</span><br></pre></td></tr></table></figure>
+<p>XREAD除了COUNT和BLOCK，没有其他选项了。所有XREAD是一个非常基本的命令。更多高级特性可以往下看接下来要介绍的XREADGROUP。</p>
+<h4 id="8-XREADGROUP"><a href="#8-XREADGROUP" class="headerlink" title="8. XREADGROUP"></a>8. XREADGROUP</h4><p>用法：XREADGROUP GROUP group consumer [COUNT count] [BLOCK milliseconds] STREAMS key [key …] ID [ID …]<br>很明显，这就是第三种模式：消费者组模式。</p>
+<p>如果你了解kafka的消费者组，那么你就也了解了streams的消费者组。如果不了解也没关系，笔者简单解释一下，假设有三个消费者C1，C2，C3。在streams中总计有7条消息：1， 2， 3， 4， 5， 6， 7，那么消费关系如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1 -&gt; C1</span><br><span class="line">2 -&gt; C2</span><br><span class="line">3 -&gt; C3</span><br><span class="line">4 -&gt; C1</span><br><span class="line">5 -&gt; C2</span><br><span class="line">6 -&gt; C3</span><br><span class="line">7 -&gt; C1</span><br></pre></td></tr></table></figure>
+<p>消费者组具备如下几个特点：</p>
+<ol>
+<li>同一个消息不会被投递到一个消费者组下的多个消费者，只可能是一个消费者。</li>
+<li>同一个消费者组下，每个消费者都是唯一的，通过大小写敏感的名字区分。</li>
+<li>消费者组中的消费者请求的消息，一定是新的，从来没有投递过的消息。</li>
+<li>消费一个消息后，需要用命令（XACK）确认，意思是说：这条消息已经给成功处理。正因为如此，当访问streams的历史消息时，每个消费者只能看到投递给它自己的消息。</li>
+</ol>
+<p>消费者组抽象的想象成如下这个样子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">+----------------------------------------+</span><br><span class="line">| consumer_group_name: afeigroup         |</span><br><span class="line">| consumer_group_stream: somekey         |</span><br><span class="line">| last_delivered_id: 1292309234234-92    |</span><br><span class="line">|                                        |</span><br><span class="line">| consumers:                             |</span><br><span class="line">|    &quot;consumer-1&quot; with pending messages  |</span><br><span class="line">|       1292309234234-4                  |</span><br><span class="line">|       1292309234232-8                  |</span><br><span class="line">|    &quot;consumer-42&quot; with pending messages |</span><br><span class="line">|       ... (and so forth)               |</span><br><span class="line">+----------------------------------------+</span><br></pre></td></tr></table></figure>
+<h4 id="9-XACK"><a href="#9-XACK" class="headerlink" title="9. XACK"></a>9. XACK</h4><p><strong>用法</strong>：XACK key group ID [ID …]<br>这是消费者组相关的另一个重要的命令。标记一个处理中的消息为已被正确处理，如此一来，这条消息就会被从消费者组的pending消息集合中删除，类似MQ中的ack。</p>
+<h4 id="10-XGROUP"><a href="#10-XGROUP" class="headerlink" title="10. XGROUP"></a>10. XGROUP</h4><p><strong>用法</strong>：XGROUP [CREATE key groupname id-or-<code>$</code>] [SETID key id-or-<code>$</code>] [DESTROY key groupname] [DELCONSUMER key groupname consumername]</p>
+<p>这也是消费者组的一个重要命令，这个命令用来管理消费者组，例如创建，删除等。</p>
+<p>XREADGROUP，XACK，XGROUP三种命令构成了消费者组相关的操作命令，下面是消费者组一些操作示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 创建一个消费者组</span><br><span class="line">127.0.0.1:6379&gt; XGROUP CREATE userInfo GRP-AFEI $</span><br><span class="line">OK</span><br><span class="line"><span class="meta">#</span> 需要注意的是，目前XGROUP CREATE的streams必须是一个存在的streams，否则会报错：</span><br><span class="line">127.0.0.1:6379&gt; XGROUP CREATE userinfo GRP-AFEI $</span><br><span class="line">(error) ERR The XGROUP subcommand requires the key to exist. Note that for CREATE you may want to use the MKSTREAM option to create an empty stream automatically.</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 名为zhangsan的消费者，需要注意的是streams名称userInfo后面的特殊符号`&gt;`表示这个消费者只接收从来没有被投递给其他消费者的消息，即新的消息。当然我们也可以指定具体的ID，例如指定0表示访问所有投递给该消费者的历史消息，指定1540081890919-1表示投递给该消费者且大于这个ID的历史消息：</span><br><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP mygroup zhangsan COUNT 1 BLOCK 0 STREAMS userInfo &gt;</span><br><span class="line"><span class="meta">#</span> 名为lisi的消费者：</span><br><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP mygroup lisi COUNT 1 BLOCK 0 STREAMS userInfo &gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 接下来分别添加两条信息，一条就会被zhangsan消费，另一条被lisi消费：</span><br><span class="line">127.0.0.1:6379&gt; XADD userInfo * username u102102 password p102102</span><br><span class="line">"1540081873370-0"</span><br><span class="line">127.0.0.1:6379&gt; XADD userInfo * username u102103 password p102103</span><br><span class="line">"1540081890919-0"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>现在消费者lisi有一条消息：</span><br><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP mygroup lisi COUNT 5 BLOCK 0 STREAMS userInfo 0</span><br><span class="line">1) 1) "userInfo"</span><br><span class="line">   2) 1) 1) "1540081890919-0"</span><br><span class="line">         2) 1) "username"</span><br><span class="line">            2) "u102103"</span><br><span class="line">            3) "password"</span><br><span class="line">            4) "p102103"</span><br><span class="line"><span class="meta">#</span>然后通过命令ack这条消息：</span><br><span class="line">127.0.0.1:6379&gt; XACK userInfo mygroup 1540081890919-0</span><br><span class="line">(integer) 1</span><br><span class="line"><span class="meta">#</span> 再看消费者lisi的pending队列，已经为空：</span><br><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP mygroup lisi COUNT 5 BLOCK 0 STREAMS userInfo 0</span><br><span class="line">1) 1) "userInfo"</span><br><span class="line">   2) (empty list or set)</span><br></pre></td></tr></table></figure>
+<h4 id="11-XPENDING"><a href="#11-XPENDING" class="headerlink" title="11. XPENDING"></a>11. XPENDING</h4><p>用法：XPENDING key group [start end count] [consumer]<br>返回streams中消费者组的pending消息，即消费者接收到但是还没有ack的消息，用法参考：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 查看消费者组下总计最多10条pending消息</span><br><span class="line">127.0.0.1:6379&gt; XPENDING userInfo mygroup - + 10</span><br><span class="line">1) 1) "1540083260408-0"</span><br><span class="line">   2) "zhangsan"</span><br><span class="line">   3) (integer) 183551</span><br><span class="line">   4) (integer) 1</span><br><span class="line">2) 1) "1540083266293-0"</span><br><span class="line">   2) "lisi"</span><br><span class="line">   3) (integer) 177666</span><br><span class="line">   4) (integer) 1</span><br><span class="line"><span class="meta">#</span> 查看消费者组下zhangsan这个消费者总计最多10条pending消息</span><br><span class="line">127.0.0.1:6379&gt; XPENDING userInfo mygroup - + 10 zhangsan</span><br><span class="line">1) 1) "1540083260408-0"</span><br><span class="line">   2) "zhangsan"</span><br><span class="line">   3) (integer) 187006</span><br><span class="line">   4) (integer) 1</span><br></pre></td></tr></table></figure>
+<h4 id="12-XCLAIM"><a href="#12-XCLAIM" class="headerlink" title="12. XCLAIM"></a>12. XCLAIM</h4><p>用法：XCLAIM key group consumer min-idle-time ID [ID …] [IDLE ms] [TIME ms-unix-time] [RETRYCOUNT count] [FORCE] [JUSTID]<br>作用是改变消费者组中消息的所有权，用法参考：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP mygroup zhangsan COUNT 5 BLOCK 0 STREAMS userInfo 0</span><br><span class="line">1) 1) "userInfo"</span><br><span class="line">   2) 1) 1) "1540083260408-0"</span><br><span class="line">         2) 1) "username"</span><br><span class="line">            2) "u102106"</span><br><span class="line">            3) "password"</span><br><span class="line">            4) "p102106"</span><br><span class="line"><span class="meta">#</span> zhangsan本来有1条消息，现在将另一条本来属于lisi的消息的所有权转给它：</span><br><span class="line">127.0.0.1:6379&gt; XCLAIM userInfo mygroup zhangsan 360 1540083266293-0</span><br><span class="line">1) 1) "1540083266293-0"</span><br><span class="line">   2) 1) "username"</span><br><span class="line">      2) "u102107"</span><br><span class="line">      3) "password"</span><br><span class="line">      4) "p102107"</span><br><span class="line"><span class="meta">#</span> 现在zhangsan有两条消息了</span><br><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP mygroup zhangsan COUNT 5 BLOCK 0 STREAMS userInfo 0</span><br><span class="line">1) 1) "userInfo"</span><br><span class="line">   2) 1) 1) "1540083260408-0"</span><br><span class="line">         2) 1) "username"</span><br><span class="line">            2) "u102106"</span><br><span class="line">            3) "password"</span><br><span class="line">            4) "p102106"</span><br><span class="line">      2) 1) "1540083266293-0"</span><br><span class="line">         2) 1) "username"</span><br><span class="line">            2) "u102107"</span><br><span class="line">            3) "password"</span><br><span class="line">            4) "p102107"</span><br></pre></td></tr></table></figure>
+<h4 id="13-XINFO"><a href="#13-XINFO" class="headerlink" title="13. XINFO"></a>13. XINFO</h4><p><strong>用法</strong>：XINFO [CONSUMERS key groupname] [GROUPS key] [STREAM key] [HELP]<br>其作用是得到streams和消费者组的一些信息，使用参考：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XINFO CONSUMERS userInfo mygroup </span><br><span class="line">1) 1) "name"</span><br><span class="line">   2) "lisi"</span><br><span class="line">   3) "pending"</span><br><span class="line">   4) (integer) 0</span><br><span class="line">   5) "idle"</span><br><span class="line">   6) (integer) 201086</span><br><span class="line">2) 1) "name"</span><br><span class="line">   2) "zhangsan"</span><br><span class="line">   3) "pending"</span><br><span class="line">   4) (integer) 2</span><br><span class="line">   5) "idle"</span><br><span class="line">   6) (integer) 701954</span><br><span class="line">127.0.0.1:6379&gt; XINFO STREAM userInfo</span><br><span class="line"> 1) "length"</span><br><span class="line"> 2) (integer) 22</span><br><span class="line"> 3) "radix-tree-keys"</span><br><span class="line"> 4) (integer) 1</span><br><span class="line"> 5) "radix-tree-nodes"</span><br><span class="line"> 6) (integer) 2</span><br><span class="line"> 7) "groups"</span><br><span class="line"> 8) (integer) 2</span><br><span class="line"> 9) "last-generated-id"</span><br><span class="line">10) "1540082298051-0"</span><br><span class="line">11) "first-entry"</span><br><span class="line">12) 1) "1540014082060-0"</span><br><span class="line">    2) 1) "username"</span><br><span class="line">       2) "afei"</span><br><span class="line">       3) "password"</span><br><span class="line">       4) "123456"</span><br><span class="line">13) "last-entry"</span><br><span class="line">14) 1) "1540082298051-0"</span><br><span class="line">    2) 1) "username"</span><br><span class="line">       2) "u102105"</span><br><span class="line">       3) "password"</span><br><span class="line">       4) "p102105"</span><br></pre></td></tr></table></figure>
+<h4 id="14-XTRIM"><a href="#14-XTRIM" class="headerlink" title="14. XTRIM"></a>14. XTRIM</h4><p><strong>用法</strong>：XTRIM key MAXLEN [~] count<br>修剪streams到一个确定的size。Trims the stream to (approximately if ‘~’ is passed) a certain size，用法参考：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> streams只保留10条消息，其返回结果表示被剪去多少条消息：</span><br><span class="line">127.0.0.1:6379&gt; XTRIM userInfo MAXLEN 10</span><br><span class="line">(integer) 14</span><br></pre></td></tr></table></figure>
+<p>说明：streams目前的修剪策略比较简单，比如连根据ID范围修剪都没有实现。根据具体某一个ID删除，可以通过XDEL实现。</p>
+<h3 id="4-持久化，复制以及消息安全性"><a href="#4-持久化，复制以及消息安全性" class="headerlink" title="4. 持久化，复制以及消息安全性"></a>4. 持久化，复制以及消息安全性</h3><p>和其他数据类型一样，streams也会异步复制到slave，并也会持久化到AOF和RDB文件中。然而，消费者组的全部状态是被传播（propagated ）到AOF，RDB和slave中。</p>
+<p>需要注意的是，Redis的streams和消费者组使用Redis默认复制进行持久化和复制，因此：<strong>如果消息的持久性在您的应用程序中很重要，则必须将AOF与强fsync策略一起使用</strong>。<br>默认情况下，异步复制不保证能复制每一个数据添加或使用者组状态更改：在故障转移之后，可能会丢失某些内容，具体取决于slave从master接收数据的能力。</p>
+<ul>
+<li>长度为0的streams</li>
+</ul>
+<p>这是streams和其他redis数据类型的不同，其他数据类型，例如Lists，Sets等，如果所有元素都被删除，那么key也不存在。而streams允许所有entry都被删除。</p>
+<p>存在这种不对称性的原因是因为streams可能具有关联的消费者组，并且我们不希望由于streams中不再有任何entry而丢失消费者组定义的状态。 目前，即使没有关联的消费者群体，也不会删除该streams。</p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-05-17T04:27:21.696Z" itemprop="dateUpdated">2020-05-17 12:27:21</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/" target="_blank" rel="external">http://www.sjsmile.cn/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sjsmile.cn">
+            <img src="/img/avatar.jpg" alt="Smile">
+            Smile
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis5-0/">redis5.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/streams/">streams</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/&title=《Streams：深入剖析Redis5.0全新数据结构》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/&title=《Streams：深入剖析Redis5.0全新数据结构》 — MY STUDY BLOG&source=
+转载：原文地址
+
+Redis 5.0 全新的数据类型：streams，官方把它定义为：以更抽象的方式建模日志的数据结构。Redis的streams主要是..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2020/06/24/java/API接口的安全设计/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">API接口的安全设计</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2020/05/17/redis/Redis高级玩法：如何利用SortedSet实现多维度排序/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Redis高级玩法：如何利用SortedSet实现多维度排序</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-streams数据结构"><span class="post-toc-text">1. streams数据结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-streams基础"><span class="post-toc-text">2. streams基础</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-streams命令"><span class="post-toc-text">3. streams命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-XADD"><span class="post-toc-text">1. XADD</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-XDEL"><span class="post-toc-text">2. XDEL</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-XLEN"><span class="post-toc-text">3. XLEN</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-streams三种查询模式"><span class="post-toc-text">4. streams三种查询模式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-XRANGE"><span class="post-toc-text">5. XRANGE</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-XREVRANGE"><span class="post-toc-text">6. XREVRANGE</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-XREAD"><span class="post-toc-text">7. XREAD</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#8-XREADGROUP"><span class="post-toc-text">8. XREADGROUP</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#9-XACK"><span class="post-toc-text">9. XACK</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#10-XGROUP"><span class="post-toc-text">10. XGROUP</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#11-XPENDING"><span class="post-toc-text">11. XPENDING</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#12-XCLAIM"><span class="post-toc-text">12. XCLAIM</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#13-XINFO"><span class="post-toc-text">13. XINFO</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#14-XTRIM"><span class="post-toc-text">14. XTRIM</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-持久化，复制以及消息安全性"><span class="post-toc-text">4. 持久化，复制以及消息安全性</span></a></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/&title=《Streams：深入剖析Redis5.0全新数据结构》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2020/05/17/redis/Streams：深入剖析Redis5-0全新数据结构/&title=《Streams：深入剖析Redis5.0全新数据结构》 — MY STUDY BLOG&source=
+转载：原文地址
+
+Redis 5.0 全新的数据类型：streams，官方把它定义为：以更抽象的方式建模日志的数据结构。Redis的streams主要是..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADIUlEQVR42u3ay3LbMBAEQP3/TzvXpBxRMwuqylo3Ty6KDzR4WGMWj0d8fH07/j7//crkruT892ueje3xjgMbGxv7Q9jJy65f/+zX5K78adejrScOGxsbex37eljXU5Bc2ZaxtgblFmxsbGzsfAqu780XPG2hxcbGxsZ+B7UNlfIpw8bGxsZuC0MSHs2uzwHt4gcbGxt7NzuPb37+32/pb2NjY2P/YPZXeZxEP+0YZk3oSIGNjY29iJ0XgGtkMh131dtZYxgbGxv7N7CTUpQ0A/KylN97Pc78IxVfEhsbG3sFOw/087i/XjAcL1eirgg2Njb2x7Lb0jUbymwTz13N2uI7Y2NjY38sO2/onrda22VG25yIFkvY2NjY69jnoc9J26CNimYN4GLusbGxsT+KXfz7XpaxfOLywtYuS7CxsbF/A/uuwH1WPNrymT/zRaHFxsbGXso+iYdOgqd2iZIESS+eho2Njb2OfcKYxfR3tROGb8TGxsZexz4pFfl0zOKnk/bA0+djY2NjL2LPFgP5sB7xcRJszQobNjY29g52sh2nnYjzjTV5bBQ1A7CxsbFXsxNMHiq1kdNRxH9eSrGxsbFXs+89k4T++TTNFiQvmgTY2NjYH8vOh9WWn3bbTd48SHgvfsXGxsZeym4D/dmL2yvbJnQ9aGxsbOxF7Dx1aQeXR07tsuSoMYCNjY29iF3s7okXLSdbME+WK5EOGxsbeym7jYTyLTg5o91q2XZv/wmVsLGxsZeyZxt3Tq5s46F2m+Z/zmBjY2MvYs9arfmA2vJ2vrCp2xXY2NjYK9j5DW1U9O5mw/ALY2NjYy9ln7d78yXBrHkwW+Q8nSBsbGzspexZYHRXIcynMm9CP70LGxsbewX7pL06Y+cxVssr3o6NjY29iH1eNtom8V1Pu6voYmNjY+9gJ0VrFuLMyuT5xs2j/UrY2NjYH8vOlwptOcmfk0/TrOhiY2NjY8820MzKZBtUJdONjY2NjZ0/NFlazBrAs7gfGxsb+zew22Ao2Sgzawm07521CrCxsbE3sfMCkA/3hJqPJP8M7VuwsbGxP4T9B3U+kc0E5G2jAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>

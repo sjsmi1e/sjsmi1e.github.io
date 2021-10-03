@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="3wLXF9YV1kwKAVqbZA3aJPfJ09XOP39gXhxoO_Wbymc"/>
+    <meta name="baidu-site-verification" content="code-Gipv9WAl6W"/>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript">
+        if ('') {
+            var pwd = prompt('请输入文章密码');
+            if (pwd && sha256(pwd) == '') {
+
+            } else {
+                alert('密码错误');
+                history.back();
+            }
+        }
+    </script>
+    
+    
+    <title>
+        我的秋招 |
+        
+        MY STUDY BLOG
+         | 喜欢争取，得到珍惜
+        
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="总结">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.4">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:    true,
+            lv: JSON.parse('{"enable":true,"app_id":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","app_key":"DVHJikdL744Xv15hyvirW00X","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"EtO4sVlSFfGKFVhp1xsCshAD-gzGzoHsz","appkey":"DVHJikdL744Xv15hyvirW00X","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts = [];
+    </script>
+    
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/pjax.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css"/>
+<link rel="alternate" href="/atom.xml" title="MY STUDY BLOG" type="application/atom+xml">
+</head>
+
+<link rel="stylesheet" href="/css/alert.css">
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<body>
+<div id="loading" class="active"></div>
+
+<aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/banner.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Smile</h5>
+          <a href="mailto:1043110319@qq.com" title="1043110319@qq.com" class="mail">
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>4</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>1</span>
+            
+              <span>0</span>
+            
+              <span>3</span>
+            
+              <span>1</span>
+            
+              <span>9</span>
+            
+              <span>@</span>
+            
+              <span>q</span>
+            
+              <span>q</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sjsmi1e" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1043110319@qq.com" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章历史
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/timeline"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/photos"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                相册
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>我的秋招</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/header.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">我的秋招</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-09-21T11:43:31.000Z" itemprop="datePublished" class="page-time">
+  2019-09-21
+</time>
+
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-心得/我的秋招"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">我的秋招</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-09-21 19:43:31" datetime="2019-09-21T11:43:31.000Z"  itemprop="datePublished">2019-09-21</time>
+
+            
+
+
+            
+	<span id="/2019/09/21/心得/我的秋招/" class="leancloud_visitors" data-flag-title="我的秋招" title="我的秋招">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span class="leancloud-comment">
+        <i class="icon icon-comment-o"></i>
+        <a href="/2019/09/21/心得/我的秋招/#comment">
+            <span class="valine-comment-count" data-xid="/2019/09/21/心得/我的秋招/"></span>
+        </a>
+    </span>
+
+
+
+            
+            <span class="post-count">文章字数: 2,868</span>
+<span class="post-count">阅读时长 ≈ 10分钟</span>
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h1 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h1><p>经过一年的努力吧（感觉自己说努力有点不好意思O(∩_∩)O），从大三一直到这周，成功签约西安农行软开（还差学校签字返还）。特此作此总结，记录下自己的汗水。</p>
+<h1 id="春招"><a href="#春招" class="headerlink" title="春招"></a>春招</h1><p>从大三下学期一开始，我就开始了校园招聘的路程，虽然那时候是春招，我大三也只能找一些实习，但是有实习岂不是很好，简历不就更好看了吗？但是啊，最后也只有以失败告终，0offer。但是也收获到了许多，比如经过的几次面试。</p>
+<p>记得那是大三刚开始，因为整个宿舍（六个人）只有我和我的下铺有就业的意向，其他人都是考研。所以，我们就计划着一起开始筹备春招。当时觉得自己知识体系应该已经差不多了，所以信心满满，然而，当头棒喝。我专攻的是Java后台开发，但当有笔试传来的时候，发现出的题目竟然像是在看天书，天书，什么概念，就是有头无尾，几乎不懂的。本以为以前写过算法，参加过ACM，算法题应该不成什么大问题，然而，算法题就是最大的问题。当时就觉得自己得复习甚至是学习一波。因为当时有一些知识点是学校一起老师讲过的，因为没怎么看，也没怎么常用，所以就忘记了。</p>
+<a id="more"></a>
+<p>后来，经过一段时间的沉沦（暂停简历投递），学习得差不多了，又继续开始了笔试之战。终于有一次，过了三七互娱的笔试，迎来了面试。信心满满，因为我总结了在微信上看到的Java面试100题。然而问到的时候才发现，那100题背出来是没有用的，不懂原理仅仅只是知其一不知其二，面试问得尴尬的一匹，什么都不会。面完后，最多的还是以学习为主，发现以前学的Java只是皮毛，还有很多东西需要自己去掌握。然后，我就开始指定了Java学习计划：逐个知识点突破。边学习边投简历，边完成学校的各种课设。当时可以说是忙上加忙。忙归忙，在学习的时候，发现自己在白忙的样子，过了大半学期，依旧还是0offer。当时，参加培训班的同学一个个拿到了或多或少的offer，知道这个消息之后，当时就觉得自己的世界是如此的渺茫。曾经有一段时间精神是恍惚的，总觉得自己是那么的菜，曾经比自己差的同学经过培训之后，拿到了大厂offer，心里感到一阵落寞，唉😔。</p>
+<p>我知道，我不能沉沦，因为家里还需要我去奋斗。想到这一点，我就提起了一点劲吧。看到web老师在群里发有谁想参加互联网+的联系她，当时我觉得自己可能还需要一个奖去丰富甚至是激励自己，所以自告奋勇地对老师说自己参加了。最重要的是，经过这个，我遇见了我的那个她。记得当时上实验课，来时问我做这个项目目前有什么难处，我就说我们没有懂经济的同学，然后，老师找来了那个她。之后和她的经历我就不多在这个学习平台浪费经历了，去看我们的信去，😄O(∩_∩)O。最后，在这说一点，有了她的陪伴，我觉得我的心不再那么迷茫，也没有了以前的空荡，心里得到了许多慰藉，感谢我的那个她，爱无限♥~~~所以，之后的下半学期，我没有在投递简历，开始了内化过程。</p>
+<h1 id="暑假"><a href="#暑假" class="headerlink" title="暑假"></a>暑假</h1><p>暑假，我就开始了疯狂的训练模式，每天几乎都很有计划的样子，开始逐个击破我当时在春招总结下来的问题。早上，康康叫我起床，她去上班实习，我在宿舍复习。虽然相隔，但是依旧心连心，感觉别有一番风味。就这样，虽然枯燥无味，还挺辛苦的，但是未了将来，这点不足为惧。未了缓解压力，我们俩晚上去散心，散步，挺好的~就这样，在暑假，我完成了大部分的复习，详情请看：<a href="https://github.com/sjsmi1e/javaBaseView" target="_blank" rel="noopener">https://github.com/sjsmi1e/javaBaseView</a></p>
+<p>大约在八月份的时候，准确来说是七月第，我就加入了秋招大军的队伍，开始了提前批的投递。可能提前批招的都是大佬级人物吧，我连个笔试几乎都收不到。当时有一些低落的，但是看到网上的面经，发现都是985或者211的研究生大佬的面经，我就知道，那个时间不属于我。所以，我就等待着正式的秋招。于时在八月份之后，陆陆续续我有开始了投递，也开始了笔试风波。在笔试中遨游，也在代码中穿梭。这是我这个暑假面试写的代码：<a href="https://github.com/sjsmi1e/QiuZhaoWrittenExamination" target="_blank" rel="noopener">https://github.com/sjsmi1e/QiuZhaoWrittenExamination</a>  当时觉得笔试能A出算法题，是多么的开心，是多么的欣慰，因为为了算法笔试题，我刷完了剑指offer，leetcode的DP（简单和中等难度），树，所有简单题。但是笔试过了一段时间，发现连一个面试都没有，就觉得自己时多么的无助，委屈，垃圾。曾几次的怀疑自己，到底适不适合进入中大厂。。。一直到九月份，我都没有任何面试机会，当时，真觉得我就要被毁灭了。。。</p>
+<h1 id="秋招"><a href="#秋招" class="headerlink" title="秋招"></a>秋招</h1><p>我的第一份offer，是农行的offer。记得是8月中旬投的吧，去牛客搜索了一个内推。然后在八月底开始了笔试。她陪我去的，我们来到西北大学，她在食堂等我，我在里面考试。考完试，我觉得她绝对无聊透顶了，手机几乎都用到没电了，不过非常感谢她，能腾出时间来陪我，太感谢她了~所以，我就过了笔试，进入了面试环节。那天6点她叫我起床，给了我100元，冲去了面试场地。风尘仆仆来，风尘仆仆回，借来的西装也许不习惯，穿着走在街上还有点不好意思，但依旧很完美~记得面试过程中，我是5号，当前面一个个面试者站起来，说自己怎么怎么地，哇，好强啊，我什么都没有。。。到我起来自我介绍的时候，有些底气不足，也有些紧张，所以，就有那么一些不是很好。后来也就中规中矩，不过有一点，西电西交的研究生竟然连数据库的char或者varchar都不知道，可能他们不太关注数据库吧，但是他们的简历真的很强。这里不方便透露面试问题，所以就不阐述了。我面试完之后，我真担心自己过不了，其实过了好多天都没有消息，就早已经不报什么希望了。可能后来的论述或者其他什么的为我加分了吧，我竟然过了。当时收到体检通知的，当时我是如此的开心。后来体检通过了，今天签约了，就觉得过程是那么的奇幻，好像在做梦一样。从收到体检通知到昨晚，我一直都在担心，银行随时都会反悔，因为我觉得我是那么的不优秀。现在，心也就放下来了。感谢西安，感谢农行，感谢面试官，感谢康康，感谢自己！</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>在签约农行的时候，我也面试了其他几家大厂，下面把面经记录一下：</p>
+<h2 id="JD"><a href="#JD" class="headerlink" title="JD"></a>JD</h2><p>因为我简历上面说掌握多线，所以一面上来就多线程</p>
+<ol>
+<li>创建线程的方式</li>
+<li>run与start的区别</li>
+<li>volite关键字怎么保证变量可见性，是线程安全的吗</li>
+<li>发生死锁的情况</li>
+<li>集合类举例哪些线程安全，哪些线程不安全</li>
+<li>手写一种单例模式实现方式，为什么要用这种方式</li>
+<li>jdk1.7以前hashtable实现线程安全的原理</li>
+<li>jdk1.7concurrentHashMap 怎么实现线程安全的</li>
+<li>NIO对比于BIO优势是什么</li>
+<li>redis为什么能作为缓存，处理请求为什么能达到那么快（多路复用）</li>
+<li>你了解什么分布式的东西（然后我回答zk）<br>zk用来干什么————分布式锁（原理是什么）</li>
+<li>你用过redis做分布式锁吗，需要注意的情况有什么</li>
+<li>jion与union区别</li>
+<li>数据库的隔离级别</li>
+<li>mysql是怎么在RR情况下解决幻读的（MVCC）</li>
+<li>自己实现一个工具类，让一个对线转成JSON字符串<br>一面结束。。。</li>
+</ol>
+<p>二面：<br>上来就问项目上的问题，然后我项目用了websocket，说一下websocket的原理机制（答的不是很好）</p>
+<ol>
+<li>创建线程的方式</li>
+<li>你常用的jdk包有哪些（集合包，juc），然后我说我用过线程池，他问线程池有哪几种，一般都分别用于什么场景下</li>
+<li>你了解过AQS吗</li>
+<li>你了解什么数据结构（然后我说的基本都知道，然后嘴贱说了红黑树，然后GG）</li>
+<li>你手写一个递归函数吧</li>
+<li>tcp/ip的每一层使用到的设备<br>二面结束。。。</li>
+</ol>
+<h2 id="科大讯飞"><a href="#科大讯飞" class="headerlink" title="科大讯飞"></a>科大讯飞</h2><p>一面</p>
+<ol>
+<li>list与linked的区别，优势与劣势</li>
+<li>你了解排序算法吗，说一下选择排序，与冒泡排序的区别<br>挺多的，但都是些基础问题，不写了，下面写一些我没想到的</li>
+<li>spring是怎么把一个类加载到自己的容器的，用到了什么方法<br>一面结束。。。<br>二面</li>
+<li>你知道接口和抽象类的区别吗？什么时候用接口，什么时候用抽象类</li>
+<li>如果给你两个方法名和参数列表相同，但是返回类型不同，他们是重载吗？如果不是，会发生哪些错误</li>
+<li>讲一下适配器模式，在什么场景下应用</li>
+<li>你了解过网络吗？为什么要有MAC地址，用IP地址不行吗</li>
+<li>你们学过编译原理吗（额，怎么说，我简历上面写了。。。但是我不会）</li>
+<li>然后就问一些其他方面的（你是哪的人，了解科大讯飞吗。。。等等）<br>二面结束。。。</li>
+</ol>
+<h2 id="百度"><a href="#百度" class="headerlink" title="百度"></a>百度</h2><p>一面</p>
+<ol>
+<li>run与start的区别</li>
+<li>sychronized三种情况下锁定的对象是什么</li>
+<li>volited的作用，原理是什么</li>
+<li>计算机网络：常用的HTTP请求头有哪些</li>
+<li>spring容器有哪些组件</li>
+<li>spring事务传播机制</li>
+<li>手写算法：括号匹配问题，写完了后（我用了stack），如何实现o（1）空间的方法</li>
+<li>异常的接口，实现类（exception，error），（运行时异常，检查异常）<br>一面结束。。。</li>
+</ol>
+<h1 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h1><p>行了，这次就写到这吧，没有什么过多的，希望接下来自己在生活中学习上加油(ง •_•)ง</p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-09-21T13:12:02.656Z" itemprop="dateUpdated">2019-09-21 21:12:02</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2019/09/21/心得/我的秋招/" target="_blank" rel="external">http://www.sjsmile.cn/2019/09/21/心得/我的秋招/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sjsmile.cn">
+            <img src="/img/avatar.jpg" alt="Smile">
+            Smile
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2019/09/21/心得/我的秋招/&title=《我的秋招》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2019/09/21/心得/我的秋招/&title=《我的秋招》 — MY STUDY BLOG&source=序言经过一年的努力吧（感觉自己说努力有点不好意思O(∩_∩)O），从大三一直到这周，成功签约西安农行软开（还差学校签字返还）。特此作此总结，记录下自己的汗..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2020/05/07/后端开发必备的-RestFul-API-知识/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">后端开发必备的 RestFul API 知识</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2019/02/19/心得/我的one-year/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">我的one_year</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#序言"><span class="post-toc-text">序言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#春招"><span class="post-toc-text">春招</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#暑假"><span class="post-toc-text">暑假</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#秋招"><span class="post-toc-text">秋招</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#其他"><span class="post-toc-text">其他</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JD"><span class="post-toc-text">JD</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#科大讯飞"><span class="post-toc-text">科大讯飞</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#百度"><span class="post-toc-text">百度</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#尾声"><span class="post-toc-text">尾声</span></a></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.png" data-alipay="/img/reward-alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <!-- <iframe style="position:fixed;left:20px;bottom:20px;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=466881971&auto=0&height=32"></iframe> -->
+    <div id="music" style="position: fixed;left: 0;bottom: 0;z-index: 998;overflow: hidden;"></div>
+</main>
+<footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://sjsmi1e.github.io/" target="_blank">HOME</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Smile &copy; 2015 - 2021
+            </span>
+        		
+           	
+           	<span>
+           		<a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备20009390号</a>
+           	</span>
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+<div class="mask" id="mask"></div>
+<a href="javascript:;" style="font-size:6px;" id="gotop" class="waves-effect waves-circle waves-light">
+	<span class="icon icon-lg icon-chevron-up">
+	 <br> <br><test id="read_percent"></test>
+	</span>
+</a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sjsmile.cn/2019/09/21/心得/我的秋招/&title=《我的秋招》 — MY STUDY BLOG&pic=http://www.sjsmile.cn/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sjsmile.cn/2019/09/21/心得/我的秋招/&title=《我的秋招》 — MY STUDY BLOG&source=序言经过一年的努力吧（感觉自己说努力有点不好意思O(∩_∩)O），从大三一直到这周，成功签约西安农行软开（还差学校签字返还）。特此作此总结，记录下自己的汗..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLklEQVR42u3ay26DMBAFUP7/p9NtpZTkXttUwhxWqAnYJ4up53Ec8fX6df3+y/v950/f78+u44oLAwPjtozkdWfLf35P8mm+1hcqBgbGAxhnESwPrzOwZN0ve8bAwMCIA260ZPxzYGBgYLSMVblyezTEwMDAyJPYmVCbHwQvz8UxMDBuyBgLkf9zf0l/AwMD41aMV3klKWje/kzKc9GuMDAwtmbMtzDzLc6U1aJUFgMDY1NGvtG1pfyZ5uUfb8DAwHgMo01l88Xy0Jk3DI58ExgYGDdn5Me+fPAiKd9fUiPEwMDYlJE3BdtAmdy36xZVQwwMjI0YYyMXM4MRY+9c1s7EwMC4LaMd/0oKcGtHOqJ/AxgYGFsz2kbjTEjNc8/6UIiBgbEpY+wQloxzzfxA9fgFBgbG1ox8c2PfX3XQLA6gGBgYWzPmhy3aYlnCq8+zGBgY2zGSB/LF2u0Ols/ev4+BgfEAxljUyoto+XuSI+DpzAgGBsamjGThVcMWeUqcNx4wMDCeyRgbgxgrtI01OE+fxcDAeAxjfrQiT03HCnMYGBjPZLRBtk0+x8bClhXmMDAwbs54ldfM0W0+Tf0yJ4KBgbEpow1wbREtSXTbQN+2RTEwMPZgtMlqEmST42BbqsPAwMDI24rtgMV8wa4YtsDAwMAoS2wzzdE6icXAwMBY1Lxsj4afn8XAwHgaY6xYP1aSaxsPxdEQAwNjU8bYjEYSptsmwVipDgMDY2vGD2z3jnQ7hBKAAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+<!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.4"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$.fancybox.defaults.hash = false;
+	});
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.4"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.4" data-pjax></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.4"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="/js/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.4.4" data-pjax></script>
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.4"></script>
+<script>
+    getCount();
+</script>
+
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '嗯？去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<!--<script src="/js/jquery.dragscroll.js"></script>-->
+<script src="/js/music.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js" data-pjax></script>
+<script type="text/javascript" src="/js/alert.js"></script>
+<script type="text/javascript" src="/js/reading-progress.js"></script>
+<script type="text/javascript" src="/js/mypjax.js"></script>
+</body>
+</html>
