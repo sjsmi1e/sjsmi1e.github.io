@@ -1,7 +1,5 @@
-// var imgDataPath = "/blog/photos/photos.json"; //图片名称高宽信息json文件路径
-// var imgPath = "https://cdn.jsdelivr.net/gh/Cenergy/images/gallery/"; //图片访问路径
-var imgDataPath = "http://image.sjsmile.cn/photos.json"; //图片名称高宽信息json文件路径
-var imgPath = "http://blog.sjsmile.cn/"; //图片访问路径
+var imgDataPath = "https://sjsmile.cn/photos.json"; //图片名称高宽信息json文件路径
+var imgPath = "https://sjsmile.cn/"; //图片访问路径
 var imgMaxNum = 50; //图片显示数量
 
 var windowWidth =
