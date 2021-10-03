@@ -38,13 +38,6 @@ function generatePjax(){
                 return
             }
         }
-        if(window.location.pathname.indexOf("photos")!==-1){
-            alert("photos");
-            // var script = document.createElement('script');
-            // script.type = 'text/jacascript';
-            // script.src = 'url';     //填自己的js路径
-            // $('body').append(script);
-        }
 
         let str = e.target.URL;
         $('script[data-pjax], .pjax-reload script').each(function () {
